@@ -23,7 +23,6 @@ To get your version of PostrgreSQL running locally on your machine go here:
 
 [ --CLICK HERE-- ](http://www.enterprisedb.com/products-services-training/pgdownload)
 
-
 And download the latest version for your operating system.
 Go through the installation process wizard, and configure a password for super user.
 You will need to remember this password to later add another user that will be used to access
