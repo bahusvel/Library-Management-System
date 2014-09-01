@@ -3,7 +3,7 @@ Library-Management-System
 
 Semester 2, Unitec, Programming Principles &amp; Practice.
 
-SITE LINK: 
+SITE LINK:
 <a href=http://bahusvel.github.io/Library-Management-System>http://bahusvel.github.io/Library-Management-System/</a>
 
 So far the technologies we will be using are:
@@ -22,6 +22,7 @@ has a lot of features and is open source.
 To get your version of PostrgreSQL running locally on your machine go here:
 
 [ --CLICK HERE-- ](http://www.enterprisedb.com/products-services-training/pgdownload)
+
 
 And download the latest version for your operating system.
 Go through the installation process wizard, and configure a password for super user.
