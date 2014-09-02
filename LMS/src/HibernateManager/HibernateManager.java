@@ -1,4 +1,4 @@
-package SessionFactory;
+package HibernateManager;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;

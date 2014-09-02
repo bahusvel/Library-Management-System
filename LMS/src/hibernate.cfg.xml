@@ -10,7 +10,11 @@
         <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/librarymanagementsystem</property>
         <property name="connection.username">lms</property>
         <property name="connection.password">password</property>
+        <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">update</property>
+        <!-- SHOW SQL QUERIES HIBERNATE SENDS -->
+        <property name="show_sql">true</property>
+
         <mapping class="Persistance.Book"/>
         <mapping class="Persistance.BookEntity"/>
         <mapping class="Persistance.BookLease"/>
@@ -26,7 +30,8 @@
         <mapping class="Persistance.Member"/>
 
 
-        <!-- DB schema will be updated if needed -->
+
+
 
     </session-factory>
 </hibernate-configuration>

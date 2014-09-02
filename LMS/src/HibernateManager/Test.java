@@ -1,6 +1,6 @@
-package SessionFactory;
+package HibernateManager;
 
-import Persistance.Magazine;
+import Persistance.Book;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -16,8 +16,8 @@ public class Test {
 
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
-        for (Object o : hm.listEntities(Magazine.class)){
-            System.out.println(((Magazine)o).getTitle());
+        for (Object o : hm.listEntities(Book.class)){
+            System.out.println(((Book) o).getTitle());
         }
     }
 }

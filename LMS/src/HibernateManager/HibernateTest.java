@@ -1,4 +1,4 @@
-package SessionFactory;
+package HibernateManager;
 
 import Persistance.Book;
 import org.hibernate.HibernateException;
