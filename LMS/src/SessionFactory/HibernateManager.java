@@ -1,10 +1,6 @@
 package SessionFactory;
 
-import Persistance.Book;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
@@ -44,17 +40,24 @@ public class HibernateManager {
         }
     }
 
-    public void AddBook(Book book){
+    public void addEntity(Object object){
         Session session = factory.openSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            session.save(book);
+            try {
+                session.save(object);
+            }
+            catch (MappingException e){
+                System.err.println(object.getClass() + " Is not compatible with the database.");
+            }
             tx.commit();
-        } catch (HibernateException e){
+        }
+        catch (HibernateException e){
             if (tx!=null) tx.rollback();
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             session.close();
         }
 
