@@ -3,230 +3,243 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="128.609068627451" y="356.0">Persistance.BookReturn</node>
-    <node x="337.9589460784314" y="158.0">Persistance.Magazine</node>
-    <node x="0.0" y="0.0">Persistance.Item</node>
-    <node x="134.58394607843138" y="277.0">Persistance.Employee</node>
-    <node x="315.9589460784314" y="79.0">Persistance.MagazineEdition</node>
-    <node x="45.50490196078435" y="119.0">Persistance.ItemEntity</node>
-    <node x="46.00490196078435" y="198.0">Persistance.ItemLease</node>
-    <node x="319.9589460784314" y="0.0">Persistance.MagazineEntity</node>
-    <node x="25.60906862745101" y="435.0">Persistance.Member</node>
-    <node x="160.66850490196077" y="672.0">Persistance.Book</node>
-    <node x="95.22916666666669" y="0.0">Persistance.ItemReturn</node>
-    <node x="57.81862745098043" y="514.0">Persistance.BookLease</node>
-    <node x="142.66850490196077" y="593.0">Persistance.BookEntity</node>
+    <node x="660.4754901960782" y="1208.0">Persistance.BookReturn</node>
+    <node x="1172.6200980392155" y="424.0">Persistance.Magazine</node>
+    <node x="0.0" y="11.0">Persistance.Item</node>
+    <node x="701.2499999999999" y="908.0">Persistance.Employee</node>
+    <node x="1212.6200980392155" y="190.0">Persistance.MagazineEdition</node>
+    <node x="206.63480392156845" y="330.0">Persistance.ItemEntity</node>
+    <node x="216.63480392156845" y="630.0">Persistance.ItemLease</node>
+    <node x="1232.6200980392155" y="0.0">Persistance.MagazineEntity</node>
+    <node x="43.475490196078226" y="1552.0">Persistance.Member</node>
+    <node x="837.1200980392155" y="2672.0">Persistance.Book</node>
+    <node x="425.1127450980391" y="0.0">Persistance.ItemReturn</node>
+    <node x="392.2254901960782" y="2094.0">Persistance.BookLease</node>
+    <node x="650.1200980392155" y="2372.0">Persistance.BookEntity</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="Persistance.BookLease" target="Persistance.BookEntity">
-      <point x="24.5" y="14.5" />
-      <point x="131.31862745098044" y="563.0" />
-      <point x="179.79350490196077" y="563.0" />
-      <point x="-12.375" y="-14.5" />
-    </edge>
     <edge source="Persistance.BookReturn" target="Persistance.Member">
-      <point x="-13.0" y="14.5" />
-      <point x="167.609068627451" y="415.0" />
-      <point x="100.7757352941177" y="415.0" />
-      <point x="34.166666666666686" y="-14.5" />
+      <point x="-52.0" y="147.0" />
+      <point x="816.4754901960782" y="1532.0" />
+      <point x="589.8088235294115" y="1532.0" />
+      <point x="248.33333333333326" y="-246.0" />
+    </edge>
+    <edge source="Persistance.BookLease" target="Persistance.BookEntity">
+      <point x="89.0" y="114.0" />
+      <point x="659.2254901960782" y="2342.0" />
+      <point x="791.1200980392155" y="2342.0" />
+      <point x="-47.0" y="-125.0" />
     </edge>
     <edge source="Persistance.Employee" target="Persistance.BookLease">
-      <point x="-34.5" y="14.5" />
-      <point x="146.08394607843138" y="331.0" />
-      <point x="118.10906862745101" y="331.0" />
-      <point x="12.25" y="-14.5" />
+      <point x="-141.0" y="125.0" />
+      <point x="748.2499999999999" y="1183.0" />
+      <point x="649.9754901960782" y="1183.0" />
+      <point x="649.9754901960782" y="2069.0" />
+      <point x="614.7254901960782" y="2069.0" />
+      <point x="44.5" y="-114.0" />
     </edge>
     <edge source="Persistance.ItemLease" target="Persistance.Employee">
-      <point x="35.625" y="14.5" />
-      <point x="129.12990196078437" y="247.0" />
-      <point x="169.08394607843138" y="247.0" />
-      <point x="-11.5" y="-14.5" />
+      <point x="133.5" y="114.0" />
+      <point x="528.1348039215684" y="878.0" />
+      <point x="842.2499999999999" y="878.0" />
+      <point x="-47.0" y="-125.0" />
     </edge>
     <edge source="Persistance.Member" target="Persistance.ItemReturn">
-      <point x="-20.5" y="-14.5" />
-      <point x="46.10906862745101" y="405.0" />
-      <point x="35.00490196078435" y="405.0" />
-      <point x="35.00490196078435" y="79.0" />
-      <point x="120.47916666666669" y="79.0" />
-      <point x="-25.25" y="14.5" />
+      <point x="-148.99999999999994" y="-246.0" />
+      <point x="192.47549019607828" y="1532.0" />
+      <point x="196.1348039215685" y="1532.0" />
+      <point x="196.1348039215685" y="290.0" />
+      <point x="519.1127450980391" y="290.0" />
+      <point x="-94.0" y="125.0" />
     </edge>
     <edge source="Persistance.BookReturn" target="Persistance.Employee">
-      <point x="-26.0" y="-14.5" />
-      <point x="154.609068627451" y="331.0" />
-      <point x="169.08394607843138" y="331.0" />
-      <point x="-11.5" y="14.5" />
+      <point x="-104.0" y="-147.0" />
+      <point x="764.4754901960782" y="1183.0" />
+      <point x="842.2499999999999" y="1183.0" />
+      <point x="-47.0" y="125.0" />
     </edge>
     <edge source="Persistance.MagazineEdition" target="Persistance.Magazine">
-      <point x="33.75" y="14.5" />
-      <point x="417.2089460784314" y="133.0" />
-      <point x="406.2089460784314" y="133.0" />
-      <point x="22.75" y="-14.5" />
+      <point x="79.0" y="92.0" />
+      <point x="1449.6200980392155" y="399.0" />
+      <point x="1469.6200980392155" y="399.0" />
+      <point x="99.0" y="-136.0" />
     </edge>
     <edge source="Persistance.BookReturn" target="Persistance.BookEntity">
-      <point x="13.0" y="14.5" />
-      <point x="193.609068627451" y="415.0" />
-      <point x="259.9589460784314" y="415.0" />
-      <point x="259.9589460784314" y="563.0" />
-      <point x="204.54350490196077" y="563.0" />
-      <point x="12.375" y="-14.5" />
+      <point x="52.0" y="147.0" />
+      <point x="920.4754901960782" y="1532.0" />
+      <point x="1116.6200980392155" y="1532.0" />
+      <point x="1116.6200980392155" y="2342.0" />
+      <point x="885.1200980392155" y="2342.0" />
+      <point x="47.0" y="-125.0" />
     </edge>
     <edge source="Persistance.MagazineEdition" target="Persistance.MagazineEntity">
-      <point x="-33.75" y="-14.5" />
-      <point x="349.7089460784314" y="54.0" />
-      <point x="351.7089460784314" y="54.0" />
-      <point x="-31.75" y="14.5" />
+      <point x="-79.0" y="-92.0" />
+      <point x="1291.6200980392155" y="165.0" />
+      <point x="1301.6200980392155" y="165.0" />
+      <point x="-69.0" y="70.0" />
     </edge>
     <edge source="Persistance.Member" target="Persistance.BookReturn">
-      <point x="20.5" y="-14.5" />
-      <point x="87.10906862745101" y="405.0" />
-      <point x="141.609068627451" y="405.0" />
-      <point x="-39.0" y="14.5" />
+      <point x="149.0" y="-246.0" />
+      <point x="490.4754901960782" y="1522.0" />
+      <point x="712.4754901960782" y="1522.0" />
+      <point x="-156.0" y="147.0" />
     </edge>
     <edge source="Persistance.Magazine" target="Persistance.MagazineEdition">
-      <point x="-22.75" y="-14.5" />
-      <point x="360.7089460784314" y="133.0" />
-      <point x="349.7089460784314" y="133.0" />
-      <point x="-33.75" y="14.5" />
+      <point x="-99.0" y="-136.0" />
+      <point x="1271.6200980392155" y="399.0" />
+      <point x="1291.6200980392155" y="399.0" />
+      <point x="-79.0" y="92.0" />
     </edge>
     <edge source="Persistance.Employee" target="Persistance.BookReturn">
-      <point x="11.5" y="14.5" />
-      <point x="192.08394607843138" y="331.0" />
-      <point x="206.609068627451" y="331.0" />
-      <point x="26.0" y="-14.5" />
+      <point x="47.0" y="125.0" />
+      <point x="936.2499999999999" y="1183.0" />
+      <point x="972.4754901960782" y="1183.0" />
+      <point x="104.0" y="-147.0" />
     </edge>
     <edge source="Persistance.BookEntity" target="Persistance.Book">
-      <point x="24.75" y="14.5" />
-      <point x="216.91850490196077" y="647.0" />
-      <point x="207.91850490196077" y="647.0" />
-      <point x="15.75" y="-14.5" />
+      <point x="94.0" y="125.0" />
+      <point x="932.1200980392155" y="2647.0" />
+      <point x="838.6200980392155" y="2647.0" />
+      <point x="0.5" y="-1.0" />
     </edge>
     <edge source="Persistance.ItemLease" target="Persistance.Member">
-      <point x="-11.875" y="14.5" />
-      <point x="81.62990196078435" y="257.0" />
-      <point x="76.31862745098043" y="257.0" />
-      <point x="76.31862745098043" y="415.0" />
-      <point x="73.44240196078432" y="415.0" />
-      <point x="6.833333333333314" y="-14.5" />
+      <point x="-44.5" y="114.0" />
+      <point x="350.13480392156845" y="888.0" />
+      <point x="346.9754901960783" y="888.0" />
+      <point x="346.9754901960783" y="1532.0" />
+      <point x="391.1421568627449" y="1532.0" />
+      <point x="49.666666666666686" y="-246.0" />
     </edge>
     <edge source="Persistance.BookLease" target="Persistance.Member">
-      <point x="-36.75" y="-14.5" />
-      <point x="70.06862745098043" y="489.0" />
-      <point x="46.10906862745101" y="489.0" />
-      <point x="-20.5" y="14.5" />
+      <point x="-133.5" y="-114.0" />
+      <point x="436.7254901960782" y="2069.0" />
+      <point x="192.47549019607823" y="2069.0" />
+      <point x="-149.0" y="246.0" />
     </edge>
     <edge source="Persistance.Member" target="Persistance.BookLease">
-      <point x="20.5" y="14.5" />
-      <point x="87.10906862745101" y="489.0" />
-      <point x="94.56862745098043" y="489.0" />
-      <point x="-12.25" y="-14.5" />
+      <point x="149.0" y="246.0" />
+      <point x="490.4754901960782" y="2069.0" />
+      <point x="525.7254901960782" y="2069.0" />
+      <point x="-44.5" y="-114.0" />
     </edge>
     <edge source="Persistance.ItemEntity" target="Persistance.Item">
-      <point x="-36.0" y="-14.5" />
-      <point x="57.50490196078435" y="59.0" />
-      <point x="15.0" y="59.0" />
-      <point x="-15.0" y="14.5" />
+      <point x="-141.0" y="-125.0" />
+      <point x="253.63480392156845" y="270.0" />
+      <point x="89.0" y="270.0" />
+      <point x="-89.0" y="114.0" />
     </edge>
     <edge source="Persistance.Member" target="Persistance.ItemLease">
-      <point x="-6.833333333333314" y="-14.5" />
-      <point x="59.775735294117695" y="415.0" />
-      <point x="58.44240196078435" y="415.0" />
-      <point x="-35.625" y="14.5" />
+      <point x="-49.66666666666663" y="-246.0" />
+      <point x="291.8088235294116" y="1532.0" />
+      <point x="332.6200980392155" y="1532.0" />
+      <point x="332.6200980392155" y="888.0" />
+      <point x="261.13480392156845" y="888.0" />
+      <point x="-133.5" y="114.0" />
     </edge>
     <edge source="Persistance.BookLease" target="Persistance.Employee">
-      <point x="36.75" y="-14.5" />
-      <point x="143.56862745098044" y="489.0" />
-      <point x="243.109068627451" y="489.0" />
-      <point x="243.109068627451" y="331.0" />
-      <point x="215.08394607843138" y="331.0" />
-      <point x="34.5" y="14.5" />
+      <point x="133.5" y="-114.0" />
+      <point x="703.7254901960782" y="2069.0" />
+      <point x="1086.9754901960782" y="2069.0" />
+      <point x="1086.9754901960782" y="1183.0" />
+      <point x="1030.25" y="1183.0" />
+      <point x="141.0" y="125.0" />
     </edge>
     <edge source="Persistance.Employee" target="Persistance.ItemLease">
-      <point x="-34.5" y="-14.5" />
-      <point x="146.08394607843138" y="257.0" />
-      <point x="105.37990196078435" y="257.0" />
-      <point x="11.875" y="14.5" />
+      <point x="-141.0" y="-125.0" />
+      <point x="748.2499999999999" y="888.0" />
+      <point x="439.13480392156845" y="888.0" />
+      <point x="44.5" y="114.0" />
     </edge>
     <edge source="Persistance.ItemReturn" target="Persistance.Employee">
-      <point x="25.25" y="14.5" />
-      <point x="170.97916666666669" y="99.0" />
-      <point x="198.08394607843138" y="99.0" />
-      <point x="198.08394607843138" y="257.0" />
-      <point x="192.08394607843138" y="257.0" />
-      <point x="11.5" y="-14.5" />
+      <point x="94.0" y="125.0" />
+      <point x="707.1127450980391" y="310.0" />
+      <point x="953.7181372549018" y="310.0" />
+      <point x="953.7181372549018" y="888.0" />
+      <point x="936.2499999999999" y="888.0" />
+      <point x="47.0" y="-125.0" />
     </edge>
     <edge source="Persistance.BookEntity" target="Persistance.BookLease">
-      <point x="-37.125" y="-14.5" />
-      <point x="155.04350490196077" y="573.0" />
-      <point x="82.31862745098043" y="573.0" />
-      <point x="-24.5" y="14.5" />
+      <point x="-141.0" y="-125.0" />
+      <point x="697.1200980392155" y="2352.0" />
+      <point x="481.2254901960782" y="2352.0" />
+      <point x="-89.0" y="114.0" />
     </edge>
     <edge source="Persistance.ItemReturn" target="Persistance.Member">
-      <point x="-42.083333333333314" y="14.5" />
-      <point x="103.64583333333337" y="69.0" />
-      <point x="24.004901960784352" y="69.0" />
-      <point x="24.004901960784352" y="415.0" />
-      <point x="32.44240196078438" y="415.0" />
-      <point x="-34.16666666666663" y="-14.5" />
+      <point x="-156.66666666666663" y="125.0" />
+      <point x="456.4460784313725" y="280.0" />
+      <point x="185.1348039215685" y="280.0" />
+      <point x="185.1348039215685" y="1532.0" />
+      <point x="93.14215686274497" y="1532.0" />
+      <point x="-248.33333333333326" y="-246.0" />
     </edge>
     <edge source="Persistance.ItemLease" target="Persistance.ItemEntity">
-      <point x="-23.75" y="-14.5" />
-      <point x="-24.0" y="14.5" />
+      <point x="-89.0" y="-114.0" />
+      <point x="305.63480392156845" y="605.0" />
+      <point x="300.63480392156845" y="605.0" />
+      <point x="-94.0" y="125.0" />
     </edge>
     <edge source="Persistance.ItemEntity" target="Persistance.ItemReturn">
-      <point x="12.0" y="-14.5" />
-      <point x="105.50490196078435" y="89.0" />
-      <point x="137.31250000000003" y="89.0" />
-      <point x="-8.416666666666657" y="14.5" />
+      <point x="47.0" y="-125.0" />
+      <point x="441.63480392156845" y="300.0" />
+      <point x="581.7794117647057" y="300.0" />
+      <point x="-31.33333333333337" y="125.0" />
     </edge>
     <edge source="Persistance.Book" target="Persistance.BookEntity">
-      <point x="-15.75" y="-14.5" />
-      <point x="176.41850490196077" y="647.0" />
-      <point x="167.41850490196077" y="647.0" />
-      <point x="-24.75" y="14.5" />
+      <point x="-0.5" y="-1.0" />
+      <point x="837.6200980392155" y="2647.0" />
+      <point x="744.1200980392155" y="2647.0" />
+      <point x="-94.0" y="125.0" />
     </edge>
     <edge source="Persistance.Item" target="Persistance.ItemEntity">
-      <point x="15.0" y="14.5" />
-      <point x="45.0" y="49.0" />
-      <point x="81.50490196078435" y="49.0" />
-      <point x="-12.0" y="-14.5" />
+      <point x="89.0" y="114.0" />
+      <point x="267.0" y="270.0" />
+      <point x="347.63480392156845" y="270.0" />
+      <point x="-47.0" y="-125.0" />
     </edge>
     <edge source="Persistance.MagazineEntity" target="Persistance.MagazineEdition">
-      <point x="31.75" y="14.5" />
-      <point x="415.2089460784314" y="54.0" />
-      <point x="417.2089460784314" y="54.0" />
-      <point x="33.75" y="-14.5" />
+      <point x="69.0" y="70.0" />
+      <point x="1439.6200980392155" y="165.0" />
+      <point x="1449.6200980392155" y="165.0" />
+      <point x="79.0" y="-92.0" />
     </edge>
     <edge source="Persistance.ItemReturn" target="Persistance.ItemEntity">
-      <point x="8.416666666666686" y="14.5" />
-      <point x="154.14583333333337" y="99.0" />
-      <point x="129.50490196078437" y="99.0" />
-      <point x="36.0" y="-14.5" />
+      <point x="31.333333333333258" y="125.0" />
+      <point x="644.4460784313724" y="310.0" />
+      <point x="535.6348039215684" y="310.0" />
+      <point x="141.0" y="-125.0" />
     </edge>
     <edge source="Persistance.BookEntity" target="Persistance.BookReturn">
-      <point x="37.125" y="-14.5" />
-      <point x="229.29350490196077" y="573.0" />
-      <point x="270.9589460784314" y="573.0" />
-      <point x="270.9589460784314" y="405.0" />
-      <point x="219.609068627451" y="405.0" />
-      <point x="39.0" y="14.5" />
-    </edge>
-    <edge source="Persistance.ItemEntity" target="Persistance.ItemLease">
-      <point x="24.0" y="14.5" />
-      <point x="23.75" y="-14.5" />
+      <point x="141.0" y="-125.0" />
+      <point x="979.1200980392155" y="2352.0" />
+      <point x="1127.6200980392155" y="2352.0" />
+      <point x="1127.6200980392155" y="1522.0" />
+      <point x="1024.4754901960782" y="1522.0" />
+      <point x="156.0" y="147.0" />
     </edge>
     <edge source="Persistance.Employee" target="Persistance.ItemReturn">
-      <point x="34.5" y="-14.5" />
-      <point x="215.08394607843138" y="257.0" />
-      <point x="209.08394607843138" y="257.0" />
-      <point x="209.08394607843138" y="89.0" />
-      <point x="187.8125" y="89.0" />
-      <point x="42.083333333333314" y="14.5" />
+      <point x="141.0" y="-125.0" />
+      <point x="1030.25" y="888.0" />
+      <point x="964.7181372549018" y="888.0" />
+      <point x="964.7181372549018" y="300.0" />
+      <point x="769.7794117647056" y="300.0" />
+      <point x="156.66666666666652" y="125.0" />
+    </edge>
+    <edge source="Persistance.ItemEntity" target="Persistance.ItemLease">
+      <point x="94.0" y="125.0" />
+      <point x="488.63480392156845" y="605.0" />
+      <point x="483.63480392156845" y="605.0" />
+      <point x="89.0" y="-114.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6241331484049931" x="225.5" y="350.49999999999994" />
+  <settings layout="Hierarchic Group" zoom="0.6367330427509637" x="733.6368756396851" y="1066.3663009350075" />
   <SelectedNodes />
-  <Categories />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>
