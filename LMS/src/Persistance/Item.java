@@ -1,19 +1,23 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
 public class Item {
     private String name;
     private String description;
     private String condition;
     private String category;
-    private Double price;
     private int itemId;
+    private Double price;
     private Collection<ItemEntity> itemEntitiesByItemId;
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -22,6 +26,8 @@ public class Item {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -30,6 +36,8 @@ public class Item {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "condition")
     public String getCondition() {
         return condition;
     }
@@ -38,6 +46,8 @@ public class Item {
         this.condition = condition;
     }
 
+    @Basic
+    @Column(name = "category")
     public String getCategory() {
         return category;
     }
@@ -46,20 +56,24 @@ public class Item {
         this.category = category;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
+    @Id
+    @Column(name = "item_id")
     public int getItemId() {
         return itemId;
     }
 
     public void setItemId(int itemId) {
         this.itemId = itemId;
+    }
+
+    @Basic
+    @Column(name = "price")
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override
@@ -85,11 +99,12 @@ public class Item {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (condition != null ? condition.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + itemId;
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }
 
+    @OneToMany(mappedBy = "itemByItemId")
     public Collection<ItemEntity> getItemEntitiesByItemId() {
         return itemEntitiesByItemId;
     }

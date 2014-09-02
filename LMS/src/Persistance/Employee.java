@@ -1,10 +1,12 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
 public class Employee {
     private String firstname;
     private String lastname;
@@ -15,6 +17,8 @@ public class Employee {
     private Collection<ItemLease> itemLeasesByEmployeeId;
     private Collection<ItemReturn> itemReturnsByEmployeeId;
 
+    @Basic
+    @Column(name = "firstname")
     public String getFirstname() {
         return firstname;
     }
@@ -23,6 +27,8 @@ public class Employee {
         this.firstname = firstname;
     }
 
+    @Basic
+    @Column(name = "lastname")
     public String getLastname() {
         return lastname;
     }
@@ -31,6 +37,8 @@ public class Employee {
         this.lastname = lastname;
     }
 
+    @Basic
+    @Column(name = "role")
     public String getRole() {
         return role;
     }
@@ -39,6 +47,8 @@ public class Employee {
         this.role = role;
     }
 
+    @Id
+    @Column(name = "employee_id")
     public int getEmployeeId() {
         return employeeId;
     }
@@ -71,6 +81,7 @@ public class Employee {
         return result;
     }
 
+    @OneToMany(mappedBy = "employeeByEmployeeId")
     public Collection<BookLease> getBookLeasesByEmployeeId() {
         return bookLeasesByEmployeeId;
     }
@@ -79,6 +90,7 @@ public class Employee {
         this.bookLeasesByEmployeeId = bookLeasesByEmployeeId;
     }
 
+    @OneToMany(mappedBy = "employeeByEmployeeId")
     public Collection<BookReturn> getBookReturnsByEmployeeId() {
         return bookReturnsByEmployeeId;
     }
@@ -87,6 +99,7 @@ public class Employee {
         this.bookReturnsByEmployeeId = bookReturnsByEmployeeId;
     }
 
+    @OneToMany(mappedBy = "employeeByEmployeeId")
     public Collection<ItemLease> getItemLeasesByEmployeeId() {
         return itemLeasesByEmployeeId;
     }
@@ -95,6 +108,7 @@ public class Employee {
         this.itemLeasesByEmployeeId = itemLeasesByEmployeeId;
     }
 
+    @OneToMany(mappedBy = "employeeByEmployeeId")
     public Collection<ItemReturn> getItemReturnsByEmployeeId() {
         return itemReturnsByEmployeeId;
     }

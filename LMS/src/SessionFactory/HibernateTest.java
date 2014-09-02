@@ -1,6 +1,6 @@
 package SessionFactory;
 
-import Persistence.Book;
+import Persistance.Book;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -39,7 +39,7 @@ public class HibernateTest {
             Query query = session.createQuery("from Book");
             System.out.println("executing: " + query.getQueryString());
             for (Object o : query.list()) {
-                System.out.println(((Book)o).getBookEntitiesByBookId());
+                System.out.println(""+((Book)o).getReleaseDate());
             }
         } finally {
             session.close();

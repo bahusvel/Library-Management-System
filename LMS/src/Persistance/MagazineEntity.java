@@ -1,13 +1,19 @@
-package Persistence;
+package Persistance;
+
+import javax.persistence.*;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
+@Table(name = "magazine_entity", schema = "public", catalog = "librarymanagementsystem")
 public class MagazineEntity {
     private int magEntityId;
     private boolean available;
     private MagazineEdition magazineEditionByMagazineEditionId;
 
+    @Id
+    @Column(name = "mag_entity_id")
     public int getMagEntityId() {
         return magEntityId;
     }
@@ -16,6 +22,8 @@ public class MagazineEntity {
         this.magEntityId = magEntityId;
     }
 
+    @Basic
+    @Column(name = "available")
     public boolean isAvailable() {
         return available;
     }
@@ -44,6 +52,8 @@ public class MagazineEntity {
         return result;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "magazine_edition_id", referencedColumnName = "mag_edition_id", nullable = false)
     public MagazineEdition getMagazineEditionByMagazineEditionId() {
         return magazineEditionByMagazineEditionId;
     }

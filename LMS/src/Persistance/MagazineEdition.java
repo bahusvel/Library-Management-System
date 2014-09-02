@@ -1,11 +1,14 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
+@Table(name = "magazine_edition", schema = "public", catalog = "librarymanagementsystem")
 public class MagazineEdition {
     private int magEditionId;
     private Date editionDate;
@@ -13,6 +16,8 @@ public class MagazineEdition {
     private Magazine magazineByMagazineId;
     private Collection<MagazineEntity> magazineEntitiesByMagEditionId;
 
+    @Id
+    @Column(name = "mag_edition_id")
     public int getMagEditionId() {
         return magEditionId;
     }
@@ -21,6 +26,8 @@ public class MagazineEdition {
         this.magEditionId = magEditionId;
     }
 
+    @Basic
+    @Column(name = "edition_date")
     public Date getEditionDate() {
         return editionDate;
     }
@@ -29,6 +36,8 @@ public class MagazineEdition {
         this.editionDate = editionDate;
     }
 
+    @Basic
+    @Column(name = "edition_title")
     public String getEditionTitle() {
         return editionTitle;
     }
@@ -59,6 +68,8 @@ public class MagazineEdition {
         return result;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "magazine_id", referencedColumnName = "magazine_id", nullable = false)
     public Magazine getMagazineByMagazineId() {
         return magazineByMagazineId;
     }
@@ -67,6 +78,7 @@ public class MagazineEdition {
         this.magazineByMagazineId = magazineByMagazineId;
     }
 
+    @OneToMany(mappedBy = "magazineEditionByMagazineEditionId")
     public Collection<MagazineEntity> getMagazineEntitiesByMagEditionId() {
         return magazineEntitiesByMagEditionId;
     }

@@ -1,11 +1,13 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
 public class Book {
     private String title;
     private String authors;
@@ -24,6 +26,8 @@ public class Book {
     private Double price;
     private Collection<BookEntity> bookEntitiesByBookId;
 
+    @Basic
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -32,6 +36,8 @@ public class Book {
         this.title = title;
     }
 
+    @Basic
+    @Column(name = "authors")
     public String getAuthors() {
         return authors;
     }
@@ -40,6 +46,8 @@ public class Book {
         this.authors = authors;
     }
 
+    @Basic
+    @Column(name = "release_date")
     public Date getReleaseDate() {
         return releaseDate;
     }
@@ -48,6 +56,8 @@ public class Book {
         this.releaseDate = releaseDate;
     }
 
+    @Basic
+    @Column(name = "pages")
     public Integer getPages() {
         return pages;
     }
@@ -56,6 +66,8 @@ public class Book {
         this.pages = pages;
     }
 
+    @Basic
+    @Column(name = "publisher")
     public String getPublisher() {
         return publisher;
     }
@@ -64,6 +76,8 @@ public class Book {
         this.publisher = publisher;
     }
 
+    @Basic
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -72,6 +86,8 @@ public class Book {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "barcode")
     public Long getBarcode() {
         return barcode;
     }
@@ -80,6 +96,8 @@ public class Book {
         this.barcode = barcode;
     }
 
+    @Basic
+    @Column(name = "isbn")
     public String getIsbn() {
         return isbn;
     }
@@ -88,6 +106,8 @@ public class Book {
         this.isbn = isbn;
     }
 
+    @Basic
+    @Column(name = "edition")
     public Integer getEdition() {
         return edition;
     }
@@ -96,6 +116,8 @@ public class Book {
         this.edition = edition;
     }
 
+    @Basic
+    @Column(name = "category")
     public String getCategory() {
         return category;
     }
@@ -104,6 +126,8 @@ public class Book {
         this.category = category;
     }
 
+    @Basic
+    @Column(name = "rating")
     public Double getRating() {
         return rating;
     }
@@ -112,6 +136,9 @@ public class Book {
         this.rating = rating;
     }
 
+    @Id
+    @Column(name = "book_id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getBookId() {
         return bookId;
     }
@@ -120,6 +147,8 @@ public class Book {
         this.bookId = bookId;
     }
 
+    @Basic
+    @Column(name = "image_fpath")
     public String getImageFpath() {
         return imageFpath;
     }
@@ -128,6 +157,8 @@ public class Book {
         this.imageFpath = imageFpath;
     }
 
+    @Basic
+    @Column(name = "summary")
     public String getSummary() {
         return summary;
     }
@@ -136,17 +167,14 @@ public class Book {
         this.summary = summary;
     }
 
+    @Basic
+    @Column(name = "price")
     public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return title;
     }
 
     @Override
@@ -195,6 +223,7 @@ public class Book {
         return result;
     }
 
+    @OneToMany(mappedBy = "bookByBookId")
     public Collection<BookEntity> getBookEntitiesByBookId() {
         return bookEntitiesByBookId;
     }

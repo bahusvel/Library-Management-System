@@ -1,10 +1,13 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
+@Table(name = "book_lease", schema = "public", catalog = "librarymanagementsystem")
 public class BookLease {
     private long leaseId;
     private Date leaseDate;
@@ -14,6 +17,8 @@ public class BookLease {
     private Employee employeeByEmployeeId;
     private Member memberByMemberId;
 
+    @Id
+    @Column(name = "lease_id")
     public long getLeaseId() {
         return leaseId;
     }
@@ -22,6 +27,8 @@ public class BookLease {
         this.leaseId = leaseId;
     }
 
+    @Basic
+    @Column(name = "lease_date")
     public Date getLeaseDate() {
         return leaseDate;
     }
@@ -30,6 +37,8 @@ public class BookLease {
         this.leaseDate = leaseDate;
     }
 
+    @Basic
+    @Column(name = "due_date")
     public Date getDueDate() {
         return dueDate;
     }
@@ -38,6 +47,8 @@ public class BookLease {
         this.dueDate = dueDate;
     }
 
+    @Basic
+    @Column(name = "renewed")
     public boolean isRenewed() {
         return renewed;
     }
@@ -70,6 +81,8 @@ public class BookLease {
         return result;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id", nullable = false)
     public BookEntity getBookEntityByBookEntityId() {
         return bookEntityByBookEntityId;
     }
@@ -78,6 +91,8 @@ public class BookLease {
         this.bookEntityByBookEntityId = bookEntityByBookEntityId;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
     public Employee getEmployeeByEmployeeId() {
         return employeeByEmployeeId;
     }
@@ -86,6 +101,8 @@ public class BookLease {
         this.employeeByEmployeeId = employeeByEmployeeId;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
     public Member getMemberByMemberId() {
         return memberByMemberId;
     }

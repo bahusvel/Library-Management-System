@@ -1,10 +1,12 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
 public class Magazine {
     private String title;
     private int magazineId;
@@ -13,8 +15,11 @@ public class Magazine {
     private String frequency;
     private String language;
     private String isbn;
+    private Double price;
     private Collection<MagazineEdition> magazineEditionsByMagazineId;
 
+    @Basic
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -23,6 +28,8 @@ public class Magazine {
         this.title = title;
     }
 
+    @Id
+    @Column(name = "magazine_id")
     public int getMagazineId() {
         return magazineId;
     }
@@ -31,6 +38,8 @@ public class Magazine {
         this.magazineId = magazineId;
     }
 
+    @Basic
+    @Column(name = "publisher")
     public String getPublisher() {
         return publisher;
     }
@@ -39,6 +48,8 @@ public class Magazine {
         this.publisher = publisher;
     }
 
+    @Basic
+    @Column(name = "author")
     public String getAuthor() {
         return author;
     }
@@ -47,6 +58,8 @@ public class Magazine {
         this.author = author;
     }
 
+    @Basic
+    @Column(name = "frequency")
     public String getFrequency() {
         return frequency;
     }
@@ -55,6 +68,8 @@ public class Magazine {
         this.frequency = frequency;
     }
 
+    @Basic
+    @Column(name = "language")
     public String getLanguage() {
         return language;
     }
@@ -63,12 +78,24 @@ public class Magazine {
         this.language = language;
     }
 
+    @Basic
+    @Column(name = "isbn")
     public String getIsbn() {
         return isbn;
     }
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    @Basic
+    @Column(name = "price")
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override
@@ -83,6 +110,7 @@ public class Magazine {
         if (frequency != null ? !frequency.equals(magazine.frequency) : magazine.frequency != null) return false;
         if (isbn != null ? !isbn.equals(magazine.isbn) : magazine.isbn != null) return false;
         if (language != null ? !language.equals(magazine.language) : magazine.language != null) return false;
+        if (price != null ? !price.equals(magazine.price) : magazine.price != null) return false;
         if (publisher != null ? !publisher.equals(magazine.publisher) : magazine.publisher != null) return false;
         if (title != null ? !title.equals(magazine.title) : magazine.title != null) return false;
 
@@ -98,9 +126,11 @@ public class Magazine {
         result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
         result = 31 * result + (language != null ? language.hashCode() : 0);
         result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }
 
+    @OneToMany(mappedBy = "magazineByMagazineId")
     public Collection<MagazineEdition> getMagazineEditionsByMagazineId() {
         return magazineEditionsByMagazineId;
     }

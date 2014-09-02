@@ -1,11 +1,14 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
+@Table(name = "item_entity", schema = "public", catalog = "librarymanagementsystem")
 public class ItemEntity {
     private Date acquisitionDate;
     private Boolean leased;
@@ -16,6 +19,8 @@ public class ItemEntity {
     private Collection<ItemLease> itemLeasesByItemEntityId;
     private Collection<ItemReturn> itemReturnsByItemEntityId;
 
+    @Basic
+    @Column(name = "acquisition_date")
     public Date getAcquisitionDate() {
         return acquisitionDate;
     }
@@ -24,6 +29,8 @@ public class ItemEntity {
         this.acquisitionDate = acquisitionDate;
     }
 
+    @Basic
+    @Column(name = "leased")
     public Boolean getLeased() {
         return leased;
     }
@@ -32,6 +39,8 @@ public class ItemEntity {
         this.leased = leased;
     }
 
+    @Basic
+    @Column(name = "available")
     public Boolean getAvailable() {
         return available;
     }
@@ -40,6 +49,8 @@ public class ItemEntity {
         this.available = available;
     }
 
+    @Basic
+    @Column(name = "location")
     public String getLocation() {
         return location;
     }
@@ -48,6 +59,8 @@ public class ItemEntity {
         this.location = location;
     }
 
+    @Id
+    @Column(name = "item_entity_id")
     public int getItemEntityId() {
         return itemEntityId;
     }
@@ -83,6 +96,8 @@ public class ItemEntity {
         return result;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "item_id", referencedColumnName = "item_id")
     public Item getItemByItemId() {
         return itemByItemId;
     }
@@ -91,6 +106,7 @@ public class ItemEntity {
         this.itemByItemId = itemByItemId;
     }
 
+    @OneToMany(mappedBy = "itemEntityByItemEntityId")
     public Collection<ItemLease> getItemLeasesByItemEntityId() {
         return itemLeasesByItemEntityId;
     }
@@ -99,6 +115,7 @@ public class ItemEntity {
         this.itemLeasesByItemEntityId = itemLeasesByItemEntityId;
     }
 
+    @OneToMany(mappedBy = "itemEntityByItemEntityId")
     public Collection<ItemReturn> getItemReturnsByItemEntityId() {
         return itemReturnsByItemEntityId;
     }

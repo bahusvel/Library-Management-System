@@ -1,11 +1,14 @@
-package Persistence;
+package Persistance;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Entity
+@Table(name = "book_entity", schema = "public", catalog = "librarymanagementsystem")
 public class BookEntity {
     private boolean available;
     private String location;
@@ -16,6 +19,8 @@ public class BookEntity {
     private Collection<BookLease> bookLeasesByBookEntityId;
     private Collection<BookReturn> bookReturnsByBookEntityId;
 
+    @Basic
+    @Column(name = "available")
     public boolean isAvailable() {
         return available;
     }
@@ -24,6 +29,8 @@ public class BookEntity {
         this.available = available;
     }
 
+    @Basic
+    @Column(name = "location")
     public String getLocation() {
         return location;
     }
@@ -32,6 +39,8 @@ public class BookEntity {
         this.location = location;
     }
 
+    @Id
+    @Column(name = "book_entity_id")
     public int getBookEntityId() {
         return bookEntityId;
     }
@@ -40,6 +49,8 @@ public class BookEntity {
         this.bookEntityId = bookEntityId;
     }
 
+    @Basic
+    @Column(name = "leased")
     public boolean isLeased() {
         return leased;
     }
@@ -48,6 +59,8 @@ public class BookEntity {
         this.leased = leased;
     }
 
+    @Basic
+    @Column(name = "acquisition_date")
     public Date getAcquisitionDate() {
         return acquisitionDate;
     }
@@ -83,6 +96,8 @@ public class BookEntity {
         return result;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "book_id", nullable = false)
     public Book getBookByBookId() {
         return bookByBookId;
     }
@@ -91,6 +106,7 @@ public class BookEntity {
         this.bookByBookId = bookByBookId;
     }
 
+    @OneToMany(mappedBy = "bookEntityByBookEntityId")
     public Collection<BookLease> getBookLeasesByBookEntityId() {
         return bookLeasesByBookEntityId;
     }
@@ -99,6 +115,7 @@ public class BookEntity {
         this.bookLeasesByBookEntityId = bookLeasesByBookEntityId;
     }
 
+    @OneToMany(mappedBy = "bookEntityByBookEntityId")
     public Collection<BookReturn> getBookReturnsByBookEntityId() {
         return bookReturnsByBookEntityId;
     }
