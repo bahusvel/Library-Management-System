@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Persistence.BookEntity" table="book_entity" schema="public" catalog="LibraryManagementSystem">
+        <id name="bookEntityId" column="book_entity_id"/>
+        <property name="available" column="available"/>
+        <property name="location" column="location"/>
+        <property name="leased" column="leased"/>
+        <property name="acquisitionDate" column="acquisition_date"/>
+        <many-to-one name="bookByBookId" class="Persistence.Book">
+            <column name="book_id" not-null="true"/>
+        </many-to-one>
+        <set name="bookLeasesByBookEntityId" inverse="true">
+            <key>
+                <column name="book_entity_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="Persistence.BookLease"/>
+        </set>
+        <set name="bookReturnsByBookEntityId" inverse="true">
+            <key>
+                <column name="book_entity_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="Persistence.BookReturn"/>
+        </set>
+    </class>
+</hibernate-mapping>

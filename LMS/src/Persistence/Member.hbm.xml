@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Persistence.Member" table="member" schema="public" catalog="LibraryManagementSystem">
+        <id name="memberId" column="member_id"/>
+        <property name="firstname" column="firstname"/>
+        <property name="lastname" column="lastname"/>
+        <property name="dob" column="dob"/>
+        <property name="registrationDate" column="registration_date"/>
+        <property name="username" column="username"/>
+        <property name="balance" column="balance"/>
+        <property name="country" column="country"/>
+        <property name="city" column="city"/>
+        <property name="postalCode" column="postal_code"/>
+        <property name="address1" column="Address_1"/>
+        <property name="address2" column="Address_2"/>
+        <property name="address3" column="Address_3"/>
+        <property name="email" column="email"/>
+        <property name="phoneNumber" column="phone_number"/>
+    </class>
+</hibernate-mapping>

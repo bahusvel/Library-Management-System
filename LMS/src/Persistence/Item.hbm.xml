@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Persistence.Item" table="item" schema="public" catalog="LibraryManagementSystem">
+        <id name="itemId" column="item_id"/>
+        <property name="name" column="name"/>
+        <property name="description" column="description"/>
+        <property name="condition" column="condition"/>
+        <property name="category" column="category"/>
+        <property name="price" column="price"/>
+        <set name="itemEntitiesByItemId" inverse="true">
+            <key>
+                <column name="item_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="Persistence.ItemEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

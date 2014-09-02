@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Persistence.Magazine" table="magazine" schema="public" catalog="LibraryManagementSystem">
+        <id name="magazineId" column="magazine_id"/>
+        <property name="title" column="title"/>
+        <property name="publisher" column="publisher"/>
+        <property name="author" column="author"/>
+        <property name="frequency" column="frequency"/>
+        <property name="language" column="language"/>
+        <property name="isbn" column="isbn"/>
+        <set name="magazineEditionsByMagazineId" inverse="true">
+            <key>
+                <column name="magazine_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="Persistence.MagazineEdition"/>
+        </set>
+    </class>
+</hibernate-mapping>
