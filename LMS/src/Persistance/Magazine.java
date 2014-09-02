@@ -30,6 +30,7 @@ public class Magazine {
 
     @Id
     @Column(name = "magazine_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getMagazineId() {
         return magazineId;
     }

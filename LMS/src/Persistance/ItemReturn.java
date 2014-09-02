@@ -60,6 +60,7 @@ public class ItemReturn {
 
     @Id
     @Column(name = "item_return_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getItemReturnId() {
         return itemReturnId;
     }

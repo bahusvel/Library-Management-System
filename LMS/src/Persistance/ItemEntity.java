@@ -61,6 +61,7 @@ public class ItemEntity {
 
     @Id
     @Column(name = "item_entity_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getItemEntityId() {
         return itemEntityId;
     }

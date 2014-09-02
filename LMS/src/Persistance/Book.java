@@ -9,6 +9,10 @@ import java.util.Collection;
  */
 @Entity
 public class Book {
+    /*Say you got a field that you dont want to be persisted, what do you do ???? OMG
+      Just add @Transient annotation onto it, and you will be allgoods.
+     */
+
     private String title;
     private String authors;
     private Date releaseDate;
@@ -138,7 +142,7 @@ public class Book {
 
     @Id
     @Column(name = "book_id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getBookId() {
         return bookId;
     }

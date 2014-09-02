@@ -41,6 +41,7 @@ public class BookEntity {
 
     @Id
     @Column(name = "book_entity_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getBookEntityId() {
         return bookEntityId;
     }

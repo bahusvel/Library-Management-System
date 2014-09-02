@@ -58,6 +58,7 @@ public class Item {
 
     @Id
     @Column(name = "item_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getItemId() {
         return itemId;
     }

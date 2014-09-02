@@ -18,6 +18,7 @@ public class MagazineEdition {
 
     @Id
     @Column(name = "mag_edition_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getMagEditionId() {
         return magEditionId;
     }

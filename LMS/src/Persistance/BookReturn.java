@@ -82,6 +82,7 @@ public class BookReturn {
 
     @Id
     @Column(name = "book_return_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getBookReturnId() {
         return bookReturnId;
     }

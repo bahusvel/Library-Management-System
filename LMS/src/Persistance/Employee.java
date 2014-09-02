@@ -49,6 +49,7 @@ public class Employee {
 
     @Id
     @Column(name = "employee_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getEmployeeId() {
         return employeeId;
     }

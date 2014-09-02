@@ -1,6 +1,7 @@
 package HibernateManager;
 
 import Persistance.Book;
+import Persistance.Member;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -14,10 +15,19 @@ public class Test {
      */
 
 
+
+
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
         for (Object o : hm.listEntities(Book.class)){
             System.out.println(((Book) o).getTitle());
         }
+        Member member = new Member();
+        member.setFirstname("Denis");
+        member.setLastname("Lavrov");
+        hm.addEntity(member);
+        Book book = new Book();
+        book.setTitle("Hello World in Java");
+        hm.addEntity(book);
     }
 }

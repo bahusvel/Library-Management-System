@@ -19,6 +19,7 @@ public class BookLease {
 
     @Id
     @Column(name = "lease_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getLeaseId() {
         return leaseId;
     }

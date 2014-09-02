@@ -14,6 +14,7 @@ public class MagazineEntity {
 
     @Id
     @Column(name = "mag_entity_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getMagEntityId() {
         return magEntityId;
     }

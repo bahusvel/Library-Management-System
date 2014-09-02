@@ -1,5 +1,6 @@
 package Persistance;
 
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -110,7 +111,7 @@ public class Member {
     }
 
     @Basic
-    @Column(name = "Address_1")
+    @Column(name = "address_1")
     public String getAddress1() {
         return address1;
     }
@@ -120,7 +121,7 @@ public class Member {
     }
 
     @Basic
-    @Column(name = "Address_2")
+    @Column(name = "address_2")
     public String getAddress2() {
         return address2;
     }
@@ -130,7 +131,7 @@ public class Member {
     }
 
     @Basic
-    @Column(name = "Address_3")
+    @Column(name = "address_3")
     public String getAddress3() {
         return address3;
     }
@@ -161,6 +162,7 @@ public class Member {
 
     @Id
     @Column(name = "member_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getMemberId() {
         return memberId;
     }
