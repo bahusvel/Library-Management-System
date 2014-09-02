@@ -1,7 +1,7 @@
 package Persistance;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 
 /**
@@ -52,6 +52,7 @@ public class Book {
 
     @Basic
     @Column(name = "release_date")
+    @Temporal(TemporalType.DATE)
     public Date getReleaseDate() {
         return releaseDate;
     }
@@ -142,7 +143,7 @@ public class Book {
 
     @Id
     @Column(name = "book_id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // Could also try GenerationType.TABLE
     public int getBookId() {
         return bookId;
     }

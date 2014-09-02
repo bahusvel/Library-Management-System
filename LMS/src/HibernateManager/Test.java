@@ -3,6 +3,8 @@ package HibernateManager;
 import Persistance.Book;
 import Persistance.Member;
 
+import java.util.Date;
+
 /**
  * Created by denislavrov on 9/2/14.
  */
@@ -28,6 +30,7 @@ public class Test {
         hm.addEntity(member);
         Book book = new Book();
         book.setTitle("Hello World in Java");
+        book.setReleaseDate(new Date(1409663906879L));
         hm.addEntity(book);
     }
 }
