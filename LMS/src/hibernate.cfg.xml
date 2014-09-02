@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--property name="connection.url">jdbc:sqlite:/Users/denislavrov/Desktop/test.db</property-->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+        <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/librarymanagementsystem</property>
+        <property name="connection.username">lms</property>
+        <property name="connection.password">password</property>
+        <mapping resource="Persistence/Book.hbm.xml"/>
+        <mapping resource="Persistence/BookEntity.hbm.xml"/>
+        <mapping resource="Persistence/BookLease.hbm.xml"/>
+        <mapping resource="Persistence/BookReturn.hbm.xml"/>
+        <mapping resource="Persistence/Employee.hbm.xml"/>
+        <mapping resource="Persistence/ItemLease.hbm.xml"/>
+        <mapping resource="Persistence/Item.hbm.xml"/>
+        <mapping resource="Persistence/ItemEntity.hbm.xml"/>
+        <mapping resource="Persistence/ItemReturn.hbm.xml"/>
+        <mapping resource="Persistence/Member.hbm.xml"/>
+        <mapping resource="Persistence/Magazine.hbm.xml"/>
+        <mapping resource="Persistence/MagazineEdition.hbm.xml"/>
+        <mapping resource="Persistence/MagazineEntity.hbm.xml"/>
+        <!--mapping class="Persistence.Book"/>
+        <mapping class="Persistence.BookEntity"/-->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
