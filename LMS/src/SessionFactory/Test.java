@@ -1,6 +1,6 @@
 package SessionFactory;
 
-import Persistance.Magazine;
+import Persistance.Book;
 
 
 /**
@@ -9,7 +9,7 @@ import Persistance.Magazine;
 public class Test {
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
-        Magazine magazine = new Magazine();
+        Book magazine = new Book();
         magazine.setTitle("Test");
         hm.addEntity(magazine);
 

@@ -23,44 +23,32 @@ public class HibernateManager {
         }
     }
 
+    public class AutoSession implements AutoCloseable{
+        public Session session = factory.openSession();
+        public Transaction tx;
+        public AutoSession() {
+            try{
+                tx = session.beginTransaction();
+            }
+            catch (HibernateException e){
+                if (tx!=null) tx.rollback();
+                e.printStackTrace();
+                session.close();
+            }
+        }
 
-    private static void defTransactionRef(){
-        // a little template of code for every interaction with the database
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try{
-            tx = session.beginTransaction();
-            // write your code here
-            tx.commit();
-        } catch (HibernateException e){
-            if (tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
+        @Override
+        public void close(){
+              session.close();
         }
     }
 
-    public void addEntity(Object object){
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try{
-            tx = session.beginTransaction();
-            try {
-                session.save(object);
-            }
-            catch (MappingException e){
-                System.err.println(object.getClass() + " Is not compatible with the database.");
-            }
-            tx.commit();
+    public void addEntity(Object object) {
+        try (AutoSession as = new AutoSession()) {
+            as.session.save(object);
+            as.tx.commit();
+        } catch (MappingException e) {
+            System.err.println(object.getClass() + " Is not compatible with the database.");
         }
-        catch (HibernateException e){
-            if (tx!=null) tx.rollback();
-            e.printStackTrace();
-        }
-        finally {
-            session.close();
-        }
-
     }
-
 }
