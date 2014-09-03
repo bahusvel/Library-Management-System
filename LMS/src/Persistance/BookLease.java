@@ -82,7 +82,7 @@ public class BookLease {
         return result;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id", nullable = false)
     public BookEntity getBookEntityByBookEntityId() {
         return bookEntityByBookEntityId;

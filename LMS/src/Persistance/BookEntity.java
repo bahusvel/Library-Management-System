@@ -16,7 +16,7 @@ public class BookEntity {
     private boolean leased;
     private Date acquisitionDate;
     private Book bookByBookId;
-    private Collection<BookLease> bookLeasesByBookEntityId;
+    private BookLease bookLeasesByBookEntityId;
     private Collection<BookReturn> bookReturnsByBookEntityId;
 
     @Basic
@@ -107,12 +107,12 @@ public class BookEntity {
         this.bookByBookId = bookByBookId;
     }
 
-    @OneToMany(mappedBy = "bookEntityByBookEntityId")
-    public Collection<BookLease> getBookLeasesByBookEntityId() {
+    @OneToOne(mappedBy = "bookEntityByBookEntityId")
+    public BookLease getBookLeasesByBookEntityId() {
         return bookLeasesByBookEntityId;
     }
 
-    public void setBookLeasesByBookEntityId(Collection<BookLease> bookLeasesByBookEntityId) {
+    public void setBookLeasesByBookEntityId(BookLease bookLeasesByBookEntityId) {
         this.bookLeasesByBookEntityId = bookLeasesByBookEntityId;
     }
 

@@ -14,7 +14,6 @@ public class Book {
      */
 
     private String title;
-    private String authors;
     private Date releaseDate;
     private Integer pages;
     private String publisher;
@@ -29,6 +28,16 @@ public class Book {
     private String summary;
     private Double price;
     private Collection<BookEntity> bookEntitiesByBookId;
+    private Collection<String> author;
+
+    @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
+    public Collection<String> getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Collection<String> author) {
+        this.author = author;
+    }
 
     @Basic
     @Column(name = "title")
@@ -38,16 +47,6 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    @Basic
-    @Column(name = "authors")
-    public String getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(String authors) {
-        this.authors = authors;
     }
 
     @Basic
@@ -190,7 +189,7 @@ public class Book {
         Book book = (Book) o;
 
         if (bookId != book.bookId) return false;
-        if (authors != null ? !authors.equals(book.authors) : book.authors != null) return false;
+        if (author != null ? !author.equals(book.author) : book.author != null) return false;
         if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
@@ -211,7 +210,7 @@ public class Book {
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (authors != null ? authors.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
         result = 31 * result + (pages != null ? pages.hashCode() : 0);
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);

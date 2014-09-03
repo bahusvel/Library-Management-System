@@ -92,7 +92,7 @@ public class ItemLease {
         this.employeeByEmployeeId = employeeByEmployeeId;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "item_entity_id", referencedColumnName = "item_entity_id")
     public ItemEntity getItemEntityByItemEntityId() {
         return itemEntityByItemEntityId;

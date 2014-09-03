@@ -1,8 +1,8 @@
 package HibernateManager;
 
 import Persistance.Book;
-import Persistance.Member;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -22,14 +22,14 @@ public class Test {
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
         for (Object o : hm.listEntities(Book.class)){
-            System.out.println(((Book) o).getTitle());
+            System.out.println(((Book) o).getAuthor());
         }
-        Member member = new Member();
-        member.setFirstname("Denis");
-        member.setLastname("Lavrov");
-        hm.addEntity(member);
         Book book = new Book();
         book.setTitle("Hello World in Java");
+        ArrayList<String> author = new ArrayList<>();
+        author.add("Flying me");
+        author.add("And drunk drunky");
+        book.setAuthor(author);
         book.setReleaseDate(new Date(1409663906879L));
         hm.addEntity(book);
     }

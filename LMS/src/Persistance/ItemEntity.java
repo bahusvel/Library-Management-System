@@ -16,7 +16,7 @@ public class ItemEntity {
     private String location;
     private int itemEntityId;
     private Item itemByItemId;
-    private Collection<ItemLease> itemLeasesByItemEntityId;
+    private ItemLease itemLeasesByItemEntityId;
     private Collection<ItemReturn> itemReturnsByItemEntityId;
 
     @Basic
@@ -107,12 +107,12 @@ public class ItemEntity {
         this.itemByItemId = itemByItemId;
     }
 
-    @OneToMany(mappedBy = "itemEntityByItemEntityId")
-    public Collection<ItemLease> getItemLeasesByItemEntityId() {
+    @OneToOne(mappedBy = "itemEntityByItemEntityId")
+    public ItemLease getItemLeasesByItemEntityId() {
         return itemLeasesByItemEntityId;
     }
 
-    public void setItemLeasesByItemEntityId(Collection<ItemLease> itemLeasesByItemEntityId) {
+    public void setItemLeasesByItemEntityId(ItemLease itemLeasesByItemEntityId) {
         this.itemLeasesByItemEntityId = itemLeasesByItemEntityId;
     }
 
