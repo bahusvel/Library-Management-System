@@ -2,10 +2,13 @@ package HibernateManager;
 
 import Persistance.Book;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Created by denislavrov on 9/2/14.
  */
-public class Test {
+public class HibernateTest {
     /**
      * BIG DEAL !!!!
      * methods in Session take arguments of serializable
@@ -14,11 +17,9 @@ public class Test {
      */
 
 
-
-
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
-        /*
+
         for (Object o : hm.listEntities(Book.class)){
             //System.out.println(((Book) o).getAuthor());
         }
@@ -30,11 +31,7 @@ public class Test {
         book.setAuthor(author);
         book.setReleaseDate(new Date(1409663906879L));
         hm.addEntity(book);
-        */
-        SearchManager sm = new SearchManager(HibernateManager.getSession());
-        for (Object b : sm.search(Book.class,"Hello","title")){
-            System.out.println(((Book)b).getTitle());
-        }
+
 
     }
 }
