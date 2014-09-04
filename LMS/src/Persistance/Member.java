@@ -2,7 +2,7 @@ package Persistance;
 
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 
 /**
@@ -52,6 +52,7 @@ public class Member {
 
     @Basic
     @Column(name = "dob")
+    @Temporal(TemporalType.DATE)
     public Date getDob() {
         return dob;
     }
@@ -62,6 +63,7 @@ public class Member {
 
     @Basic
     @Column(name = "registration_date")
+    @Temporal(TemporalType.DATE)
     public Date getRegistrationDate() {
         return registrationDate;
     }

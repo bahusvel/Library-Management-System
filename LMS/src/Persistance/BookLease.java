@@ -1,7 +1,7 @@
 package Persistance;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -30,6 +30,7 @@ public class BookLease {
 
     @Basic
     @Column(name = "lease_date")
+    @Temporal(TemporalType.DATE)
     public Date getLeaseDate() {
         return leaseDate;
     }
@@ -40,6 +41,7 @@ public class BookLease {
 
     @Basic
     @Column(name = "due_date")
+    @Temporal(TemporalType.DATE)
     public Date getDueDate() {
         return dueDate;
     }

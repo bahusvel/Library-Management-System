@@ -1,7 +1,7 @@
 package Persistance;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 
 /**
@@ -29,6 +29,7 @@ public class MagazineEdition {
 
     @Basic
     @Column(name = "edition_date")
+    @Temporal(TemporalType.DATE)
     public Date getEditionDate() {
         return editionDate;
     }

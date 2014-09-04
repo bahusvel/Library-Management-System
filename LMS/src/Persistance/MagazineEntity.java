@@ -1,6 +1,7 @@
 package Persistance;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -11,6 +12,19 @@ public class MagazineEntity {
     private int magEntityId;
     private boolean available;
     private MagazineEdition magazineEditionByMagazineEditionId;
+
+    @Basic
+    @Column(name="acquistion_date")
+    @Temporal(TemporalType.DATE)
+    public Date getAcqusitionDate() {
+        return acqusitionDate;
+    }
+
+    public void setAcqusitionDate(Date acqusitionDate) {
+        this.acqusitionDate = acqusitionDate;
+    }
+
+    private Date acqusitionDate;
 
     @Id
     @Column(name = "mag_entity_id")
