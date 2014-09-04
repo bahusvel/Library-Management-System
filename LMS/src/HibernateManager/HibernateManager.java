@@ -80,6 +80,15 @@ public class HibernateManager {
         return entities;
     }
 
+    public void deleteEntity(Object object){
+        try (AutoTransaction at = new AutoTransaction()) {
+            at.session.delete(object);
+            at.tx.commit();
+        } catch (MappingException e) { // catch errors when user passes wrong objects
+            System.err.println(object.getClass() + " Is not compatible with the database.");
+        }
+    }
+
     public AutoSession newAutoSession(){
         return new AutoSession();
     }

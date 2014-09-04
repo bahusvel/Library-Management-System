@@ -230,7 +230,7 @@ public class Book {
         return result;
     }
 
-    @OneToMany(mappedBy = "bookByBookId")
+    @OneToMany(mappedBy = "bookByBookId", cascade = {CascadeType.ALL})
     public Collection<BookEntity> getBookEntitiesByBookId() {
         return bookEntitiesByBookId;
     }
