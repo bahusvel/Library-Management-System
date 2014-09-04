@@ -8,7 +8,7 @@ import Persistance.Book;
 public class SearchTest {
     public static void main(String[] args) {
         SearchManager sm = new SearchManager(HibernateManager.getSession());
-        for (Object b : sm.search(Book.class,"Some","title")){
+        for (Object b : sm.search(Book.class,"Denis","author")){
             System.out.println(((Book)b).getTitle());
         }
     }

@@ -31,7 +31,5 @@ public class HibernateTest {
         book.setAuthor(author);
         book.setReleaseDate(new Date(1409663906879L));
         hm.addEntity(book);
-
-
     }
 }

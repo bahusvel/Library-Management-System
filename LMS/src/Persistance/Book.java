@@ -12,6 +12,22 @@ import java.util.Date;
 @Entity
 @Indexed
 public class Book {
+    /*
+    Annotation Summary:
+    @Entity -
+    @Indexed - Tells Search to index this entity.
+    @IndexedEmbedded - Tells Search to index embedded Entity.
+    @Element Collection -
+    @Basic -
+    @Column -
+    @Field - Tells search that this Field needs to be indexed.
+    @Temporal -
+    @Id -
+    @GeneratedValue -
+    @OneToMany -
+     */
+
+
     /*Say you got a field that you dont want to be persisted, what do you do ???? OMG
       Just add @Transient annotation onto it, and you will be allgoods.
      */
@@ -33,6 +49,15 @@ public class Book {
     private Collection<BookEntity> bookEntitiesByBookId;
     private Collection<String> author;
 
+   /*
+   Hibernate was a little annoying here.
+   Basically the documentations specifies that Collections are indexed with @IndexedEmbedded
+   But search cannot find field named author
+   For that reason you have to specify field flag on it as well
+   Otherwise it wont work.
+    */
+
+    @Field(name="author")
     @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
     public Collection<String> getAuthor() {
@@ -77,6 +102,7 @@ public class Book {
 
     @Basic
     @Column(name = "publisher")
+    @Field
     public String getPublisher() {
         return publisher;
     }
@@ -87,6 +113,7 @@ public class Book {
 
     @Basic
     @Column(name = "description")
+    @Field
     public String getDescription() {
         return description;
     }
@@ -107,6 +134,7 @@ public class Book {
 
     @Basic
     @Column(name = "isbn")
+    @Field
     public String getIsbn() {
         return isbn;
     }
@@ -168,6 +196,7 @@ public class Book {
 
     @Basic
     @Column(name = "summary")
+    @Field
     public String getSummary() {
         return summary;
     }

@@ -27,6 +27,7 @@
         <property name="hibernate.search.default.directory_provider">filesystem</property>
         <property name="hibernate.search.default.indexBase">/Users/denislavrov/Desktop/indexes</property>
 
+        <!-- Entity mapping -->
         <mapping class="Persistance.Book"/>
         <mapping class="Persistance.BookEntity"/>
         <mapping class="Persistance.BookLease"/>
