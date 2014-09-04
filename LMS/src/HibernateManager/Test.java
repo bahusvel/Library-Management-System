@@ -2,9 +2,6 @@ package HibernateManager;
 
 import Persistance.Book;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  * Created by denislavrov on 9/2/14.
  */
@@ -21,8 +18,9 @@ public class Test {
 
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
+        /*
         for (Object o : hm.listEntities(Book.class)){
-            System.out.println(((Book) o).getAuthor());
+            //System.out.println(((Book) o).getAuthor());
         }
         Book book = new Book();
         book.setTitle("Hello World in Java");
@@ -32,5 +30,11 @@ public class Test {
         book.setAuthor(author);
         book.setReleaseDate(new Date(1409663906879L));
         hm.addEntity(book);
+        */
+        SearchManager sm = new SearchManager(HibernateManager.getSession());
+        for (Object b : sm.search(Book.class,"Hello","title")){
+            System.out.println(((Book)b).getTitle());
+        }
+
     }
 }

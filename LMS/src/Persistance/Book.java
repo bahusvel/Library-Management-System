@@ -1,13 +1,16 @@
 package Persistance;
 
+import org.hibernate.search.annotations.*;
+
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
 @Entity
+@Indexed
 public class Book {
     /*Say you got a field that you dont want to be persisted, what do you do ???? OMG
       Just add @Transient annotation onto it, and you will be allgoods.
@@ -30,6 +33,7 @@ public class Book {
     private Collection<BookEntity> bookEntitiesByBookId;
     private Collection<String> author;
 
+    @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
     public Collection<String> getAuthor() {
         return author;
@@ -41,6 +45,7 @@ public class Book {
 
     @Basic
     @Column(name = "title")
+    @Field
     public String getTitle() {
         return title;
     }

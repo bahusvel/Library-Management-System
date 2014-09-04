@@ -34,6 +34,10 @@ public class HibernateManager {
         return factory;
     }
 
+    public static Session getSession(){
+        return factory.openSession();
+    }
+
     public class AutoTransaction implements AutoCloseable{
         public Session session = factory.openSession();
         public Transaction tx;
