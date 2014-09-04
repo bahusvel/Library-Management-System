@@ -42,7 +42,7 @@ public class Book {
     private String imageFpath;
     private String summary;
     private Double price;
-    private Collection<BookEntity> bookEntitiesByBookId;
+    private Collection<BookEntity> bookEntities;
     private Collection<String> author;
 
    /*
@@ -221,7 +221,7 @@ public class Book {
         if (bookId != book.bookId) return false;
         if (author != null ? !author.equals(book.author) : book.author != null) return false;
         if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
-        if (bookEntitiesByBookId != null ? !bookEntitiesByBookId.equals(book.bookEntitiesByBookId) : book.bookEntitiesByBookId != null)
+        if (bookEntities != null ? !bookEntities.equals(book.bookEntities) : book.bookEntities != null)
             return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
@@ -255,17 +255,17 @@ public class Book {
         result = 31 * result + (imageFpath != null ? imageFpath.hashCode() : 0);
         result = 31 * result + (summary != null ? summary.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (bookEntitiesByBookId != null ? bookEntitiesByBookId.hashCode() : 0);
+        result = 31 * result + (bookEntities != null ? bookEntities.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "bookByBookId", cascade = {CascadeType.ALL})
-    public Collection<BookEntity> getBookEntitiesByBookId() {
-        return bookEntitiesByBookId;
+    @OneToMany(mappedBy = "book", cascade = {CascadeType.ALL})
+    public Collection<BookEntity> getBookEntitiesbookEntities() {
+        return bookEntities;
     }
 
-    public void setBookEntitiesByBookId(Collection<BookEntity> bookEntitiesByBookId) {
-        this.bookEntitiesByBookId = bookEntitiesByBookId;
+    public void setBookEntitiesbookEntities(Collection<BookEntity> bookEntities) {
+        this.bookEntities = bookEntities;
     }
 }

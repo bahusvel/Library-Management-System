@@ -15,9 +15,9 @@ public class BookEntity {
     private int bookEntityId;
     private boolean leased;
     private Date acquisitionDate;
-    private Book bookByBookId;
-    private BookLease bookLeasesByBookEntityId;
-    private Collection<BookReturn> bookReturnsByBookEntityId;
+    private Book book;
+    private BookLease bookLease;
+    private Collection<BookReturn> bookReturns;
 
     @Basic
     @Column(name = "available")
@@ -100,29 +100,29 @@ public class BookEntity {
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "book_id", nullable = false)
-    public Book getBookByBookId() {
-        return bookByBookId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookByBookId(Book bookByBookId) {
-        this.bookByBookId = bookByBookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    @OneToOne(mappedBy = "bookEntityByBookEntityId")
-    public BookLease getBookLeasesByBookEntityId() {
-        return bookLeasesByBookEntityId;
+    @OneToOne(mappedBy = "bookEntity")
+    public BookLease getBookLease() {
+        return bookLease;
     }
 
-    public void setBookLeasesByBookEntityId(BookLease bookLeasesByBookEntityId) {
-        this.bookLeasesByBookEntityId = bookLeasesByBookEntityId;
+    public void setBookLease(BookLease bookLease) {
+        this.bookLease = bookLease;
     }
 
-    @OneToMany(mappedBy = "bookEntityByBookEntityId")
-    public Collection<BookReturn> getBookReturnsByBookEntityId() {
-        return bookReturnsByBookEntityId;
+    @OneToMany(mappedBy = "bookEntity")
+    public Collection<BookReturn> getBookReturns() {
+        return bookReturns;
     }
 
-    public void setBookReturnsByBookEntityId(Collection<BookReturn> bookReturnsByBookEntityId) {
-        this.bookReturnsByBookEntityId = bookReturnsByBookEntityId;
+    public void setBookReturns(Collection<BookReturn> bookReturns) {
+        this.bookReturns = bookReturns;
     }
 }

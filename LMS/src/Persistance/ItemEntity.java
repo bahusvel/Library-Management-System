@@ -15,9 +15,9 @@ public class ItemEntity {
     private Boolean available;
     private String location;
     private int itemEntityId;
-    private Item itemByItemId;
-    private ItemLease itemLeasesByItemEntityId;
-    private Collection<ItemReturn> itemReturnsByItemEntityId;
+    private Item item;
+    private ItemLease itemLeases;
+    private Collection<ItemReturn> itemReturns;
 
     @Basic
     @Column(name = "acquisition_date")
@@ -100,29 +100,29 @@ public class ItemEntity {
 
     @ManyToOne
     @JoinColumn(name = "item_id", referencedColumnName = "item_id")
-    public Item getItemByItemId() {
-        return itemByItemId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemByItemId(Item itemByItemId) {
-        this.itemByItemId = itemByItemId;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    @OneToOne(mappedBy = "itemEntityByItemEntityId")
-    public ItemLease getItemLeasesByItemEntityId() {
-        return itemLeasesByItemEntityId;
+    @OneToOne(mappedBy = "itemEntity")
+    public ItemLease getItemLeases() {
+        return itemLeases;
     }
 
-    public void setItemLeasesByItemEntityId(ItemLease itemLeasesByItemEntityId) {
-        this.itemLeasesByItemEntityId = itemLeasesByItemEntityId;
+    public void setItemLeases(ItemLease itemLeases) {
+        this.itemLeases = itemLeases;
     }
 
-    @OneToMany(mappedBy = "itemEntityByItemEntityId")
-    public Collection<ItemReturn> getItemReturnsByItemEntityId() {
-        return itemReturnsByItemEntityId;
+    @OneToMany(mappedBy = "itemEntity")
+    public Collection<ItemReturn> getItemReturns() {
+        return itemReturns;
     }
 
-    public void setItemReturnsByItemEntityId(Collection<ItemReturn> itemReturnsByItemEntityId) {
-        this.itemReturnsByItemEntityId = itemReturnsByItemEntityId;
+    public void setItemReturns(Collection<ItemReturn> itemReturns) {
+        this.itemReturns = itemReturns;
     }
 }

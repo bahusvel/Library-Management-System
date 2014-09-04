@@ -14,7 +14,7 @@ public class Item {
     private String category;
     private int itemId;
     private Double price;
-    private Collection<ItemEntity> itemEntitiesByItemId;
+    private Collection<ItemEntity> itemEntities;
 
     @Basic
     @Column(name = "name")
@@ -105,12 +105,12 @@ public class Item {
         return result;
     }
 
-    @OneToMany(mappedBy = "itemByItemId")
-    public Collection<ItemEntity> getItemEntitiesByItemId() {
-        return itemEntitiesByItemId;
+    @OneToMany(mappedBy = "item")
+    public Collection<ItemEntity> getItemEntities() {
+        return itemEntities;
     }
 
-    public void setItemEntitiesByItemId(Collection<ItemEntity> itemEntitiesByItemId) {
-        this.itemEntitiesByItemId = itemEntitiesByItemId;
+    public void setItemEntities(Collection<ItemEntity> itemEntities) {
+        this.itemEntities = itemEntities;
     }
 }

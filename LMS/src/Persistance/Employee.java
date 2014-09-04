@@ -82,7 +82,7 @@ public class Employee {
         return result;
     }
 
-    @OneToMany(mappedBy = "employeeByEmployeeId")
+    @OneToMany(mappedBy = "employee")
     public Collection<BookLease> getBookLeasesByEmployeeId() {
         return bookLeasesByEmployeeId;
     }
@@ -91,7 +91,7 @@ public class Employee {
         this.bookLeasesByEmployeeId = bookLeasesByEmployeeId;
     }
 
-    @OneToMany(mappedBy = "employeeByEmployeeId")
+    @OneToMany(mappedBy = "employee")
     public Collection<BookReturn> getBookReturnsByEmployeeId() {
         return bookReturnsByEmployeeId;
     }
@@ -100,7 +100,7 @@ public class Employee {
         this.bookReturnsByEmployeeId = bookReturnsByEmployeeId;
     }
 
-    @OneToMany(mappedBy = "employeeByEmployeeId")
+    @OneToMany(mappedBy = "employee")
     public Collection<ItemLease> getItemLeasesByEmployeeId() {
         return itemLeasesByEmployeeId;
     }
@@ -109,7 +109,7 @@ public class Employee {
         this.itemLeasesByEmployeeId = itemLeasesByEmployeeId;
     }
 
-    @OneToMany(mappedBy = "employeeByEmployeeId")
+    @OneToMany(mappedBy = "employee")
     public Collection<ItemReturn> getItemReturnsByEmployeeId() {
         return itemReturnsByEmployeeId;
     }

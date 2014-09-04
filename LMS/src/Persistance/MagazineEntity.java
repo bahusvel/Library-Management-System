@@ -11,7 +11,7 @@ import java.util.Date;
 public class MagazineEntity {
     private int magEntityId;
     private boolean available;
-    private MagazineEdition magazineEditionByMagazineEditionId;
+    private MagazineEdition magazineEdition;
 
     @Basic
     @Column(name="acquistion_date")
@@ -69,11 +69,11 @@ public class MagazineEntity {
 
     @ManyToOne
     @JoinColumn(name = "magazine_edition_id", referencedColumnName = "mag_edition_id", nullable = false)
-    public MagazineEdition getMagazineEditionByMagazineEditionId() {
-        return magazineEditionByMagazineEditionId;
+    public MagazineEdition getMagazineEdition() {
+        return magazineEdition;
     }
 
-    public void setMagazineEditionByMagazineEditionId(MagazineEdition magazineEditionByMagazineEditionId) {
-        this.magazineEditionByMagazineEditionId = magazineEditionByMagazineEditionId;
+    public void setMagazineEdition(MagazineEdition magazineEdition) {
+        this.magazineEdition = magazineEdition;
     }
 }

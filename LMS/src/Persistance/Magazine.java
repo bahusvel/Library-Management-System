@@ -16,7 +16,7 @@ public class Magazine {
     private String language;
     private String isbn;
     private Double price;
-    private Collection<MagazineEdition> magazineEditionsByMagazineId;
+    private Collection<MagazineEdition> magazineEditions;
 
     @Basic
     @Column(name = "title")
@@ -131,12 +131,12 @@ public class Magazine {
         return result;
     }
 
-    @OneToMany(mappedBy = "magazineByMagazineId")
-    public Collection<MagazineEdition> getMagazineEditionsByMagazineId() {
-        return magazineEditionsByMagazineId;
+    @OneToMany(mappedBy = "magazine")
+    public Collection<MagazineEdition> getMagazineEditions() {
+        return magazineEditions;
     }
 
-    public void setMagazineEditionsByMagazineId(Collection<MagazineEdition> magazineEditionsByMagazineId) {
-        this.magazineEditionsByMagazineId = magazineEditionsByMagazineId;
+    public void setMagazineEditions(Collection<MagazineEdition> magazineEditions) {
+        this.magazineEditions = magazineEditions;
     }
 }

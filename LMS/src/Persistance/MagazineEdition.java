@@ -13,8 +13,8 @@ public class MagazineEdition {
     private int magEditionId;
     private Date editionDate;
     private String editionTitle;
-    private Magazine magazineByMagazineId;
-    private Collection<MagazineEntity> magazineEntitiesByMagEditionId;
+    private Magazine magazine;
+    private Collection<MagazineEntity> magazineEntities;
 
     @Id
     @Column(name = "mag_edition_id")
@@ -72,20 +72,20 @@ public class MagazineEdition {
 
     @ManyToOne
     @JoinColumn(name = "magazine_id", referencedColumnName = "magazine_id", nullable = false)
-    public Magazine getMagazineByMagazineId() {
-        return magazineByMagazineId;
+    public Magazine getMagazine() {
+        return magazine;
     }
 
-    public void setMagazineByMagazineId(Magazine magazineByMagazineId) {
-        this.magazineByMagazineId = magazineByMagazineId;
+    public void setMagazine(Magazine magazine) {
+        this.magazine = magazine;
     }
 
-    @OneToMany(mappedBy = "magazineEditionByMagazineEditionId")
-    public Collection<MagazineEntity> getMagazineEntitiesByMagEditionId() {
-        return magazineEntitiesByMagEditionId;
+    @OneToMany(mappedBy = "magazineEdition")
+    public Collection<MagazineEntity> getMagazineEntities() {
+        return magazineEntities;
     }
 
-    public void setMagazineEntitiesByMagEditionId(Collection<MagazineEntity> magazineEntitiesByMagEditionId) {
-        this.magazineEntitiesByMagEditionId = magazineEntitiesByMagEditionId;
+    public void setMagazineEntities(Collection<MagazineEntity> magazineEntities) {
+        this.magazineEntities = magazineEntities;
     }
 }

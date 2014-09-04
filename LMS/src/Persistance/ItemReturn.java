@@ -14,9 +14,9 @@ public class ItemReturn {
     private Date returnDate;
     private Double ammountCharged;
     private int itemReturnId;
-    private Employee employeeByEmployeeId;
-    private ItemEntity itemEntityByItemEntityId;
-    private Member memberByMemberId;
+    private Employee employee;
+    private ItemEntity itemEntity;
+    private Member member;
 
     @Basic
     @Column(name = "lease_date")
@@ -101,31 +101,31 @@ public class ItemReturn {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    public Employee getEmployeeByEmployeeId() {
-        return employeeByEmployeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeByEmployeeId(Employee employeeByEmployeeId) {
-        this.employeeByEmployeeId = employeeByEmployeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @ManyToOne
     @JoinColumn(name = "item_entity_id", referencedColumnName = "item_entity_id")
-    public ItemEntity getItemEntityByItemEntityId() {
-        return itemEntityByItemEntityId;
+    public ItemEntity getItemEntity() {
+        return itemEntity;
     }
 
-    public void setItemEntityByItemEntityId(ItemEntity itemEntityByItemEntityId) {
-        this.itemEntityByItemEntityId = itemEntityByItemEntityId;
+    public void setItemEntity(ItemEntity itemEntity) {
+        this.itemEntity = itemEntity;
     }
 
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "member_id")
-    public Member getMemberByMemberId() {
-        return memberByMemberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberByMemberId(Member memberByMemberId) {
-        this.memberByMemberId = memberByMemberId;
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

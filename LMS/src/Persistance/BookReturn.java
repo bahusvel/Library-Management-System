@@ -16,9 +16,9 @@ public class BookReturn {
     private String memberComments;
     private Double memberRating;
     private int bookReturnId;
-    private BookEntity bookEntityByBookEntityId;
-    private Employee employeeByEmployeeId;
-    private Member memberByMemberId;
+    private BookEntity bookEntity;
+    private Employee employee;
+    private Member member;
 
     @Basic
     @Column(name = "lease_date")
@@ -128,31 +128,31 @@ public class BookReturn {
 
     @ManyToOne
     @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id")
-    public BookEntity getBookEntityByBookEntityId() {
-        return bookEntityByBookEntityId;
+    public BookEntity getBookEntity() {
+        return bookEntity;
     }
 
-    public void setBookEntityByBookEntityId(BookEntity bookEntityByBookEntityId) {
-        this.bookEntityByBookEntityId = bookEntityByBookEntityId;
+    public void setBookEntity(BookEntity bookEntity) {
+        this.bookEntity = bookEntity;
     }
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    public Employee getEmployeeByEmployeeId() {
-        return employeeByEmployeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeByEmployeeId(Employee employeeByEmployeeId) {
-        this.employeeByEmployeeId = employeeByEmployeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "member_id")
-    public Member getMemberByMemberId() {
-        return memberByMemberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberByMemberId(Member memberByMemberId) {
-        this.memberByMemberId = memberByMemberId;
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

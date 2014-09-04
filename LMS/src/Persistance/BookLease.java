@@ -13,9 +13,9 @@ public class BookLease {
     private Date leaseDate;
     private Date dueDate;
     private boolean renewed;
-    private BookEntity bookEntityByBookEntityId;
-    private Employee employeeByEmployeeId;
-    private Member memberByMemberId;
+    private BookEntity bookEntity;
+    private Employee employee;
+    private Member member;
 
     @Id
     @Column(name = "lease_id")
@@ -86,31 +86,31 @@ public class BookLease {
 
     @OneToOne
     @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id", nullable = false)
-    public BookEntity getBookEntityByBookEntityId() {
-        return bookEntityByBookEntityId;
+    public BookEntity getBookEntity() {
+        return bookEntity;
     }
 
-    public void setBookEntityByBookEntityId(BookEntity bookEntityByBookEntityId) {
-        this.bookEntityByBookEntityId = bookEntityByBookEntityId;
+    public void setBookEntity(BookEntity bookEntity) {
+        this.bookEntity = bookEntity;
     }
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
-    public Employee getEmployeeByEmployeeId() {
-        return employeeByEmployeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeByEmployeeId(Employee employeeByEmployeeId) {
-        this.employeeByEmployeeId = employeeByEmployeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
-    public Member getMemberByMemberId() {
-        return memberByMemberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberByMemberId(Member memberByMemberId) {
-        this.memberByMemberId = memberByMemberId;
+    public void setMember(Member member) {
+        this.member = member;
     }
 }
