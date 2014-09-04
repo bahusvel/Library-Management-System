@@ -1,9 +1,9 @@
 package HibernateManager;
 
 import org.hibernate.*;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.util.List;
 
@@ -11,18 +11,27 @@ import java.util.List;
  * Created by denislavrov on 9/2/14.
  */
 public class HibernateManager {
-    private static final SessionFactory factory;
-    private static final ServiceRegistry serviceRegistry;
+    private static SessionFactory factory;
+
     static {
         try {
+            // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration();
             configuration.configure();
 
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                    configuration.getProperties()).build();
             factory = configuration.buildSessionFactory(serviceRegistry);
+
         } catch (Throwable ex) {
+            // Make sure you log the exception, as it might be swallowed
+            System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return factory;
     }
 
     public class AutoTransaction implements AutoCloseable{

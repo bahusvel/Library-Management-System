@@ -26,7 +26,7 @@ public class Test {
         }
         Book book = new Book();
         book.setTitle("Hello World in Java");
-        ArrayList<String> author = new ArrayList<>();
+        ArrayList<String> author = new ArrayList<>(10);
         author.add("Flying me");
         author.add("And drunk drunky");
         book.setAuthor(author);
