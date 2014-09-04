@@ -184,13 +184,15 @@ public class Book {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Book)) return false;
 
         Book book = (Book) o;
 
         if (bookId != book.bookId) return false;
         if (author != null ? !author.equals(book.author) : book.author != null) return false;
         if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
+        if (bookEntitiesByBookId != null ? !bookEntitiesByBookId.equals(book.bookEntitiesByBookId) : book.bookEntitiesByBookId != null)
+            return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
         if (edition != null ? !edition.equals(book.edition) : book.edition != null) return false;
@@ -210,7 +212,6 @@ public class Book {
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
         result = 31 * result + (pages != null ? pages.hashCode() : 0);
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
@@ -224,6 +225,8 @@ public class Book {
         result = 31 * result + (imageFpath != null ? imageFpath.hashCode() : 0);
         result = 31 * result + (summary != null ? summary.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (bookEntitiesByBookId != null ? bookEntitiesByBookId.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;
     }
 
