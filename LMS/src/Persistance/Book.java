@@ -14,22 +14,18 @@ import java.util.Date;
 public class Book {
     /*
     Annotation Summary:
-    @Entity -
-    @Indexed - Tells Search to index this entity.
-    @IndexedEmbedded - Tells Search to index embedded Entity.
-    @Element Collection -
-    @Basic -
-    @Column -
-    @Field - Tells search that this Field needs to be indexed.
-    @Temporal -
-    @Id -
-    @GeneratedValue -
-    @OneToMany -
-     */
-
-
-    /*Say you got a field that you dont want to be persisted, what do you do ???? OMG
-      Just add @Transient annotation onto it, and you will be allgoods.
+    @Transient -                Fields that are not persisted.
+    @Entity -                   Classes that will be persisted.
+    @Indexed -                  Tells Search to index this entity.
+    @IndexedEmbedded -          Tells Search to index embedded Entity.
+    @ElementCollection -        Used to store Collections in a linked table.
+    @Basic -                    Just a normal persisted field.
+    @Column -                   Establishes relationship of field with database field.
+    @Field -                    Tells search that this Field needs to be indexed.
+    @Temporal -                 Data that is time or date or timestamp.
+    @Id -                       Primary key.
+    @GeneratedValue -           Automatic surrogate primary key generation.
+    @[One|Many]To[One|Many] -   Relationship Types.
      */
 
     private String title;
