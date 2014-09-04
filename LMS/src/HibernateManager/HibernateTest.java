@@ -21,7 +21,7 @@ public class HibernateTest {
         HibernateManager hm = new HibernateManager();
 
         for (Object o : hm.listEntities(Book.class)){
-            //System.out.println(((Book) o).getAuthor());
+            System.out.println(((Book) o).getAuthor());
         }
         Book book = new Book();
         book.setTitle("Hello World in Java");
