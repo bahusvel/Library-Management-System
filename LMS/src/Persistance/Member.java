@@ -1,8 +1,9 @@
 package Persistance;
 
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.apache.solr.analysis.*;
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Parameter;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -13,6 +14,13 @@ import java.util.Date;
  */
 @Entity
 @Indexed
+@AnalyzerDef(name="NameAnalyzer",
+tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class),
+filters = {
+        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+        @TokenFilterDef(factory = PhoneticFilterFactory.class,
+                params = {@Parameter(name="encoder", value="DOUBLEMETAPHONE")})
+})
 public class Member {
     private String firstname;
     private String lastname;
@@ -37,6 +45,7 @@ public class Member {
 
     @Column(name = "firstname")
     @Field
+    @Analyzer(definition = "NameAnalyzer")
     public String getFirstname() {
         return firstname;
     }
@@ -48,6 +57,7 @@ public class Member {
 
     @Column(name = "lastname")
     @Field
+    @Analyzer(definition = "NameAnalyzer")
     public String getLastname() {
         return lastname;
     }
@@ -217,6 +227,14 @@ public class Member {
         if (username != null ? !username.equals(member.username) : member.username != null) return false;
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 
     @Override

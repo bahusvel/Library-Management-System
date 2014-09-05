@@ -17,6 +17,7 @@ import java.util.Date;
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
                 @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = StopFilterFactory.class),
                 @TokenFilterDef(factory = SnowballPorterFilterFactory.class,
                         params = {@Parameter(name="language",value="English")})
         })
@@ -208,6 +209,14 @@ public class Book {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author=" + author +
+                '}';
     }
 
     @Override
