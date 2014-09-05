@@ -31,10 +31,50 @@ public class SearchManager {
 
     public List search(Class entity, String input, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-        Query query = qb.keyword().onFields(fields).matching(input).createQuery();
-        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query, entity);
+        Query query = qb
+                .keyword()
+                .onFields(fields)
+                .matching(input)
+                .createQuery();
+        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query);
         return ftq.list();
     }
 
+    public List fuzzySearch(Class entity, String input, String... fields){
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = qb
+                .keyword()
+                .fuzzy()
+                .withThreshold(.7f)
+                .onFields(fields)
+                .matching(input)
+                .createQuery();
+        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
+        return ftq.list();
+    }
+
+    public List wildcardSearch(Class entity, String input, String field){
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = qb
+                .keyword()
+                .wildcard()
+                .onField(field)
+                .matching(input)
+                .createQuery();
+        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
+        return ftq.list();
+    }
+
+    public List phraseSearch(Class entity, String input, String field, int sloppiness){
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = qb
+                .phrase()
+                .withSlop(sloppiness)
+                .onField(field)
+                .sentence(input)
+                .createQuery();
+        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
+        return ftq.list();
+    }
 
 }
