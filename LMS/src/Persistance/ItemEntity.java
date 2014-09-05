@@ -19,7 +19,7 @@ public class ItemEntity {
     private ItemLease itemLeases;
     private Collection<ItemReturn> itemReturns;
 
-    @Basic
+
     @Column(name = "acquisition_date")
     @Temporal(TemporalType.DATE)
     public Date getAcquisitionDate() {
@@ -30,7 +30,7 @@ public class ItemEntity {
         this.acquisitionDate = acquisitionDate;
     }
 
-    @Basic
+
     @Column(name = "leased")
     public Boolean getLeased() {
         return leased;
@@ -40,7 +40,7 @@ public class ItemEntity {
         this.leased = leased;
     }
 
-    @Basic
+
     @Column(name = "available")
     public Boolean getAvailable() {
         return available;
@@ -50,7 +50,7 @@ public class ItemEntity {
         this.available = available;
     }
 
-    @Basic
+
     @Column(name = "location")
     public String getLocation() {
         return location;

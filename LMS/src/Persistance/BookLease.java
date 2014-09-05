@@ -28,7 +28,7 @@ public class BookLease {
         this.leaseId = leaseId;
     }
 
-    @Basic
+
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
     public Date getLeaseDate() {
@@ -39,7 +39,7 @@ public class BookLease {
         this.leaseDate = leaseDate;
     }
 
-    @Basic
+
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
     public Date getDueDate() {
@@ -50,7 +50,7 @@ public class BookLease {
         this.dueDate = dueDate;
     }
 
-    @Basic
+
     @Column(name = "renewed")
     public boolean isRenewed() {
         return renewed;

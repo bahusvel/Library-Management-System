@@ -13,7 +13,7 @@ public class MagazineEntity {
     private boolean available;
     private MagazineEdition magazineEdition;
 
-    @Basic
+
     @Column(name="acquistion_date")
     @Temporal(TemporalType.DATE)
     public Date getAcqusitionDate() {
@@ -37,7 +37,7 @@ public class MagazineEntity {
         this.magEntityId = magEntityId;
     }
 
-    @Basic
+
     @Column(name = "available")
     public boolean isAvailable() {
         return available;

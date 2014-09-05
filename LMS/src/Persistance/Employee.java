@@ -17,7 +17,7 @@ public class Employee {
     private Collection<ItemLease> itemLeasesByEmployeeId;
     private Collection<ItemReturn> itemReturnsByEmployeeId;
 
-    @Basic
+
     @Column(name = "firstname")
     public String getFirstname() {
         return firstname;
@@ -27,7 +27,7 @@ public class Employee {
         this.firstname = firstname;
     }
 
-    @Basic
+
     @Column(name = "lastname")
     public String getLastname() {
         return lastname;
@@ -37,7 +37,7 @@ public class Employee {
         this.lastname = lastname;
     }
 
-    @Basic
+
     @Column(name = "role")
     public String getRole() {
         return role;

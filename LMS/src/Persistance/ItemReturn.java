@@ -18,7 +18,7 @@ public class ItemReturn {
     private ItemEntity itemEntity;
     private Member member;
 
-    @Basic
+
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
     public Date getLeaseDate() {
@@ -29,7 +29,7 @@ public class ItemReturn {
         this.leaseDate = leaseDate;
     }
 
-    @Basic
+
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
     public Date getDueDate() {
@@ -40,7 +40,7 @@ public class ItemReturn {
         this.dueDate = dueDate;
     }
 
-    @Basic
+
     @Column(name = "return_date")
     @Temporal(TemporalType.DATE)
     public Date getReturnDate() {
@@ -51,7 +51,7 @@ public class ItemReturn {
         this.returnDate = returnDate;
     }
 
-    @Basic
+
     @Column(name = "ammount_charged")
     public Double getAmmountCharged() {
         return ammountCharged;

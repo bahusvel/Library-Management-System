@@ -17,7 +17,7 @@ public class ItemLease {
     private ItemEntity itemEntity;
     private Member member;
 
-    @Basic
+
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
     public Date getLeaseDate() {
@@ -28,7 +28,7 @@ public class ItemLease {
         this.leaseDate = leaseDate;
     }
 
-    @Basic
+
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
     public Date getDueDate() {
@@ -39,7 +39,7 @@ public class ItemLease {
         this.dueDate = dueDate;
     }
 
-    @Basic
+
     @Column(name = "renewed")
     public Boolean getRenewed() {
         return renewed;

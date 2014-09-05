@@ -19,7 +19,7 @@ public class BookEntity {
     private BookLease bookLease;
     private Collection<BookReturn> bookReturns;
 
-    @Basic
+
     @Column(name = "available")
     public boolean isAvailable() {
         return available;
@@ -29,7 +29,7 @@ public class BookEntity {
         this.available = available;
     }
 
-    @Basic
+
     @Column(name = "location")
     public String getLocation() {
         return location;
@@ -50,7 +50,7 @@ public class BookEntity {
         this.bookEntityId = bookEntityId;
     }
 
-    @Basic
+
     @Column(name = "leased")
     public boolean isLeased() {
         return leased;
@@ -60,7 +60,7 @@ public class BookEntity {
         this.leased = leased;
     }
 
-    @Basic
+
     @Column(name = "acquisition_date")
     @Temporal(TemporalType.DATE)
     public Date getAcquisitionDate() {

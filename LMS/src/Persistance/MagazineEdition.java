@@ -27,7 +27,7 @@ public class MagazineEdition {
         this.magEditionId = magEditionId;
     }
 
-    @Basic
+
     @Column(name = "edition_date")
     @Temporal(TemporalType.DATE)
     public Date getEditionDate() {
@@ -38,7 +38,7 @@ public class MagazineEdition {
         this.editionDate = editionDate;
     }
 
-    @Basic
+
     @Column(name = "edition_title")
     public String getEditionTitle() {
         return editionTitle;

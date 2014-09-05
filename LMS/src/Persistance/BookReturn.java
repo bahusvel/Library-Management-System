@@ -20,7 +20,7 @@ public class BookReturn {
     private Employee employee;
     private Member member;
 
-    @Basic
+
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
     public Date getLeaseDate() {
@@ -31,7 +31,7 @@ public class BookReturn {
         this.leaseDate = leaseDate;
     }
 
-    @Basic
+
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
     public Date getDueDate() {
@@ -42,7 +42,7 @@ public class BookReturn {
         this.dueDate = dueDate;
     }
 
-    @Basic
+
     @Column(name = "ammount_charged")
     public Double getAmmountCharged() {
         return ammountCharged;
@@ -52,7 +52,7 @@ public class BookReturn {
         this.ammountCharged = ammountCharged;
     }
 
-    @Basic
+
     @Column(name = "return_date")
     @Temporal(TemporalType.DATE)
     public Date getReturnDate() {
@@ -63,7 +63,7 @@ public class BookReturn {
         this.returnDate = returnDate;
     }
 
-    @Basic
+
     @Column(name = "member_comments")
     public String getMemberComments() {
         return memberComments;
@@ -73,7 +73,7 @@ public class BookReturn {
         this.memberComments = memberComments;
     }
 
-    @Basic
+
     @Column(name = "member_rating")
     public Double getMemberRating() {
         return memberRating;
