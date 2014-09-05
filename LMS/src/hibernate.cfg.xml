@@ -25,7 +25,7 @@
 
         <!-- Hibernate Search Properties -->
         <property name="hibernate.search.default.directory_provider">filesystem</property>
-        <property name="hibernate.search.default.indexBase">/Users/denislavrov/Desktop/indexes</property>
+        <property name="hibernate.search.default.indexBase">/Users/denislavrov/Documents/Developing/Java/Library-Management-System/lucene/index</property>
 
         <!-- Entity mapping -->
         <mapping class="Persistance.Book"/>
