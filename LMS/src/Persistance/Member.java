@@ -1,14 +1,18 @@
 package Persistance;
 
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
 @Entity
+@Indexed
 public class Member {
     private String firstname;
     private String lastname;
@@ -30,8 +34,9 @@ public class Member {
     private Collection<ItemLease> itemLeasesByMemberId;
     private Collection<ItemReturn> itemReturnsByMemberId;
 
-    @Basic
+
     @Column(name = "firstname")
+    @Field
     public String getFirstname() {
         return firstname;
     }
@@ -40,8 +45,9 @@ public class Member {
         this.firstname = firstname;
     }
 
-    @Basic
+
     @Column(name = "lastname")
+    @Field
     public String getLastname() {
         return lastname;
     }
@@ -50,7 +56,7 @@ public class Member {
         this.lastname = lastname;
     }
 
-    @Basic
+
     @Column(name = "dob")
     @Temporal(TemporalType.DATE)
     public Date getDob() {
@@ -61,7 +67,7 @@ public class Member {
         this.dob = dob;
     }
 
-    @Basic
+
     @Column(name = "registration_date")
     @Temporal(TemporalType.DATE)
     public Date getRegistrationDate() {
@@ -72,8 +78,9 @@ public class Member {
         this.registrationDate = registrationDate;
     }
 
-    @Basic
+
     @Column(name = "username")
+    @Field
     public String getUsername() {
         return username;
     }
@@ -82,7 +89,7 @@ public class Member {
         this.username = username;
     }
 
-    @Basic
+
     @Column(name = "country")
     public String getCountry() {
         return country;
@@ -92,7 +99,7 @@ public class Member {
         this.country = country;
     }
 
-    @Basic
+
     @Column(name = "city")
     public String getCity() {
         return city;
@@ -102,7 +109,7 @@ public class Member {
         this.city = city;
     }
 
-    @Basic
+
     @Column(name = "postal_code")
     public String getPostalCode() {
         return postalCode;
@@ -112,7 +119,7 @@ public class Member {
         this.postalCode = postalCode;
     }
 
-    @Basic
+
     @Column(name = "address_1")
     public String getAddress1() {
         return address1;
@@ -122,7 +129,7 @@ public class Member {
         this.address1 = address1;
     }
 
-    @Basic
+
     @Column(name = "address_2")
     public String getAddress2() {
         return address2;
@@ -132,7 +139,7 @@ public class Member {
         this.address2 = address2;
     }
 
-    @Basic
+
     @Column(name = "address_3")
     public String getAddress3() {
         return address3;
@@ -142,8 +149,9 @@ public class Member {
         this.address3 = address3;
     }
 
-    @Basic
+
     @Column(name = "email")
+    @Field
     public String getEmail() {
         return email;
     }
@@ -152,8 +160,9 @@ public class Member {
         this.email = email;
     }
 
-    @Basic
+
     @Column(name = "phone_number")
+    @Field
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -173,7 +182,7 @@ public class Member {
         this.memberId = memberId;
     }
 
-    @Basic
+
     @Column(name = "balance")
     public Double getBalance() {
         return balance;

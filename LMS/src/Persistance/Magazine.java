@@ -1,5 +1,7 @@
 package Persistance;
 
+import org.hibernate.search.annotations.*;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -7,19 +9,21 @@ import java.util.Collection;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
+@Indexed
 public class Magazine {
     private String title;
     private int magazineId;
     private String publisher;
-    private String author;
     private String frequency;
     private String language;
     private String isbn;
     private Double price;
     private Collection<MagazineEdition> magazineEditions;
 
-    @Basic
+
     @Column(name = "title")
+    @Field
+    @Analyzer(definition = "TokenizingLower")
     public String getTitle() {
         return title;
     }
@@ -39,8 +43,9 @@ public class Magazine {
         this.magazineId = magazineId;
     }
 
-    @Basic
+
     @Column(name = "publisher")
+    @Field
     public String getPublisher() {
         return publisher;
     }
@@ -49,17 +54,7 @@ public class Magazine {
         this.publisher = publisher;
     }
 
-    @Basic
-    @Column(name = "author")
-    public String getAuthor() {
-        return author;
-    }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    @Basic
     @Column(name = "frequency")
     public String getFrequency() {
         return frequency;
@@ -69,7 +64,7 @@ public class Magazine {
         this.frequency = frequency;
     }
 
-    @Basic
+
     @Column(name = "language")
     public String getLanguage() {
         return language;
@@ -79,8 +74,9 @@ public class Magazine {
         this.language = language;
     }
 
-    @Basic
+
     @Column(name = "isbn")
+    @Field
     public String getIsbn() {
         return isbn;
     }
@@ -89,7 +85,7 @@ public class Magazine {
         this.isbn = isbn;
     }
 
-    @Basic
+
     @Column(name = "price")
     public Double getPrice() {
         return price;
@@ -107,7 +103,6 @@ public class Magazine {
         Magazine magazine = (Magazine) o;
 
         if (magazineId != magazine.magazineId) return false;
-        if (author != null ? !author.equals(magazine.author) : magazine.author != null) return false;
         if (frequency != null ? !frequency.equals(magazine.frequency) : magazine.frequency != null) return false;
         if (isbn != null ? !isbn.equals(magazine.isbn) : magazine.isbn != null) return false;
         if (language != null ? !language.equals(magazine.language) : magazine.language != null) return false;
@@ -123,7 +118,6 @@ public class Magazine {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + magazineId;
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
         result = 31 * result + (language != null ? language.hashCode() : 0);
         result = 31 * result + (isbn != null ? isbn.hashCode() : 0);

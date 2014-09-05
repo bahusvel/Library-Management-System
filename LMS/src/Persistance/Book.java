@@ -1,6 +1,8 @@
 package Persistance;
 
+import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Parameter;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -11,6 +13,13 @@ import java.util.Date;
  */
 @Entity
 @Indexed
+@AnalyzerDef(name="TokenizingLower",
+        tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+        filters = {
+                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = SnowballPorterFilterFactory.class,
+                        params = {@Parameter(name="language",value="English")})
+        })
 public class Book {
     /*
     Annotation Summary:
@@ -19,7 +28,6 @@ public class Book {
     @Indexed -                  Tells Search to index this entity.
     @IndexedEmbedded -          Tells Search to index embedded Entity.
     @ElementCollection -        Used to store Collections in a linked table.
-    @Basic -                    Just a normal persisted field.
     @Column -                   Establishes relationship of field with database field.
     @Field -                    Tells search that this Field needs to be indexed.
     @Temporal -                 Data that is time or date or timestamp.
@@ -64,9 +72,9 @@ public class Book {
         this.author = author;
     }
 
-    @Basic
     @Column(name = "title")
     @Field
+    @Analyzer(definition = "TokenizingLower")
     public String getTitle() {
         return title;
     }
@@ -75,7 +83,6 @@ public class Book {
         this.title = title;
     }
 
-    @Basic
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     public Date getReleaseDate() {
@@ -86,7 +93,6 @@ public class Book {
         this.releaseDate = releaseDate;
     }
 
-    @Basic
     @Column(name = "pages")
     public Integer getPages() {
         return pages;
@@ -96,7 +102,6 @@ public class Book {
         this.pages = pages;
     }
 
-    @Basic
     @Column(name = "publisher")
     @Field
     public String getPublisher() {
@@ -107,9 +112,9 @@ public class Book {
         this.publisher = publisher;
     }
 
-    @Basic
     @Column(name = "description")
     @Field
+    @Analyzer(definition = "TokenizingLower")
     public String getDescription() {
         return description;
     }
@@ -118,7 +123,6 @@ public class Book {
         this.description = description;
     }
 
-    @Basic
     @Column(name = "barcode")
     public Long getBarcode() {
         return barcode;
@@ -128,7 +132,6 @@ public class Book {
         this.barcode = barcode;
     }
 
-    @Basic
     @Column(name = "isbn")
     @Field
     public String getIsbn() {
@@ -139,8 +142,8 @@ public class Book {
         this.isbn = isbn;
     }
 
-    @Basic
     @Column(name = "edition")
+    @Field
     public Integer getEdition() {
         return edition;
     }
@@ -149,7 +152,6 @@ public class Book {
         this.edition = edition;
     }
 
-    @Basic
     @Column(name = "category")
     public String getCategory() {
         return category;
@@ -159,7 +161,6 @@ public class Book {
         this.category = category;
     }
 
-    @Basic
     @Column(name = "rating")
     public Double getRating() {
         return rating;
@@ -180,7 +181,6 @@ public class Book {
         this.bookId = bookId;
     }
 
-    @Basic
     @Column(name = "image_fpath")
     public String getImageFpath() {
         return imageFpath;
@@ -190,9 +190,9 @@ public class Book {
         this.imageFpath = imageFpath;
     }
 
-    @Basic
     @Column(name = "summary")
     @Field
+    @Analyzer(definition = "TokenizingLower")
     public String getSummary() {
         return summary;
     }
@@ -201,7 +201,6 @@ public class Book {
         this.summary = summary;
     }
 
-    @Basic
     @Column(name = "price")
     public Double getPrice() {
         return price;

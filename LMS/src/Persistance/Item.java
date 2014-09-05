@@ -1,5 +1,7 @@
 package Persistance;
 
+import org.hibernate.search.annotations.*;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -7,6 +9,7 @@ import java.util.Collection;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
+@Indexed
 public class Item {
     private String name;
     private String description;
@@ -16,8 +19,10 @@ public class Item {
     private Double price;
     private Collection<ItemEntity> itemEntities;
 
-    @Basic
+
     @Column(name = "name")
+    @Field
+    @Analyzer(definition = "TokenizingLower")
     public String getName() {
         return name;
     }
@@ -26,8 +31,10 @@ public class Item {
         this.name = name;
     }
 
-    @Basic
+
     @Column(name = "description")
+    @Field
+    @Analyzer(definition = "TokenizingLower")
     public String getDescription() {
         return description;
     }
@@ -36,7 +43,7 @@ public class Item {
         this.description = description;
     }
 
-    @Basic
+
     @Column(name = "condition")
     public String getCondition() {
         return condition;
@@ -46,7 +53,7 @@ public class Item {
         this.condition = condition;
     }
 
-    @Basic
+
     @Column(name = "category")
     public String getCategory() {
         return category;
@@ -67,7 +74,7 @@ public class Item {
         this.itemId = itemId;
     }
 
-    @Basic
+
     @Column(name = "price")
     public Double getPrice() {
         return price;
