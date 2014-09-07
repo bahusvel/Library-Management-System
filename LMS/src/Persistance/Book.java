@@ -74,7 +74,7 @@ public class Book {
     }
 
     @Column(name = "title")
-    @Field
+    @Field(store = Store.COMPRESS)
     @Analyzer(definition = "TokenizingLower")
     public String getTitle() {
         return title;

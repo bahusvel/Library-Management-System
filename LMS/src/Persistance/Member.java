@@ -44,7 +44,7 @@ public class Member {
 
 
     @Column(name = "firstname")
-    @Field
+    @Field(store = Store.COMPRESS)
     @Analyzer(definition = "NameAnalyzer")
     public String getFirstname() {
         return firstname;
@@ -56,7 +56,7 @@ public class Member {
 
 
     @Column(name = "lastname")
-    @Field
+    @Field(store = Store.COMPRESS)
     @Analyzer(definition = "NameAnalyzer")
     public String getLastname() {
         return lastname;

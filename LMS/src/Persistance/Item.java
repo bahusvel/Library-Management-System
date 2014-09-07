@@ -21,7 +21,7 @@ public class Item {
 
 
     @Column(name = "name")
-    @Field
+    @Field(store = Store.COMPRESS)
     @Analyzer(definition = "TokenizingLower")
     public String getName() {
         return name;
