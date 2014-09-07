@@ -29,7 +29,7 @@ public class HibernateTest {
         author.add("Flying me");
         author.add("And drunk drunky");
         book.setAuthor(author);
-        book.setReleaseDate(new Date(1409663906879L));
+        book.setReleaseDate(new Date());
         hm.addEntity(book);
     }
 }
