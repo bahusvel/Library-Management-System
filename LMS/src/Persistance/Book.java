@@ -13,14 +13,51 @@ import java.util.Date;
  */
 @Entity
 @Indexed
-@AnalyzerDef(name="TokenizingLower",
-        tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+@AnalyzerDefs({
+        @AnalyzerDef(name = "TokenizingLower",
+                tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+                filters = {
+                        @TokenFilterDef(factory = PatternReplaceFilterFactory.class,
+                        params = {
+                                @Parameter(name = "pattern",value = "([^a-zA-Z0-9\\.])"),
+                                @Parameter(name = "replacement", value = " "),
+                                @Parameter(name = "replace", value = "all") }),
+                        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                        @TokenFilterDef(factory = StopFilterFactory.class),
+                        @TokenFilterDef(factory = SnowballPorterFilterFactory.class,
+                                params = {@Parameter(name = "language", value = "English")})
+                }),
+
+        @AnalyzerDef(name="autoEdge",
+        tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class),
         filters = {
                 @TokenFilterDef(factory = LowerCaseFilterFactory.class),
                 @TokenFilterDef(factory = StopFilterFactory.class),
-                @TokenFilterDef(factory = SnowballPorterFilterFactory.class,
-                        params = {@Parameter(name="language",value="English")})
+                @TokenFilterDef(factory = EdgeNGramFilterFactory.class,
+                params = {
+                        @Parameter(name = "minGramSize", value = "3"), // prediction lower boundary
+                        @Parameter(name = "maxGramSize", value = "50") // prediction upper boundary
+                })
+        }),
+        @AnalyzerDef(name="autoNgram",
+        tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+        filters = {
+                @TokenFilterDef(factory = WordDelimiterFilterFactory.class),
+                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = NGramFilterFactory.class,
+                params = {
+                        @Parameter(name = "minGramSize", value = "3"), // prediction lower boundary
+                        @Parameter(name = "maxGramSize", value = "5")
+                }),
+                @TokenFilterDef(factory = PatternReplaceFilterFactory.class,
+                params = {
+                        @Parameter(name = "pattern",value = "([^a-zA-Z0-9\\.])"),
+                        @Parameter(name = "replacement", value = " "),
+                        @Parameter(name = "replace", value = "all") })
+
         })
+
+})
 public class Book {
     /*
     Annotation Summary:
@@ -74,7 +111,11 @@ public class Book {
     }
 
     @Column(name = "title")
-    @Field(store = Store.COMPRESS)
+    @Fields({
+            @Field(name = "title"),
+            @Field(name = "edgeTitle", analyzer = @Analyzer(definition = "autoEdge")),
+            @Field(name = "ngramTitle", analyzer = @Analyzer(definition = "autoNgram")),
+    })
     @Analyzer(definition = "TokenizingLower")
     public String getTitle() {
         return title;

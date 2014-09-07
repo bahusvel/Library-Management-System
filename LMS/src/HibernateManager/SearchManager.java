@@ -1,5 +1,6 @@
 package HibernateManager;
 
+import Persistance.Book;
 import org.apache.lucene.search.Query;
 import org.hibernate.Session;
 import org.hibernate.search.FullTextSession;
@@ -12,6 +13,10 @@ import java.util.List;
  * Created by denislavrov on 9/4/14.
  */
 public class SearchManager {
+    private static final String TITLE_EDGE_NGRAM_INDEX = "edgeTitle";
+    private static final String TITLE_NGRAM_INDEX = "ngramTitle";
+
+
     Session session;
     FullTextSession fullTextSession;
     public SearchManager(Session session){
@@ -75,6 +80,24 @@ public class SearchManager {
                 .createQuery();
         org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
         return ftq.list();
+    }
+
+    public List<Book> bookSuggestions(final String input, final int results){
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Book.class).get();
+        Query query = qb
+                .phrase()
+                .withSlop(2)
+                .onField(TITLE_NGRAM_INDEX)
+                .andField(TITLE_EDGE_NGRAM_INDEX)
+                .boostedTo(5.0f)
+                .sentence(input)
+                .createQuery();
+        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query, Book.class);
+        ftq.setMaxResults(results);
+
+        @SuppressWarnings("unchecked")
+        List<Book> ret = ftq.list();
+        return ret;
     }
 
 }
