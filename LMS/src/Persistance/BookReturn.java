@@ -1,5 +1,7 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,10 +13,10 @@ import java.util.Date;
 public class BookReturn {
     private Date leaseDate;
     private Date dueDate;
-    private Double ammountCharged;
+    private double ammountCharged = 0.0;
     private Date returnDate;
     private String memberComments;
-    private Double memberRating;
+    private double memberRating;
     private int bookReturnId;
     private BookEntity bookEntity;
     private Employee employee;
@@ -23,6 +25,7 @@ public class BookReturn {
 
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getLeaseDate() {
         return leaseDate;
     }
@@ -34,6 +37,7 @@ public class BookReturn {
 
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getDueDate() {
         return dueDate;
     }
@@ -44,17 +48,19 @@ public class BookReturn {
 
 
     @Column(name = "ammount_charged")
-    public Double getAmmountCharged() {
+    @NotNull
+    public double getAmmountCharged() {
         return ammountCharged;
     }
 
-    public void setAmmountCharged(Double ammountCharged) {
+    public void setAmmountCharged(double ammountCharged) {
         this.ammountCharged = ammountCharged;
     }
 
 
     @Column(name = "return_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getReturnDate() {
         return returnDate;
     }
@@ -75,16 +81,17 @@ public class BookReturn {
 
 
     @Column(name = "member_rating")
-    public Double getMemberRating() {
+    public double getMemberRating() {
         return memberRating;
     }
 
-    public void setMemberRating(Double memberRating) {
+    public void setMemberRating(double memberRating) {
         this.memberRating = memberRating;
     }
 
     @Id
     @Column(name = "book_return_id")
+    @NotNull
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getBookReturnId() {
         return bookReturnId;
@@ -97,18 +104,20 @@ public class BookReturn {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BookReturn)) return false;
 
         BookReturn that = (BookReturn) o;
 
+        if (Double.compare(that.ammountCharged, ammountCharged) != 0) return false;
         if (bookReturnId != that.bookReturnId) return false;
-        if (ammountCharged != null ? !ammountCharged.equals(that.ammountCharged) : that.ammountCharged != null)
-            return false;
+        if (Double.compare(that.memberRating, memberRating) != 0) return false;
+        if (bookEntity != null ? !bookEntity.equals(that.bookEntity) : that.bookEntity != null) return false;
         if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null) return false;
+        if (employee != null ? !employee.equals(that.employee) : that.employee != null) return false;
         if (leaseDate != null ? !leaseDate.equals(that.leaseDate) : that.leaseDate != null) return false;
+        if (member != null ? !member.equals(that.member) : that.member != null) return false;
         if (memberComments != null ? !memberComments.equals(that.memberComments) : that.memberComments != null)
             return false;
-        if (memberRating != null ? !memberRating.equals(that.memberRating) : that.memberRating != null) return false;
         if (returnDate != null ? !returnDate.equals(that.returnDate) : that.returnDate != null) return false;
 
         return true;
@@ -116,18 +125,25 @@ public class BookReturn {
 
     @Override
     public int hashCode() {
-        int result = leaseDate != null ? leaseDate.hashCode() : 0;
+        int result;
+        long temp;
+        result = leaseDate != null ? leaseDate.hashCode() : 0;
         result = 31 * result + (dueDate != null ? dueDate.hashCode() : 0);
-        result = 31 * result + (ammountCharged != null ? ammountCharged.hashCode() : 0);
+        temp = Double.doubleToLongBits(ammountCharged);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (returnDate != null ? returnDate.hashCode() : 0);
         result = 31 * result + (memberComments != null ? memberComments.hashCode() : 0);
-        result = 31 * result + (memberRating != null ? memberRating.hashCode() : 0);
+        temp = Double.doubleToLongBits(memberRating);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + bookReturnId;
+        result = 31 * result + (bookEntity != null ? bookEntity.hashCode() : 0);
+        result = 31 * result + (employee != null ? employee.hashCode() : 0);
+        result = 31 * result + (member != null ? member.hashCode() : 0);
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id")
+    @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id", nullable = false)
     public BookEntity getBookEntity() {
         return bookEntity;
     }
@@ -137,7 +153,7 @@ public class BookReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
     public Employee getEmployee() {
         return employee;
     }
@@ -147,7 +163,7 @@ public class BookReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
     public Member getMember() {
         return member;
     }

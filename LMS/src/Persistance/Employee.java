@@ -1,5 +1,7 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -19,6 +21,7 @@ public class Employee {
 
 
     @Column(name = "firstname")
+    @NotNull
     public String getFirstname() {
         return firstname;
     }
@@ -29,6 +32,7 @@ public class Employee {
 
 
     @Column(name = "lastname")
+    @NotNull
     public String getLastname() {
         return lastname;
     }
@@ -39,6 +43,7 @@ public class Employee {
 
 
     @Column(name = "role")
+    @NotNull
     public String getRole() {
         return role;
     }

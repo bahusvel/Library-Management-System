@@ -1,5 +1,7 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ import java.util.Date;
 public class ItemLease {
     private Date leaseDate;
     private Date dueDate;
-    private Boolean renewed;
+    private boolean renewed = false;
     private int itemLeaseId;
     private Employee employee;
     private ItemEntity itemEntity;
@@ -20,6 +22,7 @@ public class ItemLease {
 
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getLeaseDate() {
         return leaseDate;
     }
@@ -31,6 +34,7 @@ public class ItemLease {
 
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getDueDate() {
         return dueDate;
     }
@@ -41,11 +45,12 @@ public class ItemLease {
 
 
     @Column(name = "renewed")
-    public Boolean getRenewed() {
+    @NotNull
+    public boolean getRenewed() {
         return renewed;
     }
 
-    public void setRenewed(Boolean renewed) {
+    public void setRenewed(boolean renewed) {
         this.renewed = renewed;
     }
 
@@ -63,14 +68,17 @@ public class ItemLease {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ItemLease)) return false;
 
         ItemLease itemLease = (ItemLease) o;
 
         if (itemLeaseId != itemLease.itemLeaseId) return false;
+        if (renewed != itemLease.renewed) return false;
         if (dueDate != null ? !dueDate.equals(itemLease.dueDate) : itemLease.dueDate != null) return false;
+        if (employee != null ? !employee.equals(itemLease.employee) : itemLease.employee != null) return false;
+        if (itemEntity != null ? !itemEntity.equals(itemLease.itemEntity) : itemLease.itemEntity != null) return false;
         if (leaseDate != null ? !leaseDate.equals(itemLease.leaseDate) : itemLease.leaseDate != null) return false;
-        if (renewed != null ? !renewed.equals(itemLease.renewed) : itemLease.renewed != null) return false;
+        if (member != null ? !member.equals(itemLease.member) : itemLease.member != null) return false;
 
         return true;
     }
@@ -79,13 +87,16 @@ public class ItemLease {
     public int hashCode() {
         int result = leaseDate != null ? leaseDate.hashCode() : 0;
         result = 31 * result + (dueDate != null ? dueDate.hashCode() : 0);
-        result = 31 * result + (renewed != null ? renewed.hashCode() : 0);
+        result = 31 * result + (renewed ? 1 : 0);
         result = 31 * result + itemLeaseId;
+        result = 31 * result + (employee != null ? employee.hashCode() : 0);
+        result = 31 * result + (itemEntity != null ? itemEntity.hashCode() : 0);
+        result = 31 * result + (member != null ? member.hashCode() : 0);
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
     public Employee getEmployee() {
         return employee;
     }
@@ -95,7 +106,7 @@ public class ItemLease {
     }
 
     @OneToOne
-    @JoinColumn(name = "item_entity_id", referencedColumnName = "item_entity_id")
+    @JoinColumn(name = "item_entity_id", referencedColumnName = "item_entity_id", nullable = false)
     public ItemEntity getItemEntity() {
         return itemEntity;
     }
@@ -105,7 +116,7 @@ public class ItemLease {
     }
 
     @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
     public Member getMember() {
         return member;
     }

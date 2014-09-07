@@ -1,5 +1,7 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Collection;
@@ -10,10 +12,10 @@ import java.util.Collection;
 @Entity
 @Table(name = "book_entity", schema = "public", catalog = "librarymanagementsystem")
 public class BookEntity {
-    private boolean available;
+    private boolean available = true;
     private String location;
     private int bookEntityId;
-    private boolean leased;
+    private boolean leased = false;
     private Date acquisitionDate;
     private Book book;
     private BookLease bookLease;
@@ -21,6 +23,7 @@ public class BookEntity {
 
 
     @Column(name = "available")
+    @NotNull
     public boolean isAvailable() {
         return available;
     }
@@ -52,6 +55,7 @@ public class BookEntity {
 
 
     @Column(name = "leased")
+    @NotNull
     public boolean isLeased() {
         return leased;
     }
@@ -63,6 +67,7 @@ public class BookEntity {
 
     @Column(name = "acquisition_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getAcquisitionDate() {
         return acquisitionDate;
     }

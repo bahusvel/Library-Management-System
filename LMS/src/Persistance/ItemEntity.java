@@ -1,5 +1,7 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Collection;
@@ -11,8 +13,8 @@ import java.util.Collection;
 @Table(name = "item_entity", schema = "public", catalog = "librarymanagementsystem")
 public class ItemEntity {
     private Date acquisitionDate;
-    private Boolean leased;
-    private Boolean available;
+    private boolean leased = false;
+    private boolean available = true;
     private String location;
     private int itemEntityId;
     private Item item;
@@ -22,6 +24,7 @@ public class ItemEntity {
 
     @Column(name = "acquisition_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getAcquisitionDate() {
         return acquisitionDate;
     }
@@ -32,21 +35,23 @@ public class ItemEntity {
 
 
     @Column(name = "leased")
-    public Boolean getLeased() {
+    @NotNull
+    public boolean getLeased() {
         return leased;
     }
 
-    public void setLeased(Boolean leased) {
+    public void setLeased(boolean leased) {
         this.leased = leased;
     }
 
 
     @Column(name = "available")
-    public Boolean getAvailable() {
+    @NotNull
+    public boolean getAvailable() {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(boolean available) {
         this.available = available;
     }
 
@@ -74,15 +79,18 @@ public class ItemEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ItemEntity)) return false;
 
         ItemEntity that = (ItemEntity) o;
 
+        if (available != that.available) return false;
         if (itemEntityId != that.itemEntityId) return false;
+        if (leased != that.leased) return false;
         if (acquisitionDate != null ? !acquisitionDate.equals(that.acquisitionDate) : that.acquisitionDate != null)
             return false;
-        if (available != null ? !available.equals(that.available) : that.available != null) return false;
-        if (leased != null ? !leased.equals(that.leased) : that.leased != null) return false;
+        if (item != null ? !item.equals(that.item) : that.item != null) return false;
+        if (itemLeases != null ? !itemLeases.equals(that.itemLeases) : that.itemLeases != null) return false;
+        if (itemReturns != null ? !itemReturns.equals(that.itemReturns) : that.itemReturns != null) return false;
         if (location != null ? !location.equals(that.location) : that.location != null) return false;
 
         return true;
@@ -91,15 +99,18 @@ public class ItemEntity {
     @Override
     public int hashCode() {
         int result = acquisitionDate != null ? acquisitionDate.hashCode() : 0;
-        result = 31 * result + (leased != null ? leased.hashCode() : 0);
-        result = 31 * result + (available != null ? available.hashCode() : 0);
+        result = 31 * result + (leased ? 1 : 0);
+        result = 31 * result + (available ? 1 : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + itemEntityId;
+        result = 31 * result + (item != null ? item.hashCode() : 0);
+        result = 31 * result + (itemLeases != null ? itemLeases.hashCode() : 0);
+        result = 31 * result + (itemReturns != null ? itemReturns.hashCode() : 0);
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "item_id", referencedColumnName = "item_id")
+    @JoinColumn(name = "item_id", referencedColumnName = "item_id", nullable = false)
     public Item getItem() {
         return item;
     }

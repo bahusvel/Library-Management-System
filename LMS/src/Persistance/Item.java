@@ -1,5 +1,6 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
 import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
@@ -16,11 +17,12 @@ public class Item {
     private String condition;
     private String category;
     private int itemId;
-    private Double price;
+    private double price;
     private Collection<ItemEntity> itemEntities;
 
 
     @Column(name = "name")
+    @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "TokenizingLower")
     public String getName() {
@@ -76,39 +78,44 @@ public class Item {
 
 
     @Column(name = "price")
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Item)) return false;
 
         Item item = (Item) o;
 
         if (itemId != item.itemId) return false;
+        if (Double.compare(item.price, price) != 0) return false;
         if (category != null ? !category.equals(item.category) : item.category != null) return false;
         if (condition != null ? !condition.equals(item.condition) : item.condition != null) return false;
         if (description != null ? !description.equals(item.description) : item.description != null) return false;
+        if (itemEntities != null ? !itemEntities.equals(item.itemEntities) : item.itemEntities != null) return false;
         if (name != null ? !name.equals(item.name) : item.name != null) return false;
-        if (price != null ? !price.equals(item.price) : item.price != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result;
+        long temp;
+        result = name != null ? name.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (condition != null ? condition.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + itemId;
-        result = 31 * result + (price != null ? price.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (itemEntities != null ? itemEntities.hashCode() : 0);
         return result;
     }
 

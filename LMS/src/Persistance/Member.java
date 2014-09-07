@@ -1,6 +1,7 @@
 package Persistance;
 
 
+import com.sun.istack.internal.NotNull;
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
@@ -25,7 +26,7 @@ public class Member {
     private String firstname;
     private String lastname;
     private Date dob;
-    private Date registrationDate;
+    private Date registrationDate = new Date(); // present time
     private String username;
     private String country;
     private String city;
@@ -36,7 +37,7 @@ public class Member {
     private String email;
     private String phoneNumber;
     private int memberId;
-    private Double balance;
+    private double balance = 0.0;
     private Collection<BookLease> bookLeasesByMemberId;
     private Collection<BookReturn> bookReturnsByMemberId;
     private Collection<ItemLease> itemLeasesByMemberId;
@@ -44,6 +45,7 @@ public class Member {
 
 
     @Column(name = "firstname")
+    @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "NameAnalyzer")
     public String getFirstname() {
@@ -56,6 +58,7 @@ public class Member {
 
 
     @Column(name = "lastname")
+    @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "NameAnalyzer")
     public String getLastname() {
@@ -68,6 +71,7 @@ public class Member {
 
 
     @Column(name = "dob")
+    @NotNull
     @Temporal(TemporalType.DATE)
     public Date getDob() {
         return dob;
@@ -79,6 +83,7 @@ public class Member {
 
 
     @Column(name = "registration_date")
+    @NotNull
     @Temporal(TemporalType.DATE)
     public Date getRegistrationDate() {
         return registrationDate;
@@ -89,7 +94,8 @@ public class Member {
     }
 
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
+    @NotNull
     @Field
     public String getUsername() {
         return username;
@@ -161,6 +167,7 @@ public class Member {
 
 
     @Column(name = "email")
+    @NotNull
     @Field
     public String getEmail() {
         return email;
@@ -194,31 +201,40 @@ public class Member {
 
 
     @Column(name = "balance")
-    public Double getBalance() {
+    @NotNull
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Member)) return false;
 
         Member member = (Member) o;
 
+        if (Double.compare(member.balance, balance) != 0) return false;
         if (memberId != member.memberId) return false;
         if (address1 != null ? !address1.equals(member.address1) : member.address1 != null) return false;
         if (address2 != null ? !address2.equals(member.address2) : member.address2 != null) return false;
         if (address3 != null ? !address3.equals(member.address3) : member.address3 != null) return false;
-        if (balance != null ? !balance.equals(member.balance) : member.balance != null) return false;
+        if (bookLeasesByMemberId != null ? !bookLeasesByMemberId.equals(member.bookLeasesByMemberId) : member.bookLeasesByMemberId != null)
+            return false;
+        if (bookReturnsByMemberId != null ? !bookReturnsByMemberId.equals(member.bookReturnsByMemberId) : member.bookReturnsByMemberId != null)
+            return false;
         if (city != null ? !city.equals(member.city) : member.city != null) return false;
         if (country != null ? !country.equals(member.country) : member.country != null) return false;
         if (dob != null ? !dob.equals(member.dob) : member.dob != null) return false;
         if (email != null ? !email.equals(member.email) : member.email != null) return false;
         if (firstname != null ? !firstname.equals(member.firstname) : member.firstname != null) return false;
+        if (itemLeasesByMemberId != null ? !itemLeasesByMemberId.equals(member.itemLeasesByMemberId) : member.itemLeasesByMemberId != null)
+            return false;
+        if (itemReturnsByMemberId != null ? !itemReturnsByMemberId.equals(member.itemReturnsByMemberId) : member.itemReturnsByMemberId != null)
+            return false;
         if (lastname != null ? !lastname.equals(member.lastname) : member.lastname != null) return false;
         if (phoneNumber != null ? !phoneNumber.equals(member.phoneNumber) : member.phoneNumber != null) return false;
         if (postalCode != null ? !postalCode.equals(member.postalCode) : member.postalCode != null) return false;
@@ -230,16 +246,10 @@ public class Member {
     }
 
     @Override
-    public String toString() {
-        return "Member{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
-    }
-
-    @Override
     public int hashCode() {
-        int result = firstname != null ? firstname.hashCode() : 0;
+        int result;
+        long temp;
+        result = firstname != null ? firstname.hashCode() : 0;
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (dob != null ? dob.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
@@ -253,9 +263,23 @@ public class Member {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + memberId;
-        result = 31 * result + (balance != null ? balance.hashCode() : 0);
+        temp = Double.doubleToLongBits(balance);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (bookLeasesByMemberId != null ? bookLeasesByMemberId.hashCode() : 0);
+        result = 31 * result + (bookReturnsByMemberId != null ? bookReturnsByMemberId.hashCode() : 0);
+        result = 31 * result + (itemLeasesByMemberId != null ? itemLeasesByMemberId.hashCode() : 0);
+        result = 31 * result + (itemReturnsByMemberId != null ? itemReturnsByMemberId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
+    }
+
 
     @OneToMany(mappedBy = "member")
     public Collection<BookLease> getBookLeasesByMemberId() {

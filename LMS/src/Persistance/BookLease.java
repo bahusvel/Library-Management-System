@@ -1,5 +1,7 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,7 +14,7 @@ public class BookLease {
     private long leaseId;
     private Date leaseDate;
     private Date dueDate;
-    private boolean renewed;
+    private boolean renewed = false;
     private BookEntity bookEntity;
     private Employee employee;
     private Member member;
@@ -31,6 +33,7 @@ public class BookLease {
 
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getLeaseDate() {
         return leaseDate;
     }
@@ -42,6 +45,7 @@ public class BookLease {
 
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getDueDate() {
         return dueDate;
     }
@@ -52,6 +56,7 @@ public class BookLease {
 
 
     @Column(name = "renewed")
+    @NotNull
     public boolean isRenewed() {
         return renewed;
     }

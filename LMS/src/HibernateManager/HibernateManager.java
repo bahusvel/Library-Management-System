@@ -3,6 +3,7 @@ package HibernateManager;
 import org.hibernate.*;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.service.ServiceRegistry;
 
 import java.util.List;
@@ -24,8 +25,11 @@ public class HibernateManager {
             factory = configuration.buildSessionFactory(serviceRegistry);
 
         } catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
+            if (ex.getClass() == JDBCConnectionException.class){
+                System.err.println("Could not connect to the database.");
+            } else {
+                System.err.println("Initial SessionFactory creation failed." + ex);
+            }
             throw new ExceptionInInitializerError(ex);
         }
     }

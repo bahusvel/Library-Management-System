@@ -99,5 +99,4 @@ public class SearchManager {
         List<Book> ret = ftq.list();
         return ret;
     }
-
 }

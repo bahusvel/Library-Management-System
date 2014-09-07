@@ -1,5 +1,7 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Collection;
@@ -30,6 +32,7 @@ public class MagazineEdition {
 
     @Column(name = "edition_date")
     @Temporal(TemporalType.DATE)
+    @NotNull
     public Date getEditionDate() {
         return editionDate;
     }

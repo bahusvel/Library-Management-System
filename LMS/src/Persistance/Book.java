@@ -1,5 +1,6 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
@@ -28,7 +29,7 @@ import java.util.Date;
                                 params = {@Parameter(name = "language", value = "English")})
                 }),
 
-        @AnalyzerDef(name="autoEdge",
+        @AnalyzerDef(name="autoEdge", // analyzer for auto suggestions
         tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class),
         filters = {
                 @TokenFilterDef(factory = LowerCaseFilterFactory.class),
@@ -39,7 +40,7 @@ import java.util.Date;
                         @Parameter(name = "maxGramSize", value = "50") // prediction upper boundary
                 })
         }),
-        @AnalyzerDef(name="autoNgram",
+        @AnalyzerDef(name="autoNgram", // analyzer for auto suggestions
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
                 @TokenFilterDef(factory = WordDelimiterFilterFactory.class),
@@ -76,18 +77,18 @@ public class Book {
 
     private String title;
     private Date releaseDate;
-    private Integer pages;
+    private int pages;
     private String publisher;
     private String description;
-    private Long barcode;
+    private long barcode;
     private String isbn;
-    private Integer edition;
+    private int edition;
     private String category;
-    private Double rating;
+    private double rating;
     private int bookId;
     private String imageFpath;
     private String summary;
-    private Double price;
+    private double price;
     private Collection<BookEntity> bookEntities;
     private Collection<String> author;
 
@@ -111,6 +112,7 @@ public class Book {
     }
 
     @Column(name = "title")
+    @NotNull
     @Fields({
             @Field(name = "title"),
             @Field(name = "edgeTitle", analyzer = @Analyzer(definition = "autoEdge")),
@@ -136,11 +138,11 @@ public class Book {
     }
 
     @Column(name = "pages")
-    public Integer getPages() {
+    public int getPages() {
         return pages;
     }
 
-    public void setPages(Integer pages) {
+    public void setPages(int pages) {
         this.pages = pages;
     }
 
@@ -166,15 +168,15 @@ public class Book {
     }
 
     @Column(name = "barcode")
-    public Long getBarcode() {
+    public long getBarcode() {
         return barcode;
     }
 
-    public void setBarcode(Long barcode) {
+    public void setBarcode(long barcode) {
         this.barcode = barcode;
     }
 
-    @Column(name = "isbn")
+    @Column(name = "isbn", unique = true)
     @Field
     public String getIsbn() {
         return isbn;
@@ -186,11 +188,11 @@ public class Book {
 
     @Column(name = "edition")
     @Field
-    public Integer getEdition() {
+    public int getEdition() {
         return edition;
     }
 
-    public void setEdition(Integer edition) {
+    public void setEdition(int edition) {
         this.edition = edition;
     }
 
@@ -204,11 +206,11 @@ public class Book {
     }
 
     @Column(name = "rating")
-    public Double getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -244,11 +246,11 @@ public class Book {
     }
 
     @Column(name = "price")
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -267,20 +269,19 @@ public class Book {
 
         Book book = (Book) o;
 
+        if (barcode != book.barcode) return false;
         if (bookId != book.bookId) return false;
+        if (edition != book.edition) return false;
+        if (pages != book.pages) return false;
+        if (Double.compare(book.price, price) != 0) return false;
+        if (Double.compare(book.rating, rating) != 0) return false;
         if (author != null ? !author.equals(book.author) : book.author != null) return false;
-        if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
-        if (bookEntities != null ? !bookEntities.equals(book.bookEntities) : book.bookEntities != null)
-            return false;
+        if (bookEntities != null ? !bookEntities.equals(book.bookEntities) : book.bookEntities != null) return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
-        if (edition != null ? !edition.equals(book.edition) : book.edition != null) return false;
         if (imageFpath != null ? !imageFpath.equals(book.imageFpath) : book.imageFpath != null) return false;
         if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
-        if (pages != null ? !pages.equals(book.pages) : book.pages != null) return false;
-        if (price != null ? !price.equals(book.price) : book.price != null) return false;
         if (publisher != null ? !publisher.equals(book.publisher) : book.publisher != null) return false;
-        if (rating != null ? !rating.equals(book.rating) : book.rating != null) return false;
         if (releaseDate != null ? !releaseDate.equals(book.releaseDate) : book.releaseDate != null) return false;
         if (summary != null ? !summary.equals(book.summary) : book.summary != null) return false;
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
@@ -290,20 +291,24 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
+        int result;
+        long temp;
+        result = title != null ? title.hashCode() : 0;
         result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
-        result = 31 * result + (pages != null ? pages.hashCode() : 0);
+        result = 31 * result + pages;
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (barcode != null ? barcode.hashCode() : 0);
+        result = 31 * result + (int) (barcode ^ (barcode >>> 32));
         result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
-        result = 31 * result + (edition != null ? edition.hashCode() : 0);
+        result = 31 * result + edition;
         result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        temp = Double.doubleToLongBits(rating);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + bookId;
         result = 31 * result + (imageFpath != null ? imageFpath.hashCode() : 0);
         result = 31 * result + (summary != null ? summary.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (bookEntities != null ? bookEntities.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;

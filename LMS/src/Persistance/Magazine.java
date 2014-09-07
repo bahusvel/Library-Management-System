@@ -1,5 +1,6 @@
 package Persistance;
 
+import com.sun.istack.internal.NotNull;
 import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
@@ -17,11 +18,12 @@ public class Magazine {
     private String frequency;
     private String language;
     private String isbn;
-    private Double price;
+    private double price;
     private Collection<MagazineEdition> magazineEditions;
 
 
     @Column(name = "title")
+    @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "TokenizingLower")
     public String getTitle() {
@@ -75,7 +77,7 @@ public class Magazine {
     }
 
 
-    @Column(name = "isbn")
+    @Column(name = "isbn", unique = true)
     @Field
     public String getIsbn() {
         return isbn;
@@ -87,26 +89,28 @@ public class Magazine {
 
 
     @Column(name = "price")
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Magazine)) return false;
 
         Magazine magazine = (Magazine) o;
 
         if (magazineId != magazine.magazineId) return false;
+        if (Double.compare(magazine.price, price) != 0) return false;
         if (frequency != null ? !frequency.equals(magazine.frequency) : magazine.frequency != null) return false;
         if (isbn != null ? !isbn.equals(magazine.isbn) : magazine.isbn != null) return false;
         if (language != null ? !language.equals(magazine.language) : magazine.language != null) return false;
-        if (price != null ? !price.equals(magazine.price) : magazine.price != null) return false;
+        if (magazineEditions != null ? !magazineEditions.equals(magazine.magazineEditions) : magazine.magazineEditions != null)
+            return false;
         if (publisher != null ? !publisher.equals(magazine.publisher) : magazine.publisher != null) return false;
         if (title != null ? !title.equals(magazine.title) : magazine.title != null) return false;
 
@@ -115,13 +119,17 @@ public class Magazine {
 
     @Override
     public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
+        int result;
+        long temp;
+        result = title != null ? title.hashCode() : 0;
         result = 31 * result + magazineId;
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
         result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
         result = 31 * result + (language != null ? language.hashCode() : 0);
         result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (magazineEditions != null ? magazineEditions.hashCode() : 0);
         return result;
     }
 
