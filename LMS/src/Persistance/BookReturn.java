@@ -16,7 +16,7 @@ public class BookReturn {
     private double ammountCharged = 0.0;
     private Date returnDate;
     private String memberComments;
-    private double memberRating;
+    private Double memberRating;
     private int bookReturnId;
     private BookEntity bookEntity;
     private Employee employee;
@@ -81,11 +81,11 @@ public class BookReturn {
 
 
     @Column(name = "member_rating")
-    public double getMemberRating() {
+    public Double getMemberRating() {
         return memberRating;
     }
 
-    public void setMemberRating(double memberRating) {
+    public void setMemberRating(Double memberRating) {
         this.memberRating = memberRating;
     }
 
@@ -110,7 +110,6 @@ public class BookReturn {
 
         if (Double.compare(that.ammountCharged, ammountCharged) != 0) return false;
         if (bookReturnId != that.bookReturnId) return false;
-        if (Double.compare(that.memberRating, memberRating) != 0) return false;
         if (bookEntity != null ? !bookEntity.equals(that.bookEntity) : that.bookEntity != null) return false;
         if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null) return false;
         if (employee != null ? !employee.equals(that.employee) : that.employee != null) return false;
@@ -118,6 +117,7 @@ public class BookReturn {
         if (member != null ? !member.equals(that.member) : that.member != null) return false;
         if (memberComments != null ? !memberComments.equals(that.memberComments) : that.memberComments != null)
             return false;
+        if (memberRating != null ? !memberRating.equals(that.memberRating) : that.memberRating != null) return false;
         if (returnDate != null ? !returnDate.equals(that.returnDate) : that.returnDate != null) return false;
 
         return true;
@@ -133,8 +133,7 @@ public class BookReturn {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (returnDate != null ? returnDate.hashCode() : 0);
         result = 31 * result + (memberComments != null ? memberComments.hashCode() : 0);
-        temp = Double.doubleToLongBits(memberRating);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (memberRating != null ? memberRating.hashCode() : 0);
         result = 31 * result + bookReturnId;
         result = 31 * result + (bookEntity != null ? bookEntity.hashCode() : 0);
         result = 31 * result + (employee != null ? employee.hashCode() : 0);

@@ -17,7 +17,7 @@ public class Item {
     private String condition;
     private String category;
     private int itemId;
-    private double price;
+    private Double price;
     private Collection<ItemEntity> itemEntities;
 
 
@@ -78,11 +78,11 @@ public class Item {
 
 
     @Column(name = "price")
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -94,27 +94,24 @@ public class Item {
         Item item = (Item) o;
 
         if (itemId != item.itemId) return false;
-        if (Double.compare(item.price, price) != 0) return false;
         if (category != null ? !category.equals(item.category) : item.category != null) return false;
         if (condition != null ? !condition.equals(item.condition) : item.condition != null) return false;
         if (description != null ? !description.equals(item.description) : item.description != null) return false;
         if (itemEntities != null ? !itemEntities.equals(item.itemEntities) : item.itemEntities != null) return false;
         if (name != null ? !name.equals(item.name) : item.name != null) return false;
+        if (price != null ? !price.equals(item.price) : item.price != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = name != null ? name.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (condition != null ? condition.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + itemId;
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (itemEntities != null ? itemEntities.hashCode() : 0);
         return result;
     }

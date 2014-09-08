@@ -14,7 +14,7 @@ public class ItemReturn {
     private Date leaseDate;
     private Date dueDate;
     private Date returnDate;
-    private double ammountCharged;
+    private double ammountCharged = 0.0;
     private int itemReturnId;
     private Employee employee;
     private ItemEntity itemEntity;
