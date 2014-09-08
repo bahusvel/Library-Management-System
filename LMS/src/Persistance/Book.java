@@ -77,18 +77,18 @@ public class Book {
 
     private String title;
     private Date releaseDate;
-    private int pages;
+    private Integer pages;
     private String publisher;
     private String description;
     private long barcode;
     private String isbn;
-    private int edition;
+    private int edition = 1;
     private String category;
-    private double rating;
+    private Double rating;
     private int bookId;
     private String imageFpath;
     private String summary;
-    private double price;
+    private Double price;
     private Collection<BookEntity> bookEntities;
     private Collection<String> author;
 
@@ -138,11 +138,11 @@ public class Book {
     }
 
     @Column(name = "pages")
-    public int getPages() {
+    public Integer getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
+    public void setPages(Integer pages) {
         this.pages = pages;
     }
 
@@ -206,11 +206,11 @@ public class Book {
     }
 
     @Column(name = "rating")
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
@@ -246,11 +246,11 @@ public class Book {
     }
 
     @Column(name = "price")
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -272,16 +272,16 @@ public class Book {
         if (barcode != book.barcode) return false;
         if (bookId != book.bookId) return false;
         if (edition != book.edition) return false;
-        if (pages != book.pages) return false;
-        if (Double.compare(book.price, price) != 0) return false;
-        if (Double.compare(book.rating, rating) != 0) return false;
         if (author != null ? !author.equals(book.author) : book.author != null) return false;
         if (bookEntities != null ? !bookEntities.equals(book.bookEntities) : book.bookEntities != null) return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
         if (imageFpath != null ? !imageFpath.equals(book.imageFpath) : book.imageFpath != null) return false;
         if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
+        if (pages != null ? !pages.equals(book.pages) : book.pages != null) return false;
+        if (price != null ? !price.equals(book.price) : book.price != null) return false;
         if (publisher != null ? !publisher.equals(book.publisher) : book.publisher != null) return false;
+        if (rating != null ? !rating.equals(book.rating) : book.rating != null) return false;
         if (releaseDate != null ? !releaseDate.equals(book.releaseDate) : book.releaseDate != null) return false;
         if (summary != null ? !summary.equals(book.summary) : book.summary != null) return false;
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
@@ -291,24 +291,20 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = title != null ? title.hashCode() : 0;
+        int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
-        result = 31 * result + pages;
+        result = 31 * result + (pages != null ? pages.hashCode() : 0);
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (int) (barcode ^ (barcode >>> 32));
         result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
         result = 31 * result + edition;
         result = 31 * result + (category != null ? category.hashCode() : 0);
-        temp = Double.doubleToLongBits(rating);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
         result = 31 * result + bookId;
         result = 31 * result + (imageFpath != null ? imageFpath.hashCode() : 0);
         result = 31 * result + (summary != null ? summary.hashCode() : 0);
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (bookEntities != null ? bookEntities.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;
