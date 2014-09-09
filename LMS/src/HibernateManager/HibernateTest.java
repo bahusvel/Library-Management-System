@@ -1,8 +1,9 @@
 package HibernateManager;
 
-import Persistance.Book;
+import Persistance.Magazine;
+import Persistance.MagazineEdition;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -20,16 +21,23 @@ public class HibernateTest {
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
 
-        for (Object o : hm.listEntities(Book.class)){
-            System.out.println(((Book) o).getAuthor());
-        }
-        Book book = new Book();
-        book.setTitle("Hello World in Java");
-        ArrayList<String> author = new ArrayList<>(10);
-        author.add("Flying me");
-        author.add("And drunk drunky");
-        book.setAuthor(author);
-        book.setReleaseDate(new Date());
-        hm.addEntity(book);
+        //hm.listEntities(Magazine.class).forEach(mag -> System.out.println(mag.getMagazineEditions()));
+
+
+        Magazine mag = new Magazine();
+        mag.setTitle("Bastards on the moon");
+        MagazineEdition mage1 = new MagazineEdition();
+        MagazineEdition mage2 = new MagazineEdition();
+        mage1.setEditionDate(new Date());
+        mage1.setEditionTitle("First");
+        mage2.setEditionDate(new Date());
+        mage2.setEditionTitle("Second");
+        Collection<MagazineEdition> magz= mag.getMagazineEditions();
+        magz.add(mage1);
+        magz.add(mage2);
+        mag.setMagazineEditions(magz);
+        hm.addEntity(mag);
+
+
     }
 }

@@ -122,6 +122,7 @@ public class Item {
     }
 
     public void setItemEntities(Collection<ItemEntity> itemEntities) {
+        itemEntities.forEach(m -> m.setItem(this));
         this.itemEntities = itemEntities;
     }
 }

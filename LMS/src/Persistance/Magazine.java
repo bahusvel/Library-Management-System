@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -19,7 +20,7 @@ public class Magazine {
     private String language;
     private String isbn;
     private Double price;
-    private Collection<MagazineEdition> magazineEditions;
+    private Collection<MagazineEdition> magazineEditions = new ArrayList<>();
 
 
     @Column(name = "title")
@@ -130,12 +131,13 @@ public class Magazine {
         return result;
     }
 
-    @OneToMany(mappedBy = "magazine")
+    @OneToMany(mappedBy = "magazine", cascade = CascadeType.ALL)
     public Collection<MagazineEdition> getMagazineEditions() {
         return magazineEditions;
     }
 
     public void setMagazineEditions(Collection<MagazineEdition> magazineEditions) {
+        magazineEditions.forEach(m -> m.setMagazine(this));
         this.magazineEditions = magazineEditions;
     }
 }

@@ -72,17 +72,18 @@ public class HibernateManager {
 
     public void addEntity(Object object) {
         try (AutoTransaction at = new AutoTransaction()) {
-            at.session.save(object);
+            at.session.persist(object);
             at.tx.commit();
         } catch (MappingException e) { // catch errors when user passes wrong objects
             System.err.println(object.getClass() + " Is not compatible with the database.");
         }
     }
 
-    public List listEntities(Class entity){
+    @SuppressWarnings("unchecked")
+    public <E> List<E> listEntities(Class<E> entity){
         List entities = null;
         try(AutoSession as = new AutoSession()){
-            entities = as.session.createQuery("from " + entity.getSimpleName()).list();
+            entities = (List<E>)as.session.createQuery("from " + entity.getSimpleName()).list();
         }
 
         return entities;

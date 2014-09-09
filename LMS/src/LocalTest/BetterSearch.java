@@ -39,10 +39,10 @@ public class BetterSearch {
         searchButton.addActionListener(e -> {
             StringBuilder sb = new StringBuilder();
             List<Book> books = sm.dynamicFuzzy(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(),5, "title");
-            for (Book book : books){
+            books.forEach(book -> {
                 sb.append(book);
                 sb.append('\n');
-            }
+            });
             textPane1.setText(sb.toString());
         });
     }

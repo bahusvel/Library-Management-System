@@ -122,7 +122,6 @@ public class Book {
             @Field(name = "edgeTitle", analyzer = @Analyzer(definition = "autoEdge")),
             @Field(name = "ngramTitle", analyzer = @Analyzer(definition = "autoNgram")),
     })
-
     public String getTitle() {
         return title;
     }
@@ -314,12 +313,14 @@ public class Book {
         return result;
     }
 
-    @OneToMany(mappedBy = "book", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     public Collection<BookEntity> getBookEntitiesbookEntities() {
         return bookEntities;
     }
 
     public void setBookEntitiesbookEntities(Collection<BookEntity> bookEntities) {
+        bookEntities.forEach(m -> m.setBook(this));
         this.bookEntities = bookEntities;
+
     }
 }

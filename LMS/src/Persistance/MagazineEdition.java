@@ -89,6 +89,7 @@ public class MagazineEdition {
     }
 
     public void setMagazineEntities(Collection<MagazineEntity> magazineEntities) {
+        magazineEntities.forEach(m -> m.setMagazineEdition(this));
         this.magazineEntities = magazineEntities;
     }
 }

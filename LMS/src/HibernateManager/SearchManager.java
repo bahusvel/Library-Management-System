@@ -36,14 +36,14 @@ public class SearchManager {
 
 
     @SuppressWarnings("unchecked")
-    public <E> List<E> search(Class entity, String input, String... fields){
+    public <E> List<E> search(Class<E> entity, String input, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
                 .onFields(fields)
                 .matching(input)
                 .createQuery();
-        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query);
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query);
         return (List<E>) ftq.list();
     }
 
@@ -57,16 +57,16 @@ public class SearchManager {
                 .onFields(fields)
                 .matching(input)
                 .createQuery();
-        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
         return (List<E>) ftq.list();
     }
 
     @SuppressWarnings("unchecked")
     public <E> List<E> dynamicFuzzy(Class<E> entity,String input, int minResults, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-        int results = 0;
+        int results;
         float fuzzines = 0.7f;
-        org.hibernate.Query ftq;
+        FullTextQuery ftq;
         do {
             Query query = qb
                     .keyword()
@@ -76,7 +76,7 @@ public class SearchManager {
                     .matching(input)
                     .createQuery();
             ftq = fullTextSession.createFullTextQuery(query, entity);
-            results = ftq.list().size();
+            results = ftq.getResultSize();
             fuzzines -= 0.1f;
         }while(results < minResults && fuzzines > 0.2f);
         return (List<E>) ftq.list();
@@ -84,7 +84,7 @@ public class SearchManager {
 
 
     @SuppressWarnings("unchecked")
-    public <E> List<E> wildcardSearch(Class entity, String input, String field){
+    public <E> List<E> wildcardSearch(Class<E> entity, String input, String field){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
@@ -92,7 +92,7 @@ public class SearchManager {
                 .onField(field)
                 .matching(input)
                 .createQuery();
-        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
         return (List<E>) ftq.list();
     }
 
@@ -105,7 +105,7 @@ public class SearchManager {
                 .onField(field)
                 .sentence(input)
                 .createQuery();
-        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
         return (List<E>) ftq.list();
     }
 
@@ -114,7 +114,7 @@ public class SearchManager {
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Book.class).get();
         Query query = qb
                 .phrase()
-                .withSlop(2)
+                .withSlop(10) // Has interesting effects !!
                 .onField(TITLE_NGRAM_INDEX)
                 .andField(TITLE_EDGE_NGRAM_INDEX)
                 .boostedTo(5.0f)
