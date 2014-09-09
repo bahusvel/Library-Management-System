@@ -1,7 +1,6 @@
 package HibernateManager;
 
-import Persistance.Book;
-
+import java.util.Scanner;
 
 /**
  * Created by denislavrov on 9/4/14.
@@ -10,12 +9,15 @@ public class SearchTest {
     public static void main(String[] args) {
         SearchManager sm = new SearchManager(HibernateManager.getSession());
 
+        /*
+
         for (Object b : sm.fuzzySearch(Book.class, "Aaron, Jason", "author")) {
             System.out.println(b);
         }
 
+        */
 
-        /*
+
 
         Scanner s = new Scanner(System.in);
         System.out.println("You can input now:");
@@ -30,6 +32,5 @@ public class SearchTest {
         System.out.println("Input over");
 
     }
-    */
-    }
+
 }
