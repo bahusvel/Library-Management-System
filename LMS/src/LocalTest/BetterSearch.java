@@ -30,9 +30,7 @@ public class BetterSearch {
                 super.keyTyped(e);
                 final String input = ((JTextComponent)comboBox1.getEditor().getEditorComponent()).getText();
                 comboBox1.removeAllItems();
-                for (Book b : sm.bookSuggestions(input,5)){
-                    comboBox1.addItem(b.getTitle());
-                }
+                sm.bookSuggestions(input,5).forEach(comboBox1::addItem);
                 ((JTextComponent)comboBox1.getEditor().getEditorComponent()).setText(input);
                 comboBox1.setPopupVisible(true);
             }

@@ -3,11 +3,12 @@ package HibernateManager;
 import Persistance.Book;
 import org.apache.lucene.search.Query;
 import org.hibernate.Session;
-import org.hibernate.search.FullTextSession;
-import org.hibernate.search.Search;
+import org.hibernate.search.*;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by denislavrov on 9/4/14.
@@ -109,7 +110,7 @@ public class SearchManager {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Book> bookSuggestions(final String input, final int results){
+    public List<String> bookSuggestions(final String input, final int results){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Book.class).get();
         Query query = qb
                 .phrase()
@@ -119,9 +120,11 @@ public class SearchManager {
                 .boostedTo(5.0f)
                 .sentence(input)
                 .createQuery();
-        org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query, Book.class);
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query, Book.class);
+        ftq.setProjection("store_title");
         ftq.setMaxResults(results);
-
-        return (List<Book>) ftq.list();
+        List<String> ret = new ArrayList<>();
+        ret.addAll(((List<Object[]>)ftq.list()).stream().map(oa -> (String) oa[0]).collect(Collectors.toList()));
+        return ret;
     }
 }

@@ -15,6 +15,9 @@ import java.util.Date;
 @Entity
 @Indexed
 @AnalyzerDefs({
+        @AnalyzerDef(name="projectionAnalyzer",
+        tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class)),
+
         @AnalyzerDef(name = "TokenizingLower",
                 tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
                 filters = {
@@ -114,11 +117,12 @@ public class Book {
     @Column(name = "title")
     @NotNull
     @Fields({
-            @Field(name = "title"),
+            @Field(name = "store_title", analyzer = @Analyzer(definition = "projectionAnalyzer"), store = Store.COMPRESS),
+            @Field(name = "title", analyzer = @Analyzer(definition = "TokenizingLower")),
             @Field(name = "edgeTitle", analyzer = @Analyzer(definition = "autoEdge")),
             @Field(name = "ngramTitle", analyzer = @Analyzer(definition = "autoNgram")),
     })
-    @Analyzer(definition = "TokenizingLower")
+
     public String getTitle() {
         return title;
     }

@@ -26,7 +26,7 @@ public class SearchTest {
 
         while(!ui.isEmpty()){
             sb.append(ui);
-            sm.bookSuggestions(sb.toString(),5).forEach(System.out::println);
+            sm.bookSuggestions(sb.toString(), 5).forEach(System.out::println);
             ui = s.nextLine();
         }
         System.out.println("Input over");
