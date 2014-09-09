@@ -34,7 +34,8 @@ public class SearchManager {
     }
 
 
-    public List search(Class entity, String input, String... fields){
+    @SuppressWarnings("unchecked")
+    public <E> List<E> search(Class entity, String input, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
@@ -42,10 +43,11 @@ public class SearchManager {
                 .matching(input)
                 .createQuery();
         org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query);
-        return ftq.list();
+        return (List<E>) ftq.list();
     }
 
-    public List fuzzySearch(Class entity, String input, String... fields){
+    @SuppressWarnings("unchecked")
+    public <E> List<E> fuzzySearch(Class<E> entity, String input, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
@@ -55,10 +57,33 @@ public class SearchManager {
                 .matching(input)
                 .createQuery();
         org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
-        return ftq.list();
+        return (List<E>) ftq.list();
     }
 
-    public List wildcardSearch(Class entity, String input, String field){
+    @SuppressWarnings("unchecked")
+    public <E> List<E> dynamicFuzzy(Class<E> entity,String input, int minResults, String... fields){
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        int results = 0;
+        float fuzzines = 0.7f;
+        org.hibernate.Query ftq;
+        do {
+            Query query = qb
+                    .keyword()
+                    .fuzzy()
+                    .withThreshold(.7f)
+                    .onFields(fields)
+                    .matching(input)
+                    .createQuery();
+            ftq = fullTextSession.createFullTextQuery(query, entity);
+            results = ftq.list().size();
+            fuzzines -= 0.1f;
+        }while(results < minResults && fuzzines > 0.2f);
+        return (List<E>) ftq.list();
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public <E> List<E> wildcardSearch(Class entity, String input, String field){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
@@ -67,10 +92,11 @@ public class SearchManager {
                 .matching(input)
                 .createQuery();
         org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
-        return ftq.list();
+        return (List<E>) ftq.list();
     }
 
-    public List phraseSearch(Class entity, String input, String field, int sloppiness){
+    @SuppressWarnings("unchecked")
+    public <E> List<E> phraseSearch(Class<E> entity, String input, String field, int sloppiness){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .phrase()
@@ -79,9 +105,10 @@ public class SearchManager {
                 .sentence(input)
                 .createQuery();
         org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query,entity);
-        return ftq.list();
+        return (List<E>) ftq.list();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Book> bookSuggestions(final String input, final int results){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Book.class).get();
         Query query = qb
@@ -95,8 +122,6 @@ public class SearchManager {
         org.hibernate.Query ftq = fullTextSession.createFullTextQuery(query, Book.class);
         ftq.setMaxResults(results);
 
-        @SuppressWarnings("unchecked")
-        List<Book> ret = ftq.list();
-        return ret;
+        return (List<Book>) ftq.list();
     }
 }

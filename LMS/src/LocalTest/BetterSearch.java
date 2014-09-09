@@ -40,8 +40,8 @@ public class BetterSearch {
         });
         searchButton.addActionListener(e -> {
             StringBuilder sb = new StringBuilder();
-            List books = sm.fuzzySearch(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(), "title");
-            for (Object book : books){
+            List<Book> books = sm.dynamicFuzzy(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(),5, "title");
+            for (Book book : books){
                 sb.append(book);
                 sb.append('\n');
             }

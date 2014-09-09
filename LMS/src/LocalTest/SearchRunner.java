@@ -6,9 +6,8 @@ import java.awt.*;
 /**
  * Created by denislavrov on 9/9/14.
  */
-public class Runner {
+public class SearchRunner {
     public static void main(String[] args) {
-        // Runnable() replaced with lambda
         EventQueue.invokeLater(() -> {
             JFrame frame = new JFrame("Search Tester");
             BetterSearch mw = new BetterSearch();
