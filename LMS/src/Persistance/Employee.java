@@ -14,10 +14,20 @@ public class Employee {
     private String lastname;
     private String role;
     private int employeeId;
+    private Address address;
     private Collection<BookLease> bookLeasesByEmployeeId;
     private Collection<BookReturn> bookReturnsByEmployeeId;
     private Collection<ItemLease> itemLeasesByEmployeeId;
     private Collection<ItemReturn> itemReturnsByEmployeeId;
+
+    @Embedded
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
 
     @Column(name = "firstname")
@@ -66,12 +76,21 @@ public class Employee {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Employee)) return false;
 
         Employee employee = (Employee) o;
 
         if (employeeId != employee.employeeId) return false;
+        if (address != null ? !address.equals(employee.address) : employee.address != null) return false;
+        if (bookLeasesByEmployeeId != null ? !bookLeasesByEmployeeId.equals(employee.bookLeasesByEmployeeId) : employee.bookLeasesByEmployeeId != null)
+            return false;
+        if (bookReturnsByEmployeeId != null ? !bookReturnsByEmployeeId.equals(employee.bookReturnsByEmployeeId) : employee.bookReturnsByEmployeeId != null)
+            return false;
         if (firstname != null ? !firstname.equals(employee.firstname) : employee.firstname != null) return false;
+        if (itemLeasesByEmployeeId != null ? !itemLeasesByEmployeeId.equals(employee.itemLeasesByEmployeeId) : employee.itemLeasesByEmployeeId != null)
+            return false;
+        if (itemReturnsByEmployeeId != null ? !itemReturnsByEmployeeId.equals(employee.itemReturnsByEmployeeId) : employee.itemReturnsByEmployeeId != null)
+            return false;
         if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
         if (role != null ? !role.equals(employee.role) : employee.role != null) return false;
 
@@ -84,6 +103,11 @@ public class Employee {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + employeeId;
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (bookLeasesByEmployeeId != null ? bookLeasesByEmployeeId.hashCode() : 0);
+        result = 31 * result + (bookReturnsByEmployeeId != null ? bookReturnsByEmployeeId.hashCode() : 0);
+        result = 31 * result + (itemLeasesByEmployeeId != null ? itemLeasesByEmployeeId.hashCode() : 0);
+        result = 31 * result + (itemReturnsByEmployeeId != null ? itemReturnsByEmployeeId.hashCode() : 0);
         return result;
     }
 

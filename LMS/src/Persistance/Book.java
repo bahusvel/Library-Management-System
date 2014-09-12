@@ -83,7 +83,7 @@ public class Book {
     private Integer pages;
     private String publisher;
     private String description;
-    private long barcode;
+    private Long barcode;
     private String isbn;
     private int edition = 1;
     private String category;
@@ -171,11 +171,11 @@ public class Book {
     }
 
     @Column(name = "barcode")
-    public long getBarcode() {
+    public Long getBarcode() {
         return barcode;
     }
 
-    public void setBarcode(long barcode) {
+    public void setBarcode(Long barcode) {
         this.barcode = barcode;
     }
 
@@ -191,6 +191,7 @@ public class Book {
 
     @Column(name = "edition")
     @Field
+    @NotNull
     public int getEdition() {
         return edition;
     }
@@ -272,10 +273,10 @@ public class Book {
 
         Book book = (Book) o;
 
-        if (barcode != book.barcode) return false;
         if (bookId != book.bookId) return false;
         if (edition != book.edition) return false;
         if (author != null ? !author.equals(book.author) : book.author != null) return false;
+        if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
         if (bookEntities != null ? !bookEntities.equals(book.bookEntities) : book.bookEntities != null) return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
@@ -299,7 +300,7 @@ public class Book {
         result = 31 * result + (pages != null ? pages.hashCode() : 0);
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (int) (barcode ^ (barcode >>> 32));
+        result = 31 * result + (barcode != null ? barcode.hashCode() : 0);
         result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
         result = 31 * result + edition;
         result = 31 * result + (category != null ? category.hashCode() : 0);
