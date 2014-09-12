@@ -41,9 +41,8 @@
         <mapping class="Persistance.MagazineEdition"/>
         <mapping class="Persistance.MagazineEntity"/>
         <mapping class="Persistance.Member"/>
-
-
-
+        <mapping class="Persistance.Visit"/>
+        <mapping class="Persistance.BookRequest"/>
 
 
     </session-factory>

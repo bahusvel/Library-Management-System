@@ -1,6 +1,6 @@
 package Persistance;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,6 +17,7 @@ public class BookEntity {
     private int bookEntityId;
     private boolean leased = false;
     private Date acquisitionDate;
+    private String suppliedBy;
     private Book book;
     private BookLease bookLease;
     private Collection<BookReturn> bookReturns;
@@ -76,10 +77,19 @@ public class BookEntity {
         this.acquisitionDate = acquisitionDate;
     }
 
+    @Column(name = "supplied_by")
+    public String getSuppliedBy() {
+        return suppliedBy;
+    }
+
+    public void setSuppliedBy(String suppliedBy) {
+        this.suppliedBy = suppliedBy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BookEntity)) return false;
 
         BookEntity that = (BookEntity) o;
 
@@ -88,7 +98,11 @@ public class BookEntity {
         if (leased != that.leased) return false;
         if (acquisitionDate != null ? !acquisitionDate.equals(that.acquisitionDate) : that.acquisitionDate != null)
             return false;
+        if (book != null ? !book.equals(that.book) : that.book != null) return false;
+        if (bookLease != null ? !bookLease.equals(that.bookLease) : that.bookLease != null) return false;
+        if (bookReturns != null ? !bookReturns.equals(that.bookReturns) : that.bookReturns != null) return false;
         if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (suppliedBy != null ? !suppliedBy.equals(that.suppliedBy) : that.suppliedBy != null) return false;
 
         return true;
     }
@@ -100,6 +114,10 @@ public class BookEntity {
         result = 31 * result + bookEntityId;
         result = 31 * result + (leased ? 1 : 0);
         result = 31 * result + (acquisitionDate != null ? acquisitionDate.hashCode() : 0);
+        result = 31 * result + (suppliedBy != null ? suppliedBy.hashCode() : 0);
+        result = 31 * result + (book != null ? book.hashCode() : 0);
+        result = 31 * result + (bookLease != null ? bookLease.hashCode() : 0);
+        result = 31 * result + (bookReturns != null ? bookReturns.hashCode() : 0);
         return result;
     }
 

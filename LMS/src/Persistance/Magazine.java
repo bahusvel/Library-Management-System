@@ -1,6 +1,6 @@
 package Persistance;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;

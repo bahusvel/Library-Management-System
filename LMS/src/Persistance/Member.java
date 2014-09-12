@@ -1,12 +1,15 @@
 package Persistance;
 
 
-import com.sun.istack.internal.NotNull;
-import org.apache.solr.analysis.*;
+import org.apache.solr.analysis.KeywordTokenizerFactory;
+import org.apache.solr.analysis.LowerCaseFilterFactory;
+import org.apache.solr.analysis.PhoneticFilterFactory;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
 
@@ -33,11 +36,11 @@ public class Member {
     private String phoneNumber;
     private int memberId;
     private double balance = 0.0;
-    private Collection<BookLease> bookLeasesByMemberId;
-    private Collection<BookReturn> bookReturnsByMemberId;
-    private Collection<ItemLease> itemLeasesByMemberId;
-    private Collection<ItemReturn> itemReturnsByMemberId;
-
+    private Collection<BookLease> bookLeases;
+    private Collection<BookReturn> bookReturns;
+    private Collection<ItemLease> itemLeases;
+    private Collection<ItemReturn> itemReturns;
+    private Collection<Visit> visits;
 
     @Column(name = "firstname")
     @NotNull
@@ -51,7 +54,6 @@ public class Member {
         this.firstname = firstname;
     }
 
-
     @Column(name = "lastname")
     @NotNull
     @Field(store = Store.COMPRESS)
@@ -64,7 +66,6 @@ public class Member {
         this.lastname = lastname;
     }
 
-
     @Column(name = "dob")
     @NotNull
     @Temporal(TemporalType.DATE)
@@ -75,7 +76,6 @@ public class Member {
     public void setDob(Date dob) {
         this.dob = dob;
     }
-
 
     @Column(name = "registration_date")
     @NotNull
@@ -88,7 +88,6 @@ public class Member {
         this.registrationDate = registrationDate;
     }
 
-
     @Column(name = "username", unique = true)
     @NotNull
     @Field
@@ -100,7 +99,6 @@ public class Member {
         this.username = username;
     }
 
-
     @Column(name = "email")
     @NotNull
     @Field
@@ -111,7 +109,6 @@ public class Member {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     @Column(name = "phone_number")
     @Field
@@ -133,7 +130,6 @@ public class Member {
     public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
-
 
     @Column(name = "balance")
     @NotNull
@@ -164,16 +160,16 @@ public class Member {
         if (Double.compare(member.balance, balance) != 0) return false;
         if (memberId != member.memberId) return false;
         if (address != null ? !address.equals(member.address) : member.address != null) return false;
-        if (bookLeasesByMemberId != null ? !bookLeasesByMemberId.equals(member.bookLeasesByMemberId) : member.bookLeasesByMemberId != null)
+        if (bookLeases != null ? !bookLeases.equals(member.bookLeases) : member.bookLeases != null)
             return false;
-        if (bookReturnsByMemberId != null ? !bookReturnsByMemberId.equals(member.bookReturnsByMemberId) : member.bookReturnsByMemberId != null)
+        if (bookReturns != null ? !bookReturns.equals(member.bookReturns) : member.bookReturns != null)
             return false;
         if (dob != null ? !dob.equals(member.dob) : member.dob != null) return false;
         if (email != null ? !email.equals(member.email) : member.email != null) return false;
         if (firstname != null ? !firstname.equals(member.firstname) : member.firstname != null) return false;
-        if (itemLeasesByMemberId != null ? !itemLeasesByMemberId.equals(member.itemLeasesByMemberId) : member.itemLeasesByMemberId != null)
+        if (itemLeases != null ? !itemLeases.equals(member.itemLeases) : member.itemLeases != null)
             return false;
-        if (itemReturnsByMemberId != null ? !itemReturnsByMemberId.equals(member.itemReturnsByMemberId) : member.itemReturnsByMemberId != null)
+        if (itemReturns != null ? !itemReturns.equals(member.itemReturns) : member.itemReturns != null)
             return false;
         if (lastname != null ? !lastname.equals(member.lastname) : member.lastname != null) return false;
         if (phoneNumber != null ? !phoneNumber.equals(member.phoneNumber) : member.phoneNumber != null) return false;
@@ -199,10 +195,10 @@ public class Member {
         result = 31 * result + memberId;
         temp = Double.doubleToLongBits(balance);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (bookLeasesByMemberId != null ? bookLeasesByMemberId.hashCode() : 0);
-        result = 31 * result + (bookReturnsByMemberId != null ? bookReturnsByMemberId.hashCode() : 0);
-        result = 31 * result + (itemLeasesByMemberId != null ? itemLeasesByMemberId.hashCode() : 0);
-        result = 31 * result + (itemReturnsByMemberId != null ? itemReturnsByMemberId.hashCode() : 0);
+        result = 31 * result + (bookLeases != null ? bookLeases.hashCode() : 0);
+        result = 31 * result + (bookReturns != null ? bookReturns.hashCode() : 0);
+        result = 31 * result + (itemLeases != null ? itemLeases.hashCode() : 0);
+        result = 31 * result + (itemReturns != null ? itemReturns.hashCode() : 0);
         return result;
     }
 
@@ -214,40 +210,49 @@ public class Member {
                 '}';
     }
 
-
     @OneToMany(mappedBy = "member")
-    public Collection<BookLease> getBookLeasesByMemberId() {
-        return bookLeasesByMemberId;
+    @Size(min=0, max = 5)
+    public Collection<BookLease> getBookLeases() {
+        return bookLeases;
     }
 
-    public void setBookLeasesByMemberId(Collection<BookLease> bookLeasesByMemberId) {
-        this.bookLeasesByMemberId = bookLeasesByMemberId;
-    }
-
-    @OneToMany(mappedBy = "member")
-    public Collection<BookReturn> getBookReturnsByMemberId() {
-        return bookReturnsByMemberId;
-    }
-
-    public void setBookReturnsByMemberId(Collection<BookReturn> bookReturnsByMemberId) {
-        this.bookReturnsByMemberId = bookReturnsByMemberId;
+    public void setBookLeases(Collection<BookLease> bookLeases) {
+        this.bookLeases = bookLeases;
     }
 
     @OneToMany(mappedBy = "member")
-    public Collection<ItemLease> getItemLeasesByMemberId() {
-        return itemLeasesByMemberId;
+    public Collection<BookReturn> getBookReturns() {
+        return bookReturns;
     }
 
-    public void setItemLeasesByMemberId(Collection<ItemLease> itemLeasesByMemberId) {
-        this.itemLeasesByMemberId = itemLeasesByMemberId;
+    public void setBookReturns(Collection<BookReturn> bookReturns) {
+        this.bookReturns = bookReturns;
     }
 
     @OneToMany(mappedBy = "member")
-    public Collection<ItemReturn> getItemReturnsByMemberId() {
-        return itemReturnsByMemberId;
+    public Collection<ItemLease> getItemLeases() {
+        return itemLeases;
     }
 
-    public void setItemReturnsByMemberId(Collection<ItemReturn> itemReturnsByMemberId) {
-        this.itemReturnsByMemberId = itemReturnsByMemberId;
+    public void setItemLeases(Collection<ItemLease> itemLeases) {
+        this.itemLeases = itemLeases;
+    }
+
+    @OneToMany(mappedBy = "member")
+    public Collection<ItemReturn> getItemReturns() {
+        return itemReturns;
+    }
+
+    public void setItemReturns(Collection<ItemReturn> itemReturns) {
+        this.itemReturns = itemReturns;
+    }
+
+    @OneToMany(mappedBy = "member")
+    public Collection<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Collection<Visit> visits) {
+        this.visits = visits;
     }
 }

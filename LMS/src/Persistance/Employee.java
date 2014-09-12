@@ -1,6 +1,6 @@
 package Persistance;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -15,10 +15,10 @@ public class Employee {
     private String role;
     private int employeeId;
     private Address address;
-    private Collection<BookLease> bookLeasesByEmployeeId;
-    private Collection<BookReturn> bookReturnsByEmployeeId;
-    private Collection<ItemLease> itemLeasesByEmployeeId;
-    private Collection<ItemReturn> itemReturnsByEmployeeId;
+    private Collection<BookLease> bookLeases;
+    private Collection<BookReturn> bookReturns;
+    private Collection<ItemLease> itemLeases;
+    private Collection<ItemReturn> itemReturns;
 
     @Embedded
     public Address getAddress() {
@@ -82,14 +82,14 @@ public class Employee {
 
         if (employeeId != employee.employeeId) return false;
         if (address != null ? !address.equals(employee.address) : employee.address != null) return false;
-        if (bookLeasesByEmployeeId != null ? !bookLeasesByEmployeeId.equals(employee.bookLeasesByEmployeeId) : employee.bookLeasesByEmployeeId != null)
+        if (bookLeases != null ? !bookLeases.equals(employee.bookLeases) : employee.bookLeases != null)
             return false;
-        if (bookReturnsByEmployeeId != null ? !bookReturnsByEmployeeId.equals(employee.bookReturnsByEmployeeId) : employee.bookReturnsByEmployeeId != null)
+        if (bookReturns != null ? !bookReturns.equals(employee.bookReturns) : employee.bookReturns != null)
             return false;
         if (firstname != null ? !firstname.equals(employee.firstname) : employee.firstname != null) return false;
-        if (itemLeasesByEmployeeId != null ? !itemLeasesByEmployeeId.equals(employee.itemLeasesByEmployeeId) : employee.itemLeasesByEmployeeId != null)
+        if (itemLeases != null ? !itemLeases.equals(employee.itemLeases) : employee.itemLeases != null)
             return false;
-        if (itemReturnsByEmployeeId != null ? !itemReturnsByEmployeeId.equals(employee.itemReturnsByEmployeeId) : employee.itemReturnsByEmployeeId != null)
+        if (itemReturns != null ? !itemReturns.equals(employee.itemReturns) : employee.itemReturns != null)
             return false;
         if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
         if (role != null ? !role.equals(employee.role) : employee.role != null) return false;
@@ -104,46 +104,46 @@ public class Employee {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + employeeId;
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (bookLeasesByEmployeeId != null ? bookLeasesByEmployeeId.hashCode() : 0);
-        result = 31 * result + (bookReturnsByEmployeeId != null ? bookReturnsByEmployeeId.hashCode() : 0);
-        result = 31 * result + (itemLeasesByEmployeeId != null ? itemLeasesByEmployeeId.hashCode() : 0);
-        result = 31 * result + (itemReturnsByEmployeeId != null ? itemReturnsByEmployeeId.hashCode() : 0);
+        result = 31 * result + (bookLeases != null ? bookLeases.hashCode() : 0);
+        result = 31 * result + (bookReturns != null ? bookReturns.hashCode() : 0);
+        result = 31 * result + (itemLeases != null ? itemLeases.hashCode() : 0);
+        result = 31 * result + (itemReturns != null ? itemReturns.hashCode() : 0);
         return result;
     }
 
     @OneToMany(mappedBy = "employee")
-    public Collection<BookLease> getBookLeasesByEmployeeId() {
-        return bookLeasesByEmployeeId;
+    public Collection<BookLease> getBookLeases() {
+        return bookLeases;
     }
 
-    public void setBookLeasesByEmployeeId(Collection<BookLease> bookLeasesByEmployeeId) {
-        this.bookLeasesByEmployeeId = bookLeasesByEmployeeId;
-    }
-
-    @OneToMany(mappedBy = "employee")
-    public Collection<BookReturn> getBookReturnsByEmployeeId() {
-        return bookReturnsByEmployeeId;
-    }
-
-    public void setBookReturnsByEmployeeId(Collection<BookReturn> bookReturnsByEmployeeId) {
-        this.bookReturnsByEmployeeId = bookReturnsByEmployeeId;
+    public void setBookLeases(Collection<BookLease> bookLeases) {
+        this.bookLeases = bookLeases;
     }
 
     @OneToMany(mappedBy = "employee")
-    public Collection<ItemLease> getItemLeasesByEmployeeId() {
-        return itemLeasesByEmployeeId;
+    public Collection<BookReturn> getBookReturns() {
+        return bookReturns;
     }
 
-    public void setItemLeasesByEmployeeId(Collection<ItemLease> itemLeasesByEmployeeId) {
-        this.itemLeasesByEmployeeId = itemLeasesByEmployeeId;
+    public void setBookReturns(Collection<BookReturn> bookReturns) {
+        this.bookReturns = bookReturns;
     }
 
     @OneToMany(mappedBy = "employee")
-    public Collection<ItemReturn> getItemReturnsByEmployeeId() {
-        return itemReturnsByEmployeeId;
+    public Collection<ItemLease> getItemLeases() {
+        return itemLeases;
     }
 
-    public void setItemReturnsByEmployeeId(Collection<ItemReturn> itemReturnsByEmployeeId) {
-        this.itemReturnsByEmployeeId = itemReturnsByEmployeeId;
+    public void setItemLeases(Collection<ItemLease> itemLeases) {
+        this.itemLeases = itemLeases;
+    }
+
+    @OneToMany(mappedBy = "employee")
+    public Collection<ItemReturn> getItemReturns() {
+        return itemReturns;
+    }
+
+    public void setItemReturns(Collection<ItemReturn> itemReturns) {
+        this.itemReturns = itemReturns;
     }
 }

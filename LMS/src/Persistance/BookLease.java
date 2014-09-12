@@ -1,6 +1,6 @@
 package Persistance;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +18,7 @@ public class BookLease {
     private BookEntity bookEntity;
     private Employee employee;
     private Member member;
+    private Visit visit;
 
     @Id
     @Column(name = "lease_id")
@@ -30,7 +31,6 @@ public class BookLease {
         this.leaseId = leaseId;
     }
 
-
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
     @NotNull
@@ -42,7 +42,6 @@ public class BookLease {
         this.leaseDate = leaseDate;
     }
 
-
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
     @NotNull
@@ -53,7 +52,6 @@ public class BookLease {
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
-
 
     @Column(name = "renewed")
     @NotNull
@@ -117,5 +115,15 @@ public class BookLease {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "visitid", referencedColumnName = "visitid", nullable = false)
+    public Visit getVisit() {
+        return visit;
+    }
+
+    public void setVisit(Visit visit) {
+        this.visit = visit;
     }
 }

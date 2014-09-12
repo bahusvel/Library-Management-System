@@ -1,11 +1,11 @@
 package Persistance;
 
-import com.sun.istack.internal.NotNull;
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -94,6 +94,7 @@ public class Book {
     private Double price;
     private Collection<BookEntity> bookEntities;
     private Collection<String> author;
+    private Collection<BookRequest> bookRequests;
 
    /*
    Hibernate was a little annoying here.
@@ -102,6 +103,7 @@ public class Book {
    For that reason you have to specify field flag on it as well
    Otherwise it wont work.
     */
+
 
     @Field(name="author")
     @IndexedEmbedded
@@ -323,5 +325,14 @@ public class Book {
         bookEntities.forEach(m -> m.setBook(this));
         this.bookEntities = bookEntities;
 
+    }
+
+    @OneToMany(mappedBy = "book")
+    public Collection<BookRequest> getBookRequests() {
+        return bookRequests;
+    }
+
+    public void setBookRequests(Collection<BookRequest> bookRequests) {
+        this.bookRequests = bookRequests;
     }
 }
