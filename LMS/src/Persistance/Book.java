@@ -290,6 +290,9 @@ public class Book {
         return DBIO.bImageNotAvailable;
     }
 
+    // NOTE TO SELF
+    // DO NOT GENERATE equals AND hashCode for Cascaded entities.
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
