@@ -1,10 +1,14 @@
 package Persistance;
 
-import javax.validation.constraints.NotNull;
+import imageUtils.DBIO;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Collection;
+import java.util.Date;
+
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -16,6 +20,7 @@ public class MagazineEdition {
     private Date editionDate;
     private String editionTitle;
     private Magazine magazine;
+    private byte[] image = DBIO.imageNotAvailable;
     private Collection<MagazineEntity> magazineEntities;
 
     @Id
@@ -49,6 +54,24 @@ public class MagazineEdition {
 
     public void setEditionTitle(String editionTitle) {
         this.editionTitle = editionTitle;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public void imageToDatabase(File f){
+        image = DBIO.imageFromFile(f);
+    }
+
+    public BufferedImage imageFromDatabase(){
+        BufferedImage ret = DBIO.bImageFromArray(image);
+        if (ret != null) return ret;
+        return DBIO.bImageNotAvailable;
     }
 
     @Override

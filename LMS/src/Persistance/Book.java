@@ -1,14 +1,14 @@
 package Persistance;
 
+import imageUtils.DBIO;
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
 
-import javax.imageio.ImageIO;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
 import java.util.Collection;
 import java.util.Date;
 
@@ -66,12 +66,6 @@ import java.util.Date;
 
 })
 public class Book {
-    private static File im = new File("/Users/denislavrov/Documents/Developing/Java/Library-Management-System/LMS/resources/missing.jpg");
-    private static byte[] imageNotAvailable =  imageFromFile(im);
-    private static BufferedImage bImageNotAvailable = bImageFromArray(imageNotAvailable);
-
-
-
     /*
     Annotation Summary:
     @Transient -                Fields that are not persisted.
@@ -101,56 +95,10 @@ public class Book {
     private String imageFpath;
     private String summary;
     private Double price;
-    private byte[] image = imageNotAvailable;
+    private byte[] image = DBIO.imageNotAvailable;
     private Collection<BookEntity> bookEntities;
     private Collection<String> author;
     private Collection<BookRequest> bookRequests;
-
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public void imageToDatabase(File f){
-        image = imageFromFile(f);
-    }
-
-    private static byte[] imageFromFile(File f){
-        byte[] ret  = new byte[(int) f.length()];
-        try(FileInputStream fis = new FileInputStream(f)){
-            fis.read(ret);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ret;
-    }
-    private static BufferedImage bImageFromArray(byte[] arr){
-        InputStream in;
-        try {
-            in = new ByteArrayInputStream(arr);
-        } catch (NullPointerException e){
-            return null;
-        }
-        try {
-            return ImageIO.read(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public BufferedImage imageFromDatabase(){
-        BufferedImage ret = bImageFromArray(image);
-        if (ret != null) return ret;
-        return bImageNotAvailable;
-    }
-
 
    /*
    Hibernate was a little annoying here.
@@ -322,6 +270,24 @@ public class Book {
                 "title='" + title + '\'' +
                 ", author=" + author +
                 '}';
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public void imageToDatabase(File f){
+        image = DBIO.imageFromFile(f);
+    }
+
+    public BufferedImage imageFromDatabase(){
+        BufferedImage ret = DBIO.bImageFromArray(image);
+        if (ret != null) return ret;
+        return DBIO.bImageNotAvailable;
     }
 
     @Override

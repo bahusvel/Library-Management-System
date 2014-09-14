@@ -15,22 +15,5 @@ public class HibernateTest {
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
 
-        /*
-        Magazine mag = new Magazine();
-        mag.setTitle("Bastards on the moon");
-        MagazineEdition mage1 = new MagazineEdition();
-        MagazineEdition mage2 = new MagazineEdition();
-        mage1.setEditionDate(new Date());
-        mage1.setEditionTitle("First");
-        mage2.setEditionDate(new Date());
-        mage2.setEditionTitle("Second");
-        Collection<MagazineEdition> magz= mag.getMagazineEditions();
-        magz.add(mage1);
-        magz.add(mage2);
-        mag.setMagazineEditions(magz);
-        hm.addEntity(mag);
-        */
-
-
     }
 }

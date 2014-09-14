@@ -10,8 +10,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.view.JasperViewer;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -64,18 +62,4 @@ public class ReportManager {
         JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
         JasperViewer.viewReport(jp);
     }
-
-
-    public static void main(String[] args) throws ParseException {
-        ReportManager rm = new ReportManager();
-        try {
-            rm.bookReport(new SimpleDateFormat("dd/MM/yyyy").parse("14/08/2014"), new Date());
-            //rm.booksInLease();
-        } catch (JRException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

@@ -1,9 +1,15 @@
 package Persistance;
 
-import javax.validation.constraints.NotNull;
-import org.hibernate.search.annotations.*;
+import imageUtils.DBIO;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Collection;
 
 /**
@@ -18,6 +24,7 @@ public class Item {
     private String category;
     private int itemId;
     private Double price;
+    private byte[] image = DBIO.imageNotAvailable;
     private Collection<ItemEntity> itemEntities;
 
 
@@ -84,6 +91,24 @@ public class Item {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public void imageToDatabase(File f){
+        image = DBIO.imageFromFile(f);
+    }
+
+    public BufferedImage imageFromDatabase(){
+        BufferedImage ret = DBIO.bImageFromArray(image);
+        if (ret != null) return ret;
+        return DBIO.bImageNotAvailable;
     }
 
     @Override
