@@ -92,6 +92,9 @@ public class Book {
     private String imageFpath;
     private String summary;
     private Double price;
+
+
+
     private Collection<BookEntity> bookEntities;
     private Collection<String> author;
     private Collection<BookRequest> bookRequests;
@@ -316,15 +319,14 @@ public class Book {
         return result;
     }
 
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    public Collection<BookEntity> getBookEntitiesbookEntities() {
+    public Collection<BookEntity> getBookEntities() {
         return bookEntities;
     }
 
-    public void setBookEntitiesbookEntities(Collection<BookEntity> bookEntities) {
-        bookEntities.forEach(m -> m.setBook(this));
+    public void setBookEntities(Collection<BookEntity> bookEntities) {
         this.bookEntities = bookEntities;
-
     }
 
     @OneToMany(mappedBy = "book")

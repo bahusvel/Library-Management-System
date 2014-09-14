@@ -70,6 +70,12 @@ public class HibernateManager {
         }
     }
 
+    public void TaskRunner(Runnable task){
+        try (AutoTransaction at = new AutoTransaction()) {
+            task.run();
+        }
+    }
+
     public void addEntity(Object object) {
         try (AutoTransaction at = new AutoTransaction()) {
             at.session.persist(object);

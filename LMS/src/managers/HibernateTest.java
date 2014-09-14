@@ -1,11 +1,5 @@
 package managers;
 
-import Persistance.Magazine;
-import Persistance.MagazineEdition;
-
-import java.util.Collection;
-import java.util.Date;
-
 /**
  * Created by denislavrov on 9/2/14.
  */
@@ -23,7 +17,7 @@ public class HibernateTest {
 
         //hm.listEntities(Magazine.class).forEach(mag -> System.out.println(mag.getMagazineEditions()));
 
-
+        /*
         Magazine mag = new Magazine();
         mag.setTitle("Bastards on the moon");
         MagazineEdition mage1 = new MagazineEdition();
@@ -37,7 +31,14 @@ public class HibernateTest {
         magz.add(mage2);
         mag.setMagazineEditions(magz);
         hm.addEntity(mag);
+        */
 
+        /*
+        hm.TaskRunner(() ->{
+            List<Magazine> magz = hm.listEntities(Magazine.class);
+            magz.forEach(mag -> System.out.println(mag.getMagazineEditions()));
+        });
+        */
 
     }
 }
