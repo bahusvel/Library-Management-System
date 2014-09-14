@@ -15,8 +15,6 @@ public class HibernateTest {
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
 
-        //hm.listEntities(Magazine.class).forEach(mag -> System.out.println(mag.getMagazineEditions()));
-
         /*
         Magazine mag = new Magazine();
         mag.setTitle("Bastards on the moon");
@@ -33,12 +31,6 @@ public class HibernateTest {
         hm.addEntity(mag);
         */
 
-        /*
-        hm.TaskRunner(() ->{
-            List<Magazine> magz = hm.listEntities(Magazine.class);
-            magz.forEach(mag -> System.out.println(mag.getMagazineEditions()));
-        });
-        */
 
     }
 }
