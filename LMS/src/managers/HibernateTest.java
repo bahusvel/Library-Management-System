@@ -1,4 +1,4 @@
-package HibernateManager;
+package managers;
 
 import Persistance.Magazine;
 import Persistance.MagazineEdition;

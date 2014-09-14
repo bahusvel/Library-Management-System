@@ -6,6 +6,7 @@ import org.apache.solr.analysis.LowerCaseFilterFactory;
 import org.apache.solr.analysis.PhoneticFilterFactory;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -101,6 +102,7 @@ public class Member {
 
     @Column(name = "email")
     @NotNull
+    @Email
     @Field
     public String getEmail() {
         return email;

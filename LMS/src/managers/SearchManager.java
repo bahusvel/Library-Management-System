@@ -1,4 +1,4 @@
-package HibernateManager;
+package managers;
 
 import Persistance.Book;
 import org.apache.lucene.search.Query;

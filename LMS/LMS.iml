@@ -24,6 +24,9 @@
     <orderEntry type="library" name="org.hibernate:hibernate-c3p0:4.3.4.Final" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-search-orm:4.5.1.Final" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-validator:5.1.2.Final" level="project" />
+    <orderEntry type="library" name="DynamicJasper-5.0" level="project" />
+    <orderEntry type="library" name="net.sf.jasperreports:jasperreports:5.6.0" level="project" />
+    <orderEntry type="library" name="jasperreports-5.6.1" level="project" />
   </component>
 </module>
 

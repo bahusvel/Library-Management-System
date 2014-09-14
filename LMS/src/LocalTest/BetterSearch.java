@@ -1,7 +1,7 @@
 package LocalTest;
 
-import HibernateManager.HibernateManager;
-import HibernateManager.SearchManager;
+import managers.HibernateManager;
+import managers.SearchManager;
 import Persistance.Book;
 
 import javax.swing.*;

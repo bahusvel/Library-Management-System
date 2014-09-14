@@ -1,4 +1,4 @@
-package HibernateManager;
+package managers;
 
 import java.util.Scanner;
 
