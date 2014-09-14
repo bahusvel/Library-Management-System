@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.service.ServiceRegistry;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -76,20 +77,29 @@ public class HibernateManager {
         }
     }
 
-    public void addEntity(Object object) {
+    public Serializable addEntity(Object object) {
+        Serializable ret = null;
         try (AutoTransaction at = new AutoTransaction()) {
-            at.session.persist(object);
+            ret = at.session.save(object);
             at.tx.commit();
         } catch (MappingException e) { // catch errors when user passes wrong objects
             System.err.println(object.getClass() + " Is not compatible with the database.");
+        }
+        return ret;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <E> E getEntity(Class<E> eClass, Serializable key){
+        try(AutoSession as = new AutoSession()){
+            return (E) as.session.get(eClass, key);
         }
     }
 
     @SuppressWarnings("unchecked")
     public <E> List<E> listEntities(Class<E> entity){
-        List entities = null;
+        List<E> entities = null;
         try(AutoSession as = new AutoSession()){
-            entities = (List<E>)as.session.createQuery("from " + entity.getSimpleName()).list();
+            entities = (List<E>)as.session.createCriteria(entity).list();
         }
 
         return entities;

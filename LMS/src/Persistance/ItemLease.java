@@ -73,10 +73,7 @@ public class ItemLease {
         if (itemLeaseId != itemLease.itemLeaseId) return false;
         if (renewed != itemLease.renewed) return false;
         if (dueDate != null ? !dueDate.equals(itemLease.dueDate) : itemLease.dueDate != null) return false;
-        if (employee != null ? !employee.equals(itemLease.employee) : itemLease.employee != null) return false;
-        if (itemEntity != null ? !itemEntity.equals(itemLease.itemEntity) : itemLease.itemEntity != null) return false;
         if (leaseDate != null ? !leaseDate.equals(itemLease.leaseDate) : itemLease.leaseDate != null) return false;
-        if (member != null ? !member.equals(itemLease.member) : itemLease.member != null) return false;
 
         return true;
     }
@@ -87,9 +84,6 @@ public class ItemLease {
         result = 31 * result + (dueDate != null ? dueDate.hashCode() : 0);
         result = 31 * result + (renewed ? 1 : 0);
         result = 31 * result + itemLeaseId;
-        result = 31 * result + (employee != null ? employee.hashCode() : 0);
-        result = 31 * result + (itemEntity != null ? itemEntity.hashCode() : 0);
-        result = 31 * result + (member != null ? member.hashCode() : 0);
         return result;
     }
 

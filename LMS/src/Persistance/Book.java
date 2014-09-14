@@ -299,9 +299,7 @@ public class Book {
 
         if (bookId != book.bookId) return false;
         if (edition != book.edition) return false;
-        if (author != null ? !author.equals(book.author) : book.author != null) return false;
         if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
-        if (bookEntities != null ? !bookEntities.equals(book.bookEntities) : book.bookEntities != null) return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
         if (imageFpath != null ? !imageFpath.equals(book.imageFpath) : book.imageFpath != null) return false;
@@ -333,8 +331,6 @@ public class Book {
         result = 31 * result + (imageFpath != null ? imageFpath.hashCode() : 0);
         result = 31 * result + (summary != null ? summary.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (bookEntities != null ? bookEntities.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;
     }
 

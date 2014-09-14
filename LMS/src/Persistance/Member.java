@@ -162,17 +162,9 @@ public class Member {
         if (Double.compare(member.balance, balance) != 0) return false;
         if (memberId != member.memberId) return false;
         if (address != null ? !address.equals(member.address) : member.address != null) return false;
-        if (bookLeases != null ? !bookLeases.equals(member.bookLeases) : member.bookLeases != null)
-            return false;
-        if (bookReturns != null ? !bookReturns.equals(member.bookReturns) : member.bookReturns != null)
-            return false;
         if (dob != null ? !dob.equals(member.dob) : member.dob != null) return false;
         if (email != null ? !email.equals(member.email) : member.email != null) return false;
         if (firstname != null ? !firstname.equals(member.firstname) : member.firstname != null) return false;
-        if (itemLeases != null ? !itemLeases.equals(member.itemLeases) : member.itemLeases != null)
-            return false;
-        if (itemReturns != null ? !itemReturns.equals(member.itemReturns) : member.itemReturns != null)
-            return false;
         if (lastname != null ? !lastname.equals(member.lastname) : member.lastname != null) return false;
         if (phoneNumber != null ? !phoneNumber.equals(member.phoneNumber) : member.phoneNumber != null) return false;
         if (registrationDate != null ? !registrationDate.equals(member.registrationDate) : member.registrationDate != null)
@@ -197,10 +189,6 @@ public class Member {
         result = 31 * result + memberId;
         temp = Double.doubleToLongBits(balance);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (bookLeases != null ? bookLeases.hashCode() : 0);
-        result = 31 * result + (bookReturns != null ? bookReturns.hashCode() : 0);
-        result = 31 * result + (itemLeases != null ? itemLeases.hashCode() : 0);
-        result = 31 * result + (itemReturns != null ? itemReturns.hashCode() : 0);
         return result;
     }
 

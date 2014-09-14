@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -111,7 +112,8 @@ public class HibernateManagerTest {
         magz.add(mage1);
         magz.add(mage2);
         mag.setMagazineEditions(magz);
-        hm.addEntity(mag);
+        Serializable key = hm.addEntity(mag);
+        assert hm.getEntity(Magazine.class, key).equals(mag);
     }
 
     /**

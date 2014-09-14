@@ -89,10 +89,7 @@ public class ItemReturn {
         if (Double.compare(that.ammountCharged, ammountCharged) != 0) return false;
         if (itemReturnId != that.itemReturnId) return false;
         if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null) return false;
-        if (employee != null ? !employee.equals(that.employee) : that.employee != null) return false;
-        if (itemEntity != null ? !itemEntity.equals(that.itemEntity) : that.itemEntity != null) return false;
         if (leaseDate != null ? !leaseDate.equals(that.leaseDate) : that.leaseDate != null) return false;
-        if (member != null ? !member.equals(that.member) : that.member != null) return false;
         if (returnDate != null ? !returnDate.equals(that.returnDate) : that.returnDate != null) return false;
 
         return true;
@@ -108,9 +105,6 @@ public class ItemReturn {
         temp = Double.doubleToLongBits(ammountCharged);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + itemReturnId;
-        result = 31 * result + (employee != null ? employee.hashCode() : 0);
-        result = 31 * result + (itemEntity != null ? itemEntity.hashCode() : 0);
-        result = 31 * result + (member != null ? member.hashCode() : 0);
         return result;
     }
 

@@ -1,5 +1,7 @@
 package managers;
 
+import Persistance.Magazine;
+
 /**
  * Created by denislavrov on 9/2/14.
  */
@@ -14,6 +16,6 @@ public class HibernateTest {
 
     public static void main(String[] args) {
         HibernateManager hm = new HibernateManager();
-
+        hm.listEntities(Magazine.class).forEach(System.out::println);
     }
 }

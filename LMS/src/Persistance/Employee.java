@@ -82,15 +82,7 @@ public class Employee {
 
         if (employeeId != employee.employeeId) return false;
         if (address != null ? !address.equals(employee.address) : employee.address != null) return false;
-        if (bookLeases != null ? !bookLeases.equals(employee.bookLeases) : employee.bookLeases != null)
-            return false;
-        if (bookReturns != null ? !bookReturns.equals(employee.bookReturns) : employee.bookReturns != null)
-            return false;
         if (firstname != null ? !firstname.equals(employee.firstname) : employee.firstname != null) return false;
-        if (itemLeases != null ? !itemLeases.equals(employee.itemLeases) : employee.itemLeases != null)
-            return false;
-        if (itemReturns != null ? !itemReturns.equals(employee.itemReturns) : employee.itemReturns != null)
-            return false;
         if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
         if (role != null ? !role.equals(employee.role) : employee.role != null) return false;
 
@@ -104,10 +96,6 @@ public class Employee {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + employeeId;
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (bookLeases != null ? bookLeases.hashCode() : 0);
-        result = 31 * result + (bookReturns != null ? bookReturns.hashCode() : 0);
-        result = 31 * result + (itemLeases != null ? itemLeases.hashCode() : 0);
-        result = 31 * result + (itemReturns != null ? itemReturns.hashCode() : 0);
         return result;
     }
 

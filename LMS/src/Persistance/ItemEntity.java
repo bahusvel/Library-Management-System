@@ -88,9 +88,6 @@ public class ItemEntity {
         if (leased != that.leased) return false;
         if (acquisitionDate != null ? !acquisitionDate.equals(that.acquisitionDate) : that.acquisitionDate != null)
             return false;
-        if (item != null ? !item.equals(that.item) : that.item != null) return false;
-        if (itemLeases != null ? !itemLeases.equals(that.itemLeases) : that.itemLeases != null) return false;
-        if (itemReturns != null ? !itemReturns.equals(that.itemReturns) : that.itemReturns != null) return false;
         if (location != null ? !location.equals(that.location) : that.location != null) return false;
 
         return true;
@@ -103,9 +100,6 @@ public class ItemEntity {
         result = 31 * result + (available ? 1 : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + itemEntityId;
-        result = 31 * result + (item != null ? item.hashCode() : 0);
-        result = 31 * result + (itemLeases != null ? itemLeases.hashCode() : 0);
-        result = 31 * result + (itemReturns != null ? itemReturns.hashCode() : 0);
         return result;
     }
 

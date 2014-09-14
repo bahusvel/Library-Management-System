@@ -110,11 +110,8 @@ public class BookReturn {
 
         if (Double.compare(that.ammountCharged, ammountCharged) != 0) return false;
         if (bookReturnId != that.bookReturnId) return false;
-        if (bookEntity != null ? !bookEntity.equals(that.bookEntity) : that.bookEntity != null) return false;
         if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null) return false;
-        if (employee != null ? !employee.equals(that.employee) : that.employee != null) return false;
         if (leaseDate != null ? !leaseDate.equals(that.leaseDate) : that.leaseDate != null) return false;
-        if (member != null ? !member.equals(that.member) : that.member != null) return false;
         if (memberComments != null ? !memberComments.equals(that.memberComments) : that.memberComments != null)
             return false;
         if (memberRating != null ? !memberRating.equals(that.memberRating) : that.memberRating != null) return false;
@@ -135,9 +132,6 @@ public class BookReturn {
         result = 31 * result + (memberComments != null ? memberComments.hashCode() : 0);
         result = 31 * result + (memberRating != null ? memberRating.hashCode() : 0);
         result = 31 * result + bookReturnId;
-        result = 31 * result + (bookEntity != null ? bookEntity.hashCode() : 0);
-        result = 31 * result + (employee != null ? employee.hashCode() : 0);
-        result = 31 * result + (member != null ? member.hashCode() : 0);
         return result;
     }
 
