@@ -94,7 +94,7 @@ public class Book {
     private int bookId;
     private String imageFpath;
     private String summary;
-    private Double price;
+    private Double price = 0.0;
     private byte[] image = DBIO.imageNotAvailable;
     private Collection<BookEntity> bookEntities;
     private Collection<String> author;

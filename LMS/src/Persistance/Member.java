@@ -11,7 +11,9 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Date;
 
@@ -43,8 +45,7 @@ public class Member {
     private Collection<ItemLease> itemLeases;
     private Collection<ItemReturn> itemReturns;
     private Collection<Visit> visits;
-    // NOT PERSISTED
-    private Visit currentVisit = null;
+    private Visit currentVisit;
 
     @Column(name = "firstname")
     @NotNull
@@ -249,9 +250,17 @@ public class Member {
         this.visits = visits;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    public Visit getCurrentVisit() {
+        return currentVisit;
+    }
+
+    public void setCurrentVisit(Visit currentVisit) {
+        this.currentVisit = currentVisit;
+    }
 
     public String signIn(){
-        Timestamp cTimeStamp = new Timestamp(new Date().getTime());
+        Date cTimeStamp = new Date();
         Visit visit = new Visit(this, cTimeStamp, cTimeStamp, true);
         visits.add(visit);
         currentVisit = visit;
@@ -259,9 +268,8 @@ public class Member {
     }
 
     public String signOut(){
-        Timestamp cTimeStamp = new Timestamp(new Date().getTime());
         currentVisit.setCurrent(false);
-        currentVisit.setExittime(cTimeStamp);
+        currentVisit.setExittime(new Date());
         currentVisit = null;
         return "Sign Out OK";
     }
@@ -288,11 +296,35 @@ public class Member {
     public String returnBook(BookEntity bookEntity, Employee employee){
         BookLease bookLease = bookEntity.getBookLease();
         if (!bookLease.getMember().equals(this)) return "You did not lease that book";
-        BookReturn bookReturn = new BookReturn(bookEntity,bookLease.getLeaseDate(), bookLease.getDueDate(), this, employee, new Date());
+        Date dueDate = new Date(bookLease.getDueDate().getTime());
+        Date cDate = new Date();
+        BookReturn bookReturn = new BookReturn(bookLease, employee);
+        if (dueDate.before(cDate)) {
+            LocalDate dueLocal = dueDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            long daysOverdue = LocalDate.now().until(dueLocal, ChronoUnit.DAYS);
+            bookReturn.setAmmountCharged(0.60 * daysOverdue);
+            balance += 0.60 * daysOverdue;
+        }
         bookReturns.add(bookReturn);
         bookLeases.remove(bookLease);
         bookEntity.setLeased(false);
         return "Return successful";
+    }
+
+    public String looseBook(BookEntity bookEntity, Employee employee){
+        BookLease bookLease = bookEntity.getBookLease();
+        if (!bookLease.getMember().equals(this)) return "You did not lease that book";
+        Date dueDate = new Date(bookLease.getDueDate().getTime());
+        Date cDate = new Date();
+        BookReturn bookReturn = new BookReturn(bookLease, employee);
+        bookReturn.setLost(true);
+        double bookPrice = bookEntity.getBook().getPrice();
+        bookReturn.setAmmountCharged(bookPrice);
+        balance -= bookPrice;
+        bookReturns.add(bookReturn);
+        bookLeases.remove(bookLease);
+        bookEntity.getBook().getBookEntities().remove(bookEntity);
+        return "Lost book acknowledge";
     }
 
 }

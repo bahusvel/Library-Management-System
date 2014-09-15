@@ -21,6 +21,7 @@ public class BookReturn {
     private BookEntity bookEntity;
     private Employee employee;
     private Member member;
+    private boolean lost = false;
 
     public BookReturn(){
 
@@ -33,6 +34,15 @@ public class BookReturn {
         this.member = member;
         this.employee = employee;
         this.returnDate = returnDate;
+    }
+
+    public BookReturn(BookLease bookLease, Employee employee){
+        bookEntity = bookLease.getBookEntity();
+        leaseDate = bookLease.getLeaseDate();
+        dueDate = bookLease.getDueDate();
+        member = bookLease.getMember();
+        this.employee = employee;
+        returnDate = new Date();
     }
 
     @Column(name = "lease_date")
@@ -103,7 +113,6 @@ public class BookReturn {
 
     @Id
     @Column(name = "book_return_id")
-    @NotNull
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getBookReturnId() {
         return bookReturnId;
@@ -111,6 +120,14 @@ public class BookReturn {
 
     public void setBookReturnId(int bookReturnId) {
         this.bookReturnId = bookReturnId;
+    }
+
+    public boolean isLost() {
+        return lost;
+    }
+
+    public void setLost(boolean lost) {
+        this.lost = lost;
     }
 
     @Override
@@ -148,7 +165,7 @@ public class BookReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id", nullable = false)
+    @JoinColumn(name = "book_entity_id", referencedColumnName = "book_entity_id")
     public BookEntity getBookEntity() {
         return bookEntity;
     }
@@ -158,7 +175,7 @@ public class BookReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
     public Employee getEmployee() {
         return employee;
     }
@@ -168,7 +185,7 @@ public class BookReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     public Member getMember() {
         return member;
     }

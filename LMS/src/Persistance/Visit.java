@@ -1,10 +1,9 @@
 package Persistance;
 
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/12/14.
@@ -12,8 +11,8 @@ import java.util.Collection;
 @Entity
 public class Visit {
     private long visitid;
-    private Timestamp entrytime;
-    private Timestamp exittime;
+    private Date entrytime;
+    private Date exittime;
     private Collection<BookLease> bookLeases;
     private Collection<ItemLease> itemLeases;
     private Member member;
@@ -23,7 +22,7 @@ public class Visit {
 
     }
 
-    public Visit(Member member, Timestamp exittime, Timestamp entrytime, boolean current) {
+    public Visit(Member member, Date exittime, Date entrytime, boolean current) {
         this.member = member;
         this.exittime = exittime;
         this.entrytime = entrytime;
@@ -43,21 +42,23 @@ public class Visit {
 
     @Column(name = "entrytime")
     @NotNull
-    public Timestamp getEntrytime() {
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getEntrytime() {
         return entrytime;
     }
 
-    public void setEntrytime(Timestamp entrytime) {
+    public void setEntrytime(Date entrytime) {
         this.entrytime = entrytime;
     }
 
     @Column(name = "exittime")
     @NotNull
-    public Timestamp getExittime() {
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getExittime() {
         return exittime;
     }
 
-    public void setExittime(Timestamp exittime) {
+    public void setExittime(Date exittime) {
         this.exittime = exittime;
     }
 

@@ -109,7 +109,7 @@ public class ItemReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
     public Employee getEmployee() {
         return employee;
     }
@@ -119,7 +119,7 @@ public class ItemReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "item_entity_id", referencedColumnName = "item_entity_id", nullable = false)
+    @JoinColumn(name = "item_entity_id", referencedColumnName = "item_entity_id")
     public ItemEntity getItemEntity() {
         return itemEntity;
     }
@@ -129,7 +129,7 @@ public class ItemReturn {
     }
 
     @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     public Member getMember() {
         return member;
     }
