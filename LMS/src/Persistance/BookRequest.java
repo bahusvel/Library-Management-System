@@ -17,6 +17,7 @@ public class BookRequest {
 
     @Id
     @Column(name = "requestid")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getRequestid() {
         return requestid;
     }

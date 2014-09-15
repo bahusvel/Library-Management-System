@@ -19,8 +19,20 @@ public class Visit {
     private Member member;
     private boolean current = false;
 
+    public Visit(){
+
+    }
+
+    public Visit(Member member, Timestamp exittime, Timestamp entrytime, boolean current) {
+        this.member = member;
+        this.exittime = exittime;
+        this.entrytime = entrytime;
+        this.current = current;
+    }
+
     @Id
     @Column(name = "visitid")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getVisitid() {
         return visitid;
     }

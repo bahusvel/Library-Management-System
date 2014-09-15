@@ -22,6 +22,15 @@ public class BookEntity {
     private BookLease bookLease;
     private Collection<BookReturn> bookReturns;
 
+    public BookEntity(){
+
+    }
+
+
+    public BookEntity(Book book, Date acquisitionDate) {
+        this.book = book;
+        this.acquisitionDate = acquisitionDate;
+    }
 
     @Column(name = "available")
     @NotNull

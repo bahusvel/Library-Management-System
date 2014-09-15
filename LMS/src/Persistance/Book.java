@@ -338,7 +338,7 @@ public class Book {
     }
 
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<BookEntity> getBookEntities() {
         return bookEntities;
     }
@@ -354,5 +354,13 @@ public class Book {
 
     public void setBookRequests(Collection<BookRequest> bookRequests) {
         this.bookRequests = bookRequests;
+    }
+
+    public String addEntities(int qty){
+        for (int i = 0; i < qty; i++) {
+            BookEntity newBE = new BookEntity(this, new Date());
+            bookEntities.add(newBE);
+        }
+        return "Added successfully";
     }
 }

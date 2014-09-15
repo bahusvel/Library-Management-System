@@ -22,6 +22,18 @@ public class BookReturn {
     private Employee employee;
     private Member member;
 
+    public BookReturn(){
+
+    }
+
+    public BookReturn(BookEntity bookEntity, Date leaseDate, Date dueDate, Member member, Employee employee, Date returnDate) {
+        this.bookEntity = bookEntity;
+        this.leaseDate = leaseDate;
+        this.dueDate = dueDate;
+        this.member = member;
+        this.employee = employee;
+        this.returnDate = returnDate;
+    }
 
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)

@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
@@ -42,6 +43,8 @@ public class Member {
     private Collection<ItemLease> itemLeases;
     private Collection<ItemReturn> itemReturns;
     private Collection<Visit> visits;
+    // NOT PERSISTED
+    private Visit currentVisit = null;
 
     @Column(name = "firstname")
     @NotNull
@@ -200,7 +203,7 @@ public class Member {
                 '}';
     }
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     @Size(min=0, max = 5)
     public Collection<BookLease> getBookLeases() {
         return bookLeases;
@@ -210,7 +213,7 @@ public class Member {
         this.bookLeases = bookLeases;
     }
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     public Collection<BookReturn> getBookReturns() {
         return bookReturns;
     }
@@ -219,7 +222,7 @@ public class Member {
         this.bookReturns = bookReturns;
     }
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<ItemLease> getItemLeases() {
         return itemLeases;
     }
@@ -228,7 +231,7 @@ public class Member {
         this.itemLeases = itemLeases;
     }
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     public Collection<ItemReturn> getItemReturns() {
         return itemReturns;
     }
@@ -237,7 +240,7 @@ public class Member {
         this.itemReturns = itemReturns;
     }
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     public Collection<Visit> getVisits() {
         return visits;
     }
@@ -245,4 +248,51 @@ public class Member {
     public void setVisits(Collection<Visit> visits) {
         this.visits = visits;
     }
+
+
+    public String signIn(){
+        Timestamp cTimeStamp = new Timestamp(new Date().getTime());
+        Visit visit = new Visit(this, cTimeStamp, cTimeStamp, true);
+        visits.add(visit);
+        currentVisit = visit;
+        return "Sign In OK";
+    }
+
+    public String signOut(){
+        Timestamp cTimeStamp = new Timestamp(new Date().getTime());
+        currentVisit.setCurrent(false);
+        currentVisit.setExittime(cTimeStamp);
+        currentVisit = null;
+        return "Sign Out OK";
+    }
+
+    public String leaseBook(Book book, Employee employee, Date until){
+        if (bookLeases.size() > 4) return "Limit of 5 books per Member reached.";
+
+        BookEntity leaseEnity = null;
+        for(BookEntity bookEntity : book.getBookEntities()){
+            if (bookEntity.isAvailable() && !bookEntity.isLeased()){
+                leaseEnity = bookEntity;
+                break;
+            }
+        }
+        if (leaseEnity == null) return "Book wasn’t available";
+        if (currentVisit == null) return "Customer hasn't signed in";
+        BookLease bookLease = new BookLease(new Date(), until, this, employee, leaseEnity ,currentVisit);
+        leaseEnity.setBookLease(bookLease);
+        leaseEnity.setLeased(true);
+        bookLeases.add(bookLease);
+        return "Lease was successful";
+    }
+
+    public String returnBook(BookEntity bookEntity, Employee employee){
+        BookLease bookLease = bookEntity.getBookLease();
+        if (!bookLease.getMember().equals(this)) return "You did not lease that book";
+        BookReturn bookReturn = new BookReturn(bookEntity,bookLease.getLeaseDate(), bookLease.getDueDate(), this, employee, new Date());
+        bookReturns.add(bookReturn);
+        bookLeases.remove(bookLease);
+        bookEntity.setLeased(false);
+        return "Return successful";
+    }
+
 }

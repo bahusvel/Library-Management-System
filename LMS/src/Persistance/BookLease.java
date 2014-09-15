@@ -20,6 +20,20 @@ public class BookLease {
     private Member member;
     private Visit visit;
 
+
+    public BookLease(){
+
+    }
+
+    public BookLease(Date leaseDate, Date dueDate, Member member, Employee employee, BookEntity bookEntity, Visit visit) {
+        this.leaseDate = leaseDate;
+        this.dueDate = dueDate;
+        this.member = member;
+        this.employee = employee;
+        this.bookEntity = bookEntity;
+        this.visit = visit;
+    }
+
     @Id
     @Column(name = "lease_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
