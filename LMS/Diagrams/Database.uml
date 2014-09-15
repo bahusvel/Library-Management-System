@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>9eaef950-98ea-4d84-9344-e61ac4b12626</OriginalElement>
+  <nodes>
+    <node x="-15.0" y="-20.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.member</node>
+    <node x="-20.0" y="1908.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.magazine</node>
+    <node x="1651.0" y="1330.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_request</node>
+    <node x="533.0" y="530.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.visit</node>
+    <node x="1307.0" y="1083.5">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_author</node>
+    <node x="494.0" y="1308.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_entity</node>
+    <node x="1328.5" y="239.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item</node>
+    <node x="1.5" y="1701.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.magazine_edition</node>
+    <node x="870.5" y="795.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.employee</node>
+    <node x="1207.0" y="1231.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book</node>
+    <node x="22.0" y="1275.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_return</node>
+    <node x="285.5" y="1701.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.magazine_entity</node>
+    <node x="887.5" y="497.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_lease</node>
+    <node x="496.0" y="817.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_lease</node>
+    <node x="1283.5" y="817.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_return</node>
+    <node x="1305.5" y="519.0">9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_entity</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.visit" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.member">
+      <point x="0.0" y="-70.0" />
+      <point x="640.0" y="240.0" />
+      <point x="215.0" y="80.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_return" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.member">
+      <point x="156.5" y="-0.0" />
+      <point x="1640.0" y="920.0" />
+      <point x="1640.0" y="160.0" />
+      <point x="215.0" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.magazine_edition" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.magazine">
+      <point x="0.0" y="59.0" />
+      <point x="0.0" y="-92.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.member">
+      <point x="0.0" y="-103.0" />
+      <point x="1040.0" y="200.0" />
+      <point x="215.0" y="40.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_return" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.employee">
+      <point x="-156.5" y="-0.0" />
+      <point x="169.5" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.visit">
+      <point x="-152.5" y="-0.0" />
+      <point x="107.0" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_entity">
+      <point x="152.5" y="-0.0" />
+      <point x="-134.5" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_return" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.member">
+      <point x="0.0" y="-125.0" />
+      <point x="0.0" y="180.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_entity">
+      <point x="0.0" y="103.0" />
+      <point x="0.0" y="-92.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_return" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_entity">
+      <point x="0.0" y="-103.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.employee">
+      <point x="0.0" y="103.0" />
+      <point x="0.0" y="-125.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_author" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book">
+      <point x="0.0" y="36.5" />
+      <point x="0.0" y="-169.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item_entity" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.item">
+      <point x="0.0" y="-81.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_request" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book">
+      <point x="-109.0" y="-0.0" />
+      <point x="193.0" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.member">
+      <point x="-144.0" y="-0.0" />
+      <point x="240.0" y="920.0" />
+      <point x="40.0" y="180.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_return" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_entity">
+      <point x="178.0" y="-0.0" />
+      <point x="-146.0" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.magazine_entity" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.magazine_edition">
+      <point x="-114.5" y="-0.0" />
+      <point x="118.5" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_entity" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book">
+      <point x="146.0" y="-0.0" />
+      <point x="-193.0" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.employee">
+      <point x="144.0" y="-0.0" />
+      <point x="-169.5" y="-0.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_lease" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.visit">
+      <point x="0.0" y="-103.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.book_return" target="9eaef950-98ea-4d84-9344-e61ac4b12626.table:librarymanagementsystem.public.employee">
+      <point x="0.0" y="125.0" />
+      <point x="200.0" y="1600.0" />
+      <point x="1040.0" y="1600.0" />
+      <point x="0.0" y="125.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.46679980029955065" x="942.5" y="772.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
