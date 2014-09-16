@@ -22,6 +22,7 @@ public class BookReturn {
     private Employee employee;
     private Member member;
     private boolean lost = false;
+    private Book book;
 
     public BookReturn(){
 
@@ -162,6 +163,15 @@ public class BookReturn {
         result = 31 * result + (memberRating != null ? memberRating.hashCode() : 0);
         result = 31 * result + bookReturnId;
         return result;
+    }
+
+    @ManyToOne
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     @ManyToOne

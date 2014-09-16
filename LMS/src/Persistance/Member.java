@@ -302,8 +302,8 @@ public class Member {
         if (dueDate.before(cDate)) {
             LocalDate dueLocal = dueDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             long daysOverdue = LocalDate.now().until(dueLocal, ChronoUnit.DAYS);
-            bookReturn.setAmmountCharged(0.60 * daysOverdue);
-            balance += 0.60 * daysOverdue;
+            bookReturn.setAmmountCharged(-0.60 * daysOverdue);
+            balance -= -0.60 * daysOverdue;
         }
         bookReturns.add(bookReturn);
         bookLeases.remove(bookLease);
@@ -314,8 +314,6 @@ public class Member {
     public String looseBook(BookEntity bookEntity, Employee employee){
         BookLease bookLease = bookEntity.getBookLease();
         if (!bookLease.getMember().equals(this)) return "You did not lease that book";
-        Date dueDate = new Date(bookLease.getDueDate().getTime());
-        Date cDate = new Date();
         BookReturn bookReturn = new BookReturn(bookLease, employee);
         bookReturn.setLost(true);
         double bookPrice = bookEntity.getBook().getPrice();

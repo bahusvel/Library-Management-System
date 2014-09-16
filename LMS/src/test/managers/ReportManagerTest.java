@@ -7,6 +7,10 @@ import org.junit.Test;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -46,4 +50,15 @@ public class ReportManagerTest {
         rm.booksInLease();
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
     }
+
+    @Test
+    public void testActivityReport() throws Exception{
+        ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
+        Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
+        Date back = Date.from(instant);
+        rm.activityReport(back, new Date());
+        assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
+    }
+
+
 }

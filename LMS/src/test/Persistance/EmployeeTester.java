@@ -1,11 +1,12 @@
 package test.Persistance;
 
 import Persistance.Book;
+import Persistance.Employee;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoTransaction;
-import org.junit.Test;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Book Tester.
@@ -14,7 +15,7 @@ import org.junit.After;
  * @version 1.0
  * @since <pre>Sep 15, 2014</pre>
  */
-public class BookTest {
+public class EmployeeTester {
     HibernateManager hm;
 
     @Before
@@ -27,10 +28,11 @@ public class BookTest {
     }
 
     @Test
-    public void testAddEntities() throws Exception {
+    public void testAddBookEntities() throws Exception {
         try (AutoTransaction at = hm.newAutoTransaction()) {
             Book book = (Book) at.session.get(Book.class, 86009);
-            book.addEntities(5);
+            Employee employee = (Employee) at.session.get(Employee.class, 1);
+            employee.addBookEntities(book, 5);
             at.tx.commit();
         }
     }

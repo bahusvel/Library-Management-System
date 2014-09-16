@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -133,5 +134,13 @@ public class Employee {
 
     public void setItemReturns(Collection<ItemReturn> itemReturns) {
         this.itemReturns = itemReturns;
+    }
+
+    public String addBookEntities(Book book, int qty){
+        for (int i = 0; i < qty; i++) {
+            BookEntity newBE = new BookEntity(book, new Date());
+            book.getBookEntities().add(newBE);
+        }
+        return "Added successfully";
     }
 }

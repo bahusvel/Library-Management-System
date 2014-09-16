@@ -92,13 +92,13 @@ public class Book {
     private String category;
     private Double rating;
     private int bookId;
-    private String imageFpath;
     private String summary;
     private Double price = 0.0;
     private byte[] image = DBIO.imageNotAvailable;
     private Collection<BookEntity> bookEntities;
     private Collection<String> author;
     private Collection<BookRequest> bookRequests;
+    private Collection<BookReturn> bookReturns;
 
    /*
    Hibernate was a little annoying here.
@@ -235,15 +235,6 @@ public class Book {
         this.bookId = bookId;
     }
 
-    @Column(name = "image_fpath")
-    public String getImageFpath() {
-        return imageFpath;
-    }
-
-    public void setImageFpath(String imageFpath) {
-        this.imageFpath = imageFpath;
-    }
-
     @Column(name = "summary")
     @Field
     @Analyzer(definition = "TokenizingLower")
@@ -305,7 +296,6 @@ public class Book {
         if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
         if (category != null ? !category.equals(book.category) : book.category != null) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
-        if (imageFpath != null ? !imageFpath.equals(book.imageFpath) : book.imageFpath != null) return false;
         if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
         if (pages != null ? !pages.equals(book.pages) : book.pages != null) return false;
         if (price != null ? !price.equals(book.price) : book.price != null) return false;
@@ -331,12 +321,19 @@ public class Book {
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
         result = 31 * result + bookId;
-        result = 31 * result + (imageFpath != null ? imageFpath.hashCode() : 0);
         result = 31 * result + (summary != null ? summary.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }
 
+    @OneToMany(mappedBy = "book")
+    public Collection<BookReturn> getBookReturns() {
+        return bookReturns;
+    }
+
+    public void setBookReturns(Collection<BookReturn> bookReturns) {
+        this.bookReturns = bookReturns;
+    }
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<BookEntity> getBookEntities() {
@@ -356,11 +353,4 @@ public class Book {
         this.bookRequests = bookRequests;
     }
 
-    public String addEntities(int qty){
-        for (int i = 0; i < qty; i++) {
-            BookEntity newBE = new BookEntity(this, new Date());
-            bookEntities.add(newBE);
-        }
-        return "Added successfully";
-    }
 }
