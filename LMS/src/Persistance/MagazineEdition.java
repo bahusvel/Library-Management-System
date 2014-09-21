@@ -1,6 +1,6 @@
 package Persistance;
 
-import imageUtils.DBIO;
+import util.DBIO;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

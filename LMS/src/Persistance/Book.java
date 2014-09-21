@@ -1,6 +1,6 @@
 package Persistance;
 
-import imageUtils.DBIO;
+import util.DBIO;
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;

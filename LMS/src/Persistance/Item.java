@@ -1,6 +1,6 @@
 package Persistance;
 
-import imageUtils.DBIO;
+import util.DBIO;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;

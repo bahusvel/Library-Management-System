@@ -40,9 +40,6 @@ public class ReportManager {
     private static Style importeStyle = new Style();
     private static Style oddRowStyle = new Style();
     static {
-
-
-
         headerStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
         headerStyle.setBackgroundColor(Color.gray);
         headerStyle.setTextColor(Color.black);
@@ -72,7 +69,8 @@ public class ReportManager {
         oddRowStyle.setBackgroundColor(Color.LIGHT_GRAY);
     }
 
-    public void bookReport(Date from, Date to) throws JRException, ClassNotFoundException {
+    @SuppressWarnings("unchecked")
+    public static void bookReport(Date from, Date to) throws JRException, ClassNotFoundException {
         FastReportBuilder drb = new FastReportBuilder();
         DynamicReport dr = drb
                 .addColumn("Title", "title", String.class.getName(), 30)
@@ -95,7 +93,8 @@ public class ReportManager {
         JasperViewer.viewReport(jp);
     }
 
-    public void booksInLease() throws JRException, ClassNotFoundException {
+    @SuppressWarnings("unchecked")
+    public static void booksInLease() throws JRException, ClassNotFoundException {
         FastReportBuilder drb = new FastReportBuilder();
         DynamicReport dr = drb
                 .addColumn("Title", "title", String.class.getName(), 30)
@@ -118,7 +117,8 @@ public class ReportManager {
         JasperViewer.viewReport(jp);
     }
 
-    public void activityReport(Date from, Date to) throws JRException, ClassNotFoundException {
+    @SuppressWarnings("unchecked")
+    public static void activityReport(Date from, Date to) throws JRException, ClassNotFoundException {
         FastReportBuilder drb = new FastReportBuilder();
         String sFrom = from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString();
         String sTo = to.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString();
@@ -211,17 +211,12 @@ public class ReportManager {
     }
 
     public static void main(String[] args) {
-
-        ReportManager rm = new ReportManager();
-
         try {
             ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
             Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
             Date back = Date.from(instant);
-            rm.activityReport(back, new Date());
-        } catch (JRException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+            activityReport(back, new Date());
+        } catch (JRException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 

@@ -21,11 +21,11 @@ import java.util.Date;
  * @since <pre>Sep 14, 2014</pre>
  */
 public class ReportManagerTest {
-    ReportManager rm;
+
 
     @Before
     public void before() throws Exception {
-        rm = new ReportManager();
+
     }
 
     @After
@@ -37,7 +37,7 @@ public class ReportManagerTest {
      */
     @Test
     public void testBookReport() throws Exception {
-        rm.bookReport(new SimpleDateFormat("dd/MM/yyyy").parse("14/08/2014"), new Date());
+        ReportManager.bookReport(new SimpleDateFormat("dd/MM/yyyy").parse("14/08/2014"), new Date());
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
 
     }
@@ -47,7 +47,7 @@ public class ReportManagerTest {
      */
     @Test
     public void testBooksInLease() throws Exception {
-        rm.booksInLease();
+        ReportManager.booksInLease();
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
     }
 
@@ -56,7 +56,7 @@ public class ReportManagerTest {
         ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
         Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
         Date back = Date.from(instant);
-        rm.activityReport(back, new Date());
+        ReportManager.activityReport(back, new Date());
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
     }
 
