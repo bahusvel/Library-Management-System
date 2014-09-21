@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d7d7d7" height="148.0" layoutX="-24.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="148.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="75.0" fitWidth="75.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="27.0" layoutY="115.0" text="Category Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="164.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d7d7d7" height="148.0" layoutX="-24.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="148.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="75.0" fitWidth="75.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="27.0" layoutY="115.0" text="Category Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="314.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d7d7d7" height="148.0" layoutX="-24.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="148.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="75.0" fitWidth="75.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="27.0" layoutY="115.0" text="Category Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d7d7d7" height="148.0" layoutX="-24.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="148.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="75.0" fitWidth="75.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="27.0" layoutY="115.0" text="Category Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="164.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d7d7d7" height="148.0" layoutX="-24.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="148.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="75.0" fitWidth="75.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="27.0" layoutY="115.0" text="Category Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="314.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d7d7d7" height="148.0" layoutX="-24.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="148.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="75.0" fitWidth="75.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="27.0" layoutY="115.0" text="Category Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d7d7d7" height="148.0" layoutX="-24.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="148.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="75.0" fitWidth="75.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="27.0" layoutY="115.0" text="Category Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="26.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
