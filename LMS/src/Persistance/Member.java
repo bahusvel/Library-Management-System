@@ -47,17 +47,16 @@ public class Member {
     private Collection<Visit> visits;
     private Visit currentVisit;
 
-    // JAVAFX Properties
+    // JAVAFX PROPERTIES START
     public LocalDate pDOB = LocalDate.now();
-
     @Transient
     public LocalDate getPDOB() {
         return pDOB;
     }
-
     public void setPDOB(LocalDate pDOB) {
         this.pDOB = pDOB;
     }
+    // JAVAFX PROPERTIES END
 
     @Column(name = "firstname")
     @NotNull
