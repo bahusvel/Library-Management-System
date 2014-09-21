@@ -29,6 +29,7 @@
     <orderEntry type="library" name="net.sf.jasperreports:jasperreports:5.6.0" level="project" />
     <orderEntry type="library" name="jasperreports-5.6.1" level="project" />
     <orderEntry type="library" name="junit:junit:4.11" level="project" />
+    <orderEntry type="library" name="com.dooapp.fxform2:core:8.0.6" level="project" />
   </component>
 </module>
 

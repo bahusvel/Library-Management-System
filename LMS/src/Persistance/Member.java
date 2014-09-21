@@ -35,7 +35,7 @@ public class Member {
     private Date dob;
     private Date registrationDate = new Date(); // present time
     private String username;
-    private Address address;
+    private Address address = new Address();
     private String email;
     private String phoneNumber;
     private int memberId;
@@ -46,6 +46,18 @@ public class Member {
     private Collection<ItemReturn> itemReturns;
     private Collection<Visit> visits;
     private Visit currentVisit;
+
+    // JAVAFX Properties
+    public LocalDate pDOB = LocalDate.now();
+
+    @Transient
+    public LocalDate getPDOB() {
+        return pDOB;
+    }
+
+    public void setPDOB(LocalDate pDOB) {
+        this.pDOB = pDOB;
+    }
 
     @Column(name = "firstname")
     @NotNull
