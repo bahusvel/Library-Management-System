@@ -117,4 +117,30 @@ public class MemberTest {
         }
 
     }
+
+    @Test
+    public void testReturnItem() throws Exception{
+        try(AutoTransaction at = hm.newAutoTransaction()) {
+            Member member = (Member) at.session.get(Member.class, 1);
+            ItemEntity itemEntity = new ArrayList<>(member.getItemLeases()).get(0).getItemEntity();
+            Employee employee = (Employee) at.session.get(Employee.class, 1);
+            member.signIn();
+            System.out.println(member.returnItem(itemEntity, employee));
+            member.signOut();
+            at.tx.commit();
+        }
+    }
+
+    @Test
+    public void testlooseItem() throws Exception{
+        try(AutoTransaction at = hm.newAutoTransaction()) {
+            Member member = (Member) at.session.get(Member.class, 1);
+            ItemEntity itemEntity = new ArrayList<>(member.getItemLeases()).get(0).getItemEntity();
+            Employee employee = (Employee) at.session.get(Employee.class, 1);
+            member.signIn();
+            System.out.println(member.looseItem(itemEntity, employee));
+            member.signOut();
+            at.tx.commit();
+        }
+    }
 }
