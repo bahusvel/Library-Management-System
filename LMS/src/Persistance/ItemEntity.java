@@ -18,8 +18,18 @@ public class ItemEntity {
     private String location;
     private int itemEntityId;
     private Item item;
-    private ItemLease itemLeases;
+    private ItemLease itemLease;
     private Collection<ItemReturn> itemReturns;
+
+    public ItemEntity(){
+
+    }
+
+
+    public ItemEntity(Item item, Date acquisitionDate) {
+        this.item = item;
+        this.acquisitionDate = acquisitionDate;
+    }
 
 
     @Column(name = "acquisition_date")
@@ -36,7 +46,7 @@ public class ItemEntity {
 
     @Column(name = "leased")
     @NotNull
-    public boolean getLeased() {
+    public boolean isLeased() {
         return leased;
     }
 
@@ -47,7 +57,7 @@ public class ItemEntity {
 
     @Column(name = "available")
     @NotNull
-    public boolean getAvailable() {
+    public boolean isAvailable() {
         return available;
     }
 
@@ -114,12 +124,12 @@ public class ItemEntity {
     }
 
     @OneToOne(mappedBy = "itemEntity")
-    public ItemLease getItemLeases() {
-        return itemLeases;
+    public ItemLease getItemLease() {
+        return itemLease;
     }
 
-    public void setItemLeases(ItemLease itemLeases) {
-        this.itemLeases = itemLeases;
+    public void setItemLease(ItemLease itemLeases) {
+        this.itemLease = itemLeases;
     }
 
     @OneToMany(mappedBy = "itemEntity")

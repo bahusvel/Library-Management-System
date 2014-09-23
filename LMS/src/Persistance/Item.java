@@ -139,7 +139,7 @@ public class Item {
         return result;
     }
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<ItemEntity> getItemEntities() {
         return itemEntities;
     }

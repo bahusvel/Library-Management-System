@@ -16,9 +16,32 @@ public class ItemReturn {
     private Date returnDate;
     private double ammountCharged = 0.0;
     private int itemReturnId;
+    private boolean lost = false;
     private Employee employee;
     private ItemEntity itemEntity;
     private Member member;
+
+    public ItemReturn(){
+
+    }
+
+    public ItemReturn(ItemEntity itemEntity, Date leaseDate, Date dueDate, Member member, Employee employee, Date returnDate) {
+        this.itemEntity = itemEntity;
+        this.leaseDate = leaseDate;
+        this.dueDate = dueDate;
+        this.member = member;
+        this.employee = employee;
+        this.returnDate = returnDate;
+    }
+
+    public ItemReturn(ItemLease itemLease, Employee employee){
+        itemEntity = itemLease.getItemEntity();
+        leaseDate = itemLease.getLeaseDate();
+        dueDate = itemLease.getDueDate();
+        member = itemLease.getMember();
+        this.employee = employee;
+        returnDate = new Date();
+    }
 
 
     @Column(name = "lease_date")
@@ -79,6 +102,15 @@ public class ItemReturn {
         this.itemReturnId = itemReturnId;
     }
 
+    @NotNull
+    public boolean isLost() {
+        return lost;
+    }
+
+    public void setLost(boolean lost) {
+        this.lost = lost;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,6 +120,7 @@ public class ItemReturn {
 
         if (Double.compare(that.ammountCharged, ammountCharged) != 0) return false;
         if (itemReturnId != that.itemReturnId) return false;
+        if (lost != that.lost) return false;
         if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null) return false;
         if (leaseDate != null ? !leaseDate.equals(that.leaseDate) : that.leaseDate != null) return false;
         if (returnDate != null ? !returnDate.equals(that.returnDate) : that.returnDate != null) return false;
@@ -105,6 +138,7 @@ public class ItemReturn {
         temp = Double.doubleToLongBits(ammountCharged);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + itemReturnId;
+        result = 31 * result + (lost ? 1 : 0);
         return result;
     }
 

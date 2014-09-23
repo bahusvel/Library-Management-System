@@ -1,5 +1,6 @@
 package managers;
 
+import ar.com.fdvs.dj.core.BarcodeTypes;
 import ar.com.fdvs.dj.core.DJConstants;
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
@@ -39,6 +40,7 @@ public class ReportManager {
     private static Style titleStyle = new Style("titleStyle");
     private static Style importeStyle = new Style();
     private static Style oddRowStyle = new Style();
+
     static {
         headerStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
         headerStyle.setBackgroundColor(Color.gray);
@@ -61,7 +63,7 @@ public class ReportManager {
         groupVariables.setVerticalAlign(VerticalAlign.BOTTOM);
 
 
-        titleStyle.setFont(new Font(18,Font._FONT_VERDANA, true));
+        titleStyle.setFont(new Font(18, Font._FONT_VERDANA, true));
 
         importeStyle.setHorizontalAlign(HorizontalAlign.RIGHT);
 
@@ -80,12 +82,6 @@ public class ReportManager {
                 .setUseFullPageWidth(true)
                 .setQuery("SELECT b.title as title FROM Book as b", DJConstants.QUERY_LANGUAGE_HQL)
                 .build();
-
-        /* This actually works but is a little silly
-        HibernateManager hm = new HibernateManager();
-        List<Magazine> ds = hm.listEntities(Magazine.class);
-        JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
-        */
 
         HashMap params = new HashMap();
         params.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, HibernateManager.getSession());
@@ -177,8 +173,8 @@ public class ReportManager {
                 .setCriteriaColumn((PropertyColumn) columnTitle)
                 .build();
 
-        DynamicReport dr = drb
-                .setTitle("Activity Report.")
+
+        drb.setTitle("Activity Report.")
                 .setSubtitle("All book activity from " + sFrom + " to " + sTo)
                 .setPrintBackgroundOnOddRows(true)
                 .setUseFullPageWidth(true)
@@ -187,7 +183,8 @@ public class ReportManager {
                 .addColumn(columnTitle)
                 .addColumn(columnFirstName)
                 .addColumn(columnLastName)
-                .addColumn(columnCharged)
+                .addColumn(columnCharged);
+        DynamicReport dr = drb.addBarcodeColumn("Barcode", "isbn", String.class.getName(), BarcodeTypes.EAN128, false, 100, true, ImageScaleMode.FILL)
                 .addGroup(groupStatus)
                 .addGroup(groupOverdue)
                 .addGroup(groupTitle)
@@ -198,7 +195,8 @@ public class ReportManager {
                                 " br.book.title as title," +
                                 " m.firstname as firstname," +
                                 " m.lastname as lastname," +
-                                " br.ammountCharged as charged" +
+                                " br.ammountCharged as charged," +
+                                " br.book.isbn as isbn" +
                                 " FROM BookReturn as br join br.member as m" +
                                 " WHERE br.returnDate between '" + sFrom + "' and '" + sTo + "'",
                         DJConstants.QUERY_LANGUAGE_HQL)
@@ -211,14 +209,18 @@ public class ReportManager {
     }
 
     public static void main(String[] args) {
+
+        ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
+        Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
+        Date back = Date.from(instant);
         try {
-            ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
-            Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
-            Date back = Date.from(instant);
             activityReport(back, new Date());
-        } catch (JRException | ClassNotFoundException e) {
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
 
     }
 

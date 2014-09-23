@@ -30,6 +30,7 @@
     <orderEntry type="library" name="jasperreports-5.6.1" level="project" />
     <orderEntry type="library" name="junit:junit:4.11" level="project" />
     <orderEntry type="library" name="com.dooapp.fxform2:core:8.0.6" level="project" />
+    <orderEntry type="library" name="net.sourceforge.barbecue:barbecue:1.5-beta1" level="project" />
   </component>
 </module>
 

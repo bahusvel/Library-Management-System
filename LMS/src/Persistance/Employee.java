@@ -1,8 +1,7 @@
 package Persistance;
 
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -13,13 +12,15 @@ import java.util.Date;
 public class Employee {
     private String firstname;
     private String lastname;
-    private String role;
+    private EmployeeRole role;
     private int employeeId;
     private Address address;
     private Collection<BookLease> bookLeases;
     private Collection<BookReturn> bookReturns;
     private Collection<ItemLease> itemLeases;
     private Collection<ItemReturn> itemReturns;
+
+    public enum EmployeeRole{ADMIN, CASHIER, ROOT}
 
     @Embedded
     public Address getAddress() {
@@ -55,11 +56,12 @@ public class Employee {
 
     @Column(name = "role")
     @NotNull
-    public String getRole() {
+    @Enumerated(EnumType.STRING)
+    public EmployeeRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(EmployeeRole role) {
         this.role = role;
     }
 
@@ -136,11 +138,24 @@ public class Employee {
         this.itemReturns = itemReturns;
     }
 
+    @SuppressWarnings("MethodMayBeStatic")
     public String addBookEntities(Book book, int qty){
+        if (role != EmployeeRole.ADMIN && role != EmployeeRole.ROOT) return "You don't have permission to add books.";
         for (int i = 0; i < qty; i++) {
             BookEntity newBE = new BookEntity(book, new Date());
             book.getBookEntities().add(newBE);
         }
         return "Added successfully";
     }
+
+    @SuppressWarnings("MethodMayBeStatic")
+    public String addItemEntities(Item item, int qty){
+        if (role != EmployeeRole.ADMIN && role != EmployeeRole.ROOT) return "You don't have permission to add items.";
+        for (int i = 0; i < qty; i++) {
+            ItemEntity newBE = new ItemEntity(item, new Date());
+            item.getItemEntities().add(newBE);
+        }
+        return "Added successfully";
+    }
+
 }

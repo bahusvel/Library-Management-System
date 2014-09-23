@@ -20,6 +20,18 @@ public class ItemLease {
     private Member member;
     private Visit visit;
 
+    public ItemLease(Date leaseDate, Date dueDate, Member member, Employee employee, ItemEntity itemEntity, Visit visit) {
+        this.leaseDate = leaseDate;
+        this.dueDate = dueDate;
+        this.member = member;
+        this.employee = employee;
+        this.itemEntity = itemEntity;
+        this.visit = visit;
+    }
+
+    public ItemLease() {
+    }
+
     @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
     @NotNull

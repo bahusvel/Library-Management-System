@@ -1,8 +1,8 @@
 package LocalTest;
 
+import Persistance.Book;
 import managers.HibernateManager;
 import managers.SearchManager;
-import Persistance.Book;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -20,7 +20,9 @@ public class BetterSearch {
     private JTextPane textPane1;
     private JScrollPane scrollPane;
 
-    private SearchManager sm = new SearchManager(HibernateManager.getSession());
+    {
+        SearchManager.initIndex(HibernateManager.getSession());
+    }
 
     public BetterSearch() {
         comboBox1.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
@@ -30,7 +32,7 @@ public class BetterSearch {
                 super.keyTyped(e);
                 final String input = ((JTextComponent)comboBox1.getEditor().getEditorComponent()).getText();
                 comboBox1.removeAllItems();
-                sm.bookSuggestions(input,5).forEach(comboBox1::addItem);
+                SearchManager.bookSuggestions(input, 5).forEach(comboBox1::addItem);
                 ((JTextComponent)comboBox1.getEditor().getEditorComponent()).setText(input);
                 comboBox1.setPopupVisible(true);
             }
@@ -38,7 +40,7 @@ public class BetterSearch {
         });
         searchButton.addActionListener(e -> {
             StringBuilder sb = new StringBuilder();
-            List<Book> books = sm.dynamicFuzzy(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(),5, "title");
+            List<Book> books = SearchManager.dynamicFuzzy(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(), 5, "title");
             books.forEach(book -> {
                 sb.append(book);
                 sb.append('\n');

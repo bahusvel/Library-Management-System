@@ -1,9 +1,9 @@
 package Persistance;
 
-import util.DBIO;
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
+import util.DBIO;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,16 +19,16 @@ import java.util.Date;
 @Indexed
 @AnalyzerDefs({
         @AnalyzerDef(name="projectionAnalyzer",
-        tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class)),
+                tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class)),
 
         @AnalyzerDef(name = "TokenizingLower",
                 tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
                 filters = {
                         @TokenFilterDef(factory = PatternReplaceFilterFactory.class,
-                        params = {
-                                @Parameter(name = "pattern",value = "([^a-zA-Z0-9\\.])"),
-                                @Parameter(name = "replacement", value = " "),
-                                @Parameter(name = "replace", value = "all") }),
+                                params = {
+                                        @Parameter(name = "pattern",value = "([^a-zA-Z0-9\\.])"),
+                                        @Parameter(name = "replacement", value = " "),
+                                        @Parameter(name = "replace", value = "all") }),
                         @TokenFilterDef(factory = LowerCaseFilterFactory.class),
                         @TokenFilterDef(factory = StopFilterFactory.class),
                         @TokenFilterDef(factory = SnowballPorterFilterFactory.class,
@@ -36,33 +36,33 @@ import java.util.Date;
                 }),
 
         @AnalyzerDef(name="autoEdge", // analyzer for auto suggestions
-        tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class),
-        filters = {
-                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
-                @TokenFilterDef(factory = StopFilterFactory.class),
-                @TokenFilterDef(factory = EdgeNGramFilterFactory.class,
-                params = {
-                        @Parameter(name = "minGramSize", value = "3"), // prediction lower boundary
-                        @Parameter(name = "maxGramSize", value = "50") // prediction upper boundary
-                })
-        }),
-        @AnalyzerDef(name="autoNgram", // analyzer for auto suggestions
-        tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
-        filters = {
-                @TokenFilterDef(factory = WordDelimiterFilterFactory.class),
-                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
-                @TokenFilterDef(factory = NGramFilterFactory.class,
-                params = {
-                        @Parameter(name = "minGramSize", value = "3"), // prediction lower boundary
-                        @Parameter(name = "maxGramSize", value = "5")
+                tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class),
+                filters = {
+                        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                        @TokenFilterDef(factory = StopFilterFactory.class),
+                        @TokenFilterDef(factory = EdgeNGramFilterFactory.class,
+                                params = {
+                                        @Parameter(name = "minGramSize", value = "3"), // prediction lower boundary
+                                        @Parameter(name = "maxGramSize", value = "50") // prediction upper boundary
+                                })
                 }),
-                @TokenFilterDef(factory = PatternReplaceFilterFactory.class,
-                params = {
-                        @Parameter(name = "pattern",value = "([^a-zA-Z0-9\\.])"),
-                        @Parameter(name = "replacement", value = " "),
-                        @Parameter(name = "replace", value = "all") })
+        @AnalyzerDef(name="autoNgram", // analyzer for auto suggestions
+                tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+                filters = {
+                        @TokenFilterDef(factory = WordDelimiterFilterFactory.class),
+                        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                        @TokenFilterDef(factory = NGramFilterFactory.class,
+                                params = {
+                                        @Parameter(name = "minGramSize", value = "3"), // prediction lower boundary
+                                        @Parameter(name = "maxGramSize", value = "5")
+                                }),
+                        @TokenFilterDef(factory = PatternReplaceFilterFactory.class,
+                                params = {
+                                        @Parameter(name = "pattern",value = "([^a-zA-Z0-9\\.])"),
+                                        @Parameter(name = "replacement", value = " "),
+                                        @Parameter(name = "replace", value = "all") })
 
-        })
+                })
 
 })
 public class Book {

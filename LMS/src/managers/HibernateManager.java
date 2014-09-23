@@ -105,12 +105,18 @@ public class HibernateManager {
         return entities;
     }
 
-    public void deleteEntity(Object object){
+    public void deleteEntities(Object... objects){
         try (AutoTransaction at = new AutoTransaction()) {
-            at.session.delete(object);
+            for(Object object : objects) at.session.delete(object);
             at.tx.commit();
         } catch (MappingException e) { // catch errors when user passes wrong objects
-            System.err.println(object.getClass() + " Is not compatible with the database.");
+            System.err.println(objects[0].getClass() + " Is not compatible with the database.");
+        }
+    }
+
+    public Object executeQuery(String query){
+        try(AutoSession as = new AutoSession()){
+            return as.session.createQuery(query).list();
         }
     }
 

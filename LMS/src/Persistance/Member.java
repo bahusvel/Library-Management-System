@@ -1,9 +1,10 @@
 package Persistance;
 
 
-import org.apache.solr.analysis.KeywordTokenizerFactory;
+
 import org.apache.solr.analysis.LowerCaseFilterFactory;
 import org.apache.solr.analysis.PhoneticFilterFactory;
+import org.apache.solr.analysis.StandardTokenizerFactory;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
@@ -23,7 +24,7 @@ import java.util.Date;
 @Entity
 @Indexed
 @AnalyzerDef(name="NameAnalyzer",
-tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class),
+tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
 filters = {
         @TokenFilterDef(factory = LowerCaseFilterFactory.class),
         @TokenFilterDef(factory = PhoneticFilterFactory.class,
@@ -270,6 +271,8 @@ public class Member {
         this.currentVisit = currentVisit;
     }
 
+    // ACTIVITY METHODS
+
     public String signIn(){
         Date cTimeStamp = new Date();
         Visit visit = new Visit(this, cTimeStamp, cTimeStamp, true);
@@ -335,5 +338,57 @@ public class Member {
         bookEntity.getBook().getBookEntities().remove(bookEntity);
         return "Lost book acknowledge";
     }
+
+    public String leaseItem(Item item, Employee employee, Date until){
+        if (itemLeases.size() > 4) return "Limit of 5 items per Member reached.";
+
+        ItemEntity leaseEnity = null;
+        for(ItemEntity itemEntity : item.getItemEntities()){
+            if (itemEntity.isAvailable() && !itemEntity.isLeased()){
+                leaseEnity = itemEntity;
+                break;
+            }
+        }
+        if (leaseEnity == null) return "Item wasn’t available";
+        if (currentVisit == null) return "Customer hasn't signed in";
+        ItemLease itemLease = new ItemLease(new Date(), until, this, employee, leaseEnity ,currentVisit);
+        leaseEnity.setItemLease(itemLease);
+        leaseEnity.setLeased(true);
+        itemLeases.add(itemLease);
+        return "Lease was successful";
+    }
+
+    public String returnItem(ItemEntity itemEntity, Employee employee){
+        ItemLease itemLease = itemEntity.getItemLease();
+        if (!itemLease.getMember().equals(this)) return "You did not lease that item";
+        Date dueDate = new Date(itemLease.getDueDate().getTime());
+        Date cDate = new Date();
+        ItemReturn itemReturn = new ItemReturn(itemLease, employee);
+        if (dueDate.before(cDate)) {
+            LocalDate dueLocal = dueDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            long daysOverdue = LocalDate.now().until(dueLocal, ChronoUnit.DAYS);
+            itemReturn.setAmmountCharged(-0.60 * daysOverdue);
+            balance -= -0.60 * daysOverdue;
+        }
+        itemReturns.add(itemReturn);
+        itemLeases.remove(itemLease);
+        itemEntity.setLeased(false);
+        return "Return successful";
+    }
+
+    public String looseItem(ItemEntity itemEntity, Employee employee){
+        ItemLease itemLease = itemEntity.getItemLease();
+        if (!itemLease.getMember().equals(this)) return "You did not lease that item";
+        ItemReturn itemReturn = new ItemReturn(itemLease, employee);
+        itemReturn.setLost(true);
+        double itemPrice = itemEntity.getItem().getPrice();
+        itemReturn.setAmmountCharged(itemPrice);
+        balance -= itemPrice;
+        itemReturns.add(itemReturn);
+        itemLeases.remove(itemLease);
+        itemEntity.getItem().getItemEntities().remove(itemEntity);
+        return "Lost item acknowledge";
+    }
+
 
 }

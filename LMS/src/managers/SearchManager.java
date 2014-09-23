@@ -17,26 +17,33 @@ public class SearchManager {
     private static final String TITLE_EDGE_NGRAM_INDEX = "edgeTitle";
     private static final String TITLE_NGRAM_INDEX = "ngramTitle";
 
+    private static FullTextSession fullTextSession;
 
-    Session session;
-    FullTextSession fullTextSession;
-    public SearchManager(Session session){
-        this.session = session;
-        try {
-            initIndex();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public static void initIndex(Session session) {
+        if (fullTextSession == null) {
+            fullTextSession = Search.getFullTextSession(session);
+            try {
+                fullTextSession.createIndexer().startAndWait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void initIndex() throws InterruptedException {
-        fullTextSession = Search.getFullTextSession(session);
-        fullTextSession.createIndexer().startAndWait();
+    public static void initIndex() {
+        fullTextSession = Search.getFullTextSession(HibernateManager.getSession());
+        if (fullTextSession == null) {
+            try {
+                fullTextSession.createIndexer().startAndWait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
     @SuppressWarnings("unchecked")
-    public <E> List<E> search(Class<E> entity, String input, String... fields){
+    public static <E> List<E> search(Class<E> entity, String input, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
@@ -48,7 +55,7 @@ public class SearchManager {
     }
 
     @SuppressWarnings("unchecked")
-    public <E> List<E> fuzzySearch(Class<E> entity, String input, String... fields){
+    public static <E> List<E> fuzzySearch(Class<E> entity, String input, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
@@ -62,7 +69,7 @@ public class SearchManager {
     }
 
     @SuppressWarnings("unchecked")
-    public <E> List<E> dynamicFuzzy(Class<E> entity,String input, int minResults, String... fields){
+    public static <E> List<E> dynamicFuzzy(Class<E> entity, String input, int minResults, String... fields){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         int results;
         float fuzzines = 0.7f;
@@ -84,7 +91,7 @@ public class SearchManager {
 
 
     @SuppressWarnings("unchecked")
-    public <E> List<E> wildcardSearch(Class<E> entity, String input, String field){
+    public static <E> List<E> wildcardSearch(Class<E> entity, String input, String field){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .keyword()
@@ -97,7 +104,7 @@ public class SearchManager {
     }
 
     @SuppressWarnings("unchecked")
-    public <E> List<E> phraseSearch(Class<E> entity, String input, String field, int sloppiness){
+    public static <E> List<E> phraseSearch(Class<E> entity, String input, String field, int sloppiness){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
         Query query = qb
                 .phrase()
@@ -110,7 +117,7 @@ public class SearchManager {
     }
 
     @SuppressWarnings("unchecked")
-    public List<String> bookSuggestions(final String input, final int results){
+    public static List<String> bookSuggestions(final String input, final int results){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Book.class).get();
         Query query = qb
                 .phrase()

@@ -48,6 +48,7 @@
         <mapping class="Persistance.Member"/>
         <mapping class="Persistance.Visit"/>
         <mapping class="Persistance.BookRequest"/>
+        <mapping package="hibernate_localdate"/>
 
 
     </session-factory>

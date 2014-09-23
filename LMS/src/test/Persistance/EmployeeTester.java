@@ -2,6 +2,7 @@ package test.Persistance;
 
 import Persistance.Book;
 import Persistance.Employee;
+import Persistance.Item;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoTransaction;
 import org.junit.After;
@@ -36,4 +37,15 @@ public class EmployeeTester {
             at.tx.commit();
         }
     }
+
+    @Test
+    public void testAddItemEntities() throws Exception {
+        try (AutoTransaction at = hm.newAutoTransaction()) {
+            Item item = (Item) at.session.get(Item.class, 1);
+            Employee employee = (Employee) at.session.get(Employee.class, 1);
+            employee.addItemEntities(item, 5);
+            at.tx.commit();
+        }
+    }
+
 }

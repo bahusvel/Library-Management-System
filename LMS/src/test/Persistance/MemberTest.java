@@ -1,9 +1,6 @@
 package test.Persistance;
 
-import Persistance.Book;
-import Persistance.BookEntity;
-import Persistance.Employee;
-import Persistance.Member;
+import Persistance.*;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoTransaction;
 import org.junit.After;
@@ -105,5 +102,19 @@ public class MemberTest {
             member.signOut();
             at.tx.commit();
         }
+    }
+
+    @Test
+    public void testLeaseItem() throws Exception {
+        try (AutoTransaction at = hm.newAutoTransaction()) {
+            Item item = (Item) at.session.get(Item.class, 1);
+            Member member = (Member) at.session.get(Member.class, 1);
+            Employee employee = (Employee) at.session.get(Employee.class, 1);
+            member.signIn();
+            System.out.println(member.leaseItem(item, employee, new Date()));
+            member.signOut();
+            at.tx.commit();
+        }
+
     }
 }
