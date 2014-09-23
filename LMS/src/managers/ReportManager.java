@@ -208,13 +208,66 @@ public class ReportManager {
         JasperViewer.viewReport(jp);
     }
 
+
+    public static void bookSummaryReport() throws JRException, ClassNotFoundException {
+        FastReportBuilder drb = new FastReportBuilder();
+        DynamicReport dr = drb
+                .addColumn("Year", "booky", Integer.class.getName(), 30)
+                .addColumn("Month", "bookm", Integer.class.getName(), 30)
+                .addColumn("Status", "status", String.class.getName(), 30)
+                .addColumn("Count", "bookc", Long.class.getName(), 30)
+                .addGroups(2)
+                .setTitle("Book lending summary report.")
+                .setUseFullPageWidth(true)
+                .setQuery(
+                        "select year(br.returnDate) as booky," +
+                                "month(br.returnDate) as bookm," +
+                                " case br.lost when true then 'LOST' else 'RETURNED' end as status," +
+                                " count(*) as bookc" +
+                                " from BookReturn as br" +
+                                " group by year(br.returnDate), month(br.returnDate), (case br.lost when true then 'LOST' else 'RETURNED' end)",
+                        DJConstants.QUERY_LANGUAGE_HQL)
+                .build();
+
+        HashMap params = new HashMap();
+        params.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, HibernateManager.getSession());
+        JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
+        JasperViewer.viewReport(jp);
+    }
+
+    public static void itemSummaryReport() throws JRException, ClassNotFoundException {
+        FastReportBuilder drb = new FastReportBuilder();
+        DynamicReport dr = drb
+                .addColumn("Year", "itemy", Integer.class.getName(), 30)
+                .addColumn("Month", "itemm", Integer.class.getName(), 30)
+                .addColumn("Status", "status", String.class.getName(), 30)
+                .addColumn("Count", "itemc", Long.class.getName(), 30)
+                .addGroups(2)
+                .setTitle("Item lending summary report.")
+                .setUseFullPageWidth(true)
+                .setQuery(
+                        "select year(ir.returnDate) as itemy," +
+                                "month(ir.returnDate) as itemm," +
+                                " case ir.lost when true then 'LOST' else 'RETURNED' end as status," +
+                                " count(*) as itemc" +
+                                " from ItemReturn as ir" +
+                                " group by year(ir.returnDate), month(ir.returnDate), (case ir.lost when true then 'LOST' else 'RETURNED' end)",
+                        DJConstants.QUERY_LANGUAGE_HQL)
+                .build();
+
+        HashMap params = new HashMap();
+        params.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, HibernateManager.getSession());
+        JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
+        JasperViewer.viewReport(jp);
+    }
+
     public static void main(String[] args) {
 
         ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
         Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
         Date back = Date.from(instant);
         try {
-            activityReport(back, new Date());
+            bookSummaryReport();
         } catch (JRException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
