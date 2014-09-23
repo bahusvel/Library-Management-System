@@ -130,6 +130,7 @@ public class Member {
     }
 
     @NotNull
+
     public String getPassword() {
         return password;
     }

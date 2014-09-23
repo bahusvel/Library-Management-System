@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -35,12 +34,7 @@ public class ReportManagerTest {
     /**
      * Method: bookReport(Date from, Date to)
      */
-    @Test
-    public void testBookReport() throws Exception {
-        ReportManager.bookReport(new SimpleDateFormat("dd/MM/yyyy").parse("14/08/2014"), new Date());
-        assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
 
-    }
 
     /**
      * Method: booksInLease()

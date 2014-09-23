@@ -72,15 +72,30 @@ public class ReportManager {
     }
 
     @SuppressWarnings("unchecked")
-    public static void bookReport(Date from, Date to) throws JRException, ClassNotFoundException {
+    public static void memberReport() throws JRException, ClassNotFoundException {
         FastReportBuilder drb = new FastReportBuilder();
         DynamicReport dr = drb
-                .addColumn("Title", "title", String.class.getName(), 30)
-                .setTitle("Book lending report.")
-                .setSubtitle("All book lendings from " + from + " to " + to)
+                .addColumn("First Name", "firstname", String.class.getName(), 30)
+                .addColumn("Last Name", "lastname", String.class.getName(), 30)
+                .addColumn("Books Leased in Total", "booksleased", Long.class.getName(), 30)
+                .addColumn("Books in lease", "booksinlease", Long.class.getName(), 30)
+                .addColumn("Books Lost", "bookslost", Long.class.getName(), 30)
+                .addColumn("Items Leased in Total", "itemsleased", Long.class.getName(), 30)
+                .addColumn("Items in lease", "itemsinlease", Long.class.getName(), 30)
+                .addColumn("Items Lost", "itemslost", Long.class.getName(), 30)
+                .setTitle("Members report.")
                 .setPrintBackgroundOnOddRows(true)
                 .setUseFullPageWidth(true)
-                .setQuery("SELECT b.title as title FROM Book as b", DJConstants.QUERY_LANGUAGE_HQL)
+                .setPageSizeAndOrientation(Page.Page_A4_Landscape())
+                .setQuery("SELECT m.firstname as firstname," +
+                        " m.lastname as lastname," +
+                        " (select count(*) from m.bookReturns) as booksleased," +
+                        " (select count(*) from m.bookLeases) as booksinlease," +
+                        " (select count(*) from m.bookReturns as br where br.lost is true) as bookslost," +
+                        " (select count(*) from m.itemReturns) as itemsleased," +
+                        " (select count(*) from m.itemLeases) as itemsinlease," +
+                        " (select count(*) from m.itemReturns as ir where ir.lost is true) as itemslost" +
+                        " from Member as m", DJConstants.QUERY_LANGUAGE_HQL)
                 .build();
 
         HashMap params = new HashMap();
@@ -267,7 +282,7 @@ public class ReportManager {
         Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
         Date back = Date.from(instant);
         try {
-            bookSummaryReport();
+            memberReport();
         } catch (JRException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
