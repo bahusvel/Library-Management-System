@@ -1,5 +1,9 @@
 package Persistance;
 
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -9,18 +13,32 @@ import java.util.Date;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
+@Indexed
 public class Employee {
     private String firstname;
     private String lastname;
+    private String username;
     private EmployeeRole role;
     private int employeeId;
     private Address address;
+    private String password;
     private Collection<BookLease> bookLeases;
     private Collection<BookReturn> bookReturns;
     private Collection<ItemLease> itemLeases;
     private Collection<ItemReturn> itemReturns;
 
     public enum EmployeeRole{ADMIN, CASHIER, ROOT}
+
+    public Employee() {
+    }
+
+    public Employee(String firstname, String lastname, EmployeeRole role, String username, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+    }
 
     @Embedded
     public Address getAddress() {
@@ -31,9 +49,29 @@ public class Employee {
         this.address = address;
     }
 
+    @NotNull
+    @Field
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @NotNull
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Column(name = "firstname")
     @NotNull
+    @Field
+    @Analyzer(definition = "NameAnalyzer")
     public String getFirstname() {
         return firstname;
     }
@@ -45,6 +83,8 @@ public class Employee {
 
     @Column(name = "lastname")
     @NotNull
+    @Field
+    @Analyzer(definition = "NameAnalyzer")
     public String getLastname() {
         return lastname;
     }
@@ -87,7 +127,8 @@ public class Employee {
         if (address != null ? !address.equals(employee.address) : employee.address != null) return false;
         if (firstname != null ? !firstname.equals(employee.firstname) : employee.firstname != null) return false;
         if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
-        if (role != null ? !role.equals(employee.role) : employee.role != null) return false;
+        if (role != employee.role) return false;
+        if (username != null ? !username.equals(employee.username) : employee.username != null) return false;
 
         return true;
     }
@@ -96,6 +137,7 @@ public class Employee {
     public int hashCode() {
         int result = firstname != null ? firstname.hashCode() : 0;
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + employeeId;
         result = 31 * result + (address != null ? address.hashCode() : 0);

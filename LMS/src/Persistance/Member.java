@@ -41,6 +41,7 @@ public class Member {
     private String phoneNumber;
     private int memberId;
     private double balance = 0.0;
+    private String password;
     private Collection<BookLease> bookLeases;
     private Collection<BookReturn> bookReturns;
     private Collection<ItemLease> itemLeases;
@@ -58,6 +59,18 @@ public class Member {
         this.pDOB = pDOB;
     }
     // JAVAFX PROPERTIES END
+
+    public Member() {
+    }
+
+    public Member(String firstname, String lastname, Date dob, String username, String email, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dob = dob;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
     @Column(name = "firstname")
     @NotNull
@@ -114,6 +127,15 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @NotNull
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Column(name = "email")
