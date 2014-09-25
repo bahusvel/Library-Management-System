@@ -282,7 +282,7 @@ public class ReportManager {
         Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
         Date back = Date.from(instant);
         try {
-            memberReport();
+            booksInLease();
         } catch (JRException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

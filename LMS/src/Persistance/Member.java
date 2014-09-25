@@ -1,7 +1,8 @@
 package Persistance;
 
 
-
+import managers.notification.Notification;
+import managers.notification.NotificationManager;
 import org.apache.solr.analysis.LowerCaseFilterFactory;
 import org.apache.solr.analysis.PhoneticFilterFactory;
 import org.apache.solr.analysis.StandardTokenizerFactory;
@@ -15,8 +16,10 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -411,6 +414,59 @@ public class Member {
         itemLeases.remove(itemLease);
         itemEntity.getItem().getItemEntities().remove(itemEntity);
         return "Lost item acknowledge";
+    }
+
+    private List<Book> booksOverdue(){
+        ArrayList<Book> books = new ArrayList<>();
+        Date today = new Date();
+        bookLeases.stream().filter(bl -> bl.getDueDate().before(today)).forEach(bl -> books.add(bl.getBookEntity().getBook()));
+        return books;
+    }
+
+    private List<Item> itemsOverdue(){
+        ArrayList<Item> items = new ArrayList<>();
+        Date today = new Date();
+        itemLeases.stream().filter(il -> il.getDueDate().before(today)).forEach(il -> items.add(il.getItemEntity().getItem()));
+        return items;
+    }
+
+    public void expireNotify(){
+        List<Book> expiredBooks = booksOverdue();
+        StringBuilder books = new StringBuilder();
+        if (!expiredBooks.isEmpty()){
+            books.append("Following books are past their due date:\n");
+            expiredBooks.forEach(b -> {
+                books.append(b.getTitle());
+                books.append('\n');
+            });
+            books.append("You will be charged $0.6 every day for each of those books, until you return them\n\n");
+        }
+
+        List<Item> expiredItems = itemsOverdue();
+        StringBuilder items = new StringBuilder();
+        if (!expiredItems.isEmpty()){
+            items.append("Following items are past their due date:\n");
+            expiredItems.forEach(b -> {
+                items.append(b.getName());
+                items.append('\n');
+            });
+            items.append("You will be charged $0.6 every day for each of those items, until you return them\n\n");
+        }
+
+
+        StringBuilder message = new StringBuilder();
+        message.append("Hi ").append(firstname).append(",\n\n")
+                .append(books)
+                .append(items)
+                .append("Best Regards, \n" +
+                        "Your favorite library\n" +
+                        "This is an automated email, do not reply to it.")
+                .append('\n');
+
+
+
+        Notification notification = new Notification("Library Reminder",message.toString(),email);
+        NotificationManager.submitNotification(notification);
     }
 
 

@@ -2,7 +2,9 @@ package test.Persistance;
 
 import Persistance.*;
 import managers.HibernateManager;
+import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
+import managers.notification.NotificationManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -142,5 +144,15 @@ public class MemberTest {
             member.signOut();
             at.tx.commit();
         }
+    }
+
+    @Test
+    public void testExpireNotify() throws Exception {
+        try(AutoSession as = hm.newAutoSession()) {
+            Member member = (Member) as.session.get(Member.class, 1);
+            member.expireNotify();
+        }
+        NotificationManager.shutdown();
+        while (!NotificationManager.isTerminated());
     }
 }
