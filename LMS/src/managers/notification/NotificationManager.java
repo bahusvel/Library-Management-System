@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by denislavrov on 9/25/14.
@@ -33,6 +34,10 @@ public class NotificationManager {
         }
         username = prop.getProperty("username");
         password = prop.getProperty("password");
+    }
+
+    public int notificationsLeft(){
+        return ((ThreadPoolExecutor) service).getQueue().size();
     }
 
     private static ExecutorService service = Executors.newFixedThreadPool(THREADS);

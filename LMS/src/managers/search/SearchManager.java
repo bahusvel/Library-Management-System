@@ -1,6 +1,7 @@
-package managers;
+package managers.search;
 
 import Persistance.Book;
+import managers.HibernateManager;
 import org.apache.lucene.search.Query;
 import org.hibernate.Session;
 import org.hibernate.search.*;
@@ -41,81 +42,6 @@ public class SearchManager {
         }
     }
 
-
-    @SuppressWarnings("unchecked")
-    public static <E> List<E> search(Class<E> entity, String input, String... fields){
-        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-        Query query = qb
-                .keyword()
-                .onFields(fields)
-                .matching(input)
-                .createQuery();
-        FullTextQuery ftq = fullTextSession.createFullTextQuery(query);
-        return (List<E>) ftq.list();
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <E> List<E> fuzzySearch(Class<E> entity, String input, String... fields){
-        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-        Query query = qb
-                .keyword()
-                .fuzzy()
-                .withThreshold(.7f)
-                .onFields(fields)
-                .matching(input)
-                .createQuery();
-        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
-        return (List<E>) ftq.list();
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <E> List<E> dynamicFuzzy(Class<E> entity, String input, int minResults, String... fields){
-        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-        int results;
-        float fuzzines = 0.7f;
-        FullTextQuery ftq;
-        do {
-            Query query = qb
-                    .keyword()
-                    .fuzzy()
-                    .withThreshold(.7f)
-                    .onFields(fields)
-                    .matching(input)
-                    .createQuery();
-            ftq = fullTextSession.createFullTextQuery(query, entity);
-            results = ftq.getResultSize();
-            fuzzines -= 0.1f;
-        }while(results < minResults && fuzzines > 0.2f);
-        return (List<E>) ftq.list();
-    }
-
-
-    @SuppressWarnings("unchecked")
-    public static <E> List<E> wildcardSearch(Class<E> entity, String input, String field){
-        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-        Query query = qb
-                .keyword()
-                .wildcard()
-                .onField(field)
-                .matching(input)
-                .createQuery();
-        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
-        return (List<E>) ftq.list();
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <E> List<E> phraseSearch(Class<E> entity, String input, String field, int sloppiness){
-        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
-        Query query = qb
-                .phrase()
-                .withSlop(sloppiness)
-                .onField(field)
-                .sentence(input)
-                .createQuery();
-        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
-        return (List<E>) ftq.list();
-    }
-
     @SuppressWarnings("unchecked")
     public static List<String> bookSuggestions(final String input, final int results){
         QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Book.class).get();
@@ -133,5 +59,89 @@ public class SearchManager {
         List<String> ret = new ArrayList<>();
         ret.addAll(((List<Object[]>)ftq.list()).stream().map(oa -> (String) oa[0]).collect(Collectors.toList()));
         return ret;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <E> SearchResults<E> newSearch(Class<E> entity, String input, String... fields){
+        SearchResults<E> results = new SearchResults<>(input);
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = qb
+                .keyword()
+                .onFields(fields)
+                .matching(input)
+                .createQuery();
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query);
+        results.populateResult((List<E>) ftq.list());
+        return results;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <E> SearchResults<E> newFuzzySearch(Class<E> entity, String input, String... fields){
+        SearchResults<E> results = new SearchResults<>(input);
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = qb
+                .keyword()
+                .fuzzy()
+                .withThreshold(.7f)
+                .onFields(fields)
+                .matching(input)
+                .createQuery();
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
+        results.populateResult((List<E>) ftq.list());
+        return results;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <E> SearchResults<E> newDynamicFuzzy(Class<E> entity, String input, int minResults, String... fields){
+        SearchResults<E> results = new SearchResults<>(input);
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        int cresults;
+        float fuzzines = 0.7f;
+        FullTextQuery ftq;
+        do {
+            Query query = qb
+                    .keyword()
+                    .fuzzy()
+                    .withThreshold(.7f)
+                    .onFields(fields)
+                    .matching(input)
+                    .createQuery();
+            ftq = fullTextSession.createFullTextQuery(query, entity);
+            cresults = ftq.getResultSize();
+            fuzzines -= 0.1f;
+        }while(cresults < minResults && fuzzines > 0.2f);
+        results.populateResult((List<E>) ftq.list());
+        return results;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public static <E> SearchResults<E> newWildcardSearch(Class<E> entity, String input, String field){
+        SearchResults<E> results = new SearchResults<>(input);
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = qb
+                .keyword()
+                .wildcard()
+                .onField(field)
+                .matching(input)
+                .createQuery();
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
+        results.populateResult((List<E>) ftq.list());
+        return results;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <E> SearchResults<E> newPhraseSearch(Class<E> entity, String input, String field, int sloppiness){
+        SearchResults<E> results = new SearchResults<>(input);
+        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+        Query query = qb
+                .phrase()
+                .withSlop(sloppiness)
+                .onField(field)
+                .sentence(input)
+                .createQuery();
+        FullTextQuery ftq = fullTextSession.createFullTextQuery(query,entity);
+        results.populateResult((List<E>) ftq.list());
+        return results;
     }
 }

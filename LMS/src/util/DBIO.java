@@ -1,5 +1,7 @@
 package util;
 
+import org.apache.commons.io.IOUtils;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -8,9 +10,22 @@ import java.io.*;
  * Created by denislavrov on 9/14/14.
  */
 public class DBIO {
-    public static File im = new File("/Users/denislavrov/Documents/Developing/Java/Library-Management-System/LMS/resources/missing.jpg");
-    public static byte[] imageNotAvailable =  imageFromFile(im);
-    public static BufferedImage bImageNotAvailable = bImageFromArray(imageNotAvailable);
+    public static InputStream image = DBIO.class.getClassLoader().getResourceAsStream("missing.jpg");
+    public static byte[] imageNotAvailable;
+    public static BufferedImage bImageNotAvailable;
+
+    static {
+        try {
+            bImageNotAvailable = ImageIO.read(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            imageNotAvailable = IOUtils.toByteArray(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public static byte[] imageFromFile(File f){
@@ -24,6 +39,7 @@ public class DBIO {
         }
         return ret;
     }
+
     public static BufferedImage bImageFromArray(byte[] arr){
         InputStream in;
         try {

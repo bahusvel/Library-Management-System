@@ -6,12 +6,11 @@ import Persistance.MagazineEdition;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -44,20 +43,18 @@ public class HibernateManagerTest {
 
     @Test
     public void testAddImage() throws Exception{
-        File testFile = new File("/Users/denislavrov/Documents/Developing/Java/Library-Management-System/LMS/resources/test.jpeg");
-        byte[] oImage = new byte[(int) testFile.length()];
-        try(FileInputStream fis = new FileInputStream(testFile)){
-            fis.read(oImage);
-        }
-        byte[] nImage;
+        final int BOOK = 85967;
+
+        byte[] oImage = IOUtils.toByteArray(HibernateManagerTest.class.getClassLoader().getResourceAsStream("test.jpeg"));
         try(AutoTransaction at = hm.newAutoTransaction()){
-            Book b = (Book) at.session.get(Book.class, 85965);
-            b.imageToDatabase(testFile);
+            Book b = (Book) at.session.get(Book.class, BOOK);
+            b.setImage(oImage);
             at.session.saveOrUpdate(b);
             at.tx.commit();
         }
+        byte[] nImage;
         try(AutoSession as = hm.newAutoSession()){
-            nImage = ((Book) as.session.get(Book.class, 85965)).getImage();
+            nImage = ((Book) as.session.get(Book.class, BOOK)).getImage();
         }
 
         assertArrayEquals("Image didn’t load or save correctly", oImage, nImage);

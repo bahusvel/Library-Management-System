@@ -2,7 +2,7 @@ package LocalTest;
 
 import Persistance.Book;
 import managers.HibernateManager;
-import managers.SearchManager;
+import managers.search.SearchManager;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -40,7 +40,7 @@ public class BetterSearch {
         });
         searchButton.addActionListener(e -> {
             StringBuilder sb = new StringBuilder();
-            List<Book> books = SearchManager.dynamicFuzzy(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(), 5, "title");
+            List<Book> books = SearchManager.newDynamicFuzzy(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(), 5, "title").getResultList();
             books.forEach(book -> {
                 sb.append(book);
                 sb.append('\n');

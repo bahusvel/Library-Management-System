@@ -11,11 +11,13 @@
         <property name="connection.password">password</property>
         <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">update</property>
+
         <!-- SHOW SQL QUERIES HIBERNATE SENDS -->
         <property name="show_sql">true</property>
         <property name="use_sql_comments">true</property>
-        <property name="connection.pool_size">1</property>
 
+        <!-- Connection pool properties-->
+        <property name="connection.pool_size">1</property>
         <!-- Use these properties for production.
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>
@@ -31,6 +33,7 @@
         <!-- Hibernate Search Properties -->
         <property name="hibernate.search.default.directory_provider">filesystem</property>
         <property name="hibernate.search.default.indexBase">/Users/denislavrov/Documents/Developing/Java/Library-Management-System/lucene/index</property>
+        <property name="hibernate.search.lucene_version">LUCENE_CURRENT</property>
 
         <!-- Entity mapping -->
         <mapping class="Persistance.Book"/>

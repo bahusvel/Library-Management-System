@@ -2,7 +2,7 @@ package test.managers;
 
 import Persistance.Member;
 import managers.HibernateManager;
-import managers.SearchManager;
+import managers.search.SearchManager;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -44,7 +44,7 @@ public class SearchManagerTest {
 
     @Test
     public void testPhoneticSearch() throws Exception {
-        assert !SearchManager.search(Member.class, "Tenis Lafrov", "firstname", "lastname").isEmpty();
+        assert SearchManager.newSearch(Member.class, "Tenis Lafrov", "firstname", "lastname").getResultCount()>0;
     }
 
     /**
