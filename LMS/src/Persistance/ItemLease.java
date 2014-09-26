@@ -1,4 +1,4 @@
-package Persistance;
+package persistance;
 
 import javax.validation.constraints.NotNull;
 

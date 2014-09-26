@@ -36,21 +36,21 @@
         <property name="hibernate.search.lucene_version">LUCENE_CURRENT</property>
 
         <!-- Entity mapping -->
-        <mapping class="Persistance.Book"/>
-        <mapping class="Persistance.BookEntity"/>
-        <mapping class="Persistance.BookLease"/>
-        <mapping class="Persistance.BookReturn"/>
-        <mapping class="Persistance.Employee"/>
-        <mapping class="Persistance.Item"/>
-        <mapping class="Persistance.ItemEntity"/>
-        <mapping class="Persistance.ItemLease"/>
-        <mapping class="Persistance.ItemReturn"/>
-        <mapping class="Persistance.Magazine"/>
-        <mapping class="Persistance.MagazineEdition"/>
-        <mapping class="Persistance.MagazineEntity"/>
-        <mapping class="Persistance.Member"/>
-        <mapping class="Persistance.Visit"/>
-        <mapping class="Persistance.BookRequest"/>
+        <mapping class="persistance.Book"/>
+        <mapping class="persistance.BookEntity"/>
+        <mapping class="persistance.BookLease"/>
+        <mapping class="persistance.BookReturn"/>
+        <mapping class="persistance.Employee"/>
+        <mapping class="persistance.Item"/>
+        <mapping class="persistance.ItemEntity"/>
+        <mapping class="persistance.ItemLease"/>
+        <mapping class="persistance.ItemReturn"/>
+        <mapping class="persistance.Magazine"/>
+        <mapping class="persistance.MagazineEdition"/>
+        <mapping class="persistance.MagazineEntity"/>
+        <mapping class="persistance.Member"/>
+        <mapping class="persistance.Visit"/>
+        <mapping class="persistance.BookRequest"/>
         <mapping package="hibernate_localdate"/>
 
 

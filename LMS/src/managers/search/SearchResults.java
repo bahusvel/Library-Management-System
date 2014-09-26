@@ -1,17 +1,24 @@
 package managers.search;
 
+import org.hibernate.search.query.facet.Facet;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by denislavrov on 9/25/14.
  */
 public class SearchResults<E> {
-    private List<E> resultList;
-    private int resultCount;
-    private long searchDuration;
-    private String originalQuery;
-    private String suggestedQuery;
-    private long stime;
+    protected List<E> resultList;
+    protected int resultCount;
+    protected long searchDuration;
+    protected String originalQuery;
+    protected String suggestedQuery;
+    protected long stime;
+    protected Map<String, List<Facet>> facetMap;
+    protected Map<String, List<Facet>> appliedFacets = new HashMap<>();
 
     public SearchResults(String originalQuery){
         this.originalQuery = originalQuery;
@@ -29,6 +36,27 @@ public class SearchResults<E> {
         this.resultList = resultList;
         resultCount = resultList.size();
         searchDuration = System.nanoTime()/1000L - stime;
+    }
+
+    public void populateResult(List<E> resultList, Map<String, List<Facet>> facetMap) {
+        this.resultList = resultList;
+        resultCount = resultList.size();
+        searchDuration = System.nanoTime()/1000L - stime;
+        this.facetMap = facetMap;
+    }
+
+    public void applyFacets(String key, int position){
+        if (appliedFacets.get(key) == null){
+            ArrayList<Facet> val = new ArrayList<>();
+            val.add(facetMap.get(key).get(position));
+            appliedFacets.put(key,val);
+        } else {
+            appliedFacets.get(key).add(facetMap.get(key).get(position));
+        }
+    }
+
+    public void resetClock(){
+        stime = System.nanoTime()/1000;
     }
 
     public List<E> getResultList() {
@@ -49,5 +77,9 @@ public class SearchResults<E> {
 
     public String getSuggestedQuery() {
         return suggestedQuery;
+    }
+
+    public Map<String, List<Facet>> getFacetMap() {
+        return facetMap;
     }
 }

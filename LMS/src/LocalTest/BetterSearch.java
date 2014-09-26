@@ -1,14 +1,15 @@
 package LocalTest;
 
-import Persistance.Book;
-import managers.HibernateManager;
-import managers.search.SearchManager;
+import managers.search.SearchResults;
+import managers.search.entities.BookSearch;
+import persistance.Book;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by denislavrov on 9/9/14.
@@ -19,10 +20,9 @@ public class BetterSearch {
     private JButton searchButton;
     private JTextPane textPane1;
     private JScrollPane scrollPane;
-
-    {
-        SearchManager.initIndex(HibernateManager.getSession());
-    }
+    private JList list1;
+    private BookSearch bookSearch = new BookSearch("");
+    private Scanner s = new Scanner(System.in);
 
     public BetterSearch() {
         comboBox1.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
@@ -31,8 +31,9 @@ public class BetterSearch {
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
                 final String input = ((JTextComponent)comboBox1.getEditor().getEditorComponent()).getText();
+                bookSearch.setInput(input);
                 comboBox1.removeAllItems();
-                SearchManager.bookSuggestions(input, 5).forEach(comboBox1::addItem);
+                bookSearch.getSuggestions().forEach(comboBox1::addItem);
                 ((JTextComponent)comboBox1.getEditor().getEditorComponent()).setText(input);
                 comboBox1.setPopupVisible(true);
             }
@@ -40,12 +41,16 @@ public class BetterSearch {
         });
         searchButton.addActionListener(e -> {
             StringBuilder sb = new StringBuilder();
-            List<Book> books = SearchManager.newDynamicFuzzy(Book.class, ((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText(), 5, "title").getResultList();
+            bookSearch.setInput(((JTextComponent) comboBox1.getEditor().getEditorComponent()).getText());
+            bookSearch.dynamicSearch(5,"title");
+            SearchResults<Book> bookResults = bookSearch.getResults();
+            List<Book> books = bookResults.getResultList();
             books.forEach(book -> {
                 sb.append(book);
                 sb.append('\n');
             });
             textPane1.setText(sb.toString());
+            bookResults.applyFacets(s.nextLine(), s.nextInt());
         });
     }
 

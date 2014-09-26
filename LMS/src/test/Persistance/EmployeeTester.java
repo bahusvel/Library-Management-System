@@ -1,8 +1,8 @@
 package test.Persistance;
 
-import Persistance.Book;
-import Persistance.Employee;
-import Persistance.Item;
+import persistance.Book;
+import persistance.Employee;
+import persistance.Item;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoTransaction;
 import org.junit.After;

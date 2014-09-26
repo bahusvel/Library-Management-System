@@ -1,11 +1,10 @@
 package test.managers;
 
-import Persistance.Member;
-import managers.HibernateManager;
-import managers.search.SearchManager;
-import org.junit.Test;
-import org.junit.Before;
+import persistance.Member;
+import managers.search.SearchBase;
 import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -19,7 +18,7 @@ public class SearchManagerTest {
 
     @Before
     public void before() throws Exception {
-        SearchManager.initIndex(HibernateManager.getSession());
+
     }
 
     @After
@@ -44,7 +43,9 @@ public class SearchManagerTest {
 
     @Test
     public void testPhoneticSearch() throws Exception {
-        assert SearchManager.newSearch(Member.class, "Tenis Lafrov", "firstname", "lastname").getResultCount()>0;
+        SearchBase<Member> memberSearch = new SearchBase<>(Member.class, "Tenis Lafrov");
+        memberSearch.simpleSearch("firstname", "lastname");
+        if (memberSearch.getResults().getResultCount() <= 0) throw new AssertionError();
     }
 
     /**

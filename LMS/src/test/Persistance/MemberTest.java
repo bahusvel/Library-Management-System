@@ -1,6 +1,6 @@
 package test.Persistance;
 
-import Persistance.*;
+import persistance.*;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;

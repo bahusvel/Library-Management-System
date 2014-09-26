@@ -1,4 +1,4 @@
-package Persistance;
+package persistance;
 
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
@@ -207,6 +207,7 @@ public class Book {
     }
 
     @Column(name = "category")
+    @Field(analyze = Analyze.NO)
     public String getCategory() {
         return category;
     }

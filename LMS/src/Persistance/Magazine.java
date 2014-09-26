@@ -1,4 +1,4 @@
-package Persistance;
+package persistance;
 
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;

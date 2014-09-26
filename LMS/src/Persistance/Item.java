@@ -1,4 +1,4 @@
-package Persistance;
+package persistance;
 
 import util.DBIO;
 import org.hibernate.search.annotations.Analyzer;

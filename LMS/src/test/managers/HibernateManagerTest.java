@@ -1,8 +1,8 @@
 package test.managers;
 
-import Persistance.Book;
-import Persistance.Magazine;
-import Persistance.MagazineEdition;
+import persistance.Book;
+import persistance.Magazine;
+import persistance.MagazineEdition;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
