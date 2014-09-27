@@ -8,8 +8,10 @@ import org.hibernate.search.query.facet.Facet;
 import org.hibernate.search.query.facet.FacetingRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by denislavrov on 9/26/14.
@@ -24,6 +26,12 @@ public class SearchBase<E> {
     protected Class<E> entity;
     protected Map<String, List<Facet>> facetMap;
     protected ArrayList<FacetingRequest> facetingRequests;
+    protected Map<String, List<Facet>> appliedFacets = new HashMap<>();
+    protected int MAXRESULTS = 5;
+    protected String TITLE_EDGE_NGRAM_INDEX = null;
+    protected String TITLE_NGRAM_INDEX = null;
+    private boolean init = true;
+
 
     public SearchBase(Class<E> entity, String input){
         this.entity = entity;
@@ -108,17 +116,31 @@ public class SearchBase<E> {
         return this;
     }
 
+    public void selectFacet(String key, int position){
+        if (appliedFacets.get(key) == null){
+            ArrayList<Facet> val = new ArrayList<>();
+            val.add(facetMap.get(key).get(position));
+            appliedFacets.put(key,val);
+        } else {
+            appliedFacets.get(key).add(facetMap.get(key).get(position));
+        }
+    }
+
+    public void resetFacets(){
+        appliedFacets.forEach((k,v) -> v.clear());
+    }
+
     protected void createFullTextQuery(){
         assert query != null;
         ftq = fullTextSession.createFullTextQuery(query, entity);
     }
 
-    protected void setupFacets(){
-        facetingRequests.forEach(ftq.getFacetManager()::enableFaceting);
+    protected void applyFacets(){
+        appliedFacets.forEach((k,v) -> ftq.getFacetManager().getFacetGroup(k).selectFacets(v.toArray(new Facet[v.size()])));
     }
 
-    protected void applyFacets(){
-        results.appliedFacets.forEach((k,v) -> ftq.getFacetManager().getFacetGroup(k).selectFacets(v.toArray(new Facet[v.size()])));
+    protected void setupFacets(){
+        facetingRequests.forEach(ftq.getFacetManager()::enableFaceting);
     }
 
     protected void retrieveFacets(){
@@ -130,9 +152,36 @@ public class SearchBase<E> {
         results.populateResult((List <E>)ftq.list(), facetMap);
     }
 
+    @SuppressWarnings("unchecked")
+    public List<String> getSuggestions(){
+        List<String> ret = new ArrayList<>();
+        if (TITLE_NGRAM_INDEX != null && TITLE_EDGE_NGRAM_INDEX != null) {
+            Query query = queryBuilder
+                    .phrase()
+                    .withSlop(10) // Has interesting effects !!
+                    .onField(TITLE_NGRAM_INDEX)
+                    .andField(TITLE_EDGE_NGRAM_INDEX)
+                    .boostedTo(5.0f)
+                    .sentence(input)
+                    .createQuery();
+            FullTextQuery ftq = fullTextSession.createFullTextQuery(query, entity);
+            ftq.setProjection("store_title");
+            ftq.setMaxResults(MAXRESULTS);
+            ret.addAll(((List<Object[]>) ftq.list()).stream().map(oa -> (String) oa[0]).collect(Collectors.toList()));
+        }
+        else ret.add("Not Available");
+        return ret;
+    }
+
 
     public SearchResults<E> getResults(){
         createFullTextQuery();
+        if (facetingRequests != null)
+            setupFacets();
+        if (facetingRequests != null)
+            retrieveFacets();
+        if (facetingRequests != null)
+            applyFacets();
         createResults();
         return results;
     }

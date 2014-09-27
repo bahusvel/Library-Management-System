@@ -2,8 +2,6 @@ package managers.search;
 
 import org.hibernate.search.query.facet.Facet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +16,6 @@ public class SearchResults<E> {
     protected String suggestedQuery;
     protected long stime;
     protected Map<String, List<Facet>> facetMap;
-    protected Map<String, List<Facet>> appliedFacets = new HashMap<>();
 
     public SearchResults(String originalQuery){
         this.originalQuery = originalQuery;
@@ -45,15 +42,7 @@ public class SearchResults<E> {
         this.facetMap = facetMap;
     }
 
-    public void applyFacets(String key, int position){
-        if (appliedFacets.get(key) == null){
-            ArrayList<Facet> val = new ArrayList<>();
-            val.add(facetMap.get(key).get(position));
-            appliedFacets.put(key,val);
-        } else {
-            appliedFacets.get(key).add(facetMap.get(key).get(position));
-        }
-    }
+
 
     public void resetClock(){
         stime = System.nanoTime()/1000;
