@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import managers.search.SearchResults;
 import managers.search.entities.BookSearch;
 import persistance.Book;
 
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class Controller {
     BookSearch bookSearch;
+    SearchResults<Book> searchResults;
     private boolean toggle = true;
 
     @FXML
@@ -33,21 +35,43 @@ public class Controller {
     @FXML
     void searchPressed(ActionEvent event) {
         bookSearch.setInput(searchField.getEditor().getText());
-        bookSearch.fuzzySearch("title");
-        resultsList.getItems().clear();
-        List<Book> resultList = bookSearch.getResults().getResultList();
-        resultList.forEach(b -> resultsList.getItems().add(b.toString()));
+        bookSearch.dynamicSearch(5,"title");
+        updateResults();
+        updateFacets();
 
+    }
+
+    private void updateResults(){
+        searchResults = bookSearch.getResults();
+        List<Book> resultList = searchResults.getResultList();
+        resultsList.getItems().clear();
+        resultList.forEach(b -> resultsList.getItems().add(b.toString()));
+    }
+
+    private void updateFacets(){
+        facetsList.getItems().clear();
+        searchResults
+                .getFacetMap()
+                .get("categoryFacetingRequest")
+                .forEach(facet -> facetsList.getItems().add(facet.getValue() + " (" + facet.getCount() + ")"));
+    }
+
+    @FXML
+    void facetReset(ActionEvent event) {
+        bookSearch.resetFacets();
+        updateFacets();
+        updateResults();
     }
 
     @FXML
     void initialize() {
         bookSearch = new BookSearch("");
 
-
-        assert resultsList != null : "fx:id=\"resultsList\" was not injected: check your FXML file 'search.fxml'.";
-        assert facetsList != null : "fx:id=\"facetsList\" was not injected: check your FXML file 'search.fxml'.";
-
+        facetsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            bookSearch.resetFacets();
+            bookSearch.selectFacet("categoryFacetingRequest", facetsList.getSelectionModel().getSelectedIndex());
+            updateResults();
+        });
 
         searchField.valueProperty().addListener((observable, oldValue, newValue) -> {
             bookSearch.setInput(searchField.getEditor().getText());
