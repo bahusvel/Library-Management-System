@@ -1,4 +1,4 @@
-package fxsearch;
+package test.fxsearch;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

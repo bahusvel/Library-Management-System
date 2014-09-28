@@ -9,9 +9,6 @@ import org.hibernate.search.Search;
  * Created by denislavrov on 9/4/14.
  */
 public class SearchManager {
-    private static final String TITLE_EDGE_NGRAM_INDEX = "edgeTitle";
-    private static final String TITLE_NGRAM_INDEX = "ngramTitle";
-
     protected static FullTextSession fullTextSession;
 
     public static void initIndex(Session session) {

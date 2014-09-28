@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxsearch.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.fxsearch.Controller">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -18,16 +18,16 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ComboBox fx:id="searchField" editable="true" prefWidth="468.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" onAction="#searchPressed" text="Search" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets top="14.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <TextField fx:id="searchField" onKeyPressed="#fireSuggest" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets left="14.0" top="14.0" />
                      </GridPane.margin>
-                  </ComboBox>
-                  <Button mnemonicParsing="false" onAction="#searchPressed" text="Search" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-                     <GridPane.margin>
-                        <Insets right="14.0" top="14.0" />
-                     </GridPane.margin>
-                  </Button>
+                  </TextField>
                </children>
             </GridPane>
          </top>
