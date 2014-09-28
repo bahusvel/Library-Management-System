@@ -6,6 +6,7 @@ import org.hibernate.search.FullTextSession;
 import org.hibernate.search.query.dsl.FacetRangeEndContext;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.hibernate.search.query.facet.Facet;
+import org.hibernate.search.query.facet.FacetSortOrder;
 import org.hibernate.search.query.facet.FacetingRequest;
 
 import java.util.ArrayList;
@@ -161,7 +162,7 @@ public class SearchBase<E> {
     }
 
     protected void applyFacets() {
-        appliedFacets.forEach((k, v) -> ftq.getFacetManager().getFacetGroup(k).selectFacets(v.toArray(new Facet[v.size()])));
+        appliedFacets.forEach((k,v) -> v.forEach(ftq.getFacetManager().getFacetGroup(k)::selectFacets));
     }
 
     protected void setupFacets() {
@@ -178,7 +179,7 @@ public class SearchBase<E> {
     }
 
     protected void initFaceting() {
-        facetingRequests = new ArrayList<>();
+        facetingRequests = new ArrayList<FacetingRequest>();
         facetMap = new HashMap<>();
     }
 
@@ -196,6 +197,8 @@ public class SearchBase<E> {
                 .createFacetingRequest();
     }
 
+    // BE CAREFUL WHEN USING THIS, IF FIELD IS DOUBLE THEN YOU MUST PASS DOUBLE ARGUMENTS FOR LIMITS
+    // COULD ADD CHECK FOR THIS USING REFLECTION
     protected FacetingRequest buildRangeFacet(String name, String field, Object... limits){
         assert limits.length % 2 == 0;
         FacetRangeEndContext<Object> f =  queryBuilder.facet()
@@ -210,6 +213,7 @@ public class SearchBase<E> {
         }
         return f.above(limits[limits.length-1])
                 .excludeLimit()
+                .orderedBy(FacetSortOrder.RANGE_DEFINITION_ORDER)
                 .createFacetingRequest();
 
     }

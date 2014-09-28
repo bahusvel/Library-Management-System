@@ -1,8 +1,6 @@
 package persistance;
 
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -95,6 +93,7 @@ public class Employee {
 
 
     @Column(name = "role")
+    @Field(analyze = Analyze.NO)
     @NotNull
     @Enumerated(EnumType.STRING)
     public EmployeeRole getRole() {

@@ -1,9 +1,6 @@
 package persistance;
 
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -72,6 +69,7 @@ public class Magazine {
 
 
     @Column(name = "language")
+    @Field(analyze = Analyze.NO)
     public String getLanguage() {
         return language;
     }
@@ -93,6 +91,8 @@ public class Magazine {
 
 
     @Column(name = "price")
+    @Field(analyze = Analyze.NO)
+    @NumericField
     public Double getPrice() {
         return price;
     }

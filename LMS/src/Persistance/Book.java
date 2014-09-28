@@ -137,6 +137,8 @@ public class Book {
     }
 
     @Column(name = "release_date")
+    @Field(analyze = Analyze.NO)
+    @DateBridge(resolution = Resolution.YEAR)
     @Temporal(TemporalType.DATE)
     public Date getReleaseDate() {
         return releaseDate;
@@ -147,6 +149,8 @@ public class Book {
     }
 
     @Column(name = "pages")
+    @Field(analyze = Analyze.NO)
+    @NumericField
     public Integer getPages() {
         return pages;
     }
@@ -217,6 +221,8 @@ public class Book {
     }
 
     @Column(name = "rating")
+    @Field(analyze = Analyze.NO)
+    @NumericField
     public Double getRating() {
         return rating;
     }
@@ -248,6 +254,8 @@ public class Book {
     }
 
     @Column(name = "price")
+    @Field(analyze = Analyze.NO)
+    @NumericField // LUCENE NEEDS THIS HERE, OTHERWISE WONT RETURN RESULTS ON FACETING
     public Double getPrice() {
         return price;
     }

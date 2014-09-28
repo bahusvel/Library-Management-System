@@ -38,6 +38,8 @@ public class Controller {
 
     private SuggestionsPopOver suggestions;
 
+    private static final String facet = "Pages";
+
     ListView<String> popoverContent = new ListView<>(FXCollections.observableArrayList());
 
     @FXML
@@ -60,7 +62,7 @@ public class Controller {
         facetsList.getItems().clear();
         searchResults
                 .getFacetMap()
-                .get("categoryFacetingRequest")
+                .get(facet)
                 .forEach(facet -> facetsList.getItems().add(facet.getValue() + " (" + facet.getCount() + ")"));
     }
 
@@ -110,7 +112,7 @@ public class Controller {
 
         facetsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             bookSearch.resetFacets();
-            bookSearch.selectFacet("categoryFacetingRequest", facetsList.getSelectionModel().getSelectedIndex());
+            bookSearch.selectFacet(facet, facetsList.getSelectionModel().getSelectedIndex());
             updateResults();
         });
     }

@@ -11,5 +11,7 @@ public class EmployeeSearch extends SearchBase<Employee> {
 
     public EmployeeSearch(String input) {
         super(ENTITY, input);
+        initFaceting();
+        addFacetingRequest(buildDiscreteFacet("Role", "role"));
     }
 }

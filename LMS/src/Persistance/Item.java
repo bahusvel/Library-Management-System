@@ -1,10 +1,7 @@
 package persistance;
 
+import org.hibernate.search.annotations.*;
 import util.DBIO;
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -54,6 +51,7 @@ public class Item {
 
 
     @Column(name = "condition")
+    @Field(analyze = Analyze.NO)
     public String getCondition() {
         return condition;
     }
@@ -64,6 +62,7 @@ public class Item {
 
 
     @Column(name = "category")
+    @Field(analyze = Analyze.NO)
     public String getCategory() {
         return category;
     }
@@ -85,6 +84,8 @@ public class Item {
 
 
     @Column(name = "price")
+    @Field(analyze = Analyze.NO)
+    @NumericField
     public Double getPrice() {
         return price;
     }
