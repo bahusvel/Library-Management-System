@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="com.dooapp.fxform2:core:8.0.6" type="repository">
+    <properties maven-id="com.dooapp.fxform2:core:8.0.6" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/core-8.0.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/validation-api-1.0.0.GA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="PostgreSQL - librarymanagementsystem@127.0.0.1" uuid="9eaef950-98ea-4d84-9344-e61ac4b12626">
+    <database-info product="PostgreSQL" version="9.3.5" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.3 JDBC4 (build 1100)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <schema name="public" catalog="librarymanagementsystem"/>
+    <table name="BookLease_lease_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="Book_book_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="Employee_employee_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="Magazine_magazine_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="book" schema="public" catalog="librarymanagementsystem" type="TABLE" remarks="RGVzY3JpYmVzIHRoZSBib29rLCBub3QgdG8gYmUgY29uZnVzZWQgd2l0aCB0aGUgYm9vayBlbnRpdHksIHdoaWNoIGRlc2NyaWJlcyB0aGUgcGh5c2ljYWwgY29weSBvZiB0aGUgYm9vayBzdG9yZWQgaW4gb3VyIGxpYnJhcnkuClRoaXMgb25lIGp1c3QgZGVzY3JpYmVzIGEgYm9vayBpbiBnZW5lcmFsIGNvbnRhaW5pbmcgYWxsIG9mIGl0IGluZm9ybWF0aW9uLiBQaHlzaWNhbCBib29rIG1heSBub3QgbmVjZXNzYXJpbHkgZXZlbiBleGlzdC4=">
+      <column name="title" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="release_date" sqlType="date" precision="13" scale="0" nullable="true" jdbcType="91"/>
+      <column name="pages" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="publisher" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="barcode" sqlType="int8" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="isbn" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="edition" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="category" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rating" sqlType="float8" precision="17" scale="17" nullable="true" jdbcType="8"/>
+      <column name="book_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnIkJvb2tfYm9va19pZF9zZXEiJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="image_fpath" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="summary" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="price" sqlType="float8" precision="17" scale="17" nullable="true" jdbcType="8"/>
+      <primary-key name="Book_pkey" columns="book_id"/>
+      <exported-key name="fk_8rochm2hffd0u0a1gfb6cy1af" table="book_author" schema="public" catalog="librarymanagementsystem" columns="book_book_id"/>
+      <exported-key name="lnk_book_entity_book2" table="book_entity" schema="public" catalog="librarymanagementsystem" columns="book_id"/>
+      <exported-key name="lnk_bookid" table="book_request" schema="public" catalog="librarymanagementsystem" columns="bookid"/>
+      <index name="book_book_id_key" unique="true" columns="book_id"/>
+    </table>
+    <table name="book_author" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="book_book_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="author" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <foreign-key name="fk_8rochm2hffd0u0a1gfb6cy1af" columns="book_book_id" ref-table="book" ref-schema="public" ref-catalog="" ref-columns="book_id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="book_entity" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="available" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7" def="dHJ1ZQ=="/>
+      <column name="book_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="location" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_entity_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYm9va19lbnRpdHlfYm9va19lbnRpdHlfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="leased" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7" def="ZmFsc2U="/>
+      <column name="acquisition_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="supplied_by" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="book_entity_pkey" columns="book_entity_id"/>
+      <foreign-key name="lnk_book_entity_book2" columns="book_id" ref-table="book" ref-schema="public" ref-catalog="" ref-columns="book_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="lnk_book_lease_book_entity2" table="book_lease" schema="public" catalog="librarymanagementsystem" columns="book_entity_id"/>
+      <exported-key name="lnk_book_entity_id" table="book_return" schema="public" catalog="librarymanagementsystem" columns="book_entity_id"/>
+      <index name="book_entity_book_entity_id_key" unique="true" columns="book_entity_id"/>
+      <index name="unique_book_id" unique="true" columns="book_id"/>
+    </table>
+    <table name="book_entity_book_entity_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="book_lease" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="lease_id" sqlType="bigserial" precision="19" scale="0" nullable="false" jdbcType="-5" def="bmV4dHZhbCgnIkJvb2tMZWFzZV9sZWFzZV9pZF9zZXEiJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="lease_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="due_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="renewed" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7" def="ZmFsc2U="/>
+      <column name="member_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="employee_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="book_entity_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="visitid" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="BookLease_pkey" columns="lease_id"/>
+      <foreign-key name="lnk_book_lease_book_entity2" columns="book_entity_id" ref-table="book_entity" ref-schema="public" ref-catalog="" ref-columns="book_entity_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_book_lease_employee2" columns="employee_id" ref-table="employee" ref-schema="public" ref-catalog="" ref-columns="employee_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_book_lease_member" columns="member_id" ref-table="member" ref-schema="public" ref-catalog="" ref-columns="member_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_visitid" columns="visitid" ref-table="visit" ref-schema="public" ref-catalog="" ref-columns="visitid" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="unique_book_entity_id" unique="true" columns="book_entity_id"/>
+    </table>
+    <table name="book_request" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="bookid" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="requestid" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="supplier" sqlType="varchar" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uri" sqlType="varchar" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <column name="quantity" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="book_request_pkey" columns="requestid"/>
+      <foreign-key name="lnk_bookid" columns="bookid" ref-table="book" ref-schema="public" ref-catalog="" ref-columns="book_id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="book_return" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="book_entity_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="lease_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="due_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="member_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ammount_charged" sqlType="money" precision="2147483647" scale="0" nullable="false" jdbcType="8" def="MC4w"/>
+      <column name="return_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="member_comments" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="member_rating" sqlType="float8" precision="17" scale="17" nullable="true" jdbcType="8"/>
+      <column name="employee_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="book_return_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYm9va19yZXR1cm5fYm9va19yZXR1cm5faWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <primary-key name="book_return_pkey" columns="book_return_id"/>
+      <foreign-key name="lnk_book_entity_id" columns="book_entity_id" ref-table="book_entity" ref-schema="public" ref-catalog="" ref-columns="book_entity_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_employee_id" columns="employee_id" ref-table="employee" ref-schema="public" ref-catalog="" ref-columns="employee_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_member_id" columns="member_id" ref-table="member" ref-schema="public" ref-catalog="" ref-columns="member_id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="book_return_book_return_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="employee" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="firstname" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lastname" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="employee_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnIkVtcGxveWVlX2VtcGxveWVlX2lkX3NlcSInOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="address1" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address2" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address3" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="city" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="country" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postalcode" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="Employee_pkey" columns="employee_id"/>
+      <exported-key name="lnk_book_lease_employee2" table="book_lease" schema="public" catalog="librarymanagementsystem" columns="employee_id"/>
+      <exported-key name="lnk_employee_id" table="book_return" schema="public" catalog="librarymanagementsystem" columns="employee_id"/>
+      <exported-key name="lnk_employee_id" table="item_lease" schema="public" catalog="librarymanagementsystem" columns="employee_id"/>
+      <exported-key name="lnk_employee_id" table="item_return" schema="public" catalog="librarymanagementsystem" columns="employee_id"/>
+      <index name="employee_employee_id_key" unique="true" columns="employee_id"/>
+    </table>
+    <table name="item" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="name" sqlType="varchar" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="condition" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="category" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="item_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnaXRlbV9pdGVtX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="price" sqlType="float8" precision="17" scale="17" nullable="true" jdbcType="8"/>
+      <primary-key name="item_pkey" columns="item_id"/>
+      <exported-key name="lnk_item_id" table="item_entity" schema="public" catalog="librarymanagementsystem" columns="item_id"/>
+      <index name="item_item_id_key" unique="true" columns="item_id"/>
+    </table>
+    <table name="item_entity" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="item_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="acquisition_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="leased" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7" def="ZmFsc2U="/>
+      <column name="available" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7" def="dHJ1ZQ=="/>
+      <column name="location" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="item_entity_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnaXRlbV9lbnRpdHlfaXRlbV9lbnRpdHlfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <primary-key name="item_entity_pkey" columns="item_entity_id"/>
+      <foreign-key name="lnk_item_id" columns="item_id" ref-table="item" ref-schema="public" ref-catalog="" ref-columns="item_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="lnk_item_entity_id" table="item_lease" schema="public" catalog="librarymanagementsystem" columns="item_entity_id"/>
+      <exported-key name="lnk_item_entity_id" table="item_return" schema="public" catalog="librarymanagementsystem" columns="item_entity_id"/>
+      <index name="item_entity_item_entity_id_key" unique="true" columns="item_entity_id"/>
+    </table>
+    <table name="item_entity_item_entity_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="item_item_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="item_lease" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="item_entity_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="lease_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="due_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="renewed" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7" def="ZmFsc2U="/>
+      <column name="member_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="employee_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="item_lease_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnaXRlbV9sZWFzZV9pdGVtX2xlYXNlX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="visitid" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="item_lease_pkey" columns="item_lease_id"/>
+      <foreign-key name="lnk_employee_id" columns="employee_id" ref-table="employee" ref-schema="public" ref-catalog="" ref-columns="employee_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_item_entity_id" columns="item_entity_id" ref-table="item_entity" ref-schema="public" ref-catalog="" ref-columns="item_entity_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_member_id" columns="member_id" ref-table="member" ref-schema="public" ref-catalog="" ref-columns="member_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_visitid" columns="visitid" ref-table="visit" ref-schema="public" ref-catalog="" ref-columns="visitid" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="item_lease_item_lease_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="item_return" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="item_entity_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="member_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="employee_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="lease_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="due_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="return_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="ammount_charged" sqlType="money" precision="2147483647" scale="0" nullable="false" jdbcType="8"/>
+      <column name="item_return_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnaXRlbV9yZXR1cm5faXRlbV9yZXR1cm5faWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <primary-key name="item_returned_pkey" columns="item_return_id"/>
+      <foreign-key name="lnk_employee_id" columns="employee_id" ref-table="employee" ref-schema="public" ref-catalog="" ref-columns="employee_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_item_entity_id" columns="item_entity_id" ref-table="item_entity" ref-schema="public" ref-catalog="" ref-columns="item_entity_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="lnk_member_id" columns="member_id" ref-table="member" ref-schema="public" ref-catalog="" ref-columns="member_id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="item_return_item_return_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="magazine" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="title" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="magazine_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnIk1hZ2F6aW5lX21hZ2F6aW5lX2lkX3NlcSInOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="publisher" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="frequency" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="language" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="isbn" sqlType="varchar" precision="2044" scale="0" nullable="true" jdbcType="12"/>
+      <column name="price" sqlType="float8" precision="17" scale="17" nullable="true" jdbcType="8"/>
+      <primary-key name="Magazine_pkey" columns="magazine_id"/>
+      <exported-key name="lnk_magazine_edition_magazine2" table="magazine_edition" schema="public" catalog="librarymanagementsystem" columns="magazine_id"/>
+    </table>
+    <table name="magazine_edition" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="magazine_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="mag_edition_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWFnYXppbmVfZWRpdGlvbl9tYWdfZWRpdGlvbl9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="edition_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="edition_title" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="magazine_edition_pkey" columns="mag_edition_id"/>
+      <foreign-key name="lnk_magazine_edition_magazine2" columns="magazine_id" ref-table="magazine" ref-schema="public" ref-catalog="" ref-columns="magazine_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="lnk_magazine_entity_magazine_edition2" table="magazine_entity" schema="public" catalog="librarymanagementsystem" columns="magazine_edition_id"/>
+    </table>
+    <table name="magazine_edition_mag_edition_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="magazine_entity" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="magazine_edition_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="mag_entity_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWFnYXppbmVfZW50aXR5X21hZ19lbnRpdHlfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="available" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7" def="dHJ1ZQ=="/>
+      <column name="acquistion_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="magazine_entity_pkey" columns="mag_entity_id"/>
+      <foreign-key name="lnk_magazine_entity_magazine_edition2" columns="magazine_edition_id" ref-table="magazine_edition" ref-schema="public" ref-catalog="" ref-columns="mag_edition_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="unique_magazine_edition_id" unique="true" columns="magazine_edition_id"/>
+    </table>
+    <table name="magazine_entity_mag_entity_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="member" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="firstname" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lastname" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="dob" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="registration_date" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="username" sqlType="varchar" precision="2044" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="varchar" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone_number" sqlType="varchar" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="member_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWVtYmVyX21lbWJlcl9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="balance" sqlType="float8" precision="17" scale="17" nullable="false" jdbcType="8"/>
+      <column name="address1" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address2" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address3" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="city" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="country" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postalcode" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="member_pkey" columns="member_id"/>
+      <exported-key name="lnk_book_lease_member" table="book_lease" schema="public" catalog="librarymanagementsystem" columns="member_id"/>
+      <exported-key name="lnk_member_id" table="book_return" schema="public" catalog="librarymanagementsystem" columns="member_id"/>
+      <exported-key name="lnk_member_id" table="item_lease" schema="public" catalog="librarymanagementsystem" columns="member_id"/>
+      <exported-key name="lnk_member_id" table="item_return" schema="public" catalog="librarymanagementsystem" columns="member_id"/>
+      <exported-key name="lnk_memberid" table="visit" schema="public" catalog="librarymanagementsystem" columns="memberid"/>
+      <index name="member_member_id_key" unique="true" columns="member_id"/>
+    </table>
+    <table name="member_member_id_seq" schema="public" catalog="librarymanagementsystem" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="visit" schema="public" catalog="librarymanagementsystem" type="TABLE">
+      <column name="visitid" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="memberid" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="entrytime" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
+      <column name="exittime" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
+      <column name="current" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <primary-key name="visit_pkey" columns="visitid"/>
+      <foreign-key name="lnk_memberid" columns="memberid" ref-table="member" ref-schema="public" ref-catalog="" ref-columns="member_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="lnk_visitid" table="book_lease" schema="public" catalog="librarymanagementsystem" columns="visitid"/>
+      <exported-key name="lnk_visitid" table="item_lease" schema="public" catalog="librarymanagementsystem" columns="visitid"/>
+      <index name="visit_visitid_key" unique="true" columns="visitid"/>
+    </table>
+  </data-source>
+</component>

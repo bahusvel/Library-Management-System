@@ -1,0 +1,48 @@
+<component name="libraryTable">
+  <library name="org.hibernate:hibernate-search-orm:4.5.1.Final" type="repository">
+    <properties maven-id="org.hibernate:hibernate-search-orm:4.5.1.Final" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-search-orm-4.5.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-search-engine-4.5.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-search-analyzers-4.5.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-core-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-analyzers-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/solr-analysis-extras-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/solr-core-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/solr-solrj-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-highlighter-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-memory-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-kuromoji-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-misc-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-phonetic-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-spatial-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-spellchecker-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-grouping-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-smartcn-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-stempel-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-commons-annotations-4.0.4.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jboss-logging-3.1.4.GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jboss-logging-annotations-1.2.0.Beta1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/avro-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-asl-1.9.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-mapper-asl-1.9.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/paranamer-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-facet-3.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-core-4.3.5.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/dom4j-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xml-apis-1.0.b2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javassist-3.18.1-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/antlr-2.7.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jandex-1.1.0.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

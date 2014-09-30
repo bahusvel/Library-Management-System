@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="DynamicJasper-5.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/DynamicJasper-5.0.2-bundle" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/lib/DynamicJasper-5.0.2-bundle" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/lib/DynamicJasper-5.0.2-bundle" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/DynamicJasper-5.0.2-bundle" recursive="false" type="SOURCES" />
+  </library>
+</component>

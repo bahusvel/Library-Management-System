@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="599315897">
+    <data-source source="LOCAL" name="PostgreSQL - librarymanagementsystem@127.0.0.1" uuid="9eaef950-98ea-4d84-9344-e61ac4b12626">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/librarymanagementsystem</jdbc-url>
+      <user-name>lms</user-name>
+      <user-password>dfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
+      <schema-pattern>librarymanagementsystem.public</schema-pattern>
+      <default-schemas>librarymanagementsystem.pg_catalog librarymanagementsystem.public</default-schemas>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

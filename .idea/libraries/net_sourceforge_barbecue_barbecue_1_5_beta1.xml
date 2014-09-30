@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="net.sourceforge.barbecue:barbecue:1.5-beta1" type="repository">
+    <properties maven-id="net.sourceforge.barbecue:barbecue:1.5-beta1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/barbecue-1.5-beta1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
