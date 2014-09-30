@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import managers.search.SearchResults;
@@ -15,6 +17,7 @@ import persistance.Book;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class Controller {
     BookSearch bookSearch;
@@ -36,9 +39,10 @@ public class Controller {
     @FXML
     private TextField searchField;
 
-    private SuggestionsPopOver suggestions;
+    @FXML
+    private TreeView<String> facetTree;
 
-    private static final String facet = "Pages";
+    private SuggestionsPopOver suggestions;
 
     ListView<String> popoverContent = new ListView<>(FXCollections.observableArrayList());
 
@@ -47,7 +51,7 @@ public class Controller {
         bookSearch.setInput(searchField.getText());
         bookSearch.dynamicSearch(5,"title");
         updateResults();
-        updateFacets();
+        updateFacetTree();
 
     }
 
@@ -58,18 +62,23 @@ public class Controller {
         resultList.forEach(b -> resultsList.getItems().add(b.toString()));
     }
 
-    private void updateFacets(){
-        facetsList.getItems().clear();
-        searchResults
-                .getFacetMap()
-                .get(facet)
-                .forEach(facet -> facetsList.getItems().add(facet.getValue() + " (" + facet.getCount() + ")"));
+
+
+    private void updateFacetTree(){
+        facetTree.getRoot().getChildren().clear();
+        searchResults.getFacetMap().keySet().forEach(k -> {
+            TreeItem<String> fCat = new TreeItem<>(k);
+            fCat.setExpanded(true);
+            fCat.getChildren().addAll(searchResults.getFacetMap().get(k).stream().map(v -> new TreeItem<>(v.getValue())).collect(Collectors.toList()));
+            facetTree.getRoot().getChildren().add(fCat);
+        });
+
     }
 
     @FXML
     void facetReset(ActionEvent event) {
         bookSearch.resetFacets();
-        updateFacets();
+        updateFacetTree();
         updateResults();
     }
 
@@ -80,6 +89,18 @@ public class Controller {
         popoverContent.getItems().addAll(bookSearch.getSuggestions());
 
         suggestions.show(searchField);
+    }
+
+    private void initFacetTree(){
+        facetTree.setRoot(new TreeItem<>());
+        facetTree.setShowRoot(false);
+        facetTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(!searchResults.getFacetMap().containsKey(newValue.getValue())) {
+                bookSearch.resetFacets();
+                bookSearch.selectFacet(newValue.getParent().getValue(), newValue.getValue());
+                updateResults();
+            }
+        });
     }
 
 
@@ -95,7 +116,7 @@ public class Controller {
         clip.heightProperty().bind(popoverContent.heightProperty().subtract(1));
         popoverContent.setClip(clip);
         popoverContent.setStyle("-fx-focus-color: transparent;");
-        popoverContent.setMaxHeight(125);
+        popoverContent.setMaxHeight(150);
         suggestions.setCornerRadius(10.0);
         suggestions.setArrowLocation(ArrowLocation.TOP_CENTER);
         suggestions.setAutoHide(true);
@@ -108,13 +129,8 @@ public class Controller {
     @FXML
     void initialize() {
         bookSearch = new BookSearch("");
+        initFacetTree();
         createPopOver();
-
-        facetsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            bookSearch.resetFacets();
-            bookSearch.selectFacet(facet, facetsList.getSelectionModel().getSelectedIndex());
-            updateResults();
-        });
     }
 }
 
