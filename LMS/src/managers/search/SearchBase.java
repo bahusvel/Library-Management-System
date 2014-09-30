@@ -120,6 +120,16 @@ public class SearchBase<E> {
         }
     }
 
+    public void selectFacet(String key, String item) {
+        if (appliedFacets.get(key) == null) {
+            ArrayList<Facet> val = new ArrayList<>();
+            val.addAll(facetMap.get(key).stream().filter(f -> f.getValue().equals(item)).collect(Collectors.toList()));
+            appliedFacets.put(key, val);
+        } else {
+            appliedFacets.get(key).addAll(facetMap.get(key).stream().filter(f -> f.getValue().equals(item)).collect(Collectors.toList()));
+        }
+    }
+
     public void resetFacets() {
         appliedFacets.forEach((k, v) -> v.clear());
     }
