@@ -18,7 +18,7 @@ public class InheritanceBookLeasableEntity extends LeasableEntity<InheritanceBoo
 
 
     public InheritanceBookLeasableEntity(InheritanceBook book, Date acquisitionDate) {
-        leasableItem = book;
+        abstractItem = book;
         this.acquisitionDate = acquisitionDate;
     }
 

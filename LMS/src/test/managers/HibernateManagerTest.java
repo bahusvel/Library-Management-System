@@ -152,7 +152,7 @@ public class HibernateManagerTest {
             InheritanceBook book = new InheritanceBook();
             InheritanceBookLeasableEntity bookEntity = new InheritanceBookLeasableEntity();
             bookEntity.setAcquisitionDate(new Date());
-            bookEntity.setLeasableItem(book);
+            bookEntity.setAbstractItem(book);
 
             book.setTitle("Hello Inheritance");
             at.session.save(book);

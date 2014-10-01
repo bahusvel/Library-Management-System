@@ -62,11 +62,20 @@
         <mapping class="persistance.inheritance.InheritanceBookLease"/>
         <mapping class="persistance.inheritance.InheritanceBookLeasableEntity"/>
         <mapping class="persistance.inheritance.InheritanceBookReturn"/>
+        <mapping class="persistance.inheritance.InheritanceItem"/>
+        <mapping class="persistance.inheritance.InheritanceItemLease"/>
+        <mapping class="persistance.inheritance.InheritanceItemLeasableEntity"/>
+        <mapping class="persistance.inheritance.InheritanceItemReturn"/>
+        <mapping class="persistance.inheritance.InheritanceMagazine"/>
+        <mapping class="persistance.inheritance.InheritanceMagazineEdition"/>
+        <mapping class="persistance.inheritance.InheritanceMagazineEntity"/>
         <mapping class="persistance.base.LeasableEntity"/>
         <mapping class="persistance.base.Lease"/>
         <mapping class="persistance.base.LeasableItem"/>
         <mapping class="persistance.base.Return"/>
         <mapping class="persistance.base.AbstractItem"/>
+        <mapping class="persistance.base.Entity"/>
+        <mapping class="persistance.base.Edition"/>
 
 
 

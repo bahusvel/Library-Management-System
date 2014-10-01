@@ -7,8 +7,7 @@ import java.util.Collection;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class LeasableItem<T extends AbstractItem<T>> extends AbstractItem<T> {
+public abstract class LeasableItem<T extends AbstractItem<T>> extends AbstractItem<T> {
     protected Collection<LeasableEntity<T>> entities;
     protected Collection<Return<T>> returns;
 

@@ -6,17 +6,18 @@ import javax.persistence.*;
  * Created by denislavrov on 10/1/14.
  */
 @javax.persistence.Entity
-public class AbstractItem<T extends AbstractItem<T>>{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class AbstractItem<T extends AbstractItem<T>>{
     protected Double price;
-    protected int leasableId;
+    protected int id;
 
     @Id
     @GeneratedValue(strategy= GenerationType.TABLE) // Could also try GenerationType.TABLE
-    public int getLeasableId() {
-        return leasableId;
+    public int getId() {
+        return id;
     }
 
-    public void setLeasableId(int leasableId) {
-        this.leasableId = leasableId;
+    public void setId(int leasableId) {
+        this.id = leasableId;
     }
 }
