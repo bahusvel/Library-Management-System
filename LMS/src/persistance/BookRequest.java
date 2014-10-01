@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
  * Created by denislavrov on 9/12/14.
  */
 @Entity
-@Table(name = "book_request", schema = "public", catalog = "librarymanagementsystem")
+@Table(name = "book_request", schema = "public", catalog = "inheritance")
 public class BookRequest {
     private int requestid;
     private String supplier;

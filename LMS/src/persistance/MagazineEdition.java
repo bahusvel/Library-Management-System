@@ -14,7 +14,7 @@ import java.util.Date;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
-@Table(name = "magazine_edition", schema = "public", catalog = "librarymanagementsystem")
+@Table(name = "magazine_edition", schema = "public", catalog = "inheritance")
 public class MagazineEdition {
     private int magEditionId;
     private Date editionDate;

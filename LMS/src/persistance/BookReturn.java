@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
-@Table(name = "book_return", schema = "public", catalog = "librarymanagementsystem")
+@Table(name = "book_return", schema = "public", catalog = "inheritance")
 public class BookReturn {
     private Date leaseDate;
     private Date dueDate;

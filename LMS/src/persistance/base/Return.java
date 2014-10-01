@@ -1,4 +1,4 @@
-package persistance.lease;
+package persistance.base;
 
 import persistance.Employee;
 import persistance.Member;
@@ -10,6 +10,7 @@ import java.util.Date;
 /**
  * Created by denislavrov on 9/30/14.
  */
+@javax.persistence.Entity
 public class Return<T extends Leasable<T>> {
     protected Date leaseDate;
     protected Date dueDate;
@@ -22,7 +23,7 @@ public class Return<T extends Leasable<T>> {
     protected Employee employee;
     protected Member member;
     protected boolean lost = false;
-    protected T leasable;
+    protected Leasable<T> leasable;
 
 
     @Temporal(TemporalType.DATE)
@@ -86,7 +87,7 @@ public class Return<T extends Leasable<T>> {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public int geReturnId() {
+    public int getReturnId() {
         return returnId;
     }
 
@@ -103,13 +104,12 @@ public class Return<T extends Leasable<T>> {
     }
 
 
-
     @ManyToOne
-    public T getLeasable() {
+    public Leasable<T> getLeasable() {
         return leasable;
     }
 
-    public void setLeasable(T leasable) {
+    public void setLeasable(Leasable<T> leasable) {
         this.leasable = leasable;
     }
 

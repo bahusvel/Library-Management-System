@@ -10,7 +10,7 @@ import java.util.Collection;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
-@Table(name = "item_entity", schema = "public", catalog = "librarymanagementsystem")
+@Table(name = "item_entity", schema = "public", catalog = "inheritance")
 public class ItemEntity {
     private Date acquisitionDate;
     private boolean leased = false;

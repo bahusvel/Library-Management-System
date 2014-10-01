@@ -1,4 +1,4 @@
-package persistance.lease;
+package persistance.base;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -6,6 +6,8 @@ import java.util.Collection;
 /**
  * Created by denislavrov on 9/30/14.
  */
+@javax.persistence.Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Leasable<T extends Leasable<T>> {
     protected Double price;
     protected int leasableId;
@@ -13,7 +15,7 @@ public class Leasable<T extends Leasable<T>> {
     protected Collection<Return<T>> returns;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY) // Could also try GenerationType.TABLE
+    @GeneratedValue(strategy=GenerationType.TABLE) // Could also try GenerationType.TABLE
     public int getLeasableId() {
         return leasableId;
     }
@@ -22,7 +24,12 @@ public class Leasable<T extends Leasable<T>> {
         this.leasableId = leasableId;
     }
 
-    public void setBookReturns(Collection<Return<T>> returns) {
+    @OneToMany(mappedBy = "leasable", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Collection<Return<T>> getReturns(){
+        return returns;
+    }
+
+    public void setReturns(Collection<Return<T>> returns) {
         this.returns = returns;
     }
 

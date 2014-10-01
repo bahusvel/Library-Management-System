@@ -1,8 +1,5 @@
 package test.managers;
 
-import persistance.Book;
-import persistance.Magazine;
-import persistance.MagazineEdition;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
@@ -10,6 +7,11 @@ import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import persistance.Book;
+import persistance.Magazine;
+import persistance.MagazineEdition;
+import persistance.inheritance.InheritanceBook;
+import persistance.inheritance.InheritanceBookEntity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -141,6 +143,24 @@ public class HibernateManagerTest {
     @Test
     public void testNewAutoTransaction() throws Exception {
 //TODO: Test goes here...
+    }
+
+
+    @Test
+    public void testInheritance() throws Exception {
+        try(AutoTransaction at = hm.newAutoTransaction()) {
+            InheritanceBook book = new InheritanceBook();
+            InheritanceBookEntity bookEntity = new InheritanceBookEntity();
+            bookEntity.setAcquisitionDate(new Date());
+            bookEntity.setLeasable(book);
+
+            book.setTitle("Hello Inheritance");
+            at.session.save(book);
+            at.session.save(bookEntity);
+            at.tx.commit();
+
+        }
+
     }
 
     /**

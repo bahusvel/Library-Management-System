@@ -1,10 +1,8 @@
 package persistance.inheritance;
 
-import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
-import org.hibernate.search.annotations.Parameter;
 import persistance.BookRequest;
-import persistance.lease.Leasable;
+import persistance.base.Leasable;
 import util.DBIO;
 
 import javax.persistence.*;
@@ -19,7 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Indexed
-@AnalyzerDefs({
+/*@AnalyzerDefs({
         @AnalyzerDef(name="projectionAnalyzer",
                 tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class)),
 
@@ -66,7 +64,7 @@ import java.util.Date;
 
                 })
 
-})
+})*/
 public class InheritanceBook  extends Leasable<InheritanceBook>{
     /*
     Annotation Summary:
@@ -107,7 +105,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
     */
 
 
-    @Field(name="author")
     @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
     public Collection<String> getAuthor() {
@@ -118,7 +115,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.author = author;
     }
 
-    @Column(name = "title")
     @NotNull
     @Fields({
             @Field(name = "store_title", analyzer = @Analyzer(definition = "projectionAnalyzer"), store = Store.COMPRESS),
@@ -134,7 +130,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.title = title;
     }
 
-    @Column(name = "release_date")
     @Field(analyze = Analyze.NO)
     @DateBridge(resolution = Resolution.YEAR)
     @Temporal(TemporalType.DATE)
@@ -146,7 +141,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.releaseDate = releaseDate;
     }
 
-    @Column(name = "pages")
     @Field(analyze = Analyze.NO)
     @NumericField
     public Integer getPages() {
@@ -157,7 +151,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.pages = pages;
     }
 
-    @Column(name = "publisher")
     @Field
     public String getPublisher() {
         return publisher;
@@ -167,7 +160,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.publisher = publisher;
     }
 
-    @Column(name = "description")
     @Field
     @Analyzer(definition = "TokenizingLower")
     public String getDescription() {
@@ -178,7 +170,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.description = description;
     }
 
-    @Column(name = "barcode")
     public Long getBarcode() {
         return barcode;
     }
@@ -187,7 +178,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.barcode = barcode;
     }
 
-    @Column(name = "isbn", unique = true)
     @Field
     public String getIsbn() {
         return isbn;
@@ -197,7 +187,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.isbn = isbn;
     }
 
-    @Column(name = "edition")
     @Field
     @NotNull
     public int getEdition() {
@@ -208,7 +197,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.edition = edition;
     }
 
-    @Column(name = "category")
     @Field(analyze = Analyze.NO)
     public String getCategory() {
         return category;
@@ -218,7 +206,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.category = category;
     }
 
-    @Column(name = "rating")
     @Field(analyze = Analyze.NO)
     @NumericField
     public Double getRating() {
@@ -231,7 +218,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
 
 
 
-    @Column(name = "summary")
     @Field
     @Analyzer(definition = "TokenizingLower")
     public String getSummary() {
@@ -242,7 +228,6 @@ public class InheritanceBook  extends Leasable<InheritanceBook>{
         this.summary = summary;
     }
 
-    @Column(name = "price")
     @Field(analyze = Analyze.NO)
     @NumericField // LUCENE NEEDS THIS HERE, OTHERWISE WONT RETURN RESULTS ON FACETING
     public Double getPrice() {

@@ -1,4 +1,4 @@
-package persistance.lease;
+package persistance.base;
 
 import persistance.Employee;
 import persistance.Member;
@@ -11,6 +11,7 @@ import java.util.Date;
 /**
  * Created by denislavrov on 9/30/14.
  */
+@javax.persistence.Entity
 public class Lease<T extends Leasable<T>> {
     protected long leaseId;
     protected Date leaseDate;
@@ -31,7 +32,6 @@ public class Lease<T extends Leasable<T>> {
         this.leaseId = leaseId;
     }
 
-    @Column(name = "lease_date")
     @Temporal(TemporalType.DATE)
     @NotNull
     public Date getLeaseDate() {
@@ -42,7 +42,6 @@ public class Lease<T extends Leasable<T>> {
         this.leaseDate = leaseDate;
     }
 
-    @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
     @NotNull
     public Date getDueDate() {
@@ -53,7 +52,6 @@ public class Lease<T extends Leasable<T>> {
         this.dueDate = dueDate;
     }
 
-    @Column(name = "renewed")
     @NotNull
     public boolean isRenewed() {
         return renewed;

@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
-@Table(name = "magazine_entity", schema = "public", catalog = "librarymanagementsystem")
+@Table(name = "magazine_entity", schema = "public", catalog = "inheritance")
 public class MagazineEntity {
     private int magEntityId;
     private boolean available = true;

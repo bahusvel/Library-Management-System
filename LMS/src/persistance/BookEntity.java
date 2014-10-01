@@ -10,7 +10,7 @@ import java.util.Collection;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
-@Table(name = "book_entity", schema = "public", catalog = "librarymanagementsystem")
+@Table(name = "book_entity", schema = "public", catalog = "inheritance")
 public class BookEntity {
     private boolean available = true;
     private String location;

@@ -12,18 +12,17 @@ import java.util.Date;
  * Created by denislavrov on 9/2/14.
  */
 @Entity
-public class InheritanceBookLease extends Lease<InheritanceBook> {
+public class InheritanceItemLease extends Lease<InheritanceItem> {
 
-    public InheritanceBookLease(){
-
-    }
-
-    public InheritanceBookLease(Date leaseDate, Date dueDate, Member member, Employee employee, InheritanceBookEntity entity, Visit visit) {
+    public InheritanceItemLease(Date leaseDate, Date dueDate, Member member, Employee employee, InheritanceItemEntity itemEntity, Visit visit) {
         this.leaseDate = leaseDate;
         this.dueDate = dueDate;
         this.member = member;
         this.employee = employee;
-        this.entity = entity;
+        entity = itemEntity;
         this.visit = visit;
+    }
+
+    public InheritanceItemLease() {
     }
 }

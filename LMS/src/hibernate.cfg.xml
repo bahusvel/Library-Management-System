@@ -6,11 +6,11 @@
     <session-factory>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
-        <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/librarymanagementsystem</property>
+        <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/inheritance</property>
         <property name="connection.username">lms</property>
         <property name="connection.password">password</property>
         <!-- DB schema will be updated if needed -->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
 
         <!-- SHOW SQL QUERIES HIBERNATE SENDS -->
         <property name="show_sql">true</property>
@@ -39,6 +39,7 @@
         <property name="hibernate.search.lucene_version">LUCENE_CURRENT</property>
 
         <!-- Entity mapping -->
+
         <mapping class="persistance.Book"/>
         <mapping class="persistance.BookEntity"/>
         <mapping class="persistance.BookLease"/>
@@ -56,16 +57,16 @@
         <mapping class="persistance.BookRequest"/>
 
 
-        <!-- Inheritance Testing Classes
+        <!-- Inheritance Testing Classes-->
         <mapping class="persistance.inheritance.InheritanceBook"/>
         <mapping class="persistance.inheritance.InheritanceBookLease"/>
         <mapping class="persistance.inheritance.InheritanceBookEntity"/>
         <mapping class="persistance.inheritance.InheritanceBookReturn"/>
-        <mapping class="persistance.lease.Entity"/>
-        <mapping class="persistance.lease.Lease"/>
-        <mapping class="persistance.lease.Leasable"/>
-        <mapping class="persistance.lease.Return"/>
-        -->
+        <mapping class="persistance.base.Entity"/>
+        <mapping class="persistance.base.Lease"/>
+        <mapping class="persistance.base.Leasable"/>
+        <mapping class="persistance.base.Return"/>
+
 
 
     </session-factory>

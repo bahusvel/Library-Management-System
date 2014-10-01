@@ -2,7 +2,7 @@ package persistance.inheritance;
 
 import persistance.Employee;
 import persistance.Member;
-import persistance.lease.Return;
+import persistance.base.Return;
 
 import javax.persistence.Entity;
 import java.util.Date;
@@ -10,6 +10,7 @@ import java.util.Date;
 /**
  * Created by denislavrov on 9/2/14.
  */
+
 @Entity
 public class InheritanceBookReturn extends Return<InheritanceBook>{
 
