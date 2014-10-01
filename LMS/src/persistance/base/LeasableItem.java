@@ -8,7 +8,7 @@ import java.util.Collection;
  */
 @javax.persistence.Entity
 public abstract class LeasableItem<T extends AbstractItem<T>> extends AbstractItem<T> {
-    protected Collection<LeasableEntity<T>> entities;
+    protected Collection<Entity<T>> entities;
     protected Collection<Return<T>> returns;
 
     @OneToMany(mappedBy = "leasableItem", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -20,12 +20,12 @@ public abstract class LeasableItem<T extends AbstractItem<T>> extends AbstractIt
         this.returns = returns;
     }
 
-    @OneToMany(mappedBy = "leasableItem", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Collection<LeasableEntity<T>> getEntities() {
+    @OneToMany(mappedBy = "abstractItem", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Collection<Entity<T>> getEntities() {
         return entities;
     }
 
-    public void setEntities(Collection<LeasableEntity<T>> entities) {
+    public void setEntities(Collection<Entity<T>> entities) {
         this.entities = entities;
     }
 

@@ -9,8 +9,8 @@ import java.util.Date;
  */
 
 @javax.persistence.Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Entity<T extends AbstractItem<T>> {
+    protected boolean available = true;
     protected int entityId;
     protected String location;
     protected Date acquisitionDate;
@@ -18,7 +18,7 @@ public abstract class Entity<T extends AbstractItem<T>> {
     protected AbstractItem<T> abstractItem;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.TABLE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int getEntityId() {
         return entityId;
     }
@@ -35,6 +35,14 @@ public abstract class Entity<T extends AbstractItem<T>> {
         this.location = location;
     }
 
+    @NotNull
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 
     @Temporal(TemporalType.DATE)
     @NotNull

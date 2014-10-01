@@ -12,7 +12,7 @@ public abstract class AbstractItem<T extends AbstractItem<T>>{
     protected int id;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.TABLE) // Could also try GenerationType.TABLE
+    @GeneratedValue(strategy= GenerationType.AUTO)
     public int getId() {
         return id;
     }
