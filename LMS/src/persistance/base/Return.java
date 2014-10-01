@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
-public class Return<T extends Leasable<T>> {
+public class Return<T extends AbstractEntity<T>> {
     protected Date leaseDate;
     protected Date dueDate;
     protected double ammountCharged = 0.0;

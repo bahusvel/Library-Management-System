@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
-public class Lease<T extends Leasable<T>> {
+public class Lease<T extends AbstractEntity<T>> {
     protected long leaseId;
     protected Date leaseDate;
     protected Date dueDate;

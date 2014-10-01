@@ -8,21 +8,9 @@ import java.util.Collection;
  */
 @javax.persistence.Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Leasable<T extends Leasable<T>> {
-    protected Double price;
-    protected int leasableId;
+public class Leasable<T extends AbstractEntity<T>> extends AbstractEntity<T>{
     protected Collection<Entity<T>> entities;
     protected Collection<Return<T>> returns;
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.TABLE) // Could also try GenerationType.TABLE
-    public int getLeasableId() {
-        return leasableId;
-    }
-
-    public void setLeasableId(int leasableId) {
-        this.leasableId = leasableId;
-    }
 
     @OneToMany(mappedBy = "leasable", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<Return<T>> getReturns(){

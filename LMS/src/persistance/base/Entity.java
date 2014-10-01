@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
-public class Entity<T extends Leasable<T>> {
+public class Entity<T extends AbstractEntity<T>> {
     protected boolean available = true;
     protected boolean leased = false;
     protected Leasable<T> leasable;
