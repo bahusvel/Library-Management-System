@@ -14,12 +14,12 @@ import java.util.Date;
 @Entity
 public class InheritanceItemLease extends Lease<InheritanceItem> {
 
-    public InheritanceItemLease(Date leaseDate, Date dueDate, Member member, Employee employee, InheritanceItemEntity itemEntity, Visit visit) {
+    public InheritanceItemLease(Date leaseDate, Date dueDate, Member member, Employee employee, InheritanceItemLeasableEntity itemEntity, Visit visit) {
         this.leaseDate = leaseDate;
         this.dueDate = dueDate;
         this.member = member;
         this.employee = employee;
-        entity = itemEntity;
+        leasableEntity = itemEntity;
         this.visit = visit;
     }
 

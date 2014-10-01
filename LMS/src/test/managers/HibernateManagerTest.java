@@ -11,7 +11,7 @@ import persistance.Book;
 import persistance.Magazine;
 import persistance.MagazineEdition;
 import persistance.inheritance.InheritanceBook;
-import persistance.inheritance.InheritanceBookEntity;
+import persistance.inheritance.InheritanceBookLeasableEntity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -150,9 +150,9 @@ public class HibernateManagerTest {
     public void testInheritance() throws Exception {
         try(AutoTransaction at = hm.newAutoTransaction()) {
             InheritanceBook book = new InheritanceBook();
-            InheritanceBookEntity bookEntity = new InheritanceBookEntity();
+            InheritanceBookLeasableEntity bookEntity = new InheritanceBookLeasableEntity();
             bookEntity.setAcquisitionDate(new Date());
-            bookEntity.setLeasable(book);
+            bookEntity.setLeasableItem(book);
 
             book.setTitle("Hello Inheritance");
             at.session.save(book);

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by denislavrov on 10/1/14.
  */
 @javax.persistence.Entity
-public class AbstractEntity<T extends AbstractEntity<T>>{
+public class AbstractItem<T extends AbstractItem<T>>{
     protected Double price;
     protected int leasableId;
 

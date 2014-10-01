@@ -9,10 +9,10 @@ import java.util.Date;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
-public class Entity<T extends AbstractEntity<T>> {
+public class LeasableEntity<T extends AbstractItem<T>> {
     protected boolean available = true;
     protected boolean leased = false;
-    protected Leasable<T> leasable;
+    protected LeasableItem<T> leasableItem;
     protected Lease<T> lease;
     protected Collection<Return<T>> returns;
     protected int entityId;
@@ -78,15 +78,15 @@ public class Entity<T extends AbstractEntity<T>> {
 
 
     @ManyToOne
-    public Leasable<T> getLeasable() {
-        return leasable;
+    public LeasableItem<T> getLeasableItem() {
+        return leasableItem;
     }
 
-    public void setLeasable(Leasable<T> leasable) {
-        this.leasable = leasable;
+    public void setLeasableItem(LeasableItem<T> leasableItem) {
+        this.leasableItem = leasableItem;
     }
 
-    @OneToOne(mappedBy = "entity")
+    @OneToOne(mappedBy = "leasableEntity")
     public Lease<T> getLease() {
         return lease;
     }
@@ -95,7 +95,7 @@ public class Entity<T extends AbstractEntity<T>> {
         this.lease = lease;
     }
 
-    @OneToMany(mappedBy = "entity")
+    @OneToMany(mappedBy = "leasableEntity")
     public Collection<Return<T>> getReturns() {
         return returns;
     }

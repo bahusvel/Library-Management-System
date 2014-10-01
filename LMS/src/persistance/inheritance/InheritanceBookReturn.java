@@ -18,8 +18,8 @@ public class InheritanceBookReturn extends Return<InheritanceBook>{
 
     }
 
-    public InheritanceBookReturn(InheritanceBookEntity entity, Date leaseDate, Date dueDate, Member member, Employee employee, Date returnDate) {
-        this.entity = entity;
+    public InheritanceBookReturn(InheritanceBookLeasableEntity entity, Date leaseDate, Date dueDate, Member member, Employee employee, Date returnDate) {
+        this.leasableEntity = entity;
         this.leaseDate = leaseDate;
         this.dueDate = dueDate;
         this.member = member;
@@ -28,7 +28,7 @@ public class InheritanceBookReturn extends Return<InheritanceBook>{
     }
 
     public InheritanceBookReturn(InheritanceBookLease lease, Employee employee){
-        entity = lease.getEntity();
+        leasableEntity = lease.getLeasableEntity();
         leaseDate = lease.getLeaseDate();
         dueDate = lease.getDueDate();
         member = lease.getMember();

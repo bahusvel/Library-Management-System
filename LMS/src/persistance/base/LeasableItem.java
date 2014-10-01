@@ -8,11 +8,11 @@ import java.util.Collection;
  */
 @javax.persistence.Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Leasable<T extends AbstractEntity<T>> extends AbstractEntity<T>{
-    protected Collection<Entity<T>> entities;
+public class LeasableItem<T extends AbstractItem<T>> extends AbstractItem<T> {
+    protected Collection<LeasableEntity<T>> entities;
     protected Collection<Return<T>> returns;
 
-    @OneToMany(mappedBy = "leasable", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "leasableItem", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<Return<T>> getReturns(){
         return returns;
     }
@@ -21,12 +21,12 @@ public class Leasable<T extends AbstractEntity<T>> extends AbstractEntity<T>{
         this.returns = returns;
     }
 
-    @OneToMany(mappedBy = "leasable", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Collection<Entity<T>> getEntities() {
+    @OneToMany(mappedBy = "leasableItem", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Collection<LeasableEntity<T>> getEntities() {
         return entities;
     }
 
-    public void setEntities(Collection<Entity<T>> entities) {
+    public void setEntities(Collection<LeasableEntity<T>> entities) {
         this.entities = entities;
     }
 

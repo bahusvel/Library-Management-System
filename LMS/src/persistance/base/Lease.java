@@ -12,12 +12,12 @@ import java.util.Date;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
-public class Lease<T extends AbstractEntity<T>> {
+public class Lease<T extends AbstractItem<T>> {
     protected long leaseId;
     protected Date leaseDate;
     protected Date dueDate;
     protected boolean renewed = false;
-    protected Entity<T> entity;
+    protected LeasableEntity<T> leasableEntity;
     protected Employee employee;
     protected Member member;
     protected Visit visit;
@@ -63,12 +63,12 @@ public class Lease<T extends AbstractEntity<T>> {
 
 
     @OneToOne
-    public Entity<T> getEntity() {
-        return entity;
+    public LeasableEntity<T> getLeasableEntity() {
+        return leasableEntity;
     }
 
-    public void setEntity(Entity<T> entity) {
-        this.entity = entity;
+    public void setLeasableEntity(LeasableEntity<T> leasableEntity) {
+        this.leasableEntity = leasableEntity;
     }
 
     @ManyToOne

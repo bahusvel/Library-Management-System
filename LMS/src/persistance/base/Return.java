@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
-public class Return<T extends AbstractEntity<T>> {
+public class Return<T extends AbstractItem<T>> {
     protected Date leaseDate;
     protected Date dueDate;
     protected double ammountCharged = 0.0;
@@ -19,11 +19,11 @@ public class Return<T extends AbstractEntity<T>> {
     protected String memberComments;
     protected Double memberRating;
     protected int returnId;
-    protected Entity<T> entity;
+    protected LeasableEntity<T> leasableEntity;
     protected Employee employee;
     protected Member member;
     protected boolean lost = false;
-    protected Leasable<T> leasable;
+    protected LeasableItem<T> leasableItem;
 
 
     @Temporal(TemporalType.DATE)
@@ -105,21 +105,21 @@ public class Return<T extends AbstractEntity<T>> {
 
 
     @ManyToOne
-    public Leasable<T> getLeasable() {
-        return leasable;
+    public LeasableItem<T> getLeasableItem() {
+        return leasableItem;
     }
 
-    public void setLeasable(Leasable<T> leasable) {
-        this.leasable = leasable;
+    public void setLeasableItem(LeasableItem<T> leasableItem) {
+        this.leasableItem = leasableItem;
     }
 
     @ManyToOne
-    public Entity<T> getEntity() {
-        return entity;
+    public LeasableEntity<T> getLeasableEntity() {
+        return leasableEntity;
     }
 
-    public void setEntity(Entity<T> entity) {
-        this.entity = entity;
+    public void setLeasableEntity(LeasableEntity<T> leasableEntity) {
+        this.leasableEntity = leasableEntity;
     }
 
     @ManyToOne

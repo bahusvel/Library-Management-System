@@ -18,8 +18,8 @@ public class InheritanceItemReturn extends Return<InheritanceItem> {
 
     }
 
-    public InheritanceItemReturn(InheritanceItemEntity itemEntity, Date leaseDate, Date dueDate, Member member, Employee employee, Date returnDate) {
-        entity = itemEntity;
+    public InheritanceItemReturn(InheritanceItemLeasableEntity itemEntity, Date leaseDate, Date dueDate, Member member, Employee employee, Date returnDate) {
+        leasableEntity = itemEntity;
         this.leaseDate = leaseDate;
         this.dueDate = dueDate;
         this.member = member;
@@ -28,7 +28,7 @@ public class InheritanceItemReturn extends Return<InheritanceItem> {
     }
 
     public InheritanceItemReturn(InheritanceItemLease itemLease, Employee employee){
-        entity = itemLease.getEntity();
+        leasableEntity = itemLease.getLeasableEntity();
         leaseDate = itemLease.getLeaseDate();
         dueDate = itemLease.getDueDate();
         member = itemLease.getMember();

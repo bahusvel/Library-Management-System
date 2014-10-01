@@ -1,7 +1,7 @@
 package persistance.inheritance;
 
 import org.hibernate.search.annotations.*;
-import persistance.base.Leasable;
+import persistance.base.LeasableItem;
 import util.DBIO;
 
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import java.io.File;
  */
 @Entity
 @Indexed
-public class InheritanceItem extends Leasable<InheritanceItem>{
+public class InheritanceItem extends LeasableItem<InheritanceItem> {
     private String name;
     private String description;
     private String condition;

@@ -18,12 +18,12 @@ public class InheritanceBookLease extends Lease<InheritanceBook> {
 
     }
 
-    public InheritanceBookLease(Date leaseDate, Date dueDate, Member member, Employee employee, InheritanceBookEntity entity, Visit visit) {
+    public InheritanceBookLease(Date leaseDate, Date dueDate, Member member, Employee employee, InheritanceBookLeasableEntity entity, Visit visit) {
         this.leaseDate = leaseDate;
         this.dueDate = dueDate;
         this.member = member;
         this.employee = employee;
-        this.entity = entity;
+        this.leasableEntity = entity;
         this.visit = visit;
     }
 }

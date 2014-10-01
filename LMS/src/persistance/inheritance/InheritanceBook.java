@@ -2,7 +2,7 @@ package persistance.inheritance;
 
 import org.hibernate.search.annotations.*;
 import persistance.BookRequest;
-import persistance.base.Leasable;
+import persistance.base.LeasableItem;
 import util.DBIO;
 
 import javax.persistence.*;
@@ -65,7 +65,7 @@ import java.util.Date;
                 })
 
 })*/
-public class InheritanceBook  extends Leasable<InheritanceBook>{
+public class InheritanceBook  extends LeasableItem<InheritanceBook> {
     /*
     Annotation Summary:
     @Transient -                Fields that are not persisted.
