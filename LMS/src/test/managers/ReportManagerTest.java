@@ -54,5 +54,9 @@ public class ReportManagerTest {
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
     }
 
-
+    @Test
+    public void testBookPurchasesReport() throws Exception {
+        ReportManager.bookPurchasesReport();
+        assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
+    }
 }

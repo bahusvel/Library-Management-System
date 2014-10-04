@@ -276,6 +276,34 @@ public class ReportManager {
         JasperViewer.viewReport(jp);
     }
 
+
+    public static void bookPurchasesReport() throws JRException, ClassNotFoundException {
+        FastReportBuilder drb = new FastReportBuilder();
+        DynamicReport dr = drb
+                .addColumn("Supplier", "supplier", String.class.getName(), 30)
+                .addColumn("Title", "title", String.class.getName(), 50)
+                .addColumn("Price", "price", Double.class.getName(), 15)
+                .addColumn("Quantity", "quantity", Integer.class.getName(), 15)
+                .addColumn("URI", "uri", String.class.getName(), 60)
+                .addGroups(1)
+                .setTitle("Book purchases Report.")
+                .setUseFullPageWidth(true)
+                .setQuery(
+                        "select br.book.title as title," +
+                                " br.book.price as price," +
+                                " supplier as supplier," +
+                                " uri as uri," +
+                                " quantity as quantity" +
+                                " from BookRequest as br",
+                        DJConstants.QUERY_LANGUAGE_HQL)
+                .build();
+
+        HashMap params = new HashMap();
+        params.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, HibernateManager.getSession());
+        JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
+        JasperViewer.viewReport(jp);
+    }
+
     public static void main(String[] args) {
 
         ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
