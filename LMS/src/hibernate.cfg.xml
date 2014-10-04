@@ -56,17 +56,5 @@
         <mapping class="persistance.BookRequest"/>
 
 
-        <!-- Inheritance Testing Classes
-        <mapping class="persistance.inheritance.InheritanceBook"/>
-        <mapping class="persistance.inheritance.InheritanceBookLease"/>
-        <mapping class="persistance.inheritance.InheritanceBookEntity"/>
-        <mapping class="persistance.inheritance.InheritanceBookReturn"/>
-        <mapping class="persistance.lease.Entity"/>
-        <mapping class="persistance.lease.Lease"/>
-        <mapping class="persistance.lease.Leasable"/>
-        <mapping class="persistance.lease.Return"/>
-        -->
-
-
     </session-factory>
 </hibernate-configuration>
