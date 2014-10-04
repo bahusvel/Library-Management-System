@@ -9,11 +9,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4757a8b0-08d3-4618-a2e5-f1117815a828" name="Default" comment="Inheritance for everybody">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/AbstractItem.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/AbstractItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Entity.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Entity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableEntity.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableItem.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableItem.java" />
+    <list default="true" id="4757a8b0-08d3-4618-a2e5-f1117815a828" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Library-Management-System.iws" />
@@ -358,50 +354,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="persistance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Library-Management-System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inheritance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Library-Management-System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1064,7 +1016,7 @@
       <workItem from="1412111724070" duration="130000" />
       <workItem from="1412123366357" duration="2394000" />
       <workItem from="1412144433673" duration="1440000" />
-      <workItem from="1412148217338" duration="6219000" />
+      <workItem from="1412148217338" duration="6253000" />
     </task>
     <task id="LOCAL-00001" summary="Datastructure definition">
       <created>1409631211635</created>
@@ -1318,11 +1270,15 @@
       <created>1412151336963</created>
       <updated>1412151336964</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Small sequencing optimizations">
+      <created>1412154454824</created>
+      <updated>1412154454825</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="258422000" />
+    <option name="totallyTimeSpent" value="258456000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1346,7 +1302,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="815" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1358,7 +1314,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2353362" sideWeight="0.57081544" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2353362" sideWeight="0.57081544" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47058824" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1430,7 +1386,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Added some tests.&#10;&#10;" />
     <MESSAGE value="Added image support for other classes.&#10;&#10;" />
     <MESSAGE value="Updated equals and hashcode to not cascade&#10;&#10;" />
     <MESSAGE value="Notes&#10;" />
@@ -1455,7 +1410,8 @@
     <MESSAGE value="After Crash" />
     <MESSAGE value="Serious Refactoring" />
     <MESSAGE value="Inheritance for everybody" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inheritance for everybody" />
+    <MESSAGE value="Small sequencing optimizations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small sequencing optimizations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
