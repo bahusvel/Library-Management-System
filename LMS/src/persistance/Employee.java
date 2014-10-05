@@ -10,6 +10,7 @@ import persistance.base.Return;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -163,13 +164,13 @@ public class Employee {
         this.returns = returns;
     }
 
-    /*
+
     @SuppressWarnings("MethodMayBeStatic")
     public String addBookEntities(Book book, int qty){
         if (role != EmployeeRole.ADMIN && role != EmployeeRole.ROOT) return "You don't have permission to add books.";
         for (int i = 0; i < qty; i++) {
             BookEntity newBE = new BookEntity(book, new Date());
-            book.getBookEntities().add(newBE);
+            book.getEntities().add(newBE);
         }
         return "Added successfully";
     }
@@ -179,9 +180,9 @@ public class Employee {
         if (role != EmployeeRole.ADMIN && role != EmployeeRole.ROOT) return "You don't have permission to add items.";
         for (int i = 0; i < qty; i++) {
             ItemEntity newBE = new ItemEntity(item, new Date());
-            item.getItemEntities().add(newBE);
+            item.getEntities().add(newBE);
         }
         return "Added successfully";
     }
-*/
+
 }

@@ -1,21 +1,27 @@
 package persistance;
 
 
+import managers.notification.Notification;
+import managers.notification.NotificationManager;
 import org.apache.solr.analysis.LowerCaseFilterFactory;
 import org.apache.solr.analysis.PhoneticFilterFactory;
 import org.apache.solr.analysis.StandardTokenizerFactory;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
-import persistance.base.Lease;
-import persistance.base.Return;
+import persistance.base.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -282,151 +288,80 @@ public class Member {
         currentVisit = null;
         return "Sign Out OK";
     }
-/*
 
-    public String leaseBook(Book book, InheritanceEmployee employee, Date until){
-        if (bookLeases.size() > 4) return "Limit of 5 books per Member reached.";
 
-        BookEntity leaseEnity = null;
-        for(BookEntity bookEntity : book.getBookEntities()){
-            if (bookEntity.isAvailable() && !bookEntity.isLeased()){
-                leaseEnity = bookEntity;
+    public <T extends AbstractItem<T>> String leaseItem(LeasableItem<T> item, Employee employee, Date until){
+        if (leases.size() > 4) return "Limit of 5 leases per Member reached.";
+
+        LeasableEntity<T> leaseEntity = null;
+        for(persistance.base.Entity<T> entity : item.getEntities()){
+            if (entity.isAvailable() && !((LeasableEntity<T>)entity).isLeased()){
+                leaseEntity = (LeasableEntity<T>)entity;
                 break;
             }
         }
-        if (leaseEnity == null) return "Book wasn’t available";
+        if (leaseEntity == null) return "Item wasn’t available";
         if (currentVisit == null) return "Customer hasn't signed in";
-        BookLease bookLease = new BookLease(new Date(), until, this, employee, leaseEnity ,currentVisit);
-        leaseEnity.setBookLease(bookLease);
-        leaseEnity.setLeased(true);
-        bookLeases.add(bookLease);
+        Lease<T> lease = new Lease<>(new Date(), until, this, employee, leaseEntity ,currentVisit);
+        leaseEntity.setLease(lease);
+        leaseEntity.setLeased(true);
+        leases.add(lease);
         return "Lease was successful";
     }
 
-    public String returnBook(BookEntity bookEntity, InheritanceEmployee employee){
-        BookLease bookLease = bookEntity.getBookLease();
-        if (!bookLease.getMember().equals(this)) return "You did not lease that book";
-        Date dueDate = new Date(bookLease.getDueDate().getTime());
+    public <T extends AbstractItem<T>> String returnItem(LeasableEntity<T> entity, Employee employee){
+        Lease<T> lease = entity.getLease();
+        if (!lease.getMember().equals(this)) return "You did not lease that book";
+        Date dueDate = new Date(lease.getDueDate().getTime());
         Date cDate = new Date();
-        BookReturn bookReturn = new BookReturn(bookLease, employee);
+        Return<T> ireturn = new Return<>(lease, employee);
         if (dueDate.before(cDate)) {
             LocalDate dueLocal = dueDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             long daysOverdue = LocalDate.now().until(dueLocal, ChronoUnit.DAYS);
-            bookReturn.setAmmountCharged(-0.60 * daysOverdue);
+            ireturn.setAmmountCharged(-0.60 * daysOverdue);
             balance -= -0.60 * daysOverdue;
         }
-        bookReturns.add(bookReturn);
-        bookLeases.remove(bookLease);
-        bookEntity.setLeased(false);
+        returns.add(ireturn);
+        leases.remove(lease);
+        entity.setLeased(false);
         return "Return successful";
     }
 
-    public String looseBook(BookEntity bookEntity, InheritanceEmployee employee){
-        BookLease bookLease = bookEntity.getBookLease();
-        if (!bookLease.getMember().equals(this)) return "You did not lease that book";
-        BookReturn bookReturn = new BookReturn(bookLease, employee);
-        bookReturn.setLost(true);
-        double bookPrice = bookEntity.getBook().getPrice();
-        bookReturn.setAmmountCharged(bookPrice);
-        balance -= bookPrice;
-        bookReturns.add(bookReturn);
-        bookLeases.remove(bookLease);
-        bookEntity.getBook().getBookEntities().remove(bookEntity);
+    public <T extends AbstractItem<T>> String looseItem(LeasableEntity<T> entity, Employee employee){
+        Lease<T> lease = entity.getLease();
+        if (!lease.getMember().equals(this)) return "You did not lease that book";
+        Return<T> ireturn = new Return<>(lease, employee);
+        ireturn.setLost(true);
+        double price = entity.getAbstractItem().getPrice();
+        ireturn.setAmmountCharged(price);
+        balance -= price;
+        returns.add(ireturn);
+        leases.remove(lease);
+        ((LeasableItem<T>)entity.getAbstractItem()).getEntities().remove(entity);
         return "Lost book acknowledge";
     }
 
-    public String leaseItem(Item item, InheritanceEmployee employee, Date until){
-        if (itemLeases.size() > 4) return "Limit of 5 items per Member reached.";
-
-        ItemEntity leaseEnity = null;
-        for(ItemEntity itemEntity : item.getItemEntities()){
-            if (itemEntity.isAvailable() && !itemEntity.isLeased()){
-                leaseEnity = itemEntity;
-                break;
-            }
-        }
-        if (leaseEnity == null) return "Item wasn’t available";
-        if (currentVisit == null) return "Customer hasn't signed in";
-        ItemLease itemLease = new ItemLease(new Date(), until, this, employee, leaseEnity ,currentVisit);
-        leaseEnity.setItemLease(itemLease);
-        leaseEnity.setLeased(true);
-        itemLeases.add(itemLease);
-        return "Lease was successful";
-    }
-
-    public String returnItem(ItemEntity itemEntity, InheritanceEmployee employee){
-        ItemLease itemLease = itemEntity.getItemLease();
-        if (!itemLease.getMember().equals(this)) return "You did not lease that item";
-        Date dueDate = new Date(itemLease.getDueDate().getTime());
-        Date cDate = new Date();
-        ItemReturn itemReturn = new ItemReturn(itemLease, employee);
-        if (dueDate.before(cDate)) {
-            LocalDate dueLocal = dueDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            long daysOverdue = LocalDate.now().until(dueLocal, ChronoUnit.DAYS);
-            itemReturn.setAmmountCharged(-0.60 * daysOverdue);
-            balance -= -0.60 * daysOverdue;
-        }
-        itemReturns.add(itemReturn);
-        itemLeases.remove(itemLease);
-        itemEntity.setLeased(false);
-        return "Return successful";
-    }
-
-    public String looseItem(ItemEntity itemEntity, InheritanceEmployee employee){
-        ItemLease itemLease = itemEntity.getItemLease();
-        if (!itemLease.getMember().equals(this)) return "You did not lease that item";
-        ItemReturn itemReturn = new ItemReturn(itemLease, employee);
-        itemReturn.setLost(true);
-        double itemPrice = itemEntity.getItem().getPrice();
-        itemReturn.setAmmountCharged(itemPrice);
-        balance -= itemPrice;
-        itemReturns.add(itemReturn);
-        itemLeases.remove(itemLease);
-        itemEntity.getItem().getItemEntities().remove(itemEntity);
-        return "Lost item acknowledge";
-    }
-
-    private List<Book> booksOverdue(){
-        ArrayList<Book> books = new ArrayList<>();
+    private List<AbstractItem> itemsOverdue(){
+        ArrayList<AbstractItem> items = new ArrayList<>();
         Date today = new Date();
-        bookLeases.stream().filter(bl -> bl.getDueDate().before(today)).forEach(bl -> books.add(bl.getLeasableEntity().getAbstractItem()));
-        return books;
-    }
-
-    private List<Item> itemsOverdue(){
-        ArrayList<Item> items = new ArrayList<>();
-        Date today = new Date();
-        itemLeases.stream().filter(il -> il.getDueDate().before(today)).forEach(il -> items.add(il.getItemEntity().getItem()));
+        leases.stream().filter(il -> il.getDueDate().before(today)).forEach(il -> items.add(il.getLeasableEntity().getAbstractItem()));
         return items;
     }
 
     public void expireNotify(){
-        List<Book> expiredBooks = booksOverdue();
-        StringBuilder books = new StringBuilder();
-        if (!expiredBooks.isEmpty()){
-            books.append("Following books are past their due date:\n");
-            expiredBooks.forEach(b -> {
-                books.append(b.getTitle());
-                books.append('\n');
-            });
-            books.append("You will be charged $0.6 every day for each of those books, until you return them\n\n");
-        }
-
-        List<Item> expiredItems = itemsOverdue();
+        List<AbstractItem> expiredItems = itemsOverdue();
         StringBuilder items = new StringBuilder();
         if (!expiredItems.isEmpty()){
             items.append("Following items are past their due date:\n");
             expiredItems.forEach(b -> {
-                items.append(b.getName());
+                items.append(b);
                 items.append('\n');
             });
             items.append("You will be charged $0.6 every day for each of those items, until you return them\n\n");
         }
 
-
         StringBuilder message = new StringBuilder();
         message.append("Hi ").append(firstname).append(",\n\n")
-                .append(books)
                 .append(items)
                 .append("Best Regards, \n" +
                         "Your favorite library\n" +
@@ -438,6 +373,6 @@ public class Member {
         Notification notification = new Notification("Library Reminder",message.toString(),email);
         NotificationManager.submitNotification(notification);
     }
-*/
+
 
 }

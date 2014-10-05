@@ -22,6 +22,18 @@ public class Lease<T extends AbstractItem<T>> {
     protected Member member;
     protected Visit visit;
 
+    public Lease(Date leaseDate, Date dueDate, Member member, Employee employee, LeasableEntity<T> entity, Visit visit) {
+        this.leaseDate = leaseDate;
+        this.dueDate = dueDate;
+        this.member = member;
+        this.employee = employee;
+        this.leasableEntity = entity;
+        this.visit = visit;
+    }
+
+    public Lease() {
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public long getLeaseId() {

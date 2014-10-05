@@ -1,11 +1,21 @@
 package test.Persistance;
 
 import managers.HibernateManager;
+import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
+import managers.notification.NotificationManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import persistance.Book;
+import persistance.Employee;
 import persistance.Member;
+import persistance.base.LeasableEntity;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Member Tester.
@@ -46,7 +56,7 @@ public class MemberTest {
     /**
      * Method: leaseBook(Book book, Employee employee, Date until)
      */
-    /*
+
     @Test
     public void testOutdatedLeaseBook() throws Exception {
         try (AutoTransaction at = hm.newAutoTransaction()) {
@@ -55,7 +65,7 @@ public class MemberTest {
             Employee employee = (Employee) at.session.get(Employee.class, 1);
             member.signIn();
             Date date = Date.from(LocalDate.now().minusDays(1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-            System.out.println(member.leaseBook(book, employee, date));
+            System.out.println(member.leaseItem(book, employee, date));
             member.signOut();
             at.tx.commit();
         }
@@ -68,7 +78,7 @@ public class MemberTest {
             Member member = (Member) at.session.get(Member.class, 1);
             Employee employee = (Employee) at.session.get(Employee.class, 1);
             member.signIn();
-            System.out.println(member.leaseBook(book, employee, new Date()));
+            System.out.println(member.leaseItem(book, employee, new Date()));
             member.signOut();
             at.tx.commit();
         }
@@ -78,10 +88,10 @@ public class MemberTest {
     public void testReturnBook() throws Exception{
         try(AutoTransaction at = hm.newAutoTransaction()) {
             Member member = (Member) at.session.get(Member.class, 1);
-            BookEntity bookEntity = new ArrayList<>(member.getBookLeases()).get(0).getBookEntity();
+            LeasableEntity entity = new ArrayList<>(member.getLeases()).get(0).getLeasableEntity();
             Employee employee = (Employee) at.session.get(Employee.class, 1);
             member.signIn();
-            System.out.println(member.returnBook(bookEntity, employee));
+            System.out.println(member.returnItem(entity, employee));
             member.signOut();
             at.tx.commit();
         }
@@ -91,54 +101,15 @@ public class MemberTest {
     public void testlooseBook() throws Exception{
         try(AutoTransaction at = hm.newAutoTransaction()) {
             Member member = (Member) at.session.get(Member.class, 1);
-            BookEntity bookEntity = new ArrayList<>(member.getBookLeases()).get(0).getBookEntity();
+            LeasableEntity bookEntity = new ArrayList<>(member.getLeases()).get(0).getLeasableEntity();
             Employee employee = (Employee) at.session.get(Employee.class, 1);
             member.signIn();
-            System.out.println(member.looseBook(bookEntity, employee));
+            System.out.println(member.looseItem(bookEntity, employee));
             member.signOut();
             at.tx.commit();
         }
     }
 
-    @Test
-    public void testLeaseItem() throws Exception {
-        try (AutoTransaction at = hm.newAutoTransaction()) {
-            Item item = (Item) at.session.get(Item.class, 1);
-            Member member = (Member) at.session.get(Member.class, 1);
-            Employee employee = (Employee) at.session.get(Employee.class, 1);
-            member.signIn();
-            System.out.println(member.leaseItem(item, employee, new Date()));
-            member.signOut();
-            at.tx.commit();
-        }
-
-    }
-
-    @Test
-    public void testReturnItem() throws Exception{
-        try(AutoTransaction at = hm.newAutoTransaction()) {
-            Member member = (Member) at.session.get(Member.class, 1);
-            ItemEntity itemEntity = new ArrayList<>(member.getItemLeases()).get(0).getItemEntity();
-            Employee employee = (Employee) at.session.get(Employee.class, 1);
-            member.signIn();
-            System.out.println(member.returnItem(itemEntity, employee));
-            member.signOut();
-            at.tx.commit();
-        }
-    }
-
-    @Test
-    public void testlooseItem() throws Exception{
-        try(AutoTransaction at = hm.newAutoTransaction()) {
-            Member member = (Member) at.session.get(Member.class, 1);
-            ItemEntity itemEntity = new ArrayList<>(member.getItemLeases()).get(0).getItemEntity();
-            Employee employee = (Employee) at.session.get(Employee.class, 1);
-            member.signIn();
-            System.out.println(member.looseItem(itemEntity, employee));
-            member.signOut();
-            at.tx.commit();
-        }
-    }
 
     @Test
     public void testExpireNotify() throws Exception {
@@ -149,5 +120,5 @@ public class MemberTest {
         NotificationManager.shutdown();
         while (!NotificationManager.isTerminated());
     }
-    */
+
 }
