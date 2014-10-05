@@ -10,7 +10,7 @@
         <property name="connection.username">lms</property>
         <property name="connection.password">password</property>
         <!-- DB schema will be updated if needed -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- SHOW SQL QUERIES HIBERNATE SENDS -->
         <property name="show_sql">true</property>
@@ -40,24 +40,6 @@
 
         <!-- Entity mapping -->
 
-        <mapping class="persistance.Book"/>
-        <mapping class="persistance.BookEntity"/>
-        <mapping class="persistance.BookLease"/>
-        <mapping class="persistance.BookReturn"/>
-        <mapping class="persistance.Employee"/>
-        <mapping class="persistance.Item"/>
-        <mapping class="persistance.ItemEntity"/>
-        <mapping class="persistance.ItemLease"/>
-        <mapping class="persistance.ItemReturn"/>
-        <mapping class="persistance.Magazine"/>
-        <mapping class="persistance.MagazineEdition"/>
-        <mapping class="persistance.MagazineEntity"/>
-        <mapping class="persistance.Member"/>
-        <mapping class="persistance.Visit"/>
-        <mapping class="persistance.BookRequest"/>
-
-
-        <!-- Inheritance Testing Classes-->
         <mapping class="persistance.Book"/>
         <mapping class="persistance.BookLease"/>
         <mapping class="persistance.BookEntity"/>
