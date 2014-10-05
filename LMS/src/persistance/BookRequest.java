@@ -9,5 +9,4 @@ import javax.persistence.Entity;
  */
 @Entity
 public class BookRequest extends Request<Book>{
-
 }

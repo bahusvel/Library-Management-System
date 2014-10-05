@@ -10,5 +10,4 @@ import javax.persistence.Entity;
  */
 @Entity
 public class MagazineEdition extends Edition<Magazine> {
-
 }

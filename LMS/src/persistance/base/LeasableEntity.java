@@ -1,8 +1,10 @@
 package persistance.base;
 
-import javax.persistence.*;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by denislavrov on 9/30/14.
@@ -12,6 +14,16 @@ public class LeasableEntity<T extends AbstractItem<T>> extends Entity<T>{
     protected boolean leased = false;
     protected Lease<T> lease;
     protected Collection<Return<T>> returns;
+
+    public LeasableEntity(){
+
+    }
+
+
+    public LeasableEntity(AbstractItem<T> book, Date acquisitionDate) {
+        abstractItem = book;
+        this.acquisitionDate = acquisitionDate;
+    }
 
     @NotNull
     public boolean isLeased() {

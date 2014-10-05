@@ -7,5 +7,4 @@ import javax.persistence.Entity;
  */
 @Entity
 public class MagazineEntity extends persistance.base.Entity<Magazine>{
-
 }
