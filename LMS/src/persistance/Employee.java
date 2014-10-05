@@ -1,11 +1,15 @@
 package persistance;
 
-import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import persistance.base.Lease;
+import persistance.base.Return;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * Created by denislavrov on 9/2/14.
@@ -20,10 +24,8 @@ public class Employee {
     private int employeeId;
     private Address address;
     private String password;
-    private Collection<BookLease> bookLeases;
-    private Collection<BookReturn> bookReturns;
-    private Collection<ItemLease> itemLeases;
-    private Collection<ItemReturn> itemReturns;
+    private Collection<Lease> leases;
+    private Collection<Return> returns;
 
     public enum EmployeeRole{ADMIN, CASHIER, ROOT}
 
@@ -144,41 +146,24 @@ public class Employee {
     }
 
     @OneToMany(mappedBy = "employee")
-    public Collection<BookLease> getBookLeases() {
-        return bookLeases;
+    public Collection<Lease> getBookLeases() {
+        return leases;
     }
 
-    public void setBookLeases(Collection<BookLease> bookLeases) {
-        this.bookLeases = bookLeases;
-    }
-
-    @OneToMany(mappedBy = "employee")
-    public Collection<BookReturn> getBookReturns() {
-        return bookReturns;
-    }
-
-    public void setBookReturns(Collection<BookReturn> bookReturns) {
-        this.bookReturns = bookReturns;
+    public void setBookLeases(Collection<Lease> leases) {
+        this.leases = leases;
     }
 
     @OneToMany(mappedBy = "employee")
-    public Collection<ItemLease> getItemLeases() {
-        return itemLeases;
+    public Collection<Return> getBookReturns() {
+        return returns;
     }
 
-    public void setItemLeases(Collection<ItemLease> itemLeases) {
-        this.itemLeases = itemLeases;
+    public void setBookReturns(Collection<Return> returns) {
+        this.returns = returns;
     }
 
-    @OneToMany(mappedBy = "employee")
-    public Collection<ItemReturn> getItemReturns() {
-        return itemReturns;
-    }
-
-    public void setItemReturns(Collection<ItemReturn> itemReturns) {
-        this.itemReturns = itemReturns;
-    }
-
+    /*
     @SuppressWarnings("MethodMayBeStatic")
     public String addBookEntities(Book book, int qty){
         if (role != EmployeeRole.ADMIN && role != EmployeeRole.ROOT) return "You don't have permission to add books.";
@@ -198,5 +183,5 @@ public class Employee {
         }
         return "Added successfully";
     }
-
+*/
 }

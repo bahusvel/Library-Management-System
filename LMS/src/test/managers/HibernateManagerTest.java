@@ -8,10 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import persistance.Book;
+import persistance.BookEntity;
 import persistance.Magazine;
 import persistance.MagazineEdition;
-import persistance.inheritance.InheritanceBook;
-import persistance.inheritance.InheritanceBookLeasableEntity;
+import persistance.base.Edition;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -107,7 +107,7 @@ public class HibernateManagerTest {
         mage1.setEditionTitle("First");
         mage2.setEditionDate(new Date());
         mage2.setEditionTitle("Second");
-        Collection<MagazineEdition> magz= mag.getMagazineEditions();
+        Collection<Edition<Magazine>> magz= mag.getMagazineEditions();
         magz.add(mage1);
         magz.add(mage2);
         mag.setMagazineEditions(magz);
@@ -149,8 +149,8 @@ public class HibernateManagerTest {
     @Test
     public void testInheritance() throws Exception {
         try(AutoTransaction at = hm.newAutoTransaction()) {
-            InheritanceBook book = new InheritanceBook();
-            InheritanceBookLeasableEntity bookEntity = new InheritanceBookLeasableEntity();
+            Book book = new Book();
+            BookEntity bookEntity = new BookEntity();
             bookEntity.setAcquisitionDate(new Date());
             bookEntity.setAbstractItem(book);
 

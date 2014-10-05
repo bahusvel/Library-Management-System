@@ -1,7 +1,7 @@
 package managers.search.entities;
 
-import persistance.Employee;
 import managers.search.SearchBase;
+import persistance.Employee;
 
 /**
  * Created by denislavrov on 9/26/14.

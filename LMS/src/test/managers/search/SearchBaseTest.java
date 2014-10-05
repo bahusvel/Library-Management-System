@@ -1,10 +1,10 @@
 package test.managers.search;
 
-import persistance.Book;
 import managers.search.SearchBase;
-import org.junit.Test;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import persistance.Book;
 
 /**
 * SearchBase Tester.

@@ -1,18 +1,11 @@
 package test.Persistance;
 
-import persistance.*;
 import managers.HibernateManager;
-import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
-import managers.notification.NotificationManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
+import persistance.Member;
 
 /**
  * Member Tester.
@@ -53,6 +46,7 @@ public class MemberTest {
     /**
      * Method: leaseBook(Book book, Employee employee, Date until)
      */
+    /*
     @Test
     public void testOutdatedLeaseBook() throws Exception {
         try (AutoTransaction at = hm.newAutoTransaction()) {
@@ -155,4 +149,5 @@ public class MemberTest {
         NotificationManager.shutdown();
         while (!NotificationManager.isTerminated());
     }
+    */
 }

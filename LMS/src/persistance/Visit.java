@@ -1,5 +1,7 @@
 package persistance;
 
+import persistance.base.Lease;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -13,8 +15,7 @@ public class Visit {
     private long visitid;
     private Date entrytime;
     private Date exittime;
-    private Collection<BookLease> bookLeases;
-    private Collection<ItemLease> itemLeases;
+    private Collection<Lease> leases;
     private Member member;
     private boolean current = false;
 
@@ -30,7 +31,6 @@ public class Visit {
     }
 
     @Id
-    @Column(name = "visitid")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getVisitid() {
         return visitid;
@@ -40,7 +40,6 @@ public class Visit {
         this.visitid = visitid;
     }
 
-    @Column(name = "entrytime")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     public Date getEntrytime() {
@@ -51,7 +50,6 @@ public class Visit {
         this.entrytime = entrytime;
     }
 
-    @Column(name = "exittime")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     public Date getExittime() {
@@ -94,25 +92,15 @@ public class Visit {
     }
 
     @OneToMany(mappedBy = "visit")
-    public Collection<BookLease> getBookLeases() {
-        return bookLeases;
+    public Collection<Lease> getLeases() {
+        return leases;
     }
 
-    public void setBookLeases(Collection<BookLease> bookLeases) {
-        this.bookLeases = bookLeases;
-    }
-
-    @OneToMany(mappedBy = "visit")
-    public Collection<ItemLease> getItemLeases() {
-        return itemLeases;
-    }
-
-    public void setItemLeases(Collection<ItemLease> itemLeases) {
-        this.itemLeases = itemLeases;
+    public void setLeases(Collection<Lease> leases) {
+        this.leases = leases;
     }
 
     @ManyToOne
-    @JoinColumn(name = "memberid", referencedColumnName = "member_id", nullable = false)
     public Member getMember() {
         return member;
     }

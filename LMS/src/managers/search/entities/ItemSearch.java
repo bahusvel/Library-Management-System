@@ -1,7 +1,7 @@
 package managers.search.entities;
 
-import persistance.Item;
 import managers.search.SearchBase;
+import persistance.Item;
 
 /**
  * Created by denislavrov on 9/26/14.

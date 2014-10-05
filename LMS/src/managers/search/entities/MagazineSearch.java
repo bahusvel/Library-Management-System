@@ -1,7 +1,7 @@
 package managers.search.entities;
 
-import persistance.Magazine;
 import managers.search.SearchBase;
+import persistance.Magazine;
 
 /**
  * Created by denislavrov on 9/26/14.

@@ -1,8 +1,10 @@
 package persistance;
 
+
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
+import persistance.base.LeasableItem;
 import util.DBIO;
 
 import javax.persistence.*;
@@ -65,7 +67,7 @@ import java.util.Date;
                 })
 
 })
-public class Book {
+public class Book extends LeasableItem<Book> {
     /*
     Annotation Summary:
     @Transient -                Fields that are not persisted.
@@ -91,14 +93,9 @@ public class Book {
     private int edition = 1;
     private String category;
     private Double rating;
-    private int bookId;
     private String summary;
-    private Double price = 0.0;
     private byte[] image = DBIO.imageNotAvailable;
-    private Collection<BookEntity> bookEntities;
     private Collection<String> author;
-    private Collection<BookRequest> bookRequests;
-    private Collection<BookReturn> bookReturns;
 
    /*
    Hibernate was a little annoying here.
@@ -109,7 +106,6 @@ public class Book {
     */
 
 
-    @Field(name="author")
     @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
     public Collection<String> getAuthor() {
@@ -120,7 +116,6 @@ public class Book {
         this.author = author;
     }
 
-    @Column(name = "title")
     @NotNull
     @Fields({
             @Field(name = "store_title", analyzer = @Analyzer(definition = "projectionAnalyzer"), store = Store.COMPRESS),
@@ -136,7 +131,6 @@ public class Book {
         this.title = title;
     }
 
-    @Column(name = "release_date")
     @Field(analyze = Analyze.NO)
     @DateBridge(resolution = Resolution.YEAR)
     @Temporal(TemporalType.DATE)
@@ -148,7 +142,6 @@ public class Book {
         this.releaseDate = releaseDate;
     }
 
-    @Column(name = "pages")
     @Field(analyze = Analyze.NO)
     @NumericField
     public Integer getPages() {
@@ -159,7 +152,6 @@ public class Book {
         this.pages = pages;
     }
 
-    @Column(name = "publisher")
     @Field
     public String getPublisher() {
         return publisher;
@@ -169,7 +161,6 @@ public class Book {
         this.publisher = publisher;
     }
 
-    @Column(name = "description")
     @Field
     @Analyzer(definition = "TokenizingLower")
     public String getDescription() {
@@ -180,7 +171,6 @@ public class Book {
         this.description = description;
     }
 
-    @Column(name = "barcode")
     public Long getBarcode() {
         return barcode;
     }
@@ -189,7 +179,6 @@ public class Book {
         this.barcode = barcode;
     }
 
-    @Column(name = "isbn", unique = true)
     @Field
     public String getIsbn() {
         return isbn;
@@ -199,7 +188,6 @@ public class Book {
         this.isbn = isbn;
     }
 
-    @Column(name = "edition")
     @Field
     @NotNull
     public int getEdition() {
@@ -210,7 +198,6 @@ public class Book {
         this.edition = edition;
     }
 
-    @Column(name = "category")
     @Field(analyze = Analyze.NO)
     public String getCategory() {
         return category;
@@ -220,7 +207,6 @@ public class Book {
         this.category = category;
     }
 
-    @Column(name = "rating")
     @Field(analyze = Analyze.NO)
     @NumericField
     public Double getRating() {
@@ -231,18 +217,6 @@ public class Book {
         this.rating = rating;
     }
 
-    @Id
-    @Column(name = "book_id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY) // Could also try GenerationType.TABLE
-    public int getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-
-    @Column(name = "summary")
     @Field
     @Analyzer(definition = "TokenizingLower")
     public String getSummary() {
@@ -251,17 +225,6 @@ public class Book {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    @Column(name = "price")
-    @Field(analyze = Analyze.NO)
-    @NumericField // LUCENE NEEDS THIS HERE, OTHERWISE WONT RETURN RESULTS ON FACETING
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     @Override
@@ -292,74 +255,4 @@ public class Book {
 
     // NOTE TO SELF
     // DO NOT GENERATE equals AND hashCode for Cascaded entities.
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-
-        Book book = (Book) o;
-
-        if (bookId != book.bookId) return false;
-        if (edition != book.edition) return false;
-        if (barcode != null ? !barcode.equals(book.barcode) : book.barcode != null) return false;
-        if (category != null ? !category.equals(book.category) : book.category != null) return false;
-        if (description != null ? !description.equals(book.description) : book.description != null) return false;
-        if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
-        if (pages != null ? !pages.equals(book.pages) : book.pages != null) return false;
-        if (price != null ? !price.equals(book.price) : book.price != null) return false;
-        if (publisher != null ? !publisher.equals(book.publisher) : book.publisher != null) return false;
-        if (rating != null ? !rating.equals(book.rating) : book.rating != null) return false;
-        if (releaseDate != null ? !releaseDate.equals(book.releaseDate) : book.releaseDate != null) return false;
-        if (summary != null ? !summary.equals(book.summary) : book.summary != null) return false;
-        if (title != null ? !title.equals(book.title) : book.title != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
-        result = 31 * result + (pages != null ? pages.hashCode() : 0);
-        result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (barcode != null ? barcode.hashCode() : 0);
-        result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
-        result = 31 * result + edition;
-        result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (rating != null ? rating.hashCode() : 0);
-        result = 31 * result + bookId;
-        result = 31 * result + (summary != null ? summary.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
-    }
-
-    @OneToMany(mappedBy = "book")
-    public Collection<BookReturn> getBookReturns() {
-        return bookReturns;
-    }
-
-    public void setBookReturns(Collection<BookReturn> bookReturns) {
-        this.bookReturns = bookReturns;
-    }
-
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Collection<BookEntity> getBookEntities() {
-        return bookEntities;
-    }
-
-    public void setBookEntities(Collection<BookEntity> bookEntities) {
-        this.bookEntities = bookEntities;
-    }
-
-    @OneToMany(mappedBy = "book")
-    public Collection<BookRequest> getBookRequests() {
-        return bookRequests;
-    }
-
-    public void setBookRequests(Collection<BookRequest> bookRequests) {
-        this.bookRequests = bookRequests;
-    }
-
 }

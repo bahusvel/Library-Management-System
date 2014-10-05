@@ -1,13 +1,8 @@
 package test.Persistance;
 
-import persistance.Book;
-import persistance.Employee;
-import persistance.Item;
 import managers.HibernateManager;
-import managers.HibernateManager.AutoTransaction;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Book Tester.
@@ -28,6 +23,7 @@ public class EmployeeTester {
     public void after() throws Exception {
     }
 
+    /*
     @Test
     public void testAddBookEntities() throws Exception {
         try (AutoTransaction at = hm.newAutoTransaction()) {
@@ -47,5 +43,6 @@ public class EmployeeTester {
             at.tx.commit();
         }
     }
+    */
 
 }

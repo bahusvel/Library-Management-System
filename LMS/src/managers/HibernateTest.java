@@ -1,7 +1,7 @@
 package managers;
 
-import persistance.Employee;
 import managers.HibernateManager.AutoTransaction;
+import persistance.Employee;
 
 /**
  * Created by denislavrov on 9/2/14.

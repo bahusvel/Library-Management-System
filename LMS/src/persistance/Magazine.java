@@ -1,8 +1,12 @@
 package persistance;
 
 import org.hibernate.search.annotations.*;
+import persistance.base.AbstractItem;
+import persistance.base.Edition;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,18 +16,14 @@ import java.util.Collection;
  */
 @Entity
 @Indexed
-public class Magazine {
+public class Magazine extends AbstractItem<Magazine> {
     private String title;
-    private int magazineId;
     private String publisher;
     private String frequency;
     private String language;
     private String isbn;
-    private Double price;
-    private Collection<MagazineEdition> magazineEditions = new ArrayList<>();
+    private Collection<Edition<Magazine>> magazineEditions = new ArrayList<>();
 
-
-    @Column(name = "title")
     @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "TokenizingLower")
@@ -35,19 +35,6 @@ public class Magazine {
         this.title = title;
     }
 
-    @Id
-    @Column(name = "magazine_id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public int getMagazineId() {
-        return magazineId;
-    }
-
-    public void setMagazineId(int magazineId) {
-        this.magazineId = magazineId;
-    }
-
-
-    @Column(name = "publisher")
     @Field
     public String getPublisher() {
         return publisher;
@@ -58,7 +45,6 @@ public class Magazine {
     }
 
 
-    @Column(name = "frequency")
     public String getFrequency() {
         return frequency;
     }
@@ -68,7 +54,6 @@ public class Magazine {
     }
 
 
-    @Column(name = "language")
     @Field(analyze = Analyze.NO)
     public String getLanguage() {
         return language;
@@ -79,7 +64,6 @@ public class Magazine {
     }
 
 
-    @Column(name = "isbn", unique = true)
     @Field
     public String getIsbn() {
         return isbn;
@@ -90,54 +74,13 @@ public class Magazine {
     }
 
 
-    @Column(name = "price")
-    @Field(analyze = Analyze.NO)
-    @NumericField
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Magazine)) return false;
-
-        Magazine magazine = (Magazine) o;
-
-        if (magazineId != magazine.magazineId) return false;
-        if (frequency != null ? !frequency.equals(magazine.frequency) : magazine.frequency != null) return false;
-        if (isbn != null ? !isbn.equals(magazine.isbn) : magazine.isbn != null) return false;
-        if (language != null ? !language.equals(magazine.language) : magazine.language != null) return false;
-        if (price != null ? !price.equals(magazine.price) : magazine.price != null) return false;
-        if (publisher != null ? !publisher.equals(magazine.publisher) : magazine.publisher != null) return false;
-        if (title != null ? !title.equals(magazine.title) : magazine.title != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + magazineId;
-        result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
-        result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
-        result = 31 * result + (language != null ? language.hashCode() : 0);
-        result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
-    }
-
-    @OneToMany(mappedBy = "magazine", cascade = CascadeType.ALL)
-    public Collection<MagazineEdition> getMagazineEditions() {
+    @OneToMany(mappedBy = "abstractItem", cascade = CascadeType.ALL)
+    public Collection<Edition<Magazine>> getMagazineEditions() {
         return magazineEditions;
     }
 
-    public void setMagazineEditions(Collection<MagazineEdition> magazineEditions) {
-        magazineEditions.forEach(m -> m.setMagazine(this));
+    public void setMagazineEditions(Collection<Edition<Magazine>> magazineEditions) {
+        magazineEditions.forEach(m -> m.setAbstractItem(this));
         this.magazineEditions = magazineEditions;
     }
 }

@@ -1,38 +1,36 @@
 package persistance;
 
 
-import managers.notification.Notification;
-import managers.notification.NotificationManager;
 import org.apache.solr.analysis.LowerCaseFilterFactory;
 import org.apache.solr.analysis.PhoneticFilterFactory;
 import org.apache.solr.analysis.StandardTokenizerFactory;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
+import persistance.base.Lease;
+import persistance.base.Return;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by denislavrov on 9/2/14.
  */
 @Entity
 @Indexed
+
 @AnalyzerDef(name="NameAnalyzer",
 tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
 filters = {
         @TokenFilterDef(factory = LowerCaseFilterFactory.class),
         @TokenFilterDef(factory = PhoneticFilterFactory.class,
-                params = {@Parameter(name="encoder", value="DOUBLEMETAPHONE")})
+                params = { @Parameter(name="encoder", value="DOUBLEMETAPHONE")})
 })
+
 public class Member {
     private String firstname;
     private String lastname;
@@ -45,10 +43,8 @@ public class Member {
     private int memberId;
     private double balance = 0.0;
     private String password;
-    private Collection<BookLease> bookLeases;
-    private Collection<BookReturn> bookReturns;
-    private Collection<ItemLease> itemLeases;
-    private Collection<ItemReturn> itemReturns;
+    private Collection<Lease> leases;
+    private Collection<Return> returns;
     private Collection<Visit> visits;
     private Visit currentVisit;
 
@@ -75,7 +71,6 @@ public class Member {
         this.password = password;
     }
 
-    @Column(name = "firstname")
     @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "NameAnalyzer")
@@ -87,7 +82,6 @@ public class Member {
         this.firstname = firstname;
     }
 
-    @Column(name = "lastname")
     @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "NameAnalyzer")
@@ -99,7 +93,6 @@ public class Member {
         this.lastname = lastname;
     }
 
-    @Column(name = "dob")
     @NotNull
     @Temporal(TemporalType.DATE)
     public Date getDob() {
@@ -110,7 +103,6 @@ public class Member {
         this.dob = dob;
     }
 
-    @Column(name = "registration_date")
     @NotNull
     @Temporal(TemporalType.DATE)
     public Date getRegistrationDate() {
@@ -121,7 +113,6 @@ public class Member {
         this.registrationDate = registrationDate;
     }
 
-    @Column(name = "username", unique = true)
     @NotNull
     @Field
     public String getUsername() {
@@ -142,7 +133,6 @@ public class Member {
         this.password = password;
     }
 
-    @Column(name = "email")
     @NotNull
     @Email
     @Field
@@ -154,7 +144,6 @@ public class Member {
         this.email = email;
     }
 
-    @Column(name = "phone_number")
     @Field
     public String getPhoneNumber() {
         return phoneNumber;
@@ -165,7 +154,6 @@ public class Member {
     }
 
     @Id
-    @Column(name = "member_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getMemberId() {
         return memberId;
@@ -175,7 +163,6 @@ public class Member {
         this.memberId = memberId;
     }
 
-    @Column(name = "balance")
     @NotNull
     public double getBalance() {
         return balance;
@@ -244,39 +231,21 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     @Size(min=0, max = 5)
-    public Collection<BookLease> getBookLeases() {
-        return bookLeases;
+    public Collection<Lease> getLeases() {
+        return leases;
     }
 
-    public void setBookLeases(Collection<BookLease> bookLeases) {
-        this.bookLeases = bookLeases;
-    }
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    public Collection<BookReturn> getBookReturns() {
-        return bookReturns;
-    }
-
-    public void setBookReturns(Collection<BookReturn> bookReturns) {
-        this.bookReturns = bookReturns;
-    }
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Collection<ItemLease> getItemLeases() {
-        return itemLeases;
-    }
-
-    public void setItemLeases(Collection<ItemLease> itemLeases) {
-        this.itemLeases = itemLeases;
+    public void setLeases(Collection<Lease> leases) {
+        this.leases = leases;
     }
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    public Collection<ItemReturn> getItemReturns() {
-        return itemReturns;
+    public Collection<Return> getBookReturns() {
+        return returns;
     }
 
-    public void setItemReturns(Collection<ItemReturn> itemReturns) {
-        this.itemReturns = itemReturns;
+    public void setBookReturns(Collection<Return> returns) {
+        this.returns = returns;
     }
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -313,8 +282,9 @@ public class Member {
         currentVisit = null;
         return "Sign Out OK";
     }
+/*
 
-    public String leaseBook(Book book, Employee employee, Date until){
+    public String leaseBook(Book book, InheritanceEmployee employee, Date until){
         if (bookLeases.size() > 4) return "Limit of 5 books per Member reached.";
 
         BookEntity leaseEnity = null;
@@ -333,7 +303,7 @@ public class Member {
         return "Lease was successful";
     }
 
-    public String returnBook(BookEntity bookEntity, Employee employee){
+    public String returnBook(BookEntity bookEntity, InheritanceEmployee employee){
         BookLease bookLease = bookEntity.getBookLease();
         if (!bookLease.getMember().equals(this)) return "You did not lease that book";
         Date dueDate = new Date(bookLease.getDueDate().getTime());
@@ -351,7 +321,7 @@ public class Member {
         return "Return successful";
     }
 
-    public String looseBook(BookEntity bookEntity, Employee employee){
+    public String looseBook(BookEntity bookEntity, InheritanceEmployee employee){
         BookLease bookLease = bookEntity.getBookLease();
         if (!bookLease.getMember().equals(this)) return "You did not lease that book";
         BookReturn bookReturn = new BookReturn(bookLease, employee);
@@ -365,7 +335,7 @@ public class Member {
         return "Lost book acknowledge";
     }
 
-    public String leaseItem(Item item, Employee employee, Date until){
+    public String leaseItem(Item item, InheritanceEmployee employee, Date until){
         if (itemLeases.size() > 4) return "Limit of 5 items per Member reached.";
 
         ItemEntity leaseEnity = null;
@@ -384,7 +354,7 @@ public class Member {
         return "Lease was successful";
     }
 
-    public String returnItem(ItemEntity itemEntity, Employee employee){
+    public String returnItem(ItemEntity itemEntity, InheritanceEmployee employee){
         ItemLease itemLease = itemEntity.getItemLease();
         if (!itemLease.getMember().equals(this)) return "You did not lease that item";
         Date dueDate = new Date(itemLease.getDueDate().getTime());
@@ -402,7 +372,7 @@ public class Member {
         return "Return successful";
     }
 
-    public String looseItem(ItemEntity itemEntity, Employee employee){
+    public String looseItem(ItemEntity itemEntity, InheritanceEmployee employee){
         ItemLease itemLease = itemEntity.getItemLease();
         if (!itemLease.getMember().equals(this)) return "You did not lease that item";
         ItemReturn itemReturn = new ItemReturn(itemLease, employee);
@@ -419,7 +389,7 @@ public class Member {
     private List<Book> booksOverdue(){
         ArrayList<Book> books = new ArrayList<>();
         Date today = new Date();
-        bookLeases.stream().filter(bl -> bl.getDueDate().before(today)).forEach(bl -> books.add(bl.getBookEntity().getBook()));
+        bookLeases.stream().filter(bl -> bl.getDueDate().before(today)).forEach(bl -> books.add(bl.getLeasableEntity().getAbstractItem()));
         return books;
     }
 
@@ -468,6 +438,6 @@ public class Member {
         Notification notification = new Notification("Library Reminder",message.toString(),email);
         NotificationManager.submitNotification(notification);
     }
-
+*/
 
 }
