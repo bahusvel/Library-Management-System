@@ -310,7 +310,7 @@ public class ReportManager {
         Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
         Date back = Date.from(instant);
         try {
-            booksInLease();
+            bookSummaryReport();
         } catch (JRException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
