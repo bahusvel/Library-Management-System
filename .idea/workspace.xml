@@ -10,26 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4757a8b0-08d3-4618-a2e5-f1117815a828" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_projectlombok_lombok_1_14_8.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/AbstractItem.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/AbstractItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Address.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Address.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Book.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Book.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/BookEntity.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/BookEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Edition.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Edition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Employee.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Employee.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Entity.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Entity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Item.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Item.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/ItemEntity.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/ItemEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/LMS.iml" afterPath="$PROJECT_DIR$/LMS/LMS.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableEntity.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableItem.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/LeasableItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Lease.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Lease.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Magazine.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Magazine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Member.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Member.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Request.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Request.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Return.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Return.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Visit.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Visit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Library-Management-System.iws" />
@@ -439,7 +419,7 @@
       <recent name="Persistence" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HibernateManagerTest.testAddEntity">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="chronon">
         <include>
@@ -936,10 +916,10 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.HibernateManagerTest.testAddEntity" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.SearchManagerTest.testPhoneticSearch" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.HibernateManagerTest.testInheritance" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.HibernateManagerTest.testInheritance" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.HibernateManagerTest.testAddEntity" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.SearchManagerTest.testPhoneticSearch" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1041,7 +1021,7 @@
       <workItem from="1412464696209" duration="6263000" />
       <workItem from="1412481431842" duration="14000" />
       <workItem from="1412570436983" duration="60000" />
-      <workItem from="1412582335164" duration="3398000" />
+      <workItem from="1412582335164" duration="3841000" />
     </task>
     <task id="LOCAL-00001" summary="Datastructure definition">
       <created>1409631211635</created>
@@ -1311,11 +1291,15 @@
       <created>1412481187068</created>
       <updated>1412481187069</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Lombok to generate getters and setters">
+      <created>1412585776062</created>
+      <updated>1412585776062</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="268191000" />
+    <option name="totallyTimeSpent" value="268634000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1423,7 +1407,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="More functionality" />
     <MESSAGE value="LooseBook, ReturnBook" />
     <MESSAGE value="Detailed report completed." />
     <MESSAGE value="Added things" />
@@ -1448,7 +1431,8 @@
     <MESSAGE value="Replaced entities" />
     <MESSAGE value="Somewhat working&#10;" />
     <MESSAGE value="Added library functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added library functionality" />
+    <MESSAGE value="Lombok to generate getters and setters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lombok to generate getters and setters" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1548,13 +1532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LMS/src/test/fxsearch/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="461" max-vertical-offset="1875">
-          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LMS/src/managers/search/entities/ItemSearch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
@@ -1614,13 +1591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LMS/src/test/managers/ReportManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80750406" vertical-offset="0" max-vertical-offset="810">
-          <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LMS/src/test/Persistance/MemberTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="632" max-vertical-offset="1695">
@@ -1657,17 +1627,6 @@
         <state vertical-scroll-proportion="0.43445122" vertical-offset="0" max-vertical-offset="1125">
           <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LMS/src/persistance/BookEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding>
-            <element signature="e#356#357#0" expanded="true" />
-            <element signature="e#400#401#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1726,14 +1685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LMS/src/test/managers/HibernateManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8744395" vertical-offset="810" max-vertical-offset="2430">
-          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LMS/src/persistance/BookLease.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
@@ -1747,16 +1698,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="270">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LMS/src/persistance/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
-          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1783,14 +1724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
           <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LMS/src/persistance/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1305" max-vertical-offset="2070">
-          <caret line="21" column="64" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
           <folding />
         </state>
       </provider>
@@ -1869,6 +1802,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38116592" vertical-offset="0" max-vertical-offset="669">
           <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LMS/src/test/managers/ReportManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7399103" vertical-offset="0" max-vertical-offset="810">
+          <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LMS/src/test/managers/HibernateManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="2430">
+          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LMS/src/persistance/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40358743" vertical-offset="0" max-vertical-offset="669">
+          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LMS/src/persistance/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20179372" vertical-offset="0" max-vertical-offset="2070">
+          <caret line="21" column="64" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LMS/src/persistance/BookEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33632287" vertical-offset="0" max-vertical-offset="669">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LMS/src/test/fxsearch/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.89786583" vertical-offset="1219" max-vertical-offset="1875">
+          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
           <folding />
         </state>
       </provider>
