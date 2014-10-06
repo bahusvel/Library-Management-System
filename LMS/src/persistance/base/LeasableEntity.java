@@ -1,5 +1,7 @@
 package persistance.base;
 
+import lombok.*;
+
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -9,10 +11,15 @@ import java.util.Date;
 /**
  * Created by denislavrov on 9/30/14.
  */
+@Data
 @javax.persistence.Entity
+@EqualsAndHashCode(callSuper = true, exclude = {"lease", "returns"})
 public class LeasableEntity<T extends AbstractItem<T>> extends Entity<T>{
+    @NotNull
     protected boolean leased = false;
+    @OneToOne(mappedBy = "leasableEntity")
     protected Lease<T> lease;
+    @OneToMany(mappedBy = "leasableEntity")
     protected Collection<Return<T>> returns;
 
     public LeasableEntity(){
@@ -25,32 +32,5 @@ public class LeasableEntity<T extends AbstractItem<T>> extends Entity<T>{
         this.acquisitionDate = acquisitionDate;
     }
 
-    @NotNull
-    public boolean isLeased() {
-        return leased;
-    }
-
-    public void setLeased(boolean leased) {
-        this.leased = leased;
-    }
-
-
-    @OneToOne(mappedBy = "leasableEntity")
-    public Lease<T> getLease() {
-        return lease;
-    }
-
-    public void setLease(Lease<T> lease) {
-        this.lease = lease;
-    }
-
-    @OneToMany(mappedBy = "leasableEntity")
-    public Collection<Return<T>> getReturns() {
-        return returns;
-    }
-
-    public void setReturns(Collection<Return<T>> returns) {
-        this.returns = returns;
-    }
 
 }

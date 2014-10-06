@@ -1,6 +1,7 @@
 package persistance;
 
 
+import lombok.*;
 import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
@@ -17,6 +18,8 @@ import java.util.Date;
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Data
+@EqualsAndHashCode(callSuper = true, exclude = {"author", "image"})
 @Entity
 @Indexed
 @AnalyzerDefs({
@@ -83,18 +86,43 @@ public class Book extends LeasableItem<Book> {
     @[One|Many]To[One|Many] -   Relationship Types.
      */
 
+    @NotNull
+    @Fields({
+            @Field(name = "store_title", analyzer = @Analyzer(definition = "projectionAnalyzer"), store = Store.COMPRESS),
+            @Field(name = "title", analyzer = @Analyzer(definition = "TokenizingLower")),
+            @Field(name = "edgeTitle", analyzer = @Analyzer(definition = "autoEdge")),
+            @Field(name = "ngramTitle", analyzer = @Analyzer(definition = "autoNgram")),
+    })
     private String title;
+    @Field(analyze = Analyze.NO)
+    @DateBridge(resolution = Resolution.YEAR)
+    @Temporal(TemporalType.DATE)
     private Date releaseDate;
+    @Field(analyze = Analyze.NO)
+    @NumericField
     private Integer pages;
+    @Field
     private String publisher;
+    @Field
+    @Analyzer(definition = "TokenizingLower")
     private String description;
     private Long barcode;
+    @Field
     private String isbn;
+    @Field
+    @NotNull
     private int edition = 1;
+    @Field(analyze = Analyze.NO)
     private String category;
+    @Field(analyze = Analyze.NO)
+    @NumericField
     private Double rating;
+    @Field
+    @Analyzer(definition = "TokenizingLower")
     private String summary;
     private byte[] image = DBIO.imageNotAvailable;
+    @IndexedEmbedded
+    @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
     private Collection<String> author;
 
    /*
@@ -106,143 +134,6 @@ public class Book extends LeasableItem<Book> {
     */
 
 
-    @IndexedEmbedded
-    @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
-    public Collection<String> getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Collection<String> author) {
-        this.author = author;
-    }
-
-    @NotNull
-    @Fields({
-            @Field(name = "store_title", analyzer = @Analyzer(definition = "projectionAnalyzer"), store = Store.COMPRESS),
-            @Field(name = "title", analyzer = @Analyzer(definition = "TokenizingLower")),
-            @Field(name = "edgeTitle", analyzer = @Analyzer(definition = "autoEdge")),
-            @Field(name = "ngramTitle", analyzer = @Analyzer(definition = "autoNgram")),
-    })
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Field(analyze = Analyze.NO)
-    @DateBridge(resolution = Resolution.YEAR)
-    @Temporal(TemporalType.DATE)
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    @Field(analyze = Analyze.NO)
-    @NumericField
-    public Integer getPages() {
-        return pages;
-    }
-
-    public void setPages(Integer pages) {
-        this.pages = pages;
-    }
-
-    @Field
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    @Field
-    @Analyzer(definition = "TokenizingLower")
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(Long barcode) {
-        this.barcode = barcode;
-    }
-
-    @Field
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    @Field
-    @NotNull
-    public int getEdition() {
-        return edition;
-    }
-
-    public void setEdition(int edition) {
-        this.edition = edition;
-    }
-
-    @Field(analyze = Analyze.NO)
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    @Field(analyze = Analyze.NO)
-    @NumericField
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
-    @Field
-    @Analyzer(definition = "TokenizingLower")
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author=" + author +
-                '}';
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     public void imageToDatabase(File f){
         image = DBIO.imageFromFile(f);
     }
@@ -252,7 +143,4 @@ public class Book extends LeasableItem<Book> {
         if (ret != null) return ret;
         return DBIO.bImageNotAvailable;
     }
-
-    // NOTE TO SELF
-    // DO NOT GENERATE equals AND hashCode for Cascaded entities.
 }

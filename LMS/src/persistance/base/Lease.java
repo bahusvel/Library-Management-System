@@ -1,5 +1,6 @@
 package persistance.base;
 
+import lombok.*;
 import persistance.Employee;
 import persistance.Member;
 import persistance.Visit;
@@ -12,14 +13,27 @@ import java.util.Date;
  * Created by denislavrov on 9/30/14.
  */
 @javax.persistence.Entity
+@Data
+@EqualsAndHashCode(exclude = {"leasableEntity", "employee", "member", "visit"})
 public class Lease<T extends AbstractItem<T>> {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected long leaseId;
+    @Temporal(TemporalType.DATE)
+    @NotNull
     protected Date leaseDate;
+    @Temporal(TemporalType.DATE)
+    @NotNull
     protected Date dueDate;
+    @NotNull
     protected boolean renewed = false;
+    @OneToOne
     protected LeasableEntity<T> leasableEntity;
+    @ManyToOne
     protected Employee employee;
+    @ManyToOne
     protected Member member;
+    @ManyToOne
     protected Visit visit;
 
     public Lease(Date leaseDate, Date dueDate, Member member, Employee employee, LeasableEntity<T> entity, Visit visit) {
@@ -33,82 +47,5 @@ public class Lease<T extends AbstractItem<T>> {
 
     public Lease() {
     }
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public long getLeaseId() {
-        return leaseId;
-    }
-
-    public void setLeaseId(long leaseId) {
-        this.leaseId = leaseId;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @NotNull
-    public Date getLeaseDate() {
-        return leaseDate;
-    }
-
-    public void setLeaseDate(Date leaseDate) {
-        this.leaseDate = leaseDate;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @NotNull
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    @NotNull
-    public boolean isRenewed() {
-        return renewed;
-    }
-
-    public void setRenewed(boolean renewed) {
-        this.renewed = renewed;
-    }
-
-
-    @OneToOne
-    public LeasableEntity<T> getLeasableEntity() {
-        return leasableEntity;
-    }
-
-    public void setLeasableEntity(LeasableEntity<T> leasableEntity) {
-        this.leasableEntity = leasableEntity;
-    }
-
-    @ManyToOne
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    @ManyToOne
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
-    @ManyToOne
-    public Visit getVisit() {
-        return visit;
-    }
-
-    public void setVisit(Visit visit) {
-        this.visit = visit;
-    }
-
 }
 

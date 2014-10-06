@@ -1,6 +1,7 @@
 package persistance;
 
 
+import lombok.*;
 import managers.notification.Notification;
 import managers.notification.NotificationManager;
 import org.apache.solr.analysis.LowerCaseFilterFactory;
@@ -26,9 +27,10 @@ import java.util.List;
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Data
+@EqualsAndHashCode(exclude = {"leases","returns","visits","currentVisit"})
 @Entity
 @Indexed
-
 @AnalyzerDef(name="NameAnalyzer",
 tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
 filters = {
@@ -38,25 +40,53 @@ filters = {
 })
 
 public class Member {
+    @NotNull
+    @Field(store = Store.COMPRESS)
+    @Analyzer(definition = "NameAnalyzer")
     private String firstname;
+    @NotNull
+    @Field(store = Store.COMPRESS)
+    @Analyzer(definition = "NameAnalyzer")
     private String lastname;
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date dob;
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date registrationDate = new Date(); // present time
+    @NotNull
+    @Field
     private String username;
+    @Embedded
     private Address address = new Address();
+    @NotNull
+    @Email
+    @Field
     private String email;
+    @Field
     private String phoneNumber;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int memberId;
+    @NotNull
     private double balance = 0.0;
+    @NotNull
     private String password;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Size(min=0, max = 5)
     private Collection<Lease> leases;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Collection<Return> returns;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Collection<Visit> visits;
+    @OneToOne(cascade = CascadeType.ALL)
     private Visit currentVisit;
 
     // JAVAFX PROPERTIES START
-    public LocalDate pDOB = LocalDate.now();
     @Transient
+    public LocalDate pDOB = LocalDate.now();
+
+
     public LocalDate getPDOB() {
         return pDOB;
     }
@@ -77,202 +107,6 @@ public class Member {
         this.password = password;
     }
 
-    @NotNull
-    @Field(store = Store.COMPRESS)
-    @Analyzer(definition = "NameAnalyzer")
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    @NotNull
-    @Field(store = Store.COMPRESS)
-    @Analyzer(definition = "NameAnalyzer")
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    @NotNull
-    @Field
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @NotNull
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @NotNull
-    @Email
-    @Field
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Field
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public int getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
-    }
-
-    @NotNull
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    @Embedded
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Member)) return false;
-
-        Member member = (Member) o;
-
-        if (Double.compare(member.balance, balance) != 0) return false;
-        if (memberId != member.memberId) return false;
-        if (address != null ? !address.equals(member.address) : member.address != null) return false;
-        if (dob != null ? !dob.equals(member.dob) : member.dob != null) return false;
-        if (email != null ? !email.equals(member.email) : member.email != null) return false;
-        if (firstname != null ? !firstname.equals(member.firstname) : member.firstname != null) return false;
-        if (lastname != null ? !lastname.equals(member.lastname) : member.lastname != null) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(member.phoneNumber) : member.phoneNumber != null) return false;
-        if (registrationDate != null ? !registrationDate.equals(member.registrationDate) : member.registrationDate != null)
-            return false;
-        if (username != null ? !username.equals(member.username) : member.username != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = firstname != null ? firstname.hashCode() : 0;
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + (dob != null ? dob.hashCode() : 0);
-        result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + memberId;
-        temp = Double.doubleToLongBits(balance);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
-    }
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Size(min=0, max = 5)
-    public Collection<Lease> getLeases() {
-        return leases;
-    }
-
-    public void setLeases(Collection<Lease> leases) {
-        this.leases = leases;
-    }
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    public Collection<Return> getBookReturns() {
-        return returns;
-    }
-
-    public void setBookReturns(Collection<Return> returns) {
-        this.returns = returns;
-    }
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    public Collection<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Collection<Visit> visits) {
-        this.visits = visits;
-    }
-
-    @OneToOne(cascade = CascadeType.ALL)
-    public Visit getCurrentVisit() {
-        return currentVisit;
-    }
-
-    public void setCurrentVisit(Visit currentVisit) {
-        this.currentVisit = currentVisit;
-    }
-
-    // ACTIVITY METHODS
 
     public String signIn(){
         Date cTimeStamp = new Date();

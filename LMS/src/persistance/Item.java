@@ -1,5 +1,6 @@
 package persistance;
 
+import lombok.*;
 import org.hibernate.search.annotations.*;
 import persistance.base.LeasableItem;
 import util.DBIO;
@@ -12,65 +13,24 @@ import java.io.File;
 /**
  * Created by denislavrov on 9/2/14.
  */
+@Data
+@EqualsAndHashCode(callSuper = true, exclude = "image")
 @Entity
 @Indexed
 public class Item extends LeasableItem<Item> {
-    private String name;
-    private String description;
-    private String condition;
-    private String category;
-    private byte[] image = DBIO.imageNotAvailable;
-
-
     @NotNull
     @Field(store = Store.COMPRESS)
     @Analyzer(definition = "TokenizingLower")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
+    private String name;
     @Field
     @Analyzer(definition = "TokenizingLower")
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
+    private String description;
     @Field(analyze = Analyze.NO)
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
-
+    private String condition;
     @Field(analyze = Analyze.NO)
-    public String getCategory() {
-        return category;
-    }
+    private String category;
+    private byte[] image = DBIO.imageNotAvailable;
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
     public void imageToDatabase(File f){
         image = DBIO.imageFromFile(f);
