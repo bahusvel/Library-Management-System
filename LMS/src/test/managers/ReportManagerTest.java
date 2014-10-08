@@ -40,8 +40,20 @@ public class ReportManagerTest {
      * Method: itemsInLease()
      */
     @Test
-    public void testBooksInLease() throws Exception {
+    public void testItemsInLease() throws Exception {
         ReportManager.itemsInLease();
+        assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
+    }
+
+    @Test
+    public void testMemberReport() throws Exception {
+        ReportManager.memberReport();
+        assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
+    }
+
+    @Test
+    public void testItemSummaryReport() throws Exception {
+        ReportManager.itemSummaryReport();
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
     }
 
