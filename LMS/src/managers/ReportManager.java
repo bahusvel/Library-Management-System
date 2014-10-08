@@ -243,21 +243,4 @@ public class ReportManager {
         JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
         JasperViewer.viewReport(jp);
     }
-
-    public static void main(String[] args) {
-
-        ZonedDateTime zonedDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).minusMonths(1);
-        Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
-        Date back = Date.from(instant);
-        try {
-            itemSummaryReport();
-        } catch (JRException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
 }
