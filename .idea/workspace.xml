@@ -10,11 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4757a8b0-08d3-4618-a2e5-f1117815a828" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LMS/src/persistance/DBImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Book.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Book.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Edition.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Edition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/test/managers/HibernateManagerTest.java" afterPath="$PROJECT_DIR$/LMS/src/test/managers/HibernateManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/Item.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/Item.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LMS/src/persistance/base/Return.java" afterPath="$PROJECT_DIR$/LMS/src/persistance/base/Return.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -1226,7 +1221,7 @@
       <workItem from="1412570436983" duration="60000" />
       <workItem from="1412582335164" duration="3841000" />
       <workItem from="1412751372142" duration="198000" />
-      <workItem from="1412804373967" duration="1327000" />
+      <workItem from="1412804373967" duration="1352000" />
     </task>
     <task id="LOCAL-00001" summary="Datastructure definition">
       <created>1409631211635</created>
@@ -1500,11 +1495,15 @@
       <created>1412585776062</created>
       <updated>1412585776062</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Image composition">
+      <created>1412805732264</created>
+      <updated>1412805732265</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="270159000" />
+    <option name="totallyTimeSpent" value="270184000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1612,7 +1611,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="LooseBook, ReturnBook" />
     <MESSAGE value="Detailed report completed." />
     <MESSAGE value="Added things" />
     <MESSAGE value="Passwords" />
@@ -1637,7 +1635,8 @@
     <MESSAGE value="Somewhat working&#10;" />
     <MESSAGE value="Added library functionality" />
     <MESSAGE value="Lombok to generate getters and setters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lombok to generate getters and setters" />
+    <MESSAGE value="Image composition" />
+    <option name="LAST_COMMIT_MESSAGE" value="Image composition" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

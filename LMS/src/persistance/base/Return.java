@@ -52,6 +52,7 @@ public class Return<T extends AbstractItem<T>> {
         member = lease.getMember();
         this.employee = employee;
         returnDate = new Date();
+        leasableItem = (LeasableItem<T>) lease.getLeasableEntity().getAbstractItem();
     }
 
 
