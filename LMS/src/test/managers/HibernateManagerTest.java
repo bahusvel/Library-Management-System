@@ -50,13 +50,13 @@ public class HibernateManagerTest {
         byte[] oImage = IOUtils.toByteArray(HibernateManagerTest.class.getClassLoader().getResourceAsStream("test.jpeg"));
         try(AutoTransaction at = hm.newAutoTransaction()){
             Book b = (Book) at.session.get(Book.class, BOOK);
-            b.setImage(oImage);
+            b.getImage().setImage(oImage);
             at.session.saveOrUpdate(b);
             at.tx.commit();
         }
         byte[] nImage;
         try(AutoSession as = hm.newAutoSession()){
-            nImage = ((Book) as.session.get(Book.class, BOOK)).getImage();
+            nImage = ((Book) as.session.get(Book.class, BOOK)).getImage().getImage();
         }
 
         assertArrayEquals("Image didn’t load or save correctly", oImage, nImage);

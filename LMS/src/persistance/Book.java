@@ -120,7 +120,8 @@ public class Book extends LeasableItem<Book> {
     @Field
     @Analyzer(definition = "TokenizingLower")
     private String summary;
-    private byte[] image = DBIO.imageNotAvailable;
+    @Embedded
+    private DBImage image = new DBImage();
     @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
     private Collection<String> author;
@@ -134,13 +135,5 @@ public class Book extends LeasableItem<Book> {
     */
 
 
-    public void imageToDatabase(File f){
-        image = DBIO.imageFromFile(f);
-    }
 
-    public BufferedImage imageFromDatabase(){
-        BufferedImage ret = DBIO.bImageFromArray(image);
-        if (ret != null) return ret;
-        return DBIO.bImageNotAvailable;
-    }
 }
