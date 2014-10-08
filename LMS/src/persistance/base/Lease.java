@@ -41,7 +41,7 @@ public class Lease<T extends AbstractItem<T>> {
         this.dueDate = dueDate;
         this.member = member;
         this.employee = employee;
-        this.leasableEntity = entity;
+        leasableEntity = entity;
         this.visit = visit;
     }
 

@@ -37,11 +37,11 @@ public class ReportManagerTest {
 
 
     /**
-     * Method: booksInLease()
+     * Method: itemsInLease()
      */
     @Test
     public void testBooksInLease() throws Exception {
-        ReportManager.booksInLease();
+        ReportManager.itemsInLease();
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
     }
 

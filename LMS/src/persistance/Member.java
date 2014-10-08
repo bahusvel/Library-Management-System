@@ -136,7 +136,7 @@ public class Member {
         }
         if (leaseEntity == null) return "Item wasn’t available";
         if (currentVisit == null) return "Customer hasn't signed in";
-        Lease<T> lease = new Lease<>(new Date(), until, this, employee, leaseEntity ,currentVisit);
+        Lease<T> lease = new Lease<>(new Date(), until, this, employee, leaseEntity ,currentVisit); // TODO I would like this to be BookLease/ItemLease
         leaseEntity.setLease(lease);
         leaseEntity.setLeased(true);
         leases.add(lease);

@@ -77,24 +77,18 @@ public class ReportManager {
         DynamicReport dr = drb
                 .addColumn("First Name", "firstname", String.class.getName(), 30)
                 .addColumn("Last Name", "lastname", String.class.getName(), 30)
-                .addColumn("Books Leased in Total", "booksleased", Long.class.getName(), 30)
-                .addColumn("Books in lease", "booksinlease", Long.class.getName(), 30)
-                .addColumn("Books Lost", "bookslost", Long.class.getName(), 30)
-                .addColumn("Items Leased in Total", "itemsleased", Long.class.getName(), 30)
-                .addColumn("Items in lease", "itemsinlease", Long.class.getName(), 30)
-                .addColumn("Items Lost", "itemslost", Long.class.getName(), 30)
+                .addColumn("Items Leased in Total", "booksleased", Long.class.getName(), 30)
+                .addColumn("Items in lease", "booksinlease", Long.class.getName(), 30)
+                .addColumn("Items Lost", "bookslost", Long.class.getName(), 30)
                 .setTitle("Members report.")
                 .setPrintBackgroundOnOddRows(true)
                 .setUseFullPageWidth(true)
                 .setPageSizeAndOrientation(Page.Page_A4_Landscape())
                 .setQuery("SELECT m.firstname as firstname," +
                         " m.lastname as lastname," +
-                        " (select count(*) from m.bookReturns) as booksleased," +
-                        " (select count(*) from m.bookLeases) as booksinlease," +
-                        " (select count(*) from m.bookReturns as br where br.lost is true) as bookslost," +
-                        " (select count(*) from m.itemReturns) as itemsleased," +
-                        " (select count(*) from m.itemLeases) as itemsinlease," +
-                        " (select count(*) from m.itemReturns as ir where ir.lost is true) as itemslost" +
+                        " (select count(*) from m.returns) as booksleased," +
+                        " (select count(*) from m.leases) as booksinlease," +
+                        " (select count(*) from m.returns as br where br.lost is true) as bookslost" +
                         " from Member as m", DJConstants.QUERY_LANGUAGE_HQL)
                 .build();
 
@@ -105,10 +99,10 @@ public class ReportManager {
     }
 
     @SuppressWarnings("unchecked")
-    public static void booksInLease() throws JRException, ClassNotFoundException {
+    public static void itemsInLease() throws JRException, ClassNotFoundException {
         FastReportBuilder drb = new FastReportBuilder();
         DynamicReport dr = drb
-                .addColumn("Title", "title", String.class.getName(), 30)
+                .addColumn("ID", "id", Integer.class.getName(), 30)
                 .addColumn("First Name", "firstname", String.class.getName(), 30)
                 .addColumn("Last Name", "lastname", String.class.getName(), 30)
                 .setTitle("Book lending report.")
@@ -116,9 +110,10 @@ public class ReportManager {
                 .setPrintBackgroundOnOddRows(true)
                 .setUseFullPageWidth(true)
                 .setQuery(
-                        "SELECT bl.bookEntity.book.title as title, m.firstname as firstname, m.lastname as lastname " +
-                                "FROM BookLease as bl join bl.member as m " +
-                                "WHERE bl.bookEntity.leased = true",
+                        "SELECT bl.leasableEntity.abstractItem.id as id, m.firstname as firstname, m.lastname as lastname " +
+                                "FROM Lease as bl " +
+                                "join bl.member as m " +
+                                "WHERE bl.leasableEntity.leased = true",
                         DJConstants.QUERY_LANGUAGE_HQL)
                 .build();
 
@@ -148,8 +143,8 @@ public class ReportManager {
                 .build();
 
         AbstractColumn columnTitle = ColumnBuilder.getNew()
-                .setColumnProperty("title", String.class.getName())
-                .setTitle("Title")
+                .setColumnProperty("id", Integer.class.getName())
+                .setTitle("ID")
                 .setStyle(headerStyle)
                 .setWidth(30)
                 .build();
@@ -199,7 +194,7 @@ public class ReportManager {
                 .addColumn(columnFirstName)
                 .addColumn(columnLastName)
                 .addColumn(columnCharged);
-        DynamicReport dr = drb.addBarcodeColumn("Barcode", "isbn", String.class.getName(), BarcodeTypes.EAN128, false, 100, true, ImageScaleMode.FILL)
+        DynamicReport dr = drb.addBarcodeColumn("Barcode", "isbn", Integer.class.getName(), BarcodeTypes.EAN128, false, 100, true, ImageScaleMode.FILL)
                 .addGroup(groupStatus)
                 .addGroup(groupOverdue)
                 .addGroup(groupTitle)
@@ -207,40 +202,13 @@ public class ReportManager {
                 .setQuery(
                         "SELECT case br.lost when true then 'LOST' else 'RETURNED' end as status," +
                                 " cast((br.returnDate - br.dueDate) as int) as overdue," +
-                                " br.book.title as title," +
+                                " br.leasableItem.id as id," +
                                 " m.firstname as firstname," +
                                 " m.lastname as lastname," +
                                 " br.ammountCharged as charged," +
-                                " br.book.isbn as isbn" +
-                                " FROM BookReturn as br join br.member as m" +
+                                " br.leasableItem.id as isbn" +
+                                " FROM Return as br join br.member as m" +
                                 " WHERE br.returnDate between '" + sFrom + "' and '" + sTo + "'",
-                        DJConstants.QUERY_LANGUAGE_HQL)
-                .build();
-
-        HashMap params = new HashMap();
-        params.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, HibernateManager.getSession());
-        JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
-        JasperViewer.viewReport(jp);
-    }
-
-
-    public static void bookSummaryReport() throws JRException, ClassNotFoundException {
-        FastReportBuilder drb = new FastReportBuilder();
-        DynamicReport dr = drb
-                .addColumn("Year", "booky", Integer.class.getName(), 30)
-                .addColumn("Month", "bookm", Integer.class.getName(), 30)
-                .addColumn("Status", "status", String.class.getName(), 30)
-                .addColumn("Count", "bookc", Long.class.getName(), 30)
-                .addGroups(2)
-                .setTitle("Book lending summary report.")
-                .setUseFullPageWidth(true)
-                .setQuery(
-                        "select year(br.returnDate) as booky," +
-                                "month(br.returnDate) as bookm," +
-                                " case br.lost when true then 'LOST' else 'RETURNED' end as status," +
-                                " count(*) as bookc" +
-                                " from BookReturn as br" +
-                                " group by year(br.returnDate), month(br.returnDate), (case br.lost when true then 'LOST' else 'RETURNED' end)",
                         DJConstants.QUERY_LANGUAGE_HQL)
                 .build();
 
@@ -265,7 +233,7 @@ public class ReportManager {
                                 "month(ir.returnDate) as itemm," +
                                 " case ir.lost when true then 'LOST' else 'RETURNED' end as status," +
                                 " count(*) as itemc" +
-                                " from ItemReturn as ir" +
+                                " from Return as ir" +
                                 " group by year(ir.returnDate), month(ir.returnDate), (case ir.lost when true then 'LOST' else 'RETURNED' end)",
                         DJConstants.QUERY_LANGUAGE_HQL)
                 .build();
@@ -282,7 +250,7 @@ public class ReportManager {
         Instant instant = zonedDateTime.toLocalDateTime().toInstant(ZoneOffset.UTC);
         Date back = Date.from(instant);
         try {
-            booksInLease();
+            itemSummaryReport();
         } catch (JRException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
