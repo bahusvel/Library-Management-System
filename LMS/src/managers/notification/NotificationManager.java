@@ -22,6 +22,7 @@ public class NotificationManager {
     private static final String PROPERTIES = "email.properties";
     private static final String FROM = "LibraryManagementSystem@gmail.com";
     private static final int THREADS = 4;
+    private static ExecutorService service = Executors.newFixedThreadPool(THREADS);
 
     static{
         Properties prop = new Properties();
@@ -39,8 +40,6 @@ public class NotificationManager {
     public int notificationsLeft(){
         return ((ThreadPoolExecutor) service).getQueue().size();
     }
-
-    private static ExecutorService service = Executors.newFixedThreadPool(THREADS);
 
     public static void submitNotification(Notification notification){
         service.execute(notification);

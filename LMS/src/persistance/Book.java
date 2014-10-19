@@ -125,15 +125,4 @@ public class Book extends LeasableItem<Book> {
     @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER) // Specify this if you want Hibernate to fetch linked data.
     private Collection<String> author;
-
-   /*
-   Hibernate was a little annoying here.
-   Basically the documentations specifies that Collections are indexed with @IndexedEmbedded
-   But search cannot find field named author
-   For that reason you have to specify field flag on it as well
-   Otherwise it wont work.
-    */
-
-
-
 }
