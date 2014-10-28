@@ -7,10 +7,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import persistance.Book;
-import persistance.BookEntity;
-import persistance.Magazine;
-import persistance.MagazineEdition;
+import persistance.*;
 import persistance.base.Edition;
 
 import java.io.Serializable;
