@@ -1,9 +1,11 @@
 package test.managers;
 
+import javafx.collections.FXCollections;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
 import org.apache.commons.io.IOUtils;
+import org.hibernate.Query;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import persistance.base.Edition;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
 
@@ -37,7 +40,7 @@ public class HibernateManagerTest {
 
     @Test
     public void testListEntities() throws Exception{
-       assert !hm.listEntities(Magazine.class).isEmpty();
+       assert !hm.listEntities(Member.class).isEmpty();
     }
 
     @Test
@@ -157,7 +160,6 @@ public class HibernateManagerTest {
             at.tx.commit();
 
         }
-
     }
 
     /**
@@ -170,5 +172,23 @@ public class HibernateManagerTest {
 //TODO: Test goes here...
     }
 
+    @Test
+    public void testTopRated(){
+        try(AutoSession as = hm.newAutoSession()){
+            Query query = as.session.createQuery("from Book order by rating desc");
+            query.setMaxResults(10);
+            List<Book> top = query.list();
+            System.out.println(top);
+        }
+    }
 
+    @Test
+    public void testLogin() throws Exception {
+        try(AutoSession as = hm.newAutoSession()){
+            Query query = as.session.createQuery("from Member where username = 'bahus' and password='1234'");
+            List<Member> top = query.list();
+            System.out.println(top.size()==1);
+        }
+
+    }
 }

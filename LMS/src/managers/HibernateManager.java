@@ -61,7 +61,7 @@ public class HibernateManager {
         public void close(){
               session.close();
         }
-    }
+    } // writing
 
     public class AutoSession implements AutoCloseable{
         public Session session = factory.openSession();
@@ -69,7 +69,7 @@ public class HibernateManager {
         public void close(){
             session.close();
         }
-    }
+    } // reading
 
     public void TaskRunner(Runnable task){
         try (AutoTransaction at = new AutoTransaction()) {
@@ -92,6 +92,16 @@ public class HibernateManager {
     public <E> E getEntity(Class<E> eClass, Serializable key){
         try(AutoSession as = new AutoSession()){
             return (E) as.session.get(eClass, key);
+        }
+    }
+
+    public void updateEntity(Object object){
+        Serializable ret = null;
+        try (AutoTransaction at = new AutoTransaction()) {
+            at.session.saveOrUpdate(object);
+            at.tx.commit();
+        } catch (MappingException e) { // catch errors when user passes wrong objects
+            System.err.println(object.getClass() + " Is not compatible with the database.");
         }
     }
 

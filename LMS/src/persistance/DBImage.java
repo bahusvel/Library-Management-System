@@ -1,11 +1,13 @@
 package persistance;
 
+import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import util.DBIO;
 
 import javax.persistence.Embeddable;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 /**
@@ -26,5 +28,15 @@ public class DBImage {
         BufferedImage ret = DBIO.bImageFromArray(image);
         if (ret != null) return ret;
         return DBIO.bImageNotAvailable;
+    }
+
+    public Image fxImage(){
+        if (image.length > 0){
+            ByteArrayInputStream bis = new ByteArrayInputStream(image);
+            return new Image(bis);
+        } else {
+            ByteArrayInputStream bis = new ByteArrayInputStream(DBIO.imageNotAvailable);
+            return new Image(bis);
+        }
     }
 }
