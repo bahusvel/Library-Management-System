@@ -1,6 +1,5 @@
 package test.managers;
 
-import javafx.collections.FXCollections;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;
@@ -11,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import persistance.*;
 import persistance.base.Edition;
+import persistance.base.Lease;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -188,6 +188,29 @@ public class HibernateManagerTest {
             Query query = as.session.createQuery("from Member where username = 'bahus' and password='1234'");
             List<Member> top = query.list();
             System.out.println(top.size()==1);
+        }
+
+    }
+
+    @Test
+    public void testTitles() throws Exception {
+        try(AutoSession as = hm.newAutoSession()){
+            Member member = hm.getEntity(Member.class, 1);
+            as.session.saveOrUpdate(member);
+            Collection<Lease> top = member.getLeases();
+            top.forEach(lease -> System.out.println(((Book) lease.getLeasableEntity().getAbstractItem()).getTitle()));
+        }
+
+    }
+
+    @Test
+    public void testMembers() throws Exception {
+        try(AutoSession as = hm.newAutoSession()){
+            String email = "bahus.vel@gmail.com";
+            Query query = as.session.createQuery("from Member as m where m.email = :email");
+            query.setParameter("email", email);
+            List<Member> result = query.list();
+            result.forEach(res -> System.out.println(res.getUsername()));
         }
 
     }

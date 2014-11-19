@@ -66,5 +66,9 @@ public class ReportManagerTest {
         assert JOptionPane.showConfirmDialog(null, "Does it look right?") == 0;
     }
 
+    @Test
+    public void testHTMLExport() throws Exception {
+          ReportManager.memberReportHTML();
 
+    }
 }

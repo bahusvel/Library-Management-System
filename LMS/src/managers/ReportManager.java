@@ -17,6 +17,7 @@ import ar.com.fdvs.dj.domain.entities.DJGroup;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.view.JasperViewer;
@@ -96,6 +97,33 @@ public class ReportManager {
         params.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, HibernateManager.getSession());
         JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
         JasperViewer.viewReport(jp);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void memberReportHTML() throws JRException, ClassNotFoundException {
+        FastReportBuilder drb = new FastReportBuilder();
+        DynamicReport dr = drb
+                .addColumn("First Name", "firstname", String.class.getName(), 30)
+                .addColumn("Last Name", "lastname", String.class.getName(), 30)
+                .addColumn("Items Leased in Total", "booksleased", Long.class.getName(), 30)
+                .addColumn("Items in lease", "booksinlease", Long.class.getName(), 30)
+                .addColumn("Items Lost", "bookslost", Long.class.getName(), 30)
+                .setTitle("Members report.")
+                .setPrintBackgroundOnOddRows(true)
+                .setUseFullPageWidth(true)
+                .setPageSizeAndOrientation(Page.Page_A4_Landscape())
+                .setQuery("SELECT m.firstname as firstname," +
+                        " m.lastname as lastname," +
+                        " (select count(*) from m.returns) as booksleased," +
+                        " (select count(*) from m.leases) as booksinlease," +
+                        " (select count(*) from m.returns as br where br.lost is true) as bookslost" +
+                        " from Member as m", DJConstants.QUERY_LANGUAGE_HQL)
+                .build();
+
+        HashMap params = new HashMap();
+        params.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, HibernateManager.getSession());
+        JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), params);
+        JasperExportManager.exportReportToHtmlFile(jp, "reports/memberreport.html");
     }
 
     @SuppressWarnings("unchecked")

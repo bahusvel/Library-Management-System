@@ -1,5 +1,6 @@
 package test.Persistance;
 
+import javafx.scene.input.MouseEvent;
 import managers.HibernateManager;
 import managers.HibernateManager.AutoSession;
 import managers.HibernateManager.AutoTransaction;

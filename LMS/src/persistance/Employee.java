@@ -18,6 +18,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(exclude = {"leases", "returns"})
+@ToString(exclude = {"leases", "returns"})
 @Entity
 @Indexed
 public class Employee {

@@ -15,6 +15,7 @@ import java.util.Date;
 @javax.persistence.Entity
 @Data
 @EqualsAndHashCode(exclude = {"leasableEntity", "employee", "member", "visit"})
+@ToString(exclude = {"leasableEntity", "employee", "member", "visit"})
 public class Lease<T extends AbstractItem<T>> {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -27,7 +28,7 @@ public class Lease<T extends AbstractItem<T>> {
     protected Date dueDate;
     @NotNull
     protected boolean renewed = false;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     protected LeasableEntity<T> leasableEntity;
     @ManyToOne
     protected Employee employee;

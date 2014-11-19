@@ -1,6 +1,7 @@
 package persistance.base;
 
 import lombok.*;
+import persistance.Member;
 
 import javax.persistence.*;
 import javax.persistence.Entity;

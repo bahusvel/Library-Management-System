@@ -14,6 +14,7 @@ import java.util.Date;
 @Data
 @javax.persistence.Entity
 @EqualsAndHashCode(callSuper = true, exclude = {"lease", "returns"})
+@ToString(exclude = {"lease", "returns"})
 public class LeasableEntity<T extends AbstractItem<T>> extends Entity<T>{
     @NotNull
     protected boolean leased = false;
